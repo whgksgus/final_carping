@@ -4,8 +4,7 @@ public class FoodZone {
 	private int foodZoneKey;
 	private String foodZoneName;
 	private String foodZoneAddress;
-	private String foodZoneXCode;
-	private String foodZoneYCode;
+	private String foodZoneGeoCode;
 	private String foodZonePhone;
 	private String foodZoneImage;
 	private String foodZoneEtc;
@@ -15,14 +14,13 @@ public class FoodZone {
 		
 	}
 
-	public FoodZone(int foodZoneKey, String foodZoneName, String foodZoneAddress, String foodZoneXCode,
-			String foodZoneYCode, String foodZonePhone, String foodZoneImage, String foodZoneEtc, double scoreAvg) {
+	public FoodZone(int foodZoneKey, String foodZoneName, String foodZoneAddress, String foodZoneGeoCode,
+			String foodZonePhone, String foodZoneImage, String foodZoneEtc, double scoreAvg) {
 		super();
 		this.foodZoneKey = foodZoneKey;
 		this.foodZoneName = foodZoneName;
 		this.foodZoneAddress = foodZoneAddress;
-		this.foodZoneXCode = foodZoneXCode;
-		this.foodZoneYCode = foodZoneYCode;
+		this.foodZoneGeoCode = foodZoneGeoCode;
 		this.foodZonePhone = foodZonePhone;
 		this.foodZoneImage = foodZoneImage;
 		this.foodZoneEtc = foodZoneEtc;
@@ -53,20 +51,12 @@ public class FoodZone {
 		this.foodZoneAddress = foodZoneAddress;
 	}
 
-	public String getFoodZoneXCode() {
-		return foodZoneXCode;
+	public String getFoodZoneGeoCode() {
+		return foodZoneGeoCode;
 	}
 
-	public void setFoodZoneXCode(String foodZoneXCode) {
-		this.foodZoneXCode = foodZoneXCode;
-	}
-
-	public String getFoodZoneYCode() {
-		return foodZoneYCode;
-	}
-
-	public void setFoodZoneYCode(String foodZoneYCode) {
-		this.foodZoneYCode = foodZoneYCode;
+	public void setFoodZoneGeoCode(String foodZoneGeoCode) {
+		this.foodZoneGeoCode = foodZoneGeoCode;
 	}
 
 	public String getFoodZonePhone() {
@@ -104,11 +94,11 @@ public class FoodZone {
 	@Override
 	public String toString() {
 		return "FoodZone [foodZoneKey=" + foodZoneKey + ", foodZoneName=" + foodZoneName + ", foodZoneAddress="
-				+ foodZoneAddress + ", foodZoneXCode=" + foodZoneXCode + ", foodZoneYCode=" + foodZoneYCode
-				+ ", foodZonePhone=" + foodZonePhone + ", foodZoneImage=" + foodZoneImage + ", foodZoneEtc="
-				+ foodZoneEtc + ", scoreAvg=" + scoreAvg + "]";
+				+ foodZoneAddress + ", foodZoneGeoCode=" + foodZoneGeoCode + ", foodZonePhone=" + foodZonePhone
+				+ ", foodZoneImage=" + foodZoneImage + ", foodZoneEtc=" + foodZoneEtc + ", scoreAvg=" + scoreAvg + "]";
 	}
-	
+
+
 	
 	
 }

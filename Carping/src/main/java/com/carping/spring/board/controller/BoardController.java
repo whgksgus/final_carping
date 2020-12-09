@@ -22,7 +22,7 @@ public class BoardController {
 	
 	@RequestMapping(value="reviewInfo.do", method = RequestMethod.GET)
 	public String boardInfoView() {
-		return "ReviewBoard/ReviewInfo";
+		return "reviewboard/reviewInfo";
 	}
 	
 	public String boardWriteView() {

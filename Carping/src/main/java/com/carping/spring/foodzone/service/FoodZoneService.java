@@ -15,5 +15,6 @@ public interface FoodZoneService {
 	public double selectFoodZoneAvg(int foodZoneKey);
 	public int modifyFoodZoneAvg(int foodZoneKey, double scoreAvg);
 	public int insertFoodZone(FoodZone foodZone);
+	public ArrayList<FoodZone> selectFoodZoneList();
 	
 }

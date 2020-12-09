@@ -3,14 +3,16 @@ package com.carping.spring.foodzone.store;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
-
+@Repository
 public class FoodZoneStoreLogic implements FoodZoneStore {
-
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
@@ -53,6 +55,11 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	public int insertFoodZone(FoodZone foodZone) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ArrayList<FoodZone> selectFoodZoneList() {
+		return (ArrayList)sqlSession.selectList("FoodZoneMapper.selectAll");
 	}
 
 }
