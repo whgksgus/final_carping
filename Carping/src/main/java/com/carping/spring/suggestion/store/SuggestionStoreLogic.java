@@ -3,14 +3,18 @@ package com.carping.spring.suggestion.store;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.suggestion.domain.Answer;
 import com.carping.spring.suggestion.domain.Suggestion;
 
+@Repository
 public class SuggestionStoreLogic implements SuggestionStore {
 
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override

@@ -2,6 +2,9 @@ package com.carping.spring.place.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.place.domain.Place;
@@ -9,8 +12,10 @@ import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
 import com.carping.spring.place.store.PlaceReviewStore;
 
+@Service
 public class PlaceReviewServiceImpl implements PlaceReviewService {
 
+	@Autowired
 	private PlaceReviewStore pStore;
 	
 	@Override

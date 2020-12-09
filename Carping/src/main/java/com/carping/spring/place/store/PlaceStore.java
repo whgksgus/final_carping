@@ -15,4 +15,5 @@ public interface PlaceStore {
 	public double selectPlaceReviewStoreAvg(int placeKey);
 	public int updatePlaceScoreAvg(int placeKey, int scoreAvg);
 	public int insertPlace(Place place);
+	public ArrayList<Place> selectPlaceList();
 }
