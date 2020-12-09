@@ -1,19 +1,28 @@
 package com.carping.spring.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.member.domain.Member;
 import com.carping.spring.member.service.MemberService;
 
+@Controller
 public class MemberController {
+	
+	@Autowired
 	private MemberService mService;
 	
+	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public String loginForm() {
-		return "";
+		return "member/loginForm";
 	}
 	
 	public String enrollForm() {
@@ -24,7 +33,20 @@ public class MemberController {
 		return "";
 	}
 	
-	public ModelAndView memberLogin(String userId, String password, ModelAndView mv, HttpServletRequest request) {
+	@RequestMapping(value="loginMember.do", method=RequestMethod.POST)
+	public ModelAndView memberLogin(String memberId, String memberPwd, ModelAndView mv, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Member member = new Member(memberId, memberPwd);
+		Member loginUser = mService.loginMember(member);
+		
+		if(loginUser != null) {
+			session.setAttribute("loginUser", loginUser);
+			mv.setViewName("index.jsp");
+		}else {
+			mv.addObject("msg", "로그인 실패!");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
@@ -52,7 +74,7 @@ public class MemberController {
 		return "";
 	}
 	
-	public ModelAndView myInfoForm(ModelAndView mv, String password, HttpServletRequest request) {
+	public ModelAndView myInfoForm(ModelAndView mv, String memberPwd, HttpServletRequest request) {
 		return mv;
 	}
 	
@@ -65,7 +87,7 @@ public class MemberController {
 		return "";
 	}
 	
-	public String deleteMember(String password, HttpServletRequest request, Model model) {
+	public String deleteMember(String memberPwd, HttpServletRequest request, Model model) {
 		return "";
 	}
 }

@@ -1,11 +1,16 @@
 package com.carping.spring.member.store;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.carping.spring.member.domain.Member;
 
+@Repository
 public class MemberStoreLogic implements MemberStore {
 
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override

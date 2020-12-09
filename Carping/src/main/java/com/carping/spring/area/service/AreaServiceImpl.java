@@ -2,6 +2,9 @@ package com.carping.spring.area.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.domain.AreaReview;
 import com.carping.spring.area.store.AreaStore;
@@ -10,8 +13,10 @@ import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.place.domain.Place;
 
+@Service
 public class AreaServiceImpl implements AreaService {
 
+	@Autowired
 	private AreaStore aStore;
 	
 	@Override

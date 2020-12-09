@@ -52,6 +52,7 @@ label{
     min-height:800px;
 	position:relative;
 }
+
 .down {
       position: absolute;
     left: 46%;
@@ -76,6 +77,24 @@ label{
     /* text-transform: uppercase; */
 }
 /*--header--*/
+
+.loginBtn{
+	position: absolute;
+	background-color: rgba(12, 12, 12, 0.36);
+	color: #FFFFFF;
+	top: 20px;
+	right: 8%;
+	font-size: 
+}
+
+.enrollBtn{
+	position: absolute;
+	background-color: rgba(12, 12, 12, 0.36);
+	color: #FFFFFF;
+	top: 20px;
+	right: 2%;
+}
+
 /*-- sticky-nav --*/
 .header-bottom {
    padding: 0.5em 0em;
@@ -95,7 +114,7 @@ label{
 }
 /*-- sticky-nav --*/
 .subNav{
-	top: 15px;
+	top: 10px;
 	width:600px;
 	position: relative;
 	
@@ -2278,4 +2297,46 @@ div#contact {
 	.leave h4, h4.tz-title-4.tzcolor-blue {
 		font-size: 1.5em;
 	}
+}
+
+/* login */
+.loginBox{
+	width: 100%;
+  height: 100vh;
+	 display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.loginBox2{
+	width: 500px;
+	height: 350px;
+	background-color: rgba(12, 12, 12, 0.36);
+}
+
+.loginTable{
+	margin-top: 50px;
+	margin-left: 50px;
+	width: 400px;
+	height: 250px;
+	color: #FFFFFF;
+}
+
+.btnLogin{
+	width: 100%;
+	height: 40px;
+	background-color: rgba(12, 12, 12, 0.36);
+	color: #FFFFFF;
+	font-weight: bolder;
+}
+
+.loginA{
+	color: #FFFFFF;
+	text-decoration: none;
 }

@@ -1,16 +1,20 @@
 package com.carping.spring.member.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.member.domain.Member;
 import com.carping.spring.member.store.MemberStore;
 
+@Service
 public class MemberServiceImpl implements MemberService {
 
+	@Autowired
 	private MemberStore mStore;
 	
 	@Override
 	public Member loginMember(Member member) {
-		// TODO Auto-generated method stub
-		return null;
+		return mStore.loginMember(member);
 	}
 
 	@Override
