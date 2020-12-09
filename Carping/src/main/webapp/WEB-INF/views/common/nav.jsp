@@ -31,6 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href='//fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700'
 	rel='stylesheet' type='text/css'>
 <!--/script-->
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
          jQuery(document).ready(function($) {
             $(".scroll").click(function(event){      
@@ -74,29 +75,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a data-hover="추천장소" href="#" class="scroll">추천장소</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;"></a></li>
-									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">차박 장소
+										style="display: block; padding: 1px 5px;" href="areaInfoView.do">차박 장소
 											정보</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">맛집 정보</a></li>
+										style="display: block; padding: 1px 5px;" href="foodZoneView.do">맛집 정보</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">명소 정보</a></li>
+										style="display: block; padding: 1px 5px;" href="placeView.do">명소 정보</a></li>
 								</ul></li>
-							<li><a data-hover="쇼핑몰" href="#" class="scroll">쇼핑몰</a></li>
+							<li><a data-hover="쇼핑몰" href="tentListView.do" class="scroll">쇼핑몰</a></li>
 							<li><a data-hover="커뮤니티" href="#" class="scroll">커뮤니티</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;"></a></li>
-									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">자유 게시판</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">리뷰 게시판</a></li>
+										style="display: block; padding: 1px 5px;" href="reviewInfo.do">리뷰 게시판</a></li>
 								</ul></li>
 							<li><a data-hover="마이페이지" href="#" class="scroll">마이페이지</a>
 								<ul class="subNav">
-									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;"></a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">구매내역</a></li>
 									<li style="float: left;"><a
@@ -109,17 +104,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a data-hover="고객센터" href="#" class="scroll">고객센터</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;"></a></li>
-									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">공지사항</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">건의사항</a></li>
+										style="display: block; padding: 1px 5px;" href="sugList.do">건의사항</a></li>
 								</ul></li>
-								<li>
-									<button style="background-color:yellow;" onclick="href.location='login.do';">로그인</button>
-								</li>
 						</ul>
 					</nav>
+				<button class="loginBtn" onclick="location.href='login.do';">로그인</button>
+				<button class="enrollBtn" onclick="location.href='enroll.do';">회원가입</button>
 				</div>
 				<!-- script-for-menu -->
 				<script>

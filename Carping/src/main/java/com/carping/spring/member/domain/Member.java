@@ -12,7 +12,13 @@ public class Member {
 	public Member() {
 		
 	}
-
+	
+	public Member(String memberId, String memberPwd) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+	}
+	
 	public Member(String memberId, String memberPwd, String memberName, String phone, String email,
 			String memberAddress, String admin) {
 		super();

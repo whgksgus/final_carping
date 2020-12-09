@@ -3,8 +3,11 @@
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,15 +18,21 @@ import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.service.FoodZoneService;
 import com.carping.spring.place.service.PlaceService;
 
-
+@Controller
 public class AreaController {
 
+	@Autowired
 	private AreaService aService;
+	
+	@Autowired
 	private FoodZoneService fzService;
+	
+	@Autowired
 	private PlaceService pService;
 
+	@RequestMapping(value="areaInfoView.do", method=RequestMethod.GET)
 	public String areaInfoView() {
-		return "";
+		return "area/areaInfoView";
 	}
 	
 

@@ -3,6 +3,8 @@ package com.carping.spring.area.store;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.domain.AreaReview;
@@ -11,8 +13,10 @@ import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.place.domain.Place;
 
+@Repository
 public class AreaStoreLogic implements AreaStore {
 
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
