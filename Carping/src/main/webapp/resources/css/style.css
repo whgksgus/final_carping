@@ -73,7 +73,7 @@ label{
     font-family: 'Merriweather Sans', sans-serif;
     font-size: 2.5em;
     font-weight: bold;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 /*--header--*/
 /*-- sticky-nav --*/
