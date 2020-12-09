@@ -60,12 +60,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<span class="menu"> </span>
 							<nav class="link-effect-4" id="link-effect-4">
                               <ul>
-								<li class="active"><a data-hover="Home" href="index.jsp">Home</a></li>
-								<li><a data-hover="About" href="#about" class="scroll">About</a></li>
-								<li><a data-hover="Gallery" href="#gallery" class="scroll">Gallery</a></li>
-								<li><a data-hover="Blogs" href="#blogs" class="scroll">Blogs</a></li>
-								<li><a data-hover="Services" href="#services" class="scroll">Services</a></li>
-								<li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
+								<li class="active"><a data-hover="Home" href="index.jsp">Home</a>
+									
+								</li>
+								<li><a data-hover="추천장소" href="#" class="scroll">추천장소</a>
+									<ul class="subNav">
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">차박 장소 정보</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">맛집 정보</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">명소 정보</a></li>
+						            </ul>
+								</li>
+								<li><a data-hover="쇼핑몰" href="#" class="scroll">쇼핑몰</a>
+								</li>
+								<li><a data-hover="커뮤니티" href="#" class="scroll">커뮤니티</a>
+									<ul class="subNav">
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">자유 게시판</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">리뷰 게시판</a></li>
+						            </ul>
+								</li>
+								<li><a data-hover="마이페이지" href="#" class="scroll">마이페이지</a>
+									<ul class="subNav">
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">구매내역</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">회원정보 수정</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">장소추가</a></li>
+						            </ul>
+								</li>
+								<li><a data-hover="고객센터" href="#" class="scroll">고객센터</a>
+									<ul class="subNav">
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">공지사항</a></li>
+						                <li style="float: left;"><a style="display: block; padding: 1px 5px;" href="#">건의사항</a></li>
+						            </ul>
+								</li>
 
 								</ul>
 							</nav>

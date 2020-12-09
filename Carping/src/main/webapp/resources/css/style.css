@@ -94,6 +94,12 @@ label{
 	z-index:9999;
 }
 /*-- sticky-nav --*/
+.subNav{
+	/* width:500px; */
+	position: absolute;
+	left: 40%;
+	
+}
 .top-menu {
     float: right;
     margin-top: 0.75em;
@@ -102,7 +108,8 @@ label{
 	margin:0;
 	padding:0;
 }
-.top-menu li {		
+.top-menu li {
+	width: 150px;
 	text-transform:uppercase;
 	display:inline-block;
 }
@@ -117,6 +124,12 @@ label{
 .top-menu li a.active{
   color: #fff200;
   }
+  
+.subNav{
+	display:none;
+}
+  
+  
 /*-- nav-hover --*/
 .link-effect-4 a {
   padding: 0 10px;
@@ -128,9 +141,9 @@ label{
 .link-effect-4 a::before {
       position: absolute;
     top: 0;
-    left: -10px;
+    /* left: -5px; */ 
     overflow: hidden;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     max-height: 0;
     color:#7ccfd7;
     content: attr(data-hover);
@@ -141,6 +154,21 @@ label{
 .link-effect-4 a:hover::before {
   max-height: 100%;
 }
+
+.link-effect-4 li:hover>.subNav{
+	display: block;
+}
+
+/* .link-effect-4 li>.subNav{
+	opactiy:0;
+}
+
+.link-effect-4 li:hover>.subNav{
+	opacity: 1;
+	transition: all 1s;
+} */
+
+
 /*-- //nav-hover --*/
 
 @media only screen and (max-width :800px) {
