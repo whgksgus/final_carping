@@ -257,123 +257,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //about-bottom-->
 	<!--Gallery-->
 	<div class="gallery" id="gallery">
-		<div class="container">
-			<h3 class="tittle">Gallery</h3>
-					<div class="gallery-grids">
-						<div class="col-md-8 col-sm-8 ggd baner-top big wow fadeInRight animated" data-wow-delay=".5s">
-							<a href="resources/images/my1.jpg" class="b-link-stripe b-animate-go  swipebox">
+		<div class="container" style="width:1519px;">
+					<div class="gallery-grids" style="margin:0; padding:0;">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div class="gal-spin-effect vertical ">
 									<img src="resources/images/my1.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con">
-											<h4>Outdoors</h4>
+											<h4>차박 장소 추천</h4>
 											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa molestias minus laborum.</p>
+											<p>차박차박~</p>
 											<span class="separator"></span>
-											
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div class="gal-spin-effect vertical ">
 									<img src="resources/images/my2.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con">
-											<h4>Outdoors</h4>
+											<h4>맛집,명소 추천</h4>
 											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa molestias minus .</p>
+											<p>맛있엉ㅎ</p>
 											<span class="separator"></span>
-											
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top small ban-mar wow fadeInUp animated" data-wow-delay=".5s">
-							<a href="resources/images/my4.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical ">
-									<img src="resources/images/my4.jpg" alt=" " />
-									<div class="gal-text-box">
-										<div class="info-gal-con">
-											<h4>Outdoors</h4>
-											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa.</p>
-											<span class="separator"></span>
-											
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-8 col-sm-8 ggd baner-top big ban-mar wow fadeInDown animated" data-wow-delay=".5s">
-							<a href="resources/images/my3.jpg" class="b-link-stripe b-animate-go  swipebox">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div class="gal-spin-effect vertical ">
 									<img src="resources/images/my3.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con">
-											<h4>Outdoors</h4>
+											<h4>차박물품쇼핑</h4>
 											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa.</p>
+											<p>질러 질러~</p>
 											<span class="separator"></span>
-											
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top three wow fadeInLeft animated" data-wow-delay=".5s">
-							<a href="resources/images/my5.jpg" class="b-link-stripe b-animate-go  swipebox">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div class="gal-spin-effect vertical ">
-									<img src="resources/images/my5.jpg" alt=" " />
+									<img src="resources/images/my4.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con">
-											<h4>Outdoors</h4>
+											<h4>후기게시판</h4>
 											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa molestias minus laborum.</p>
+											<p>후기쓰자!</p>
 											<span class="separator"></span>
-											
-										</div>
-									</div>
-								</div>
-							</a>
-					</div>
-					<div class="col-md-4 col-sm-4 ggd baner-top three wow fadeInLeft animated" data-wow-delay=".5s">
-							<a href="resources/images/my6.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical ">
-									<img src="resources/images/my6.jpg" alt=" " />
-									<div class="gal-text-box">
-										<div class="info-gal-con">
-											<h4>Outdoors</h4>
-											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa molestias minus laborum .</p>
-											<span class="separator"></span>
-											
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top three thre wow fadeInLeft animated" data-wow-delay=".5s">
-							<a href="resources/images/my7.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical ">
-									<img src="resources/images/my7.jpg" alt=" " />
-									<div class="gal-text-box">
-										<div class="info-gal-con">
-											<h4>Outdoors</h4>
-											<span class="separator"></span>
-											<p>Sit accusamus, vel blanditiis iure minima ipsa molestias minus laborum.</p>
-											<span class="separator"></span>
-											
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
 		
-						<div class="clearfix"> </div>
+						<!-- <div class="clearfix"> </div> -->
+					</div>
+				</div>
+		</div>
 					</div>
 				</div>
 		</div>
