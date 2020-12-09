@@ -2,14 +2,19 @@ package com.carping.spring.suggestion.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.suggestion.domain.Answer;
 import com.carping.spring.suggestion.domain.Suggestion;
 import com.carping.spring.suggestion.store.SuggestionStore;
 
+@Service
 public class SuggestionServiceImpl implements SuggestionService {
 
+	@Autowired
 	private SuggestionStore sStore;
 	
 	@Override

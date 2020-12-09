@@ -3,6 +3,8 @@ package com.carping.spring.place.store;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
@@ -10,8 +12,10 @@ import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
 
+@Repository
 public class PlaceReviewStoreLogic implements PlaceReviewStore {
 
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
