@@ -2,14 +2,18 @@ package com.carping.spring.board.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.board.domain.Board;
 import com.carping.spring.board.domain.BoardReply;
 import com.carping.spring.board.store.BoardStore;
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 
+@Service
 public class BoardServiceImpl implements BoardService {
-
+	@Autowired
 	private BoardStore bStore;
 	
 	@Override
