@@ -95,9 +95,9 @@ label{
 }
 /*-- sticky-nav --*/
 .subNav{
-	width:500px;
-	position: absolute;
-	left: 40%;
+	top: 15px;
+	width:600px;
+	position: relative;
 	
 }
 .top-menu {
