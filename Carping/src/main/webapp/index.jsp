@@ -128,7 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul class="rslides" id="slider4">
 					    <li>
 						   <div class="banner-info">
-							      <h2 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">There are many variations of passages.</h2>
+							      <h2 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Thㅇㄻㄴㅇㄹere are many variations of passages.</h2>
 								  <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">Pellentesque habitant morbi tristique senetus.</p>
 								   <a href="single.html" class="hvr-bounce-to-bottom">READ MORE</a>
 							  </div>

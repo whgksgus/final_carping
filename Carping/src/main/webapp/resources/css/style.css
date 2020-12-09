@@ -95,7 +95,7 @@ label{
 }
 /*-- sticky-nav --*/
 .subNav{
-	/* width:500px; */
+	width:500px;
 	position: absolute;
 	left: 40%;
 	
