@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PlaceMapper">
+	
+	<resultMap type="Place" id="PlaceResultMap">
+		<id property="placeKey" column="PLACE_KEY"/>
+		<result property="placeName" column="PLACE_NAME"/>
+		<result property="placeAddress" column="PLACE_ADDRESS"/>
+		<result property="placeGeoCode" column="PLACE_GEOCODE"/>
+		<result property="placeGS25" column="PLACE_GS25"/>
+		<result property="placeToilet" column="PLACE_TOILET"/>
+		<result property="placeParking" column="PLACE_PARKING"/>
+		<result property="placeImage" column="PLACE_IMAGE"/>
+		<result property="placeEtc" column="PLACE_ETC"/>
+	</resultMap>
+
+	<select id="selectAll" resultMap="PlaceResultMap">
+		SELECT * FROM PLACE
+	</select>
+	
+	<select id="searchList" resultMap="PlaceResultMap">
+		SELECT * FROM PLACE
+		<where>
+			<if test="searchCondition.toString() == '장소명'">
+				PLACE_NAME LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '주소'">
+				PLACE_ADDRESS LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
+</mapper>

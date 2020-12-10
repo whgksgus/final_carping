@@ -62,7 +62,7 @@ public class PlaceStoreLogic implements PlaceStore {
 
 	@Override
 	public ArrayList<Place> selectPlaceList() {
-		return (ArrayList)
+		return (ArrayList)sqlSession.selectList("PlaceMapper.selectAll");
 	}
 
 }
