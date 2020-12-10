@@ -11,7 +11,7 @@ import com.carping.spring.place.domain.Place;
 
 public interface AreaStore {
 	 public ArrayList<Area> searchArea(Search search);
-	 public Area selectAreaInfo(String areaAddress);
+	 public Area selectAreaInfo(String areaName);
 	 public AreaReview selectAreaReview(int arKey);
 	 public Place selectPlaceInfo(int placeKey);
 	 public FoodZone selectFoodZoneInfo(int FoodZoneKey);
@@ -20,5 +20,6 @@ public interface AreaStore {
 	 public int selectAreaReviewScoreAvg(int areaKey);
 	 public int updateAreaScoreAvg(int areaKey, int scoreAvg);
 	 public int insertArea(Area area);
+	 public ArrayList<Area> selectAreaList();
 }
  

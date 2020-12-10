@@ -26,9 +26,8 @@ public class AreaServiceImpl implements AreaService {
 	}
 
 	@Override
-	public Area selectAreaInfo(String areaAddress) {
-		// TODO Auto-generated method stub
-		return null;
+	public Area selectAreaInfo(String areaName) {
+		return aStore.selectAreaInfo(areaName);
 	}
 
 	@Override
@@ -77,6 +76,11 @@ public class AreaServiceImpl implements AreaService {
 	public int insertArea(Area area) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ArrayList<Area> selectAreaList() {
+		return aStore.selectAreaList();
 	}
 
 }
