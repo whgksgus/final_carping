@@ -2,26 +2,29 @@ package com.carping.spring.item.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
 import com.carping.spring.item.store.ItemStore;
 
+@Service
 public class ItemServiceImpl implements ItemService {
 
+	@Autowired
 	private ItemStore iStore;
 	
 	@Override
 	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return iStore.getListCount();
 	}
 
 	@Override
 	public ArrayList<Item> selectTentList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return iStore.selectTentList(pi);
 	}
 
 	@Override
@@ -151,9 +154,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int selectItemDetail(int itemKey) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Item selectItemDetail(int itemKey) {
+		return iStore.selectItemDetail(itemKey);
 	}
 
 }

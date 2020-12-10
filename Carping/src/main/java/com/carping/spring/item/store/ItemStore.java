@@ -29,7 +29,7 @@ public interface ItemStore {
 	public ArrayList<Item> selectEtcLow(PageInfo pi);
 	public ArrayList<Item> selectEtcHigh(PageInfo pi);
 	public ArrayList<Item> searchEtcList(PageInfo pi, Search search);
-	public int selectItemDetail(int itemKey);
+	public Item selectItemDetail(int itemKey);
 	public Cart insertCart(Cart cart);
 	public Cart insertOrder(Cart cart);
 }
