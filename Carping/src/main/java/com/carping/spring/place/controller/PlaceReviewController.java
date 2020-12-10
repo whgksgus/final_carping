@@ -1,5 +1,7 @@
 package com.carping.spring.place.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,11 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
 import com.carping.spring.place.service.PlaceReviewService;
@@ -22,13 +28,23 @@ public class PlaceReviewController {
 	@Autowired
 	private PlaceReviewService prService;
 	
+	@RequestMapping(value="placeReviewSearchForm.do", method=RequestMethod.GET)
 	public String placeReviewSearchForm() {
-		return "";
+		return "place/placeReviewSearch";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="placeReviewSearch.do", method=RequestMethod.POST)
 	public String placeReviewSearch(Search search, Model model) {
-		return "";
-	}
+		ArrayList<Place> pList = prService.searchPlaceReview(search);
+		if(!pList.isEmpty()) {
+			model.addAttribute("pList", pList);
+			model.addAttribute("search", search);
+			return "success";
+		}else {
+			return "error";
+		}
+	}	
 	
 	public ModelAndView placeReviewListView(ModelAndView mv, 
 			@RequestParam(value="page", required = false) Integer page, int placeKey) {

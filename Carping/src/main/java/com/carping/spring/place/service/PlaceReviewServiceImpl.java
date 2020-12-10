@@ -26,8 +26,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 	@Override
 	public ArrayList<Place> searchPlaceReview(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return pStore.searchPlaceReview(search);
 	}
 
 	@Override

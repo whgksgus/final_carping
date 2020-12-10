@@ -4,9 +4,10 @@ public class Place {
 	private int placeKey;
 	private String placeName;
 	private String placeAddress;
-	private String placeXCode;
-	private String placeYCode;
+	private String placeGeoCode;
 	private String placeGS25;
+	private String placeToilet;
+	private String placeParking;
 	private String placeImage;
 	private String placeEtc;
 	private double scoreAvg;
@@ -15,19 +16,22 @@ public class Place {
 		
 	}
 
-	public Place(int placeKey, String placeName, String placeAddress, String placeXCode, String placeYCode,
-			String placeGS25, String placeImage, String placeEtc, double scoreAvg) {
+	public Place(int placeKey, String placeName, String placeAddress, String placeGeoCode, String placeGS25,
+			String placeToilet, String placeParking, String placeImage, String placeEtc, double scoreAvg) {
 		super();
 		this.placeKey = placeKey;
 		this.placeName = placeName;
 		this.placeAddress = placeAddress;
-		this.placeXCode = placeXCode;
-		this.placeYCode = placeYCode;
+		this.placeGeoCode = placeGeoCode;
 		this.placeGS25 = placeGS25;
+		this.placeToilet = placeToilet;
+		this.placeParking = placeParking;
 		this.placeImage = placeImage;
 		this.placeEtc = placeEtc;
 		this.scoreAvg = scoreAvg;
 	}
+
+
 
 	public int getPlaceKey() {
 		return placeKey;
@@ -53,20 +57,12 @@ public class Place {
 		this.placeAddress = placeAddress;
 	}
 
-	public String getPlaceXCode() {
-		return placeXCode;
+	public String getPlaceGeoCode() {
+		return placeGeoCode;
 	}
 
-	public void setPlaceXCode(String placeXCode) {
-		this.placeXCode = placeXCode;
-	}
-
-	public String getPlaceYCode() {
-		return placeYCode;
-	}
-
-	public void setPlaceYCode(String placeYCode) {
-		this.placeYCode = placeYCode;
+	public void setPlaceGeoCode(String placeGeoCode) {
+		this.placeGeoCode = placeGeoCode;
 	}
 
 	public String getPlaceGS25() {
@@ -75,6 +71,22 @@ public class Place {
 
 	public void setPlaceGS25(String placeGS25) {
 		this.placeGS25 = placeGS25;
+	}
+
+	public String getPlaceToilet() {
+		return placeToilet;
+	}
+
+	public void setPlaceToilet(String placeToilet) {
+		this.placeToilet = placeToilet;
+	}
+
+	public String getPlaceParking() {
+		return placeParking;
+	}
+
+	public void setPlaceParking(String placeParking) {
+		this.placeParking = placeParking;
 	}
 
 	public String getPlaceImage() {
@@ -104,10 +116,9 @@ public class Place {
 	@Override
 	public String toString() {
 		return "Place [placeKey=" + placeKey + ", placeName=" + placeName + ", placeAddress=" + placeAddress
-				+ ", placeXCode=" + placeXCode + ", placeYCode=" + placeYCode + ", placeGS25=" + placeGS25
-				+ ", placeImage=" + placeImage + ", placeEtc=" + placeEtc + ", scoreAvg=" + scoreAvg + "]";
+				+ ", placeGeoCode=" + placeGeoCode + ", placeGS25=" + placeGS25 + ", placeToilet=" + placeToilet
+				+ ", placeParking=" + placeParking + ", placeImage=" + placeImage + ", placeEtc=" + placeEtc
+				+ ", scoreAvg=" + scoreAvg + "]";
 	}
-	
-	
 	
 }

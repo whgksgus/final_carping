@@ -26,8 +26,7 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
  
 	@Override
 	public ArrayList<Place> searchPlaceReview(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("PlaceMapper.searchList", search);
 	}
 
 	@Override
