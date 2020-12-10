@@ -1,6 +1,8 @@
  package com.carping.spring.area.controller;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.service.AreaService;
 import com.carping.spring.common.Search;
+import com.carping.spring.common.SearchMap;
 import com.carping.spring.foodzone.service.FoodZoneService;
 import com.carping.spring.place.service.PlaceService;
 
@@ -31,8 +35,11 @@ public class AreaController {
 	private PlaceService pService;
 
 	@RequestMapping(value="areaInfoView.do", method=RequestMethod.GET)
-	public String areaInfoView() {
-		return "area/areaInfoView";
+	public ModelAndView areaInfoView(ModelAndView mv) {
+		ArrayList<Area> aList = aService.selectAreaList();
+		mv.addObject("aList", aList);
+		mv.setViewName("area/areaInfoView");
+		return mv;
 	}
 	
 
@@ -40,9 +47,18 @@ public class AreaController {
 		return "";
 	}
 	
-
-	public String areaInfoSelect(String areaAddress, Model model) {
-		return "";
+	
+	@RequestMapping(value="selectAreaInfo.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String areaInfoSelect(String areaName, Model model) {
+		Area area = aService.selectAreaInfo(areaName);
+		if(area != null) {
+			model.addAttribute("area", area);
+			return"area/areaInfoView";
+		}else {
+			model.addAttribute("msg", "자유게시판 검색 실패");
+			return "common/errorPage";
+		}
 	}
 	
 
@@ -104,4 +120,10 @@ public class AreaController {
 	public void deleteFile(String areaImage, HttpServletRequest request) {
 		
 	}
+	
+	@RequestMapping(value="searchsido.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+    @ResponseBody
+    public String search(SearchMap searchMap) {
+       return searchMap.getSido()+ " " +searchMap.getSigun()+ " " +searchMap.getAddress();
+    }
 }

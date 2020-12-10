@@ -26,9 +26,8 @@ public class AreaStoreLogic implements AreaStore {
 	}
 
 	@Override
-	public Area selectAreaInfo(String areaAddress) {
-		// TODO Auto-generated method stub
-		return null;
+	public Area selectAreaInfo(String areaName) {
+		return sqlSession.selectOne("AreaMapper.selectArea", areaName);
 	}
 
 	@Override
@@ -77,6 +76,11 @@ public class AreaStoreLogic implements AreaStore {
 	public int insertArea(Area area) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ArrayList<Area> selectAreaList() {
+		return (ArrayList)sqlSession.selectList("AreaMapper.selectList");
 	}
 
 }

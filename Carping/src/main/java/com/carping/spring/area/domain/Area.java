@@ -4,9 +4,11 @@ public class Area {
 	private int areaKey;
 	private String areaName;
 	private String areaAddress;
-	private String areaXCode;
-	private String areaYCode;
-	private String areaGS25;
+	private String areaGeoCode;
+	private int areaGS25;
+	private int areaToilet;
+	private int areaSink;
+	private int areaPool;
 	private String areaImage;
 	private String areaEtc;
 	private int foodZoneKey;
@@ -15,22 +17,6 @@ public class Area {
 	
 	public Area() {
 		
-	}
-
-	public Area(int areaKey, String areaName, String areaAddress, String areaXCode, String areaYCode, String areaGS25,
-			String areaImage, String areaEtc, int foodZoneKey, int placeKey, double scoreAvg) {
-		super();
-		this.areaKey = areaKey;
-		this.areaName = areaName;
-		this.areaAddress = areaAddress;
-		this.areaXCode = areaXCode;
-		this.areaYCode = areaYCode;
-		this.areaGS25 = areaGS25;
-		this.areaImage = areaImage;
-		this.areaEtc = areaEtc;
-		this.foodZoneKey = foodZoneKey;
-		this.placeKey = placeKey;
-		this.scoreAvg = scoreAvg;
 	}
 
 	public int getAreaKey() {
@@ -57,28 +43,44 @@ public class Area {
 		this.areaAddress = areaAddress;
 	}
 
-	public String getAreaXCode() {
-		return areaXCode;
+	public String getAreaGeoCode() {
+		return areaGeoCode;
 	}
 
-	public void setAreaXCode(String areaXCode) {
-		this.areaXCode = areaXCode;
+	public void setAreaGeoCode(String areaGeoCode) {
+		this.areaGeoCode = areaGeoCode;
 	}
 
-	public String getAreaYCode() {
-		return areaYCode;
-	}
-
-	public void setAreaYCode(String areaYCode) {
-		this.areaYCode = areaYCode;
-	}
-
-	public String getAreaGS25() {
+	public int getAreaGS25() {
 		return areaGS25;
 	}
 
-	public void setAreaGS25(String areaGS25) {
+	public void setAreaGS25(int areaGS25) {
 		this.areaGS25 = areaGS25;
+	}
+
+	public int getAreaToilet() {
+		return areaToilet;
+	}
+
+	public void setAreaToilet(int areaToilet) {
+		this.areaToilet = areaToilet;
+	}
+
+	public int getAreaSink() {
+		return areaSink;
+	}
+
+	public void setAreaSink(int areaSink) {
+		this.areaSink = areaSink;
+	}
+
+	public int getAreaPool() {
+		return areaPool;
+	}
+
+	public void setAreaPool(int areaPool) {
+		this.areaPool = areaPool;
 	}
 
 	public String getAreaImage() {
@@ -117,17 +119,37 @@ public class Area {
 		return scoreAvg;
 	}
 
-	public void setScoreAvg(int scoreAvg) {
+	public void setScoreAvg(double scoreAvg) {
+		this.scoreAvg = scoreAvg;
+	}
+
+	public Area(int areaKey, String areaName, String areaAddress, String areaGeoCode, int areaGS25, int areaToilet,
+			int areaSink, int areaPool, String areaImage, String areaEtc, int foodZoneKey, int placeKey,
+			double scoreAvg) {
+		super();
+		this.areaKey = areaKey;
+		this.areaName = areaName;
+		this.areaAddress = areaAddress;
+		this.areaGeoCode = areaGeoCode;
+		this.areaGS25 = areaGS25;
+		this.areaToilet = areaToilet;
+		this.areaSink = areaSink;
+		this.areaPool = areaPool;
+		this.areaImage = areaImage;
+		this.areaEtc = areaEtc;
+		this.foodZoneKey = foodZoneKey;
+		this.placeKey = placeKey;
 		this.scoreAvg = scoreAvg;
 	}
 
 	@Override
 	public String toString() {
-		return "Area [areaKey=" + areaKey + ", areaName=" + areaName + ", areaAddress=" + areaAddress + ", areaXCode="
-				+ areaXCode + ", areaYCode=" + areaYCode + ", areaGS25=" + areaGS25 + ", areaImage=" + areaImage
-				+ ", areaEtc=" + areaEtc + ", foodZoneKey=" + foodZoneKey + ", placeKey=" + placeKey + ", scoreAvg="
-				+ scoreAvg + "]";
+		return "Area [areaKey=" + areaKey + ", areaName=" + areaName + ", areaAddress=" + areaAddress + ", areaGeoCode="
+				+ areaGeoCode + ", areaGS25=" + areaGS25 + ", areaToilet=" + areaToilet + ", areaSink=" + areaSink
+				+ ", areaPool=" + areaPool + ", areaImage=" + areaImage + ", areaEtc=" + areaEtc + ", foodZoneKey="
+				+ foodZoneKey + ", placeKey=" + placeKey + ", scoreAvg=" + scoreAvg + "]";
 	}
+
 	
 	
 	

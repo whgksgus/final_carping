@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="AreaMapper">
+	
+	<resultMap type="Area" id="areaResultMap">
+		<id property="areaKey" column="AREA_KEY"/>
+		<result property="areaName" column="AREA_NAME"/>
+		<result property="areaAddress" column="AREA_ADDRESS"/>
+		<result property="areaGeoCode" column="AREA_GEOCODE"/>
+		<result property="areaGS25" column="AREA_GS25"/>
+		<result property="areaToilet" column="AREA_TOILET"/>
+		<result property="areaSink" column="AREA_SINK"/>
+		<result property="areaPool" column="AREA_POOL"/>
+		<result property="areaImage" column="AREA_IMAGE"/>
+		<result property="areaEtc" column="AREA_ETC"/>
+		<result property="foodZoneKey" column="FOODZONE_KEY"/>
+		<result property="placeKey" column="PLACE_KEY"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="areaResultMap">
+		SELECT * FROM AREA
+	</select>
+
+	<select id="selectArea" resultMap="areaResultMap">
+		SELECT * FROM AREA
+		WHERE AREA_NAME = #{areaName}
+	</select>
+</mapper>
