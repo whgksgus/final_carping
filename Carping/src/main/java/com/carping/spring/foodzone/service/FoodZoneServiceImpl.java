@@ -23,9 +23,9 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 	}
 
 	@Override
-	public FoodZone selectFoodZoneInfo(String foodZoneAddress) {
+	public FoodZone selectFoodZoneInfo(String foodZoneName) {
 		// TODO Auto-generated method stub
-		return null;
+		return fzStore.selectFoodZoneInfo(foodZoneName);
 	}
 
 	@Override
@@ -35,15 +35,14 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 	}
 
 	@Override
-	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey, PageInfo pi) {
+	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey) {
 		// TODO Auto-generated method stub
-		return null;
+		return fzStore.selectFoodZoneReviewList(foodZoneKey);
 	}
 
 	@Override
 	public double selectFoodZoneAvg(int foodZoneKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzStore.selectFoodZoneAvg(foodZoneKey);
 	}
 
 	@Override

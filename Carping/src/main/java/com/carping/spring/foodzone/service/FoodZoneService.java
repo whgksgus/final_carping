@@ -9,9 +9,9 @@ import com.carping.spring.foodzone.domain.FoodZoneReview;
 
 public interface FoodZoneService {
 	public ArrayList<FoodZone> searchFoodZone(Search search);
-	public FoodZone selectFoodZoneInfo(String foodZoneAddress);
+	public FoodZone selectFoodZoneInfo(String foodZoneName);
 	public int getListCount();
-	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey, PageInfo pi);
+	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey);
 	public double selectFoodZoneAvg(int foodZoneKey);
 	public int modifyFoodZoneAvg(int foodZoneKey, double scoreAvg);
 	public int insertFoodZone(FoodZone foodZone);

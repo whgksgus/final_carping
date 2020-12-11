@@ -12,7 +12,32 @@
 		<result property="foodZoneEtc" column="FOODZONE_ETC"/>
 	</resultMap>
 
+	<resultMap type="FoodZoneReview" id="FoodZoneReviewResultMap">
+		<id property="frKey" column="FR_KEY"/>
+		<result property="foodZoneKey" column="FOODZONE_KEY"/>
+		<result property="frScore" column="FR_SCORE"/>
+		<result property="frTitle" column="FR_TITLE"/>
+		<result property="frContent" column="FR_CONTENT"/>
+		<result property="frRegDate" column="FR_REGDATE"/>
+		<result property="frHits" column="FR_HITS"/>
+		<result property="frPhoto" column="FR_PHOTO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
 	<select id="selectAll" resultMap="FoodZoneResultMap">
 		SELECT * FROM FOODZONE
+	</select>
+	
+	<select id="selectOneFoodZone" resultMap="FoodZoneResultMap">
+		SELECT * FROM FOODZONE WHERE FOODZONE_NAME = #{foodZoneName}
+	</select>
+	<select id="getListCount" resultType="int">
+		SELECT COUNT(*) FROM FOOD_REVIEW WHERE	FOODZONE_KEY = #{foodZoneKey}
+	</select>
+	<select id="selectReviewList" resultMap="FoodZoneReviewResultMap">
+		SELECT * FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
+	</select>
+
+	<select id="selectFoodZoneAvg" resultType="double">
+		SELECT AVG(FR_SCORE) FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
 	</select>
 </mapper>

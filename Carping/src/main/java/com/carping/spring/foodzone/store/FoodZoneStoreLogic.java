@@ -22,9 +22,9 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	}
 
 	@Override
-	public FoodZone selectFoodZoneInfo(String foodZoneAddress) {
-		// TODO Auto-generated method stub
-		return null;
+	public FoodZone selectFoodZoneInfo(String foodZoneName) {
+		FoodZone foodZone = sqlSession.selectOne("FoodZoneMapper.selectOneFoodZone", foodZoneName);
+		return foodZone;
 	}
  
 	@Override
@@ -34,15 +34,13 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	}
 
 	@Override
-	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey) {
+		return (ArrayList)sqlSession.selectList("FoodZoneMapper.selectReviewList", foodZoneKey);
 	}
 
 	@Override
 	public double selectFoodZoneAvg(int foodZoneKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("FoodZoneMapper.selectFoodZoneAvg", foodZoneKey);
 	}
 
 	@Override
