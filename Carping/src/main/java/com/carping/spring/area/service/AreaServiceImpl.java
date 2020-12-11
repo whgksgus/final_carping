@@ -74,13 +74,22 @@ public class AreaServiceImpl implements AreaService {
 
 	@Override
 	public int insertArea(Area area) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aStore.insertArea(area);
 	}
 
 	@Override
 	public ArrayList<Area> selectAreaList() {
 		return aStore.selectAreaList();
+	}
+
+	@Override
+	public ArrayList<FoodZone> selectFoodZoneList(String areaAddress) {
+		return aStore.selectFoodZoneList(areaAddress);
+	}
+
+	@Override
+	public ArrayList<Place> selectPlaceList(String areaAddress) {
+		return aStore.selectPlaceList(areaAddress);
 	}
 
 }

@@ -1,6 +1,6 @@
- package com.carping.spring.area.controller;
+package com.carping.spring.area.controller;
 
-
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,111 +19,155 @@ import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.service.AreaService;
 import com.carping.spring.common.Search;
 import com.carping.spring.common.SearchMap;
+import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.service.FoodZoneService;
+import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.service.PlaceService;
+import com.google.gson.Gson;
 
 @Controller
 public class AreaController {
 
 	@Autowired
 	private AreaService aService;
-	
+
 	@Autowired
 	private FoodZoneService fzService;
-	
+
 	@Autowired
 	private PlaceService pService;
 
-	@RequestMapping(value="areaInfoView.do", method=RequestMethod.GET)
+	@RequestMapping(value = "areaInfoView.do", method = RequestMethod.GET)
 	public ModelAndView areaInfoView(ModelAndView mv) {
 		ArrayList<Area> aList = aService.selectAreaList();
 		mv.addObject("aList", aList);
 		mv.setViewName("area/areaInfoView");
 		return mv;
 	}
-	
+
+	@RequestMapping(value = "areaInsertView.do", method = RequestMethod.GET)
+	public String areaInsertView() {
+		return "area/areaInsertView";
+	}
 
 	public String areaSearch(Search search, Model model) {
 		return "";
 	}
-	
-	
-	@RequestMapping(value="selectAreaInfo.do", method=RequestMethod.POST)
+
+	@RequestMapping(value = "selectAreaInfo.do", method = RequestMethod.GET)
 	@ResponseBody
-	public String areaInfoSelect(String areaName, Model model) {
+	public Area areaInfoSelect(String areaName, Model model) {
 		Area area = aService.selectAreaInfo(areaName);
-		if(area != null) {
-			model.addAttribute("area", area);
-			return"area/areaInfoView";
-		}else {
-			model.addAttribute("msg", "자유게시판 검색 실패");
-			return "common/errorPage";
-		}
+		return area;
 	}
-	
 
 	public String areaReviewSelect(int arKey, Model model) {
 		return "";
 	}
-	
 
 	public String placeInfoSelect(int placeKey, Model model) {
 		return "";
 	}
-	
 
 	public String foodZoneInfoSelect(int FoodZoneKey, Model model) {
 		return "";
 	}
-	
 
-	public ModelAndView areaReviewList(ModelAndView mv, 
-			@RequestParam(value="page", required=false) Integer page, int areaKey) {
+	public ModelAndView areaReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			int areaKey) {
 		return mv;
 	}
-	
 
 	public String areaReviewScoreAvg(int areaKey, Model model) {
 		return "";
 	}
-	
 
 	public String scoreAvgUpdate(int areaKey, double scoreAvg, Model model) {
 		return "";
 	}
-	
+
 	public String registerCategoryForm() {
 		return "";
 	}
-	
+
 	public String areaRegisterForm() {
 		return "";
 	}
-	
-	public String selectFoodZoneList(String areaAddress, Model model) {
-		return "";
+
+	@ResponseBody
+	@RequestMapping(value = "selectFzList.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String selectFoodZoneList(String areaAddress) {
+		String selectAddr = areaAddress.substring(0, 9) + "%";
+		ArrayList<FoodZone> fList = aService.selectFoodZoneList(selectAddr);
+		Gson gson = new Gson();
+		String jsonFoodzone = gson.toJson(fList);
+		return jsonFoodzone;
 	}
-	
-	public String selectPlaceList(String areaAddress, Model model) {
-		return "";
+
+	@ResponseBody
+	@RequestMapping(value = "selectPList.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String selectPlaceList(String areaAddress) {
+		String selectAddr = areaAddress.substring(0, 9) + "%";
+		ArrayList<Place> pList = aService.selectPlaceList(selectAddr);
+		Gson gson = new Gson();
+		String jsonFoodzone = gson.toJson(pList);
+		return jsonFoodzone;
 	}
-	
-	public String insertArea(Area area,  Model model, HttpServletRequest request, 
-			@RequestParam(name="areaImage", required=false) MultipartFile areaImage) {
-		return "";
+
+@RequestMapping(value = "insertArea.do", method = RequestMethod.POST)
+public String insertArea(Area area, Model model, HttpServletRequest request,
+		@RequestParam(name = "uploadFile", required = false) MultipartFile uploadFile) {
+	// 파일을 서버에 저장하는 작업
+	if (!uploadFile.getOriginalFilename().equals("")) {
+		String filename = saveFile(uploadFile, request);
+		if (filename != null) {
+			area.setAreaImage(uploadFile.getOriginalFilename());
+		}
 	}
-	
-	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		return "";
+	// 데이터를 디비에 저장하는 작업
+	int result = 0;
+	String path = null;
+	result = aService.insertArea(area);
+	if (result > 0) {
+		path = "area/areaInsertView";
+	} else {
+		model.addAttribute("msg", "자유게시판 등록 실패");
+		path = "common/erroPage";
 	}
-	
-	public void deleteFile(String areaImage, HttpServletRequest request) {
-		
+	return path;
+}
+
+public String saveFile(MultipartFile file, HttpServletRequest request) {
+
+	String root = request.getSession().getServletContext().getRealPath("resources");
+	String savePath = root + "\\images";
+
+	File folder = new File(savePath);
+	if (!folder.exists()) {
+		folder.mkdir();
 	}
-	
-	@RequestMapping(value="searchsido.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
-    @ResponseBody
-    public String search(SearchMap searchMap) {
-       return searchMap.getSido()+ " " +searchMap.getSigun()+ " " +searchMap.getAddress();
-    }
+	// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
+	// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
+	// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
+	String originalFilename = file.getOriginalFilename();
+
+	String filePath = folder + "\\" + originalFilename;
+
+	try {
+		file.transferTo(new File(filePath));
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return originalFilename;
+}
+
+public void deleteFile(String areaImage, HttpServletRequest request) {
+
+}
+
+@RequestMapping(value = "asearchsido.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+@ResponseBody
+public String search(SearchMap searchMap) {
+	return searchMap.getSido() + " " + searchMap.getSigun() + " " + searchMap.getAddress();
+}
 }

@@ -21,4 +21,6 @@ public interface AreaService {
 	 public int modifyAreaScoreAvg(int areaKey, double scoreAvg);
 	 public int insertArea(Area area);
 	 public ArrayList<Area> selectAreaList();
+	 public ArrayList<FoodZone> selectFoodZoneList(String areaAddress);
+	 public ArrayList<Place> selectPlaceList(String areaAddress);
 }

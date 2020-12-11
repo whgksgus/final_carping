@@ -17,6 +17,29 @@
 		<result property="placeKey" column="PLACE_KEY"/>
 	</resultMap>
 	
+	<resultMap type="FoodZone" id="FoodZoneResultMap">
+		<id property="foodZoneKey" column="FOODZONE_KEY"/>
+		<result property="foodZoneName" column="FOODZONE_NAME"/>
+		<result property="foodZoneAddress" column="FOODZONE_ADDRESS"/>
+		<result property="foodZoneGeoCode" column="FOODZONE_GEOCODE"/>
+		<result property="foodZonePhone" column="FOODZONE_PHONE"/>
+		<result property="foodZoneImage" column="FOODZONE_IMAGE"/>
+		<result property="foodZoneEtc" column="FOODZONE_ETC"/>
+	</resultMap>
+	
+	<resultMap type="Place" id="PlaceResultMap">
+		<id property="placeKey" column="PLACE_KEY"/>
+		<result property="placeName" column="PLACE_NAME"/>
+		<result property="placeAddress" column="PLACE_ADDRESS"/>
+		<result property="placeGeoCode" column="PLACE_GEOCODE"/>
+		<result property="placeGS25" column="PLACE_GS25"/>
+		<result property="placeToilet" column="PLACE_TOILET"/>
+		<result property="placeParking" column="PLACE_PARKING"/>
+		<result property="placeImage" column="PLACE_IMAGE"/>
+		<result property="placeEtc" column="PLACE_ETC"/>
+	</resultMap>
+	
+	
 	<select id="selectList" resultMap="areaResultMap">
 		SELECT * FROM AREA
 	</select>
@@ -25,4 +48,20 @@
 		SELECT * FROM AREA
 		WHERE AREA_NAME = #{areaName}
 	</select>
+	
+	<select id="selectFzList" resultMap="FoodZoneResultMap">
+		SELECT * FROM FOODZONE
+		WHERE FOODZONE_ADDRESS LIKE #{areaAddress}
+	</select>
+	
+	<insert id="insertArea">
+		INSERT INTO AREA
+		VALUES(SEQ_AKEY.NEXTVAL, #{areaName}, #{areaAddress}, #{areaGeoCode}, #{areaGS25}, #{areaToilet}, #{areaSink}, #{areaPool}, #{areaImage}, #{areaEtc}, #{foodZoneKey}, #{placeKey}, DEFAULT)
+	</insert>
+	
+	<select id="selectPList" resultMap="PlaceResultMap">
+		SELECT * FROM PLACE
+		WHERE PLACE_ADDRESS LIKE #{areaAddress}
+	</select>
+	
 </mapper>
