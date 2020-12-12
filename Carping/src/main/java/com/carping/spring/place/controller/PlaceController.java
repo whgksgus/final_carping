@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.carping.spring.common.Search;
 import com.carping.spring.place.domain.Place;
+import com.carping.spring.place.domain.Search;
 import com.carping.spring.place.service.PlaceService;
 
 @Controller
@@ -35,9 +35,9 @@ public class PlaceController {
 			return mv;
 		}
 	
-	@RequestMapping(value="searchsido.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@RequestMapping(value="psearchsido.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String search(com.carping.spring.place.domain.Search search) {
+	public String search(Search search) {
 		return search.getSido()+" "+search.getSigun()+" "+search.getAddress(); 
 	}
 	

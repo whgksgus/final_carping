@@ -13,6 +13,18 @@
 		<result property="placeImage" column="PLACE_IMAGE"/>
 		<result property="placeEtc" column="PLACE_ETC"/>
 	</resultMap>
+	
+	<resultMap type="PlaceReview" id="PlaceReviewResultMap">
+		<id property="prKey" column="PR_KEY"/>
+		<result property="placeKey" column="PLACE_KEY"/>
+		<result property="prScore" column="PR_SCORE"/>
+		<result property="prTitle" column="PR_TITLE"/>
+		<result property="prContent" column="PR_CONTENT"/>
+		<result property="prRegDate" column="PR_REGDATE"/>
+		<result property="prHits" column="PR_HITS"/>
+		<result property="prPhoto" column="PR_PHOTO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
 
 	<select id="selectAll" resultMap="PlaceResultMap">
 		SELECT * FROM PLACE
@@ -28,5 +40,20 @@
 				PLACE_ADDRESS LIKE '%' || #{searchValue} || '%' 
 			</if>
 		</where>
+	</select>
+	
+	<select id="selectPlaceReviewList" resultMap="PlaceReviewResultMap">
+		SELECT * FROM PLACE_REVIEW
+		WHERE PLACE_KEY = #{placeKey}
+	</select>
+	
+	<insert id="insertPlaceReview">
+		INSERT INTO PLACE_REVIEW
+		VALUES(SEQ_PRKEY.NEXTVAL, #{placeKey}, #{prScore}, #{prTitle}, #{prContent}, SYSDATE, #{prHits}, #{prPhoto}, #{memberId})
+	</insert>
+	
+	<select id="selectOne" resultMap="PlaceResultMap">
+		SELECT * FROM PLACE
+		WHERE PLACE_KEY = #{placeKey}
 	</select>
 </mapper>
