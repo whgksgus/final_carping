@@ -21,5 +21,7 @@ public interface AreaStore {
 	 public int updateAreaScoreAvg(int areaKey, int scoreAvg);
 	 public int insertArea(Area area);
 	 public ArrayList<Area> selectAreaList();
+	 public ArrayList<FoodZone> selectFoodZoneList(String areaAddress);
+	 public ArrayList<Place> selectPlaceList(String areaAddress);
 }
  

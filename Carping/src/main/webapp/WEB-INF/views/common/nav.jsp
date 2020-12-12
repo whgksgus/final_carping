@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">장소추가</a></li>
+										style="display: block; padding: 1px 5px;" href="areaInsertView.do">장소추가</a></li>
 								</ul></li>
 							<li><a data-hover="고객센터" href="#" class="scroll">고객센터</a>
 								<ul class="subNav">

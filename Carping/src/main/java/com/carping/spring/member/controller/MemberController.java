@@ -42,7 +42,7 @@ public class MemberController {
 		
 		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
-			mv.setViewName("index.jsp");
+			mv.setViewName("home");
 		}else {
 			mv.addObject("msg", "로그인 실패!");
 			mv.setViewName("common/errorPage");
