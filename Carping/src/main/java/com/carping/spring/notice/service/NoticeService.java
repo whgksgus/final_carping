@@ -2,9 +2,9 @@ package com.carping.spring.notice.service;
 
 import java.util.ArrayList;
 
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.notice.domain.Notice;
+import com.carping.spring.notice.domain.PageInfo;
 
 public interface NoticeService {
 	public int getListCount();

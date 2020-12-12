@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carping.spring.cart.domain.Cart;
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
+import com.carping.spring.item.domain.PageInfo;
 
 @Repository
 public class ItemStoreLogic implements ItemStore {
@@ -145,15 +145,14 @@ public class ItemStoreLogic implements ItemStore {
    }
 
    @Override
-   public Cart insertCart(Cart cart) {
-      // TODO Auto-generated method stub
-      return null;
+   public int insertCart(Cart cart) {
+	   return sqlSession.insert("ItemMapper.insertCart", cart);
    }
 
    @Override
    public Cart insertOrder(Cart cart) {
-      // TODO Auto-generated method stub
-      return null;
+	   // TODO Auto-generated method stub
+	      return null;
    }
 
    @Override

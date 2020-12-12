@@ -28,4 +28,10 @@
 		WHERE ITEM_KEY = #{itemKey}
 	</select>
    
+    <insert id="insertCart">
+      INSERT INTO CART
+      VALUES(SEQ_CKEY.NEXTVAL, #{cartQuantity}, 'N', NULL, #{itemKey}, )
+     
+   </insert>
+   
 </mapper>

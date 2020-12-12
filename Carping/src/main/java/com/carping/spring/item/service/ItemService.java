@@ -3,7 +3,7 @@ package com.carping.spring.item.service;
 import java.util.ArrayList;
 
 import com.carping.spring.cart.domain.Cart;
-import com.carping.spring.common.PageInfo;
+import com.carping.spring.item.domain.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
 
@@ -30,6 +30,6 @@ public interface ItemService {
 	public ArrayList<Item> selectEtcHigh(PageInfo pi);
 	public ArrayList<Item> searchEtcList(PageInfo pi, Search search);
 	public Item selectItemDetail(int itemKey);
-	public Cart insertCart(Cart cart);
+	public int insertCart(Cart cart);
 	public Cart insertOrder(Cart cart);
 }

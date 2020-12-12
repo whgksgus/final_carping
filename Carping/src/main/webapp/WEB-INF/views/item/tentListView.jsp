@@ -8,18 +8,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Carping - 쇼핑몰</title>
+<title>쇼핑몰</title>
 </head>
 <style>
-	#wrapper{
-		width: 100%;
-		height: 1000px;
-	}
+
 	
 	a { text-decoration:none;
 	color: black; } 
 	
     #title {
+    	padding-top: 50px;
         text-align: center;
         font-size: 30px;
         font-weight: bold;
@@ -35,25 +33,26 @@
     }
 
     #sortby {
-        margin: 0px 10px;
+        margin: 0px 15px;
     }
 
     #sortby:hover {
         font-weight: bold;
     }
     
-     #item {
-        margin: 20px 47px;
+    #item {
+        margin: 100px 100px;
     }
 
     #item_img {
+    	margin: 20px 10px;
         width: 350px;
         height: 350px;
     }
 
     #item_img:hover {
-        transition-duration: 0.5s;
-        transform: scale(0.95);
+        transition-duration: 0.3s;
+        transform: scale(1.02);
     }
 
     #item_name {
@@ -69,14 +68,11 @@
 
 </style>
 <body>
-   <div id="wrapper">
-   
-      <div id="contents">
 
+	<jsp:include page="../common/nav.jsp"/>
+ 
          <legend id="title">차박텐트 상품목록</legend>
-         <br>
-   
-            <hr>
+
          <div id="item_sortby">
             <a href="#"><span id="sortby">최신순</span></a>| 
             <a href="#"><span id="sortby">낮은가격순</span></a>| 
@@ -84,7 +80,7 @@
          </div>
          <br>
         
-           <div id="item" style="width:1300px; height:550px; float:left; padding-left: 100px; padding-right:100px;">
+           <div id="item" style="width:100%; height:800px; float:left; padding-left: 100px; padding-right:100px;">
                 <c:forEach items="${iList }" var="item">
                         	<c:url var="iDetail" value="itemDetail.do">
                         		<c:param name="itemKey" value="${item.itemKey }"></c:param>
@@ -99,26 +95,29 @@
                           
                         </div>
           			</c:forEach>
+        
+        
           </div>
-   
+          </div>
+     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
              <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <table>
+            <table style="width: 100%; text-align: center; padding-top: 300px;">
             <tr align="center" height="20">
 			<td colspan="6">
 				<!-- 이전 -->
 				<c:if test="${pi.currentPage <= 1 }">
-					[이전]&nbsp;
+					◀&nbsp;
 				</c:if>
 				<c:if test="${pi.currentPage > 1 }">
 					<c:url var="before" value="tentListView.do">
 						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 					</c:url>			
-					<a href="${before }">[이전]</a>&nbsp;
+					<a href="${before }">◀</a>&nbsp;
 				</c:if>
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 					<c:if test="${p eq pi.currentPage }">
-						<font style="color:red;">[${p }]</font>
+						<font style="font-weight:bold;">${p }</font>
 					</c:if>
 					<c:url var="pagination" value="tentListView.do">
 						<c:param name="page" value="${p }"></c:param>
@@ -129,24 +128,20 @@
 				</c:forEach>
 				<!-- 다음 -->
 				<c:if test="${pi.currentPage >= pi.maxPage }">
-					[다음]&nbsp;
+					▶&nbsp;
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="tentListView.do">
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					</c:url>
-					<a href="${after }">[다음]</a>&nbsp;
+					<a href="${after }">▶</a>&nbsp;
 				</c:if>
 			</td>
 		</tr>
 	</table>
-         <br>
+    
 		<br><br><br><br><br><br><br><br><br><br><br><br><br>
       <br>
-      <hr>
-   </div>  
-
-   </div>
 </body>
 
 </html>
