@@ -23,6 +23,7 @@
 		<result property="frPhoto" column="FR_PHOTO"/>
 		<result property="memberId" column="MEMBER_ID"/>
 	</resultMap>
+	
 	<select id="selectAll" resultMap="FoodZoneResultMap">
 		SELECT * FROM FOODZONE
 	</select>
@@ -34,10 +35,12 @@
 		SELECT COUNT(*) FROM FOOD_REVIEW WHERE	FOODZONE_KEY = #{foodZoneKey}
 	</select>
 	<select id="selectReviewList" resultMap="FoodZoneReviewResultMap">
-		SELECT * FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
+		SELECT * FROM (select * from FOOD_REVIEW ORDER BY 6 DESC) WHERE FOODZONE_KEY = #{foodZoneKey} AND 3>=ROWNUM
 	</select>
 
 	<select id="selectFoodZoneAvg" resultType="double">
 		SELECT AVG(FR_SCORE) FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
 	</select>
+	
+	
 </mapper>

@@ -6,6 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 추천</title>
+<style>
+.star-rating { width:205px; } 
+.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
+.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top;}
+#star{
+	width : 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+#star div{
+	float: left;
+}
+
+</style>
 </head>
 <body>
    <jsp:include page="../common/nav.jsp"></jsp:include>
@@ -30,7 +44,7 @@
    <div id="Info" style="text-align: center;">
    
    </div>
-   <span id="reviewAvg" style="font-size: 1.6em;"></span>
+   <span id="reviewAvg" style="font-size: 1.8em;"></span>
    <div id="review">
    </div>
    <div id="paging"></div>
@@ -144,11 +158,31 @@
 	    				$("#reviewAvg").append("<p>아직 리뷰 평점이 존재하지 않습니다..</p>");
 	    			}else{
 	    				$("#reviewAvg").html('');
-	    				$("#reviewAvg").append("<p>"+positions.title+"의 평균 별점 : "+result+"</p>")
+	    				if(result > 0 && result < 0.5){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:0%;'></span></span></div></div>");	
+	    				} else if (result >= 0.5 && result < 1.0){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:10%;'></span></span></div></div>");
+	    				} else if (result >= 1.0 && result < 1.5){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:20%;'></span></span></div></div>");
+	    				} else if (result >= 1.5 && result < 2.0){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:30%;'></span></span></div></div>");
+	    				} else if (result >= 2.0 && result < 2.5){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:40%;'></span></span></div></div>");
+	    				} else if (result >= 2.5 && result < 3.0){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:50%;'></span></span></div></div>");
+	    				} else if (result >= 3.0 && result < 3.5){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:60%;'></span></span></div></div>");
+	    				} else if (result >= 3.5 && result < 4.0){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:70%;'></span></span></div></div>");
+	    				} else if (result >= 4.0 && result < 4.5){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:80%;'></span></span></div></div>");
+	    				} else if (result >= 4.5 && result < 5.0){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:90%;'></span></span></div></div>");
+	    				} else if(result==5.0){
+	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:100%;'></span></span></div></div>");
+	    				}
 	    			}
-	    			
 	    		}
-	    		
 	    	})
 	    	
 	    	console.log(positions.title)
@@ -169,13 +203,9 @@
 	    			}
 	    		}
 	    	});
-	    	
-	    	
 	        infowindow.open(map, marker);
-	        
 	    };
 	}
-
 	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 	function makeOutListener(infowindow) {
 	    return function() {
