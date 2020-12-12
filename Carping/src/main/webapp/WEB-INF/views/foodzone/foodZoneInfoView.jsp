@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 추천</title>
+
 </head>
 <body>
    <jsp:include page="../common/nav.jsp"></jsp:include>
@@ -34,6 +35,8 @@
    <div id="review">
    </div>
    <div id="paging"></div>
+   
+   
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af"></script>
    <script>
    var fList = new Array();
@@ -164,11 +167,14 @@
 	    				$('#review').html('');	
 	    				for(var i=0; i<result.frList.length; i++){
 	    					
-	    					$('#review').append("<p>"+result.frList[i].memberId+" : "+result.frList[i].frContent+"</p><br>");
+	    					$('#review').append("<p>"+result.frList[i].memberId+" : "+result.frList[i].frContent+" 작성날짜 : "+result.frList[i].frRegDate+"</p><br>");
 		    			}
 	    			}
 	    		}
 	    	});
+	    	
+	    	var offset = $("#Info").offset();
+	    	$('html, body').animate({scrollTop : offset.top}, 500);
 	    	
 	    	
 	        infowindow.open(map, marker);
@@ -303,9 +309,13 @@
     	});
 	} --%>
    </script>
-
+<script>
+	$(document).ready(function(){
+	$(".loader").delay('3000').fadeOut();
+});
+</script>
    
    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+	
 </body>
 </html>

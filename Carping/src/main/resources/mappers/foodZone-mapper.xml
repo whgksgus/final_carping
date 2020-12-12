@@ -34,7 +34,7 @@
 		SELECT COUNT(*) FROM FOOD_REVIEW WHERE	FOODZONE_KEY = #{foodZoneKey}
 	</select>
 	<select id="selectReviewList" resultMap="FoodZoneReviewResultMap">
-		SELECT * FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
+		SELECT * FROM (SELECT * FROM food_review ORDER BY 6 DESC) where foodzone_key = #{foodZoneKey} and (3>=ROWNUM)
 	</select>
 
 	<select id="selectFoodZoneAvg" resultType="double">
