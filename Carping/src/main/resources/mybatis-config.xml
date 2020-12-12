@@ -10,6 +10,7 @@
 		<typeAlias type="com.carping.spring.item.domain.Item" alias="Item"/>
       	<typeAlias type="com.carping.spring.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.carping.spring.place.domain.Place" alias="Place"/>
+		<typeAlias type="com.carping.spring.place.domain.PlaceReview" alias="PlaceReview"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/foodZone-mapper.xml"/>

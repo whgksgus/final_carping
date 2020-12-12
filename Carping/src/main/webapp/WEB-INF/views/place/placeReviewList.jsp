@@ -20,6 +20,7 @@
 	<br>
 	
 	<form action="placeReviewInsertForm.do" method="post">
+	<input type="hidden" name="placeKey" value="${placeKey}"/>
 	<table align="center" border="1" width="700">
 		<tr text-align="center">
 			<th>글번호</th>
@@ -36,7 +37,7 @@
 		</c:if>
 		<c:if test="${prList ne null || !empty prList }">
 		<c:forEach items="${prList }" var="prlist" varStatus="status">
-		<input type="hidden" name="placeKey" value="${prlist.placeKey }"/>
+		
 		<tr>
 			<td>${status.index }</td>
 			<td>${prlist.prTitle }</td>

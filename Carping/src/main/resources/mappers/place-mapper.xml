@@ -49,7 +49,7 @@
 	
 	<insert id="insertPlaceReview">
 		INSERT INTO PLACE_REVIEW
-		VALUES(SEQ_PRKEY.NEXTVAL, #{placeKey}, #{prScore}, #{prTitle}, #{prContent}, SYSDATE, #{prHits}, #{prPhoto}, #{memberId})
+		VALUES(SEQ_PRKEY.NEXTVAL, #{placeKey}, #{prScore}, #{prTitle}, #{prContent}, SYSDATE, #{prHits}, #{prPhoto,jdbcType=VARCHAR}, #{memberId})
 	</insert>
 	
 	<select id="selectOne" resultMap="PlaceResultMap">

@@ -61,11 +61,15 @@ public class PlaceReviewController {
 		int listCount = 1;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<PlaceReview> prList = prService.selectPlaceReviewList(pi, placeKey);	
+		System.out.println(placeKey);
 		if(!prList.isEmpty()) {
 			mv.addObject("prList", prList);
+			mv.addObject("placeKey", placeKey);
 			mv.setViewName("place/placeReviewList");
 		}else {
+			mv.addObject("placeKey", placeKey);
 			mv.setViewName("place/placeReviewList");
+			
 		}
 		return mv;
 	}
