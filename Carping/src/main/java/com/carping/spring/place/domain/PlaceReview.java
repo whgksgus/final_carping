@@ -13,9 +13,7 @@ public class PlaceReview {
 	private String prPhoto;
 	private String memberId;
 	
-	public PlaceReview() {
-		
-	}
+	public PlaceReview() {}
 
 	public PlaceReview(int prKey, int placeKey, int prScore, String prTitle, String prContent, Date prRegDate,
 			int prHits, String prPhoto, String memberId) {
@@ -111,5 +109,5 @@ public class PlaceReview {
 	}
 	
 	
-	
-}
+
+	}

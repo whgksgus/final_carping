@@ -31,8 +31,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 	@Override
 	public ArrayList<PlaceReview> selectPlaceReviewList(PageInfo pi, int placeKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return pStore.selectPlaceReviewList(pi, placeKey);
 	}
 
 	@Override
@@ -43,8 +42,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 	@Override
 	public int insertPlaceReview(PlaceReview pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return pStore.insertPlaceReview(pr);
 	}
 
 	@Override
@@ -75,6 +73,11 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public int deletePlaceReviewComment(int prcKey) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Place selectOne(int placeKey) {
+		return pStore.selectOne(placeKey);
 	}
 
 }

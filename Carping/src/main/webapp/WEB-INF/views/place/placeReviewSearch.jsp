@@ -14,33 +14,49 @@
 	<br>
 
 	<div style="margin-left: 100px;">
-		<h2 class="h2">리뷰게시판 - 장소 검색</h2>
+		<h2 class="h2">리뷰게시판 - 명소 검색</h2>
+		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 	</div>
 	<br>
-	<form id="form">
+	<form id="form" action="placeReviewSearch.do" method="post">
 	<div style="text-align:center;">
 		<select id="searchCondition" name="searchCondition">
 			<option value="장소명">장소명</option>
 			<option value="주소">주소</option>
 		</select>&nbsp;&nbsp;
 		<input type="text" id="searchValue" name="searchValue" size="50;" required/>&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="button" value="검색" id="search"/>
+		<input type="submit" value="검색" id="search"/>
 	</div>
 	</form>
 
 	<br>
 	<br>
 	
-	<table>
-		<tr>
-			<th>장소명</th>
-			<th>주소</th>
+	<!-- 검색 결과 출력  -->
+	<form action="placeReviewListView.do" method="post">
+	<table align="center" border="1" width="700">
+		<tr text-align="center">
+			<th width="300">장소명</th>
+			<th width="300">주소</th>
 			<th>선택</th>
 		</tr>
-	
+		<c:forEach items="${pList }" var="list">
+		<tr>
+			<td>${list.placeName }</td>
+			<td>${list.placeAddress }</td>
+			<td><input type="radio" name="placeKey" value="${list.placeKey }"/></td>
+		</tr>
+		</c:forEach>
 	</table>
+	<br>
+	<c:if test="${pList ne null || !empty pList }">
+	<input style="margin-left:1060px;" type="submit" value="다음"/>
+	</c:if>
 	
+	</form>
 	<script>
+	
+	/* var arr = [];
 		$('#search').on("click", function() {
 			var type = $("#searchCondition").val();
 			var search = $("#searchValue").val();
@@ -50,12 +66,17 @@
 				type : "POST",
 				data : {"searchCondition" : type, "searchValue" : search},
 				success : function(data) {
-					alert(data);
+				<c:forEach items="${pList}" var="list">
+				var name = ${list.placeName};
+				var addr = "${list.placeAddress}";
+				for (var i in data) {
+					$("tab tbody")
 				}
-			})
-		})
+				</c:forEach>
+				}
+			});
+		}) */
 	</script>
-
 
 
 
