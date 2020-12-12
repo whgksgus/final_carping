@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>차박 장소 추천</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 .display-none {
 	display: none;
@@ -19,7 +20,6 @@
 	<br>
 
 	<script type="text/javascript">
-		
 		$(function() {
 
 			// 질문유형을 선택한다.
@@ -82,65 +82,32 @@
 			</select> <select id="schQnaType" name="sigun"
 				style="width: 120px; display: none;">
 			</select> <input name="address" type="text" placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="검색" id="search" onclick="searchMap()" />
+			<input type="button" value="검색" id="search" onclick="searchMap()">
 		</form>
 	</div>
 	<br>
 	<!-- 지도 표시되는 부분 -->
 	<div id="map" style="width: 1300px; height: 400px; margin-left: 100px;"></div>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
 	<script>
 		var mapData;
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		mapOption = {
-			center : new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
-			level : 7
-		// 지도의 확대 레벨
-		};
-
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-		var aList = new Array();
+		
+	    var aList = new Array();
 		<c:forEach items="${aList}" var="list">
-		var key = $
-		{
-			list.areaKey
-		};
+		var key = ${list.areaKey};
 		var name = "${list.areaName}";
 		var addr = "${list.areaAddress}";
 		var geocode = "${list.areaGeoCode}";
 		var geocodeArr = geocode.split(', ', 2);
-		var gs25 = $
-		{
-			list.areaGS25
-		};
-		var toilet = $
-		{
-			list.areaToilet
-		};
-		var sink = $
-		{
-			list.areaSink
-		};
-		var pool = $
-		{
-			list.areaPool
-		};
+		var gs25 = ${list.areaGS25};
+		var toilet = ${list.areaToilet};
+		var sink = ${list.areaSink};
+		var pool = ${list.areaPool};
 		var image = "${list.areaImage}";
 		var etc = "${list.areaEtc}";
-		var fzKey = $
-		{
-			list.foodZoneKey
-		};
-		var pKey = $
-		{
-			list.placeKey
-		};
-		var avg = $
-		{
-			list.scoreAvg
-		};
+		var fzKey = ${list.foodZoneKey};
+		var pKey = ${list.placeKey};
+		var avg = ${list.scoreAvg};
 
 		var arr = {
 			areaKey : key,
@@ -162,13 +129,20 @@
 		aList.push(arr);
 		</c:forEach>
 
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	       mapOption = { 
+	           center: new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
+	           level: 11 // 지도의 확대 레벨
+	       };
+	   
+	   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
 		var arr2 = new Array();
 		var x = new Array();
 		for (var i = 0; i < aList.length; i++) {
 			x = {
 				title : aList[i].areaName,
-				latlng : new kakao.maps.LatLng(aList[i].areaGeoCodeX,
-						aList[i].areaGeoCodeY),
+				latlng : new kakao.maps.LatLng(aList[i].areaGeoCodeX,aList[i].areaGeoCodeY),
 				address : aList[i].areaAddress
 			}
 			arr2.push(x);
@@ -194,9 +168,7 @@
 			});
 
 			// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-			iwContent = '<div style="padding:5px; width:200px; height:100px;">'
-					+ positions[i].title + '<br><br>' + positions[i].address
-					+ '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			var iwContent = '<div style="padding:5px; width:200px; height:100px;">'+positions[i].title + '<br><br>' + positions[i].address+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 			iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
 			// 인포윈도우를 생성합니다
@@ -209,20 +181,8 @@
 					marker, infowindow, positions[i]));
 		}
 
-		/* function getMapData(){
-		 $.ajax({
-		          url : "searchsido.do",
-		          type : "POST",
-		          data : $("#form").serialize(),
-		          success: function(data){
-		          		mapData = data;
-		          }
-		       });
-		} */
-
-		$('#search').on(
-				'click',
-				function() {
+		
+		$('#search').on('click',function() {
 					$.ajax({
 						url : "asearchsido.do",
 						type : "POST",
@@ -252,60 +212,51 @@
 
 		function makeOverListener(map, marker, infowindow, positions) {
 			return function() {
-				$
-						.ajax({
-							url : "selectAreaInfo.do",
-							data : {
-								"areaName" : positions.title
-							},
-							type : "GET",
-							success : function(result) {
-								$('#areaInfo').html('');
-								$('#areaInfo #image')
-										.append(
-												"<img style='margin-left: 20%; width: 1000px; height:600px; align: center;' src='../../resources/images/"
-														+result.areaImage+ ">'");
-								$('#areaInfo #areaName').append(
-										"<h1 class='h1' align='center'>"
-												+result.areaName + "</h1>");
-								$('#areaInfo #areaAddress').append(
-										"<h3 class='h3'>" + result.areaAddress
-												+ "</h3>");
-								$('#areaInfo #scoreAvg').append(
-										"<h3 class='h3' style='width:50%; float:left;'>"
-												+ result.scoreAvg + "</h3>");
-								$('#areaInfo #areaEtc').append(
-										"<span>" + result.areaEtc + "</span>");
-							}
+				
+				$.ajax({
+					url : "selectAreaInfo.do",
+					data : {"areaName" : positions.title},
+					type : "GET",
+					success : function(result) {
+						$('#areaInfo').html('');
+						$('#image').html('');
+						$('#areaName').html('');
+						$('#areaAddress').html('');
+						$('#scoreAvg').html('');
+						$('#areaEtc').html('');
+						$('#lineDiv1').html('');
+						$('#lineDiv2').html('');
+						$('#lineDiv3').html('');
+						$('#reviewBox').html('');
+						$('#etcBox').html('');
+						$('#fzpl').html('');
+						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left: 5%; width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='display: inline-block; width: 70%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 15%; width: 70%;'></div><br><div id='div_1' style='width: 70%; height: 800px; margin-left: 15%;'><!-- 맛집&명소 --><div id='fzpl' style='width: 50%; float: left; display: block;'></div><div id='div_2' style='width: 50%; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 100%; display: inline-block;'></div><div id='div_3' style='width: 100%; height: 500px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
+						$('#image').append("<img align='center' style='width: 1000px; height:600px;' src='../../../resources/images/"+result.areaImage+"'>");
+						$('#areaName').append("<h1 class='h1' align='center'>"+result.areaName+"</h1>");
+						$('#areaAddress').append("<h3 class='h3'>"+result.areaAddress+"</h3>");
+						$('#fzpl').append("<h3 class='h3'>맛집&명소</h3><div style='width: 95%; display: inline-block; border-bottom: 2px solid lightgray;'></div><div id='fzImage' style='width:80%; height:300px; float:left;'align='center'></div><br><div id='pImage' style='width:80%; height:300px; float:left;'align='center'></div>");
+						$('#scoreAvg').append("<h3 class='h3' style='width: 45%; float: left;''>리뷰</h3><h3 class='h3' style='width:50%; float:left;'>"+result.scoreAvg + "</h3>");
+						$('#areaEtc').append("<div id='areaEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.areaEtc+"</span></div>");
+						$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+						$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+						$('#lineDiv3').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+					}
+				});
+				selectFz();
 
-						});
-				console.log(positions.title)
-				/* $.ajax({
-				   url : "foodZoneReviewList.do",
-				   data : {"foodZoneName" : positions.title},
-				   type : "GET",
-				   success : function(result){
-				      if(result.frList.length ==0){
-				         $('#review').html('');
-				         $('#review').append("<p>아직 작성된 리뷰가 없습니다..</p>")
-				      }else{
-				         $('#review').html('');   
-				         for(var i=0; i<result.frList.length; i++){
-				            
-				            $('#review').append("<p>"+result.frList[i].memberId+" : "+result.frList[i].frContent+"</p><br>");
-				         }
-				      }
-				      
-				      
-				      
-				   
-				}
-				}); */
-
-				infowindow.open(map, marker);
+				var offset = $("#areaInfo").offset();
+	          	$('html, body').animate({scrollTop : offset.top}, 500);
+				
+	          	infowindow.open(map, marker);
 
 			};
 		}
+		
+		function selectFz() {
+            $.post("/selectFz.do", { "foodZoneKey" : fzKey}, function(response) {
+            	
+            });
+         }
 
 		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 		function makeOutListener(infowindow) {
@@ -315,55 +266,49 @@
 		}
 	</script>
 
-	<div id="areaInfo" style="display: none;">
-		<br> <br>
-		<div
-			style="margin-left: 5%; width: 90%; border-bottom: 2px solid lightgray;"></div>
+	<div id="areaInfo" style="text-align: center;" >
+		<%-- <br> <br>
+		<div id="lineDiv1" style="margin-left: 5%; width: 90%;"></div>
 		<br> <br>
 		<div id="image"></div>
 		<br>
 		<div id="areaName"></div>
 		<br>
 		<div id="areaAddress" align="center"
-			style="display: inline-block; width: 70%; height: 150px; margin-left: 15%;">
+			style="display: inline-block; width: 70%; height: 150px;"align="center">
 
 
 		</div>
 		<br>
-		<div
-			style="margin-left: 15%; width: 70%; border-bottom: 2px solid lightgray;"></div>
+		<div id="lineDiv2" style="margin-left: 15%; width: 70%;"></div>
 		<br>
-		<div style="width: 70%; height: 800px; margin-left: 15%;">
+		<div id="div_1" style="width: 70%; height: 800px; margin-left: 15%;">
 			<!-- 맛집&명소 -->
-			<div style="width: 50%; float: left; display: block;">
-				<h3 class="h3">맛집&명소</h3>
-				<div
-					style="width: 95%; border-bottom: 2px solid lightgray; display: inline-block;"></div>
-				<%-- <div style="width:100%; height:250px; align:center;"><img src="/resources/images/${fzList[0].foodZoneImage }"></div>
-			<div style="width:100%; height:250px; align:center;"><img src="/resources/images/${pList[0].placeImage }"></div> --%>
+			<div id="fzpl" style="width: 50%; float: left; display: block;">
+				
+				
+				<div style="width:100%; height:250px; align:center;"><img src="/resources/images/${fzList[0].foodZoneImage }"></div>
+			<div style="width:100%; height:250px; align:center;"><img src="/resources/images/${pList[0].placeImage }"></div>
 			</div>
 			<!-- 리뷰 -->
-			<div style="width: 50%; float: left; display: block;">
+			<div id="div_2" style="width: 50%; float: left; display: block;">
 				<div id="scoreAvg">
-					<h3 class="h3" style="width: 45%; float: left;">리뷰</h3>
+					
 				</div>
-				<div
-					style="width: 100%; border-bottom: 2px solid lightgray; display: inline-block;"></div>
-				<div style="width: 100%; height: 500px; align: center;">
+				<div id="lineDiv3" style="width: 100%; display: inline-block;"></div>
+				<div id="div_3" style="width: 100%; height: 500px; align: center;">
 					<!-- 리뷰 반복문 돌리기 -->
-					<div style="width: 90%; margin-left: 5%; margin-top: 10px;">
-						<img src="../../resources/images/co.png"><span>와 정말 좋아요</span>
-					</div>
+					
+					<!-- <div id="reviewBox" style="width: 90%; margin-left: 5%; margin-top: 10px;">
+						<img src="../../resources/images/co.png"><span>와 정말
+							좋아요</span>
+					</div> -->
 				</div>
 			</div>
-			<div
-				style="width: 100%; height: 200px; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;">
-				<br>
-				<h3 class="h3">기타 사항</h3>
-				<br>
-				<div id="areaEtc"></div>
+			<div id="areaEtc" style="width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;">
+				
 			</div>
-		</div>
+		</div> --%>
 	</div>
 	<br>
 	<br>

@@ -45,7 +45,7 @@
                			$('#fListTable').append("<tr><td>"+response[i]['foodZoneName']+"</td><td>"+response[i]['foodZoneAddress']+"</td><td><input type='radio' name='foodZoneKey' value='"+response[i]['foodZoneKey']+"'></td></tr>");
             		};
            		}else{
-          			 $('#fListTable').append("<tr><td colspan='2' align='center'>근처의 맛집이 없습니다.</td><td><input type='hidden' name='foodZoneKey' value='0' checked></td></tr>");
+          			 $('#fListTable').append("<tr><td colspan='2' align='center'>근처의 맛집이 없습니다.</td><td><input type='radio' name='foodZoneKey' value='0' checked></td></tr>");
           	 	};
             },"json");
          }
@@ -56,7 +56,7 @@
                 		$('#pListTable').append("<tr><td>"+response[i]['placeName']+"</td><td>"+response[i]['placeAddress']+"</td><td><input type='radio' name='placeKey' value='"+response[i]['placeKey']+"'></td></tr>");
                 	 };
             	 }else{
-            		 $('#pListTable').append("<tr><td colspan='2' align='center'>근처의 명소가 없습니다.</td><td><input type='hidden' name='placeKey' value='0' checked></td></tr>");
+            		 $('#pListTable').append("<tr><td colspan='2' align='center'>근처의 명소가 없습니다.</td><td><input type='radio' name='placeKey' value='0' checked></td></tr>");
             	 };
              },"json");
           }

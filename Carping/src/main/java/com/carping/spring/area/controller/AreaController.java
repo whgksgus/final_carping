@@ -1,6 +1,7 @@
 package com.carping.spring.area.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,9 +120,10 @@ public String insertArea(Area area, Model model, HttpServletRequest request,
 		@RequestParam(name = "uploadFile", required = false) MultipartFile uploadFile) {
 	// 파일을 서버에 저장하는 작업
 	if (!uploadFile.getOriginalFilename().equals("")) {
-		String filename = saveFile(uploadFile, request);
-		if (filename != null) {
+		String renameFilename = saveFile(uploadFile, request);
+		if (renameFilename != null) {
 			area.setAreaImage(uploadFile.getOriginalFilename());
+			area.setAreaImage(renameFilename);
 		}
 	}
 	// 데이터를 디비에 저장하는 작업
@@ -131,7 +133,7 @@ public String insertArea(Area area, Model model, HttpServletRequest request,
 	if (result > 0) {
 		path = "area/areaInsertView";
 	} else {
-		model.addAttribute("msg", "자유게시판 등록 실패");
+		model.addAttribute("msg", "장소 등록 실패");
 		path = "common/erroPage";
 	}
 	return path;
@@ -140,7 +142,7 @@ public String insertArea(Area area, Model model, HttpServletRequest request,
 public String saveFile(MultipartFile file, HttpServletRequest request) {
 
 	String root = request.getSession().getServletContext().getRealPath("resources");
-	String savePath = root + "\\images";
+	String savePath = root + "\\upload";
 
 	File folder = new File(savePath);
 	if (!folder.exists()) {
@@ -149,16 +151,18 @@ public String saveFile(MultipartFile file, HttpServletRequest request) {
 	// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
 	// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
 	// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 	String originalFilename = file.getOriginalFilename();
-
-	String filePath = folder + "\\" + originalFilename;
+	String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
+			+ originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+	String filePath = folder + "\\" + renameFilename;
 
 	try {
 		file.transferTo(new File(filePath));
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	return originalFilename;
+	return renameFilename;
 }
 
 public void deleteFile(String areaImage, HttpServletRequest request) {
