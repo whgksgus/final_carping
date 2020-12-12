@@ -38,14 +38,12 @@ public class AreaServiceImpl implements AreaService {
 
 	@Override
 	public Place selectPlaceInfo(int placeKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return aStore.selectPlaceInfo(placeKey);
 	}
 
 	@Override
-	public FoodZone selectFoodZoneInfo(int FoodZoneKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public FoodZone selectFoodZoneInfo(int foodZoneKey) {
+		return aStore.selectFoodZoneInfo(foodZoneKey);
 	}
 
 	@Override
@@ -55,9 +53,8 @@ public class AreaServiceImpl implements AreaService {
 	}
 
 	@Override
-	public ArrayList<AreaReview> selectAreaReviewList(PageInfo pi, int areaKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<AreaReview> selectAreaReviewList(int areaKey) {
+		return aStore.selectAreaReviewList(areaKey);
 	}
 
 	@Override

@@ -39,14 +39,13 @@ public class AreaStoreLogic implements AreaStore {
 
 	@Override
 	public Place selectPlaceInfo(int placeKey) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(placeKey);
+		return sqlSession.selectOne("AreaMapper.selectP", placeKey);
 	}
 
 	@Override
-	public FoodZone selectFoodZoneInfo(int FoodZoneKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public FoodZone selectFoodZoneInfo(int foodZoneKey) {
+		return sqlSession.selectOne("AreaMapper.selectFz", foodZoneKey);
 	}
 
 	@Override
@@ -56,9 +55,8 @@ public class AreaStoreLogic implements AreaStore {
 	} 
 
 	@Override
-	public ArrayList<AreaReview> selectAreaReviewList(PageInfo pi, int areaKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<AreaReview> selectAreaReviewList(int areaKey) {
+		return (ArrayList)sqlSession.selectList("AreaMapper.selectArList", areaKey);
 	}
 
 	@Override
