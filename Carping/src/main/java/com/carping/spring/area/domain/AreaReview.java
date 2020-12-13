@@ -4,29 +4,17 @@ import java.sql.Date;
 
 public class AreaReview {
 	private int arKey;
+	private int areaKey;
 	private String arTitle;
 	private String arContent;
 	private int arScore;
 	private Date arRegDate;
 	private int arHits;
 	private String arPhoto;
-	private int areaKey;
+	private String memberId;
 	
 	public AreaReview() {
 		
-	}
-
-	public AreaReview(int arKey, String arTitle, String arContent, int arScore, Date arRegDate, int arHits,
-			String arPhoto, int areaKey) {
-		super();
-		this.arKey = arKey;
-		this.arTitle = arTitle;
-		this.arContent = arContent;
-		this.arScore = arScore;
-		this.arRegDate = arRegDate;
-		this.arHits = arHits;
-		this.arPhoto = arPhoto;
-		this.areaKey = areaKey;
 	}
 
 	public int getArKey() {
@@ -35,6 +23,14 @@ public class AreaReview {
 
 	public void setArKey(int arKey) {
 		this.arKey = arKey;
+	}
+
+	public int getAreaKey() {
+		return areaKey;
+	}
+
+	public void setAreaKey(int areaKey) {
+		this.areaKey = areaKey;
 	}
 
 	public String getArTitle() {
@@ -85,20 +81,35 @@ public class AreaReview {
 		this.arPhoto = arPhoto;
 	}
 
-	public int getAreaKey() {
-		return areaKey;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setAreaKey(int areaKey) {
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public AreaReview(int arKey, int areaKey, String arTitle, String arContent, int arScore, Date arRegDate, int arHits,
+			String arPhoto, String memberId) {
+		super();
+		this.arKey = arKey;
 		this.areaKey = areaKey;
+		this.arTitle = arTitle;
+		this.arContent = arContent;
+		this.arScore = arScore;
+		this.arRegDate = arRegDate;
+		this.arHits = arHits;
+		this.arPhoto = arPhoto;
+		this.memberId = memberId;
 	}
 
 	@Override
 	public String toString() {
-		return "AreaReview [arKey=" + arKey + ", arTitle=" + arTitle + ", arContent=" + arContent + ", arScore="
-				+ arScore + ", arRegDate=" + arRegDate + ", arHits=" + arHits + ", arPhoto=" + arPhoto + ", areaKey="
-				+ areaKey + "]";
+		return "AreaReview [arKey=" + arKey + ", areaKey=" + areaKey + ", arTitle=" + arTitle + ", arContent="
+				+ arContent + ", arScore=" + arScore + ", arRegDate=" + arRegDate + ", arHits=" + arHits + ", arPhoto="
+				+ arPhoto + ", memberId=" + memberId + "]";
 	}
+
 	
 	
 	

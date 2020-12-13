@@ -16,7 +16,7 @@ public interface AreaService {
 	 public Place selectPlaceInfo(int placeKey);
 	 public FoodZone selectFoodZoneInfo(int FoodZoneKey);
 	 public int getListCount();
-	 public ArrayList<AreaReview> selectAreaReviewList(PageInfo pi, int areaKey);
+	 public ArrayList<AreaReview> selectAreaReviewList(int areaKey);
 	 public double selectAreaReviewScoreAvg(int areaKey);
 	 public int modifyAreaScoreAvg(int areaKey, double scoreAvg);
 	 public int insertArea(Area area);

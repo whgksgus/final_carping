@@ -5,16 +5,16 @@
 	<typeAliases>
 		<typeAlias type="com.carping.spring.foodzone.domain.FoodZone" alias="FoodZone"/>
 		<typeAlias type="com.carping.spring.foodzone.domain.FoodZoneReview" alias="FoodZoneReview"/>
-		<!-- <typeAlias type="com.carping.spring.item.domain.Item" alias="Item"/> -->
 		<typeAlias type="com.carping.spring.area.domain.Area" alias="Area"/>
 		<typeAlias type="com.carping.spring.item.domain.Item" alias="Item"/>
       	<typeAlias type="com.carping.spring.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.carping.spring.place.domain.Place" alias="Place"/>
 		<typeAlias type="com.carping.spring.place.domain.PlaceReview" alias="PlaceReview"/>
+
+		<typeAlias type="com.carping.spring.area.domain.AreaReview" alias="AreaReview"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/foodZone-mapper.xml"/>
-		<!-- <mapper resource="mappers/item-mapper.xml"/> -->
 		<mapper resource="mappers/item-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/area-mapper.xml"/>

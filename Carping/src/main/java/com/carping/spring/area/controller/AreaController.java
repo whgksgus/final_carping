@@ -17,13 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.area.domain.Area;
+import com.carping.spring.area.domain.AreaReview;
 import com.carping.spring.area.service.AreaService;
 import com.carping.spring.common.Search;
 import com.carping.spring.common.SearchMap;
 import com.carping.spring.foodzone.domain.FoodZone;
-import com.carping.spring.foodzone.service.FoodZoneService;
 import com.carping.spring.place.domain.Place;
-import com.carping.spring.place.service.PlaceService;
 import com.google.gson.Gson;
 
 @Controller
@@ -31,12 +30,6 @@ public class AreaController {
 
 	@Autowired
 	private AreaService aService;
-
-	@Autowired
-	private FoodZoneService fzService;
-
-	@Autowired
-	private PlaceService pService;
 
 	@RequestMapping(value = "areaInfoView.do", method = RequestMethod.GET)
 	public ModelAndView areaInfoView(ModelAndView mv) {
@@ -65,18 +58,28 @@ public class AreaController {
 	public String areaReviewSelect(int arKey, Model model) {
 		return "";
 	}
-
-	public String placeInfoSelect(int placeKey, Model model) {
-		return "";
+	
+	@ResponseBody
+	@RequestMapping(value="selectP.do", method=RequestMethod.POST)
+	public Place placeInfoSelect(int placeKey) {
+		Place pl = aService.selectPlaceInfo(placeKey);
+		return pl;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="selectFz.do", method=RequestMethod.POST)
+	public FoodZone foodZoneInfoSelect(int foodZoneKey) {
+		FoodZone fz = aService.selectFoodZoneInfo(foodZoneKey);
+		return fz;
 	}
 
-	public String foodZoneInfoSelect(int FoodZoneKey, Model model) {
-		return "";
-	}
-
-	public ModelAndView areaReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
-			int areaKey) {
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="selectAreview.do", method=RequestMethod.POST)
+	public String areaReviewList(int areaKey) {
+		ArrayList<AreaReview> arList = aService.selectAreaReviewList(areaKey);
+		Gson gson = new Gson();
+		String jsonAreaReview = gson.toJson(arList);
+		return jsonAreaReview;
 	}
 
 	public String areaReviewScoreAvg(int areaKey, Model model) {
@@ -142,7 +145,7 @@ public String insertArea(Area area, Model model, HttpServletRequest request,
 public String saveFile(MultipartFile file, HttpServletRequest request) {
 
 	String root = request.getSession().getServletContext().getRealPath("resources");
-	String savePath = root + "\\upload";
+	String savePath = root + "\\areaImage";
 
 	File folder = new File(savePath);
 	if (!folder.exists()) {
