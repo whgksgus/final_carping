@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper  namespace="CartMapper">
+  <resultMap type="Cart" id="cartResultMap">
+     <result property="cartKey" column="CART_KEY"/>
+     <result property="cartQuantity" column="CART_QUANTITY"/>
+     <result property="cartStatus" column="CART_STATUS"/>
+     <result property="cartOrderDate" column="CART_ORDERDATE"/>
+     <result property="itemKey" column="ITEM_KEY"/>
+     <result property="memberId" column="MEMBER_ID"/>
+   </resultMap>
+   
+   <select id="selectCartList" resultType="MAP">
+      SELECT * FROM CART A, ITEM B WHERE A.ITEM_KEY=B.ITEM_KEY
+   </select>
+   
+   <select id="selectCartDetail" resultType="int">
+		SELECT CART_QUANTITY FROM CART
+		WHERE ITEM_KEY = #{itemKey}
+	</select>
+	
+	<delete id="deleteCart">
+		DELETE CART WHERE CART_KEY=#{cartKey}
+	</delete>
+  
+</mapper>

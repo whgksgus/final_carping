@@ -22,16 +22,31 @@
       FROM ITEM
       WHERE ITEM_CATEGORY = 'TENT'
    </select>
+   
+   <select id="checkItemKey" resultType="int">
+	SELECT COUNT(*) FROM CART WHERE ITEM_KEY=#{itemKey}   	
+   </select>
       
    	<select id="selectItemDetail" resultMap="itemResultMap">
 		SELECT * FROM ITEM
 		WHERE ITEM_KEY = #{itemKey}
 	</select>
    
-    <insert id="insertCart">
-      INSERT INTO CART
-      VALUES(SEQ_CKEY.NEXTVAL, #{cartQuantity}, 'N', NULL, #{itemKey}, )
-     
+	<insert id="insertCart">
+      INSERT INTO CART 
+      VALUES (
+      	SEQ_CKEY.NEXTVAL
+      	, #{cartQuantity}
+      	, 'N'
+      	, SYSDATE
+      	, #{itemKey}
+      	, #{memberId} 
+      
+      )
    </insert>
+   
+   <update id="updateCart">
+   	UPDATE CART SET CART_QUANTITY=#{cartQuantity} WHERE ITEM_KEY=#{itemKey}
+   </update>
    
 </mapper>

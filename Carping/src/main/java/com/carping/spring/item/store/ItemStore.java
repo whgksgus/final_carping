@@ -32,4 +32,6 @@ public interface ItemStore {
 	public Item selectItemDetail(int itemKey);
 	public int insertCart(Cart cart);
 	public Cart insertOrder(Cart cart);
+	public int checkItemKey(int itemKey);
+	public int updateCart( Cart cart );
 }

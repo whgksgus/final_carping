@@ -157,4 +157,14 @@ public class ItemServiceImpl implements ItemService {
 		return iStore.selectItemDetail(itemKey);
 	}
 
+	@Override
+	public int checkItemKey(int itemKey) {
+		return iStore.checkItemKey( itemKey );
+	}
+
+	@Override
+	public int updateCart(Cart cart) {
+		return iStore.updateCart( cart );
+	}
+
 }

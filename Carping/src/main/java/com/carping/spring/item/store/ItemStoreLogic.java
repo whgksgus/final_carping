@@ -29,6 +29,14 @@ public class ItemStoreLogic implements ItemStore {
       RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
       return (ArrayList)sqlSession.selectList("ItemMapper.selectTentList", null, rowBounds);
    }
+   
+   public int checkItemKey( int itemKey ) {
+	   return sqlSession.selectOne( "ItemMapper.checkItemKey", itemKey );
+   }
+   
+   public int updateCart( Cart cart ) {
+	   return sqlSession.update( "ItemMapper.updateCart", cart );
+   }
 
    @Override
    public ArrayList<Item> selectTentNew(PageInfo pi) {

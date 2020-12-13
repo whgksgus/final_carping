@@ -31,5 +31,7 @@ public interface ItemService {
 	public ArrayList<Item> searchEtcList(PageInfo pi, Search search);
 	public Item selectItemDetail(int itemKey);
 	public int insertCart(Cart cart);
+	public int updateCart( Cart cart );
+	public int checkItemKey( int itemKey );
 	public Cart insertOrder(Cart cart);
 }
