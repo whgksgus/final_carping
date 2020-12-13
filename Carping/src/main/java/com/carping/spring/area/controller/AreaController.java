@@ -74,11 +74,12 @@ public class AreaController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="selectAreview.do", method=RequestMethod.POST)
+	@RequestMapping(value="selectAreview.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String areaReviewList(int areaKey) {
 		ArrayList<AreaReview> arList = aService.selectAreaReviewList(areaKey);
 		Gson gson = new Gson();
 		String jsonAreaReview = gson.toJson(arList);
+		System.out.println(jsonAreaReview);
 		return jsonAreaReview;
 	}
 

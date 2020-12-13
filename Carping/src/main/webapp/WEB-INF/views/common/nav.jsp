@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -92,14 +92,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</ul></li>
 							<li><a data-hover="마이페이지" href="#" class="scroll">마이페이지</a>
 								<ul class="subNav">
+								<c:if test="${!empty sessionScope.loginUser }">
+									<c:if test="${loginUser.admin == 'N' }">
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">구매내역</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">회원정보 수정</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
+									</c:if>
+									<c:if test="${loginUser.admin == 'Y' }">
+									<li style="float: left;"><a
+										style="display: block; padding: 1px 5px;" href="#">회원정보 수정</a></li>
+									<li style="float: left;"><a
+										style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="areaInsertView.do">장소추가</a></li>
+									</c:if>
+								</c:if>
 								</ul></li>
 							<li><a data-hover="고객센터" href="#" class="scroll">고객센터</a>
 								<ul class="subNav">
@@ -108,10 +118,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="sugList.do">건의사항</a></li>
 								</ul></li>
+							<li class="loginTBox scroll" style="width:300px; height:40px; margin-top:-10px;">
+								<c:if test="${!empty sessionScope.loginUser }">
+									<c:if test="${loginUser.admin == 'N' }">
+										<span class="h5" style="color: #FFFFFF;">${loginUser.memberName } 님</span>&nbsp;&nbsp;
+										<button class="loginBtn h5" onclick="location.href='myInfo.do';">정보수정</button>
+										<button class="enrollBtn h5" onclick="location.href='logout.do';">로그아웃</button>
+									</c:if>
+									<c:if test="${loginUser.admin == 'Y' }">
+										<span class="h5" style="color: #FFFFFF;">${loginUser.memberName } 님</span>&nbsp;&nbsp;
+										<button class="loginBtn h5" onclick="location.href='adminEnrollForm.do';">관리자 추가</button>
+										<button class="enrollBtn h5" onclick="location.href='logout.do';">로그아웃</button>
+									</c:if>								
+								</c:if>
+							</li>
 						</ul>
+						
 					</nav>
-				<button class="loginBtn" onclick="location.href='login.do';">로그인</button>
-				<button class="enrollBtn" onclick="location.href='enroll.do';">회원가입</button>
+				
 				</div>
 				<!-- script-for-menu -->
 				<script>

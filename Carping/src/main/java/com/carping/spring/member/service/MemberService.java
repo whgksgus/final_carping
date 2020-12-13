@@ -10,4 +10,5 @@ public interface MemberService {
 	public int findPwCheckIdName(Member member);
 	public int updateMemberInfo(Member member);
 	public int deleteMember(String memberId);
+	public int insertAdmin(Member member);
 }

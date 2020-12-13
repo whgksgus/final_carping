@@ -20,14 +20,12 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public int insertMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("MemberMapper.insertMember", member);
 	}
 
 	@Override
 	public int checkIdDup(String memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("MemberMapper.checkId", memberId);
 	}
 
 	@Override
@@ -52,6 +50,11 @@ public class MemberStoreLogic implements MemberStore {
 	public int deleteMember(String memberId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int insertAdmin(Member member) {
+		return sqlSession.insert("MemberMapper.insertAdmin", member);
 	}
 
 }

@@ -53,6 +53,16 @@ label{
 	position:relative;
 }
 
+.banner2 {
+    background: url(../images/loading.gif) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height:800px;
+	position:relative;
+}
 .down {
       position: absolute;
     left: 46%;
@@ -78,21 +88,23 @@ label{
 }
 /*--header--*/
 
-.loginBtn{
+.loginTBox{
+	display: block;
 	position: absolute;
+	width:300px; 
+	height:30px; 
+}
+
+.loginBtn{
 	background-color: rgba(12, 12, 12, 0.36);
 	color: #FFFFFF;
-	top: 20px;
-	right: 8%;
-	font-size: 
+	margin-left:10px;
 }
 
 .enrollBtn{
-	position: absolute;
 	background-color: rgba(12, 12, 12, 0.36);
 	color: #FFFFFF;
-	top: 20px;
-	right: 2%;
+	margin-left:10px;
 }
 
 /*-- sticky-nav --*/
@@ -2320,6 +2332,21 @@ div#contact {
 	background-color: rgba(12, 12, 12, 0.36);
 }
 
+.loginBox3{
+	width: 800px;
+	height: 600px;
+	background-color: rgba(12, 12, 12, 0.36);
+	align:center;
+}
+
+.enrollTable{
+	margin-top: 50px;
+	margin-left: 100px;
+	width: 600px;
+	height: 500px;
+	color: #FFFFFF;
+}
+
 .loginTable{
 	margin-top: 50px;
 	margin-left: 50px;
@@ -2328,9 +2355,15 @@ div#contact {
 	color: #FFFFFF;
 }
 
+.btnLogin1{
+	width:100%;
+	height:40px;
+	background-color: rgba(12, 12, 12, 0.36);
+	color: #FFFFFF;
+	font-weight: bolder;
+}
+
 .btnLogin{
-	width: 100%;
-	height: 40px;
 	background-color: rgba(12, 12, 12, 0.36);
 	color: #FFFFFF;
 	font-weight: bolder;

@@ -41,44 +41,52 @@
          function selectFzList(jibunAddress) {
             $.post("/selectFzList.do", { "areaAddress" : jibunAddress}, function(response) {
            	 	if(response.length != 0){
+           			$('#fListTable').html('');
+           			$('#fListTable').append("<tr><th style='width:150px;'>이름</th><th style='width:250px;'>주소</th><th style='width:50px;'>선택</th></tr>");
             		for(var i=0; i<response.length; i++){
                			$('#fListTable').append("<tr><td>"+response[i]['foodZoneName']+"</td><td>"+response[i]['foodZoneAddress']+"</td><td><input type='radio' name='foodZoneKey' value='"+response[i]['foodZoneKey']+"'></td></tr>");
             		};
            		}else{
-          			 $('#fListTable').append("<tr><td colspan='2' align='center'>근처의 맛집이 없습니다.</td><td><input type='radio' name='foodZoneKey' value='0' checked></td></tr>");
+           			 $('#fListTable').html('');
+          			 $('#fListTable').append("<tr><th style='width:150px;'>이름</th><th style='width:250px;'>주소</th><th style='width:50px;'>선택</th></tr><tr><td colspan='2' align='center'>근처의 맛집이 없습니다.</td><td><input type='radio' name='foodZoneKey' value='0' checked></td></tr>");
           	 	};
             },"json");
          }
          function selectPList(jibunAddress) {
              $.post("/selectPList.do", { "areaAddress" : jibunAddress}, function(response) {
             	 if(response.length != 0){
+           			 $('#pListTable').html('');
+           			 $('#pListTable').append("<tr><th style='width:150px;'>이름</th><th style='width:250px;'>주소</th><th style='width:50px;'>선택</th></tr>");
             		 for(var i=0; i<response.length; i++){
                 		$('#pListTable').append("<tr><td>"+response[i]['placeName']+"</td><td>"+response[i]['placeAddress']+"</td><td><input type='radio' name='placeKey' value='"+response[i]['placeKey']+"'></td></tr>");
                 	 };
             	 }else{
-            		 $('#pListTable').append("<tr><td colspan='2' align='center'>근처의 명소가 없습니다.</td><td><input type='radio' name='placeKey' value='0' checked></td></tr>");
+            		 $('#pListTable').html('');
+            		 $('#pListTable').append("<tr><th style='width:150px;'>이름</th><th style='width:250px;'>주소</th><th style='width:50px;'>선택</th></tr><tr><td colspan='2' align='center'>근처의 명소가 없습니다.</td><td><input type='radio' name='placeKey' value='0' checked></td></tr>");
             	 };
              },"json");
           }
       </script>
    </head>
    <body>
-      <div align="center">
-         <h1 class="h1">차박 장소 추가</h1>
-         <br>
-         <div align="center">
+   <div class="banner" id="home" style="color: #FFFFFF;">
+   <jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
+      <div class="loginBox" align="center">
+         <div style="background-color: rgba(12, 12, 12, 0.36); width:1400px; height:900px;" align="center">
+         	<h1 class="h1">차박 장소 추가</h1>
+         	<br>
             <form action="insertArea.do" method="post" enctype="multipart/form-data">
-               <h3 class="h3">장소이름</h3>
-               <input class="form-control" type="text" name="areaName">
-               <h3 class="h3">주소찾기</h3>
+               <h3 class="h3" align="center">장소이름</h3>
+               <input class="form-control" style="width:400px;" type="text" name="areaName">
                <!-- <input class="form-control" type="text" id="zonecode"> -->
-               <input type="button" onclick="daumPostcode()" value="찾기">
-               <h3 class="h3">지번주소</h3>
-               <input class="form-control" type="text" id="jibunAddress" name="areaAddress">
+               <div style="width: 600px;">
+               <h3 class="h3">주소찾기</h3>
+               <input class="form-control" style="width:400px;" type="text" id="jibunAddress" name="areaAddress">
+               <input class="loginBtn" type="button" onclick="daumPostcode()" value="찾기">
+               </div>
                <input class="form-control" type="hidden" id="aGeoCode" name="areaGeoCode">
                <br>
                <div style="width: 1000px; display:inline-block">
-               <br>
                <div style="width: 50%; float: left" align="center">
                   <h3 class="h3">근처 맛집 리스트</h3>
                   <table id="fListTable">
@@ -103,23 +111,23 @@
                <br>
                <br>
                <div align="center" style="display:inline-block">
-                  <h3 class="h3">편의시설12</h3>
+                  <h3 class="h3">편의시설</h3>
                   <input id="chkBox1" type="checkbox" name="areaGS25" value="1"> 화장실&nbsp;&nbsp;
                   <input id="chkBox2" type="checkbox" name="areaToilet" value="1"> 편의점&nbsp;&nbsp;
                   <input id="chkBox3" type="checkbox" name="areaSink" value="1"> 개수대&nbsp;&nbsp;
                   <input id="chkBox4" type="checkbox" name="areaPool" value="1"> 물놀이&nbsp;&nbsp;
                </div>
                <h3 class="h3">기타사항</h3>
-               <textarea name="areaEtc" cols="50" rows="7" style="resize: none;"></textarea>
+               <textarea name="areaEtc" cols="50" rows="5" style="resize: none;"></textarea>
                <br>
                <h3 class="h3">사진 첨부</h3>
-               <input type="file" name="uploadFile">
+               <input class="loginBtn" type="file" name="uploadFile">
                <br>
                <br>
-               <br>
-               <input type="submit" value="등록">
+               <input class="loginBtn" type="submit" value="등록">
             </form>
          </div>
+      </div>
       </div>
    </body>
 </html>
