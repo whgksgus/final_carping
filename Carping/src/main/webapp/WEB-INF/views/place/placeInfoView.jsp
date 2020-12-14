@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>명소 추천</title>
+<style>
+	/* .display-none {
+		display:none;
+	} */
+</style>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
@@ -65,6 +70,7 @@
    <div style="margin-left: 100px;">
       <form id="form">
          <h2 class="h2">명소 추천</h2>
+         <div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
          <br> 
          <select name="sido" id="select1" onChange="chnQnaType(this.value)" >
              <option value="강원">강원</option>
@@ -76,36 +82,17 @@
          <input name="address" type="text"   placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp; 
          <input type="button" value="검색" id="search"/>
       </form>
-         <%-- <select name="stat" id="selectBox">
-             <option value="1" <c:if test="${sform.schStatus == '1'}">selected="selected"</c:if>>답변완료</option>
-             <option value="2" <c:if test="${sform.schStatus == '2'}">selected="selected"</c:if>>처리중</option>
-             <option value="3" <c:if test="${sform.schStatus == '3'}">selected="selected"</c:if>>대기</option>
-         </select> --%>
-         
-         
-         
-         <!-- <select name="sido">
-            <option value="강원도">강원</option>
-            <option value="경기도">경기</option>
-         </select>&nbsp;&nbsp;&nbsp;&nbsp;
-         
-          <input name="address" type="text"
-            placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp; 
-      </form> -->
    </div>
    <br>
-   <br>
-   <div id="mapresult"></div>
-	
 	<!-- 지도 표시되는 부분 -->
 	<div id="map" style="width:1300px;height:400px; margin-left:100px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
 	<script>
-	
+	var mapData;
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
+        level: 7 // 지도의 확대 레벨
     };
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -160,7 +147,7 @@
 		
 		// 마커 이미지의 이미지 주소입니다
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-		    
+		var iwContent = new Array();
 		for (var i = 0; i < positions.length; i ++) {
 		    
 		    // 마커 이미지의 이미지 크기 입니다
@@ -174,26 +161,38 @@
 		        map: map, // 마커를 표시할 지도
 		        position: positions[i].latlng, // 마커를 표시할 위치
 		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		        image : markerImage // 마커 이미지 
+		        image : markerImage, // 마커 이미지
+		        clickable: true //  마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다.
 		    });
-		}
+		
+		  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+	          iwContent = '<div style="padding:5px;">'+positions[i].title+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	              iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+	          // 인포윈도우를 생성합니다
+	          var infowindow = new kakao.maps.InfoWindow({
+	              content : iwContent,
+	              removable : iwRemoveable
+	          });
+     		 
+	      } 
 		
 		
 		$('#search').on('click', function() {
 	        $.ajax({
-	           url : "searchsido.do",
+	           url : "psearchsido.do",
 	           type : "POST",
+	           async : false,  // 기본값 true -> 비동기식 / false -> 동기식으로 바뀜
 	           data : $("#form").serialize(),
 	           success: function(data){
-	              $('#mapresult').text(data);
+	              mapData = data;
 	           }
 	        });
 	       
-	        var test = document.getElementById("mapresult").value;
 		     // 주소-좌표 변환 객체를 생성합니다
   	          var geocoder = new kakao.maps.services.Geocoder();
             // 주소로 좌표를 검색합니다
-            geocoder.addressSearch(test, function(result, status) {
+            geocoder.addressSearch(mapData, function(result, status) {
 
                 // 정상적으로 검색이 완료됐으면 
                  if (status === kakao.maps.services.Status.OK) {
@@ -205,8 +204,43 @@
             });
            
         })
+        
+        kakao.maps.event.addListener(marker, 'click', function() {
+        	console.log(postitions.title);
+        	infowindow.open(map, marker);
+        	$.ajax({
+        		url : "selectPlaceInfo.do",
+        		type : "POST",
+        		data : {"placeName" : ' 사근진해변'},
+        		success : function(data) {
+        			alert(data.placeName);
+        		}
+        		,deforeSend:function() {
+        			$('.placeInfo').addClass('display-none');
+        		}
+        		,complete:function() {
+        			$('.placeInfo').removeClass('display-none');
+        		}
+        	});
+        });
 
 	</script>
+	
+	<div class="placeInfo display-none">
+	<br>
+	<br>
+	<div style="margin-left: 5%; width:1000px; height:600px; align:center;" src="/resources/images/${place.placeImage }"></div>
+	<br>
+	<h1 class="h1" align="center">${place.placeName }</h1>
+	<br>
+	<div align="center" style="display:inline-block; width:70%; height:150px; margin-left:15%;">
+		<h3 class="h3">${place.placeAddress }</h3>
+	</div>
+	
+	<br>
+	<div style="margin-left : 15%; width: 70%; border-bottom: 2px solid lightgray;"></div>
+	<br>
+	
 	
 	
 	

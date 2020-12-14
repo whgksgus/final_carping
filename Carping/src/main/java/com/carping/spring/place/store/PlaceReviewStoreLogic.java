@@ -36,8 +36,7 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 
 	@Override
 	public PlaceReview selectPlaceReviewDetail(int prKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("PlaceMapper.PlaceReviewDetail", prKey);
 	}
 
 	@Override
@@ -47,26 +46,22 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 
 	@Override
 	public int updatePlaceReview(PlaceReview pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("PlaceMapper.updatePlaceReview", pr);
 	}
 
 	@Override
 	public int deletePlaceReview(int prKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("PlaceMapper.deletePlaceReview", prKey);
 	}
 
 	@Override
 	public int insertPlaceReviewComment(PlaceReviewComment prc) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("PlaceMapper.prCommentAdd", prc);
 	}
 
 	@Override
 	public ArrayList<PlaceReviewComment> selectPlaceReviewCommentList(int prKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("PlaceMapper.prCommentList", prKey);
 	}
 
 	@Override

@@ -25,6 +25,14 @@
 		<result property="prPhoto" column="PR_PHOTO"/>
 		<result property="memberId" column="MEMBER_ID"/>
 	</resultMap>
+	
+	<resultMap type="PlaceReviewComment" id="PlaceReviewCommentResultMap">
+		<id property="prcKey" column="PRC_KEY"/>
+		<result property="prcContent" column="PRC_CONTENT"/>
+		<result property="prKey" column="PR_KEY"/>
+		<result property="prcWriter" column="PRC_WRITER"/>
+		<result property="prcRegDate" column="PRC_REGDATE"/>
+	</resultMap>
 
 	<select id="selectAll" resultMap="PlaceResultMap">
 		SELECT * FROM PLACE
@@ -56,4 +64,31 @@
 		SELECT * FROM PLACE
 		WHERE PLACE_KEY = #{placeKey}
 	</select>
+	
+	<select id="PlaceReviewDetail" resultMap="PlaceReviewResultMap">
+		SELECT * FROM PLACE_REVIEW
+		WHERE PR_KEY = #{prKey}
+	</select>
+	
+	<insert id="prCommentAdd">
+		INSERT INTO PLACE_REVIEW_COMMENT
+		VALUES(SEQ_PRCKEY.NEXTVAL, #{prcContent}, #{prKey}, #{prcWriter}, SYSDATE) 
+	</insert>
+	
+	<select id="prCommentList" resultMap="PlaceReviewCommentResultMap">
+		SELECT * FROM PLACE_REVIEW_COMMENT
+		WHERE PR_KEY = #{prKey}
+		ORDER BY PRC_KEY DESC
+	</select>
+	
+	<delete id="deletePlaceReview">
+		DELETE FROM PLACE_REVIEW
+		WHERE PR_KEY = #{prKey}
+	</delete>
+	
+	<update id="updatePlaceReview">
+		UPDATE PLACE_REVIEW SET
+		PR_SCORE = #{prScore}, PR_TITLE = #{prTitle}, PR_CONTENT = #{prContent}, PR_REGDATE = SYSDATE, PR_HITS = #{prHits}, PR_PHOTO = #{prPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
+		WHERE PR_KEY = #{prKey}
+	</update>
 </mapper>
