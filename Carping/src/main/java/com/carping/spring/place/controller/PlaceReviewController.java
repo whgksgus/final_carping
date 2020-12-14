@@ -1,6 +1,7 @@
 package com.carping.spring.place.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,11 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Pagination;
 import com.carping.spring.common.Search;
+import com.carping.spring.member.domain.Member;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
 import com.carping.spring.place.service.PlaceReviewService;
 import com.carping.spring.place.service.PlaceService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class PlaceReviewController {
@@ -61,7 +65,6 @@ public class PlaceReviewController {
 		int listCount = 1;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<PlaceReview> prList = prService.selectPlaceReviewList(pi, placeKey);	
-		System.out.println(placeKey);
 		if(!prList.isEmpty()) {
 			mv.addObject("prList", prList);
 			mv.addObject("placeKey", placeKey);
@@ -109,7 +112,7 @@ public class PlaceReviewController {
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\ruploadFiles";
+		String savePath = root + "\\placeImage";
 		File folder = new File(savePath);
 		if(!folder.exists()) {
 			folder.mkdir();
@@ -125,33 +128,114 @@ public class PlaceReviewController {
 		}
 		return originalFileName;
 	}
-
-	public ModelAndView placeReviewDetail(ModelAndView mv, int placeKey, Integer page) {
+	
+	// 리뷰 상세보기
+	@RequestMapping(value="placeReviewDetail.do", method=RequestMethod.GET)
+	public ModelAndView placeReviewDetail(ModelAndView mv, int placeKey, int prKey, Integer page) {
+		PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
+		if (preview != null) {
+			mv.addObject("preview", preview).addObject("placeKey", placeKey).setViewName("place/placeReviewDetail");
+		}else {
+			mv.addObject("msg", "게시글 상세조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
-	public String placeReviewUpdate(Model model, PlaceReview pr, HttpServletRequest request,
-			@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile) {
-		return "";
-	}
+	// 리뷰 수정 화면 이동
+		@RequestMapping(value="placeReviewUpdateView.do", method=RequestMethod.GET)
+		/*public ModelAndView boardUpdateView(ModelAndView mv, @RequestParam(value="prKey") int prKey,
+				@RequestParam(value="page") Integer page) {*/
+		public ModelAndView boardUpdateView(ModelAndView mv, @RequestParam(value="prKey") int prKey, int placeKey) {
+			Place place = prService.selectOne(placeKey);
+			PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
+			mv.addObject("preview", preview);
+			mv.addObject("place", place);
+			mv.setViewName("place/placeReviewUpdate");
+			return mv;
+		}
 	
+		// 리뷰 수정
+		@RequestMapping(value="placeReviewUpdate.do", method=RequestMethod.POST)
+		public String placeReviewUpdate(Model model, PlaceReview pr, HttpServletRequest request,
+				@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile) {
+			if(reloadFile != null && !reloadFile.isEmpty()) {
+				deleteFile(pr.getPrPhoto(), request);
+			}
+			String renameFileName = saveFile(reloadFile, request);
+			if (renameFileName != null) {
+				pr.setPrPhoto(reloadFile.getOriginalFilename());
+			}
+			int result = prService.updatePlaceReview(pr);
+			if (result > 0) {
+				return "place/placeReviewList";
+			}else {
+				model.addAttribute("msg", "리뷰 수정 실패");
+				return "common/errorPage";
+			}
+		}
+		
+	
+	// 리뷰 삭제
+	@RequestMapping(value="placeReviewDelete.do", method=RequestMethod.GET)
 	public String placeReviewDelete(Model model, int prKey, HttpServletRequest request) {
-		return "";
+		PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
+		deleteFile(preview.getPrPhoto(), request);
+		// DB에서 데이터 삭제
+		int result = prService.deletePlaceReview(prKey);
+		if (result > 0) {
+			return "place/placeReviewList";
+		}else {
+			model.addAttribute("msg", "게시글 삭제 실패..");
+			return "common/errorPage";
+		}
 	}
 	
+	public void deleteFile(String prPhoto, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\placeImage";
+		File file = new File(savePath + "\\" + prPhoto);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+	
+	// 댓글 등록
+	@ResponseBody
+	@RequestMapping(value="prCommentAdd.do", method = RequestMethod.POST)
 	public String placeReviewCommentAdd(PlaceReviewComment prc, HttpSession session) {
-		return "";
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String prcWriter = loginUser.getMemberId();
+		prc.setPrcWriter(prcWriter);
+		int result = prService.insertPlaceReviewComment(prc);
+		if (result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
-	public void placeReviewCommentList(HttpServletResponse response, int prKey) {
-		
+	// 댓글 조회
+	@RequestMapping(value="prCommentList.do", method=RequestMethod.GET)
+	public void placeReviewCommentList(HttpServletResponse response, int prKey)throws Exception {
+		ArrayList<PlaceReviewComment> prcList = prService.selectPlaceReviewCommentList(prKey);
+		for (PlaceReviewComment prc : prcList) {
+			prc.setPrcContent(URLEncoder.encode(prc.getPrcContent(), "utf-8"));
+		}
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(prcList, response.getWriter());
 	}
 	
+	// 댓글 삭제
+	@RequestMapping(value="prCommentDelete.do", method=RequestMethod.GET)
 	public String placeReviewCommentDelete(int prcKey, Model model, HttpServletRequest request) {
-		return "";
+		int result = prService.deletePlaceReviewComment(prcKey);
+		if (result > 0) {
+			return "place/placeReviewList";
+		} else {
+			model.addAttribute("msg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
 	}
-	
-	public void deleteFile(String placeImage, HttpServletRequest request) {
-		
-	}
+
 }

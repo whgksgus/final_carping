@@ -86,7 +86,7 @@
 							<h5>차박 장소 주변 맛집 리뷰를 지금 확인해보세요.</h5>
 						 </div>
 					</div></a>
-					<a href="#">
+					<a href="placeReviewSearchForm.do">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>명소</span>
 						<img src="resources/images/b3.jpg">

@@ -29,6 +29,7 @@
 			<th>작성일</th>
 			<th>조회수</th>
 			<th>별점</th>
+			<th>첨부파일</th>
 		</tr>
 		<c:if test="${prList eq null || empty prList }">
 			<tr>
@@ -40,11 +41,25 @@
 		
 		<tr>
 			<td>${status.index }</td>
-			<td>${prlist.prTitle }</td>
+			<td>
+				<c:url var="prDetail" value="placeReviewDetail.do">
+					<c:param name="prKey" value="${prlist.prKey }"/>
+					<c:param name="placeKey" value="${placeKey }"/>
+				</c:url>
+				<a href="${prDetail}">${prlist.prTitle }</a>
+			</td>
 			<td>${prlist.memberId }</td>
 			<td>${prlist.prRegDate }</td>
 			<td>${prlist.prHits }</td>
 			<td>${prlist.prScore }</td>
+			<td>
+				<c:if test="${!empty prlist.prPhoto }">
+					O
+				</c:if>
+				<c:if test="${empty prlist.prPhoto }">
+					X
+				</c:if>
+			</td>
 		</tr>
 		</c:forEach>
 		</c:if>
