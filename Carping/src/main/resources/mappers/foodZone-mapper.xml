@@ -10,6 +10,7 @@
 		<result property="foodZonePhone" column="FOODZONE_PHONE"/>
 		<result property="foodZoneImage" column="FOODZONE_IMAGE"/>
 		<result property="foodZoneEtc" column="FOODZONE_ETC"/>
+		<result property="takeOutStatus" column="TAKEOUT_STATUS"/>
 	</resultMap>
 
 	<resultMap type="FoodZoneReview" id="FoodZoneReviewResultMap">
@@ -22,6 +23,14 @@
 		<result property="frHits" column="FR_HITS"/>
 		<result property="frPhoto" column="FR_PHOTO"/>
 		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
+	
+	<resultMap type="TakeOut" id="TakeOutResultMap">
+		<id property="takeOutKey" column="TAKEOUT_KEY"/>
+		<result property="foodZoneKey" column="FOODZONE_KEY"/>
+		<result property="takeOutMenu" column="TAKEOUT_MENU"/>
+		<result property="takeOutMenuPrice" column="TAKEOUT_MENU_PRICE"/>
+		<result property="takeOutMenuPhoto" column="TAKEOUT_MENU_PHOTO"/>
 	</resultMap>
 	
 	<select id="selectAll" resultMap="FoodZoneResultMap">
@@ -39,8 +48,11 @@
 	</select>
 
 	<select id="selectFoodZoneAvg" resultType="double">
-		SELECT AVG(FR_SCORE) FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
+		SELECT ROUND(AVG(FR_SCORE),1) FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey}
 	</select>
 	
+	<select id="takeOutMenuAll" resultMap="TakeOutResultMap">
+		SELECT * FROM TAKEOUTMENU WHERE FOODZONE_KEY=#{foodZoneKey}
+	</select>
 	
 </mapper>

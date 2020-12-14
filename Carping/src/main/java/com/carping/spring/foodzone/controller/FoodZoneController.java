@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
-
+import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.service.FoodZoneService;
 import com.google.gson.JsonObject;
 
@@ -80,7 +81,7 @@ public class FoodZoneController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="scoreAvgUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value="foodZoneScoreAvgUpdate.do", method = RequestMethod.GET)
 	public double scoreAvgUpdate(String foodZoneName, Model model) {
 		FoodZone foodZone = fzService.selectFoodZoneInfo(foodZoneName);
 		int foodZoneKey = foodZone.getFoodZoneKey();
@@ -97,6 +98,19 @@ public class FoodZoneController {
 		return foodZoneAvg;
 		
 		
+	}
+	
+	@RequestMapping(value="takeOut.do", method = RequestMethod.GET)
+	public ModelAndView takeOut(ModelAndView mv, String foodZoneName) {
+		FoodZone foodZone = fzService.selectFoodZoneInfo(foodZoneName);
+		System.out.println(foodZone);
+		int foodZoneKey = foodZone.getFoodZoneKey();
+		System.out.println(foodZoneKey);
+		ArrayList<TakeOut> tList = fzService.selectTakeOutMenu(foodZoneKey);
+		System.out.println(tList.isEmpty());
+		mv.addObject("foodZone", foodZone).addObject("tList", tList);
+		mv.setViewName("foodzone/foodZoneTakeOut");
+		return mv;
 	}
 	
 	public String registerCategoryForm() {

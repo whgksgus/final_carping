@@ -9,6 +9,7 @@ import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
+import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.store.FoodZoneStore;
 
 @Service
@@ -60,6 +61,11 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 	@Override
 	public ArrayList<FoodZone> selectFoodZoneList() {
 		return fzStore.selectFoodZoneList();
+	}
+
+	@Override
+	public ArrayList<TakeOut> selectTakeOutMenu(int foodZoneKey) {
+		return fzStore.takeOutMenu(foodZoneKey);
 	}
 
 }

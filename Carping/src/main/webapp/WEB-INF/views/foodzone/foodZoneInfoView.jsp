@@ -47,7 +47,9 @@
    <span id="reviewAvg" style="font-size: 1.8em;"></span>
    <div id="review">
    </div>
-   <div id="paging"></div>
+   <div id="takeout">
+   		
+   </div>
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af"></script>
    <script>
    var fList = new Array();
@@ -149,7 +151,7 @@
 	    	});
 	    	
 	    	$.ajax({
-	    		url : "scoreAvgUpdate.do",
+	    		url : "foodZoneScoreAvgUpdate.do",
 	    		data : {"foodZoneName" : positions.title},
 	    		type : "GET",
 	    		success : function(result){
@@ -185,7 +187,6 @@
 	    		}
 	    	})
 	    	
-	    	console.log(positions.title)
 	    	$.ajax({
 	    		url : "foodZoneReviewList.do",
 	    		data : {"foodZoneName" : positions.title},
@@ -203,6 +204,25 @@
 	    			}
 	    		}
 	    	});
+	    	
+	    	
+	    	$.ajax({
+	    		url : "foodZoneSelect.do",
+	    		data : {"foodZoneName" : positions.title},
+	    		type : "GET",
+	    		success : function(result){
+	    			console.log($(this));
+	    			if(result.takeOutStatus == 'Y'){
+	    				var foodZoneName = result.foodZoneName;
+	    				$("#takeout").html('');
+	    				$("#takeout").append("<p>테이크아웃이 가능한 매장입니다.</p>");
+	    				$("#takeout").append("<button onclick=location.href='takeOut.do?foodZoneName="+foodZoneName+"'>포장예약하기</button>");
+	    			}else{
+	    				$("#takeout").html('');
+	    				$("#takeout").append("<p>테이크 아웃이 불가능한 매장입니다.</p>");
+	    			}
+	    		}
+	    	});
 	        infowindow.open(map, marker);
 	    };
 	}
@@ -212,7 +232,10 @@
 	        infowindow.close();
 	    };
 	}
-
+	function takeOut(){
+		/* location.href="takeOut.do?foodZoneName="+foodZoneName; */
+	}
+	
 	/* function getFoodzoneReviews() {
 		$.ajax({
     		url : "foodZoneReviewList.do",
