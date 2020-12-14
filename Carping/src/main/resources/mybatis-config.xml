@@ -15,8 +15,16 @@
         <typeAlias type="com.carping.spring.notice.domain.Notice" alias="Notice"/>
         <typeAlias type="com.carping.spring.place.domain.PlaceReviewComment" alias="PlaceReviewComment"/>
         <typeAlias type="com.carping.spring.foodzone.domain.TakeOut" alias="TakeOut"/>
+
+		<typeAlias type="com.carping.spring.place.domain.PlaceReview" alias="PlaceReview"/>
+		<typeAlias type="com.carping.spring.place.domain.PlaceReviewComment" alias="PlaceReviewComment"/>
+		<typeAlias type="com.carping.spring.cart.domain.Cart" alias="Cart"/>
+        <typeAlias type="com.carping.spring.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.carping.spring.area.domain.AreaReview" alias="AreaReview"/>
 	</typeAliases>
 	<mappers>
+		<mapper resource="mappers/notice-mapper.xml"/>
+	    <mapper resource="mappers/cart-mapper.xml"/>
 		<mapper resource="mappers/foodZone-mapper.xml"/>
 		<mapper resource="mappers/item-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>

@@ -29,4 +29,9 @@
 		VALUES(#{memberId}, #{memberPwd}, #{memberName}, #{phone}, #{email}, #{memberAddress}, 'Y')
 	</insert>
 	
+	<update id="updateMember">
+		UPDATE MEMBER SET
+		MEMBER_NAME = #{memberName}, PHONE = #{phone}, EMAIL = #{email}, MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_ID = #{memberId}
+	</update>
 </mapper>

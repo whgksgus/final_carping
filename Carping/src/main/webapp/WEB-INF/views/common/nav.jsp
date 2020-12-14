@@ -62,14 +62,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="fixed-header">
 				<!-- logo -->
 				<div class="logo">
-					<a href="index.jsp"><h1>Carping</h1></a>
+					<a href="home.do"><h1>Carping</h1></a>
 				</div>
 				<!-- //logo -->
 				<div class="top-menu">
 					<span class="menu"> </span>
 					<nav class="link-effect-4" id="link-effect-4">
 						<ul>
-							<li class="active"><a data-hover="Home" href="index.jsp">Home</a>
+							<li class="active"><a data-hover="Home" href="home.do">Home</a>
 
 							</li>
 							<li><a data-hover="추천장소" href="#" class="scroll">추천장소</a>
@@ -82,7 +82,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="placeView.do">명소 정보</a></li>
 								</ul></li>
-							<li><a data-hover="쇼핑몰" href="tentListView.do" class="scroll">쇼핑몰</a></li>
+							<li><a data-hover="쇼핑몰" href="tentListView.do" >쇼핑몰</a></li>
 							<li><a data-hover="커뮤니티" href="#" class="scroll">커뮤니티</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
@@ -97,13 +97,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">구매내역</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">회원정보 수정</a></li>
+										style="display: block; padding: 1px 5px;" href="myInfoPwCheckForm.do">회원정보 수정</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
 									</c:if>
 									<c:if test="${loginUser.admin == 'Y' }">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">회원정보 수정</a></li>
+										style="display: block; padding: 1px 5px;" href="myInfoPwCheckForm.do">회원정보 수정</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
 									<li style="float: left;"><a
@@ -114,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a data-hover="고객센터" href="#" class="scroll">고객센터</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">공지사항</a></li>
+										style="display: block; padding: 1px 5px;" href="noticeList.do">공지사항</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="sugList.do">건의사항</a></li>
 								</ul></li>
@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<c:if test="${!empty sessionScope.loginUser }">
 									<c:if test="${loginUser.admin == 'N' }">
 										<span class="h5" style="color: #FFFFFF;">${loginUser.memberName } 님</span>&nbsp;&nbsp;
-										<button class="loginBtn h5" onclick="location.href='myInfo.do';">정보수정</button>
+										<button class="loginBtn h5" onclick="location.href='myInfoPwCheckForm.do';">정보수정</button>
 										<button class="enrollBtn h5" onclick="location.href='logout.do';">로그아웃</button>
 									</c:if>
 									<c:if test="${loginUser.admin == 'Y' }">

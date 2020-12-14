@@ -59,8 +59,7 @@ public class AreaServiceImpl implements AreaService {
 
 	@Override
 	public double selectAreaReviewScoreAvg(int areaKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aStore.selectAreaReviewScoreAvg(areaKey);
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,7 +70,9 @@ public class MemberController {
 		member.setMemberAddress(jibunAddress+" "+detailAddress);
 		int result = mService.insertMember(member);
 		if (result > 0) {
-			return "redirect:login.do";
+			model.addAttribute("msg", "회원가입에 성공하였습니다."); 
+			model.addAttribute("url", "login.do"); 
+			return "common/redirect";
 		}else {
 			model.addAttribute("msg", "회원 가입에 실패했습니다.");
 			model.addAttribute("url", "enrollForm.do");
@@ -81,7 +82,7 @@ public class MemberController {
 	
 	@RequestMapping(value="adminRegister.do", method=RequestMethod.POST)
 	public String adminRegister(Model model, Member member, String jibunAddress, String detailAddress) {
-		member.setMemberAddress(jibunAddress+" "+detailAddress);
+		member.setMemberAddress(jibunAddress+", "+detailAddress);
 		int result = mService.insertAdmin(member);
 		if (result > 0) {
 			model.addAttribute("msg", "관리자 추가에 성공하였습니다."); 
@@ -115,14 +116,35 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="myInfoForm.do", method=RequestMethod.POST)
-	public String myInfoForm(String memberPwd, HttpServletRequest request) {
-		
-		return "member/myInfoForm";
+	public ModelAndView myInfoForm(ModelAndView mv,String memberId, String memberPwd, HttpServletRequest request) {
+		System.out.println(memberId);
+		Member member = new Member(memberId, memberPwd);
+		Member result = mService.loginMember(member);
+		if(result != null) {
+			mv.addObject("loginUser", result);
+			mv.setViewName("member/modifyForm");
+		}else {
+			mv.addObject("msg", "비밀번호를 확인해주세요.");
+			mv.addObject("url", "myInfoPwCheckForm.do");
+			mv.setViewName("common/redirect");
+		}
+		return mv;
 	}
 	
-	public ModelAndView updateMember(ModelAndView mv, @RequestParam("post") String post, @RequestParam("road") String road,
+	@RequestMapping(value="updateMember.do", method=RequestMethod.POST)
+	public String updateMember(Model model, Member member, String jibunAddress, String detailAddress,
 			HttpServletRequest request) {
-		return mv;
+		member.setMemberAddress(jibunAddress+", "+detailAddress);
+		int result = mService.updateMemberInfo(member);
+		if (result > 0) {
+			model.addAttribute("msg", "회원정보 수정에 성공했습니다."); 
+			model.addAttribute("url", "home.do"); 
+			return "common/redirect";
+		}else {
+			model.addAttribute("msg", "회원정보 수정에 실패했습니다.");
+			model.addAttribute("url", "member/modifyForm");
+			return "common/redirect";
+		}
 	}
 	
 	

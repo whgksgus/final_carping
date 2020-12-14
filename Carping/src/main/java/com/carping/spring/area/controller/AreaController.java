@@ -87,8 +87,19 @@ public class AreaController {
 		return "";
 	}
 
-	public String scoreAvgUpdate(int areaKey, double scoreAvg, Model model) {
-		return "";
+	@ResponseBody
+	@RequestMapping(value="areaScoreAvgUpdate.do", method = RequestMethod.GET)
+	public double scoreAvgUpdate(String areaName, Model model) {
+		Area area = aService.selectAreaInfo(areaName);
+		int areaKey = area.getAreaKey();
+		double areaAvg = 0;
+		try {
+			areaAvg = aService.selectAreaReviewScoreAvg(areaKey);
+		} catch (Exception e) {
+			areaAvg = 0;
+			e.printStackTrace();
+		}
+		return areaAvg;
 	}
 
 	public String registerCategoryForm() {
@@ -119,16 +130,16 @@ public class AreaController {
 		return jsonFoodzone;
 	}
 
-@RequestMapping(value = "insertArea.do", method = RequestMethod.POST)
-public String insertArea(Area area, Model model, HttpServletRequest request,
-		@RequestParam(name = "uploadFile", required = false) MultipartFile uploadFile) {
-	// 파일을 서버에 저장하는 작업
-	if (!uploadFile.getOriginalFilename().equals("")) {
-		String renameFilename = saveFile(uploadFile, request);
-		if (renameFilename != null) {
-			area.setAreaImage(uploadFile.getOriginalFilename());
-			area.setAreaImage(renameFilename);
-		}
+	@RequestMapping(value = "insertArea.do", method = RequestMethod.POST)
+	public String insertArea(Area area, Model model, HttpServletRequest request,
+			@RequestParam(name = "uploadFile", required = false) MultipartFile uploadFile) {
+		// 파일을 서버에 저장하는 작업
+		if (!uploadFile.getOriginalFilename().equals("")) {
+			String renameFilename = saveFile(uploadFile, request);
+			if (renameFilename != null) {
+				area.setAreaImage(uploadFile.getOriginalFilename());
+				area.setAreaImage(renameFilename);
+			}
 	}
 	// 데이터를 디비에 저장하는 작업
 	int result = 0;
@@ -143,7 +154,7 @@ public String insertArea(Area area, Model model, HttpServletRequest request,
 	return path;
 }
 
-public String saveFile(MultipartFile file, HttpServletRequest request) {
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
 
 	String root = request.getSession().getServletContext().getRealPath("resources");
 	String savePath = root + "\\areaImage";

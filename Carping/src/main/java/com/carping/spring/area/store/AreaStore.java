@@ -17,7 +17,7 @@ public interface AreaStore {
 	 public FoodZone selectFoodZoneInfo(int FoodZoneKey);
 	 public int getListCount();
 	 public ArrayList<AreaReview> selectAreaReviewList(int areaKey);
-	 public int selectAreaReviewScoreAvg(int areaKey);
+	 public double selectAreaReviewScoreAvg(int areaKey);
 	 public int updateAreaScoreAvg(int areaKey, int scoreAvg);
 	 public int insertArea(Area area);
 	 public ArrayList<Area> selectAreaList();

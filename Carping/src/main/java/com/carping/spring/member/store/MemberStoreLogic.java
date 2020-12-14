@@ -42,8 +42,7 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public int updateMemberInfo(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("MemberMapper.updateMember", member);
 	}
 
 	@Override
