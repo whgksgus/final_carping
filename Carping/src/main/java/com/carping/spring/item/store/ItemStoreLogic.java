@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carping.spring.cart.domain.Cart;
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
+import com.carping.spring.item.domain.PageInfo;
 
 @Repository
 public class ItemStoreLogic implements ItemStore {
@@ -28,6 +28,14 @@ public class ItemStoreLogic implements ItemStore {
       int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
       RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
       return (ArrayList)sqlSession.selectList("ItemMapper.selectTentList", null, rowBounds);
+   }
+   
+   public int checkItemKey( int itemKey ) {
+	   return sqlSession.selectOne( "ItemMapper.checkItemKey", itemKey );
+   }
+   
+   public int updateCart( Cart cart ) {
+	   return sqlSession.update( "ItemMapper.updateCart", cart );
    }
 
    @Override
@@ -145,15 +153,14 @@ public class ItemStoreLogic implements ItemStore {
    }
 
    @Override
-   public Cart insertCart(Cart cart) {
-      // TODO Auto-generated method stub
-      return null;
+   public int insertCart(Cart cart) {
+	   return sqlSession.insert("ItemMapper.insertCart", cart);
    }
 
    @Override
    public Cart insertOrder(Cart cart) {
-      // TODO Auto-generated method stub
-      return null;
+	   // TODO Auto-generated method stub
+	      return null;
    }
 
    @Override

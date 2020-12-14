@@ -11,30 +11,53 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
-	    $(document).ready(function() {
-	        $("#count").on("click", function(e){
-	           var amount = (${item.itemPrice}*$("#count").val());
-	           $('#item_total b').empty();
-	           $("#item_total b").append("총 금액 : " + amount + "원");
-	        
-	   		 });
-	
-	    });
-	        
-	    /*     function fnCart(itemName, itemPrice, itemQuantity) {
+	        function fnCart(itemName, itemPrice) {
 	        	if(confirm("장바구니에 담으시겠습니까?")) {
-	        		location.href = "CartProcess.jsp?name=" + itemName + "&price=" + itemPrice;
+	        		var data = {
+	        			cartQuantity : $("#count").val(),			// 상품수량
+	        			itemKey : $( "#itemKey" ).val(),			// 아이템 키
+	        			itemName : $( "#itemName" ).val(),			// 아이템 이름
+	        			itemPrice : $( "#itemPrice" ).val()			// 아이템 가격
+	        		}
+	        		$.ajax({
+        			  url: "insertCart.do",
+        			  type: "POST",
+        			  data: JSON.stringify( data ),
+        			  dataType : "json",
+        			  contentType: "application/json; charset=utf-8",
+					}).done( function( data ) {
+						// data > 0 >>> 장바구니 등록 성공 / data == 0 >>> 장바구니 등록 실패
+						if( data > 0 ) {
+							if( confirm( "장바구니로 이동하시겠습니까?" ) ) {
+								// 페이지 이동
+								window.location.href = "cartListView.do";
+							} else {
+								// 현재 페이지 위치
+								return false;
+							}
+						} else {
+							alert( "장바구니 등록에 실패하였습니다." );
+							return false;
+						}
+					}).fail( function( error ) {
+						console.log( error );
+					});
 	        	}
 	        }
-
 	        function fnView() {
-	        	if(confirm("장바구니를 보시겠습니까?")){
+	        	if(confirm("장바구니로 이동하시겠습니까?")){
 	        		location.href = "cartListView.jsp";
 	        	}
 	        }
-	         */
-	
-	</script>
+	         
+	 	    $(document).ready(function() {
+		        $("#count").on("click", function(e){
+		           var amount = ( ${item.itemPrice} * $("#count").val() );
+		           $('#item_total b').empty();
+		           $("#item_total b").append("총 금액 : " + amount + "원");
+		   		 });
+		    });
+</script>
 </head>
 <style>
 ul, li {
@@ -97,43 +120,42 @@ ul, li {
 	margin: 0px 25px;
 }
 </style>
-
-
-
 <body>
-	
+	<jsp:include page="../common/nav.jsp"/>
 	<br>
 	<br>
 	<br>
 	<hr>
 		<div id="itemImage">
-			<img src="${item.itemImage }" style="width: 550px; height: 550px;">
+			<img src="${item.itemImage}" style="width: 550px; height: 550px;">
 		</div>
 
 		<div id="itemInfo">
+			<input style="display:none;" type="text" id="itemName" value="${item.itemName}"/>
+			<input style="display:none;" type="text" id="itemKey" value="${item.itemKey}"/>
+			<input style="display:none;" type="text" id="itemPrice" value="${item.itemPrice}"/>
 			<ul>
 
-				<li style="font-weight: bold; font-size: 23px; margin: 10px;">${item.itemName }</li>
+				<li style="font-weight: bold; font-size: 23px; margin: 10px;">${item.itemName}</li>
 				<hr>
-				<li style="margin: 20px 10px;">판매가<span
-					style="position: relative; left: 122px;">
+				<li style="margin: 20px 10px;">가격<span
+					style="position: relative; left: 131px;">
 				<fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/>원</span></li>
 
 				<li style="margin: 20px 10px;">배송방법<span
-					style="position: relative; left: 105px;">택배 (평일 기준 3~4일 소요)</span></li>
+					style="position: relative; left: 104px;">택배 (평일 기준 3~5일 소요)</span></li>
 				<li style="margin: 20px 10px;">배송비<span
 					style="position: relative; left: 122px;">3,000원</span></li>
-				<li style="margin: 20px 10px;">추가옵션 <select
+<!-- 				<li style="margin: 20px 10px;">추가옵션 <select
 					style="position: relative; left: 100px; width: 250px; height: 25px;">
 						<option value="1" selected>옵션없음</option>
-						<option value="2">옵션없음</option>
+						<option value="2">옵션없음</option> -->
 				</select>
 				</li>
 				<hr>
-				<li style="margin: 20px 10px;">${item.itemName }<input
-					type="number" value="1" min="1" max="100"
-					style="width: 30px; height: 20px; position: relative; left: 127px;"
-					id="count" name="quantity">
+					<li style="margin: 20px 10px;">수량선택</li>
+					<li style="margin: 20px 10px;">${item.itemName}
+				<input type="number" value="1" min="1" max="100" style="width: 50px; height: 25px; position: relative; left: 127px;" id="count" name="quantity">
 				</li>
 				<hr>
 				<li style="margin: 10px; text-align: right;">
@@ -141,26 +163,31 @@ ul, li {
 				
 				<div id="item_total">
 						<b> 총 금액 : <fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/>원 </b>
-					</div>
-					<br>
-				<br></li>
-				<div style="text-align: center;">
-					<input type="submit" value="Add to Cart" onclick='fnCart(\"" + name[i] + "\", \"" + price[i] + "\")' id="cart"> <a href="#">
-					<input type="button"
-						value="Buy Now" onclick="#" id="buyNow"></a>
+						<input type="text" style="display:none" id="totalAmount"/>
 				</div>
-		</div>
-		<br>
-		<br> <br>
-		<br>
-		<br>
-		<br>
-	<br>
-	<br>
-	<br>
-	<br>
+				<br><br>
+				</li>
+				
+				<div style="text-align: center;">
+				<!-- 	<input type="submit" value="Add to Cart" onclick='fnCart("\"" + itemName[i] + "\", \"" + itemPrice[i] + "\")' id="cart"/> -->
+					<input type="submit" value="Add to Cart" onclick='fnCart( $("#itemName" ).val(), $( "#itemPrice" ).val() )' id="cart"/>
+					<!-- <input type="button" value="Add to Cart" onclick="insertCart.do" id="cart"> -->
+					<a href="#">
+					<input type="button" value="Buy Now" onclick="" id="buyNow"></a>
+				</div>
+				</div>
+		<br><br><br>
+		<br><br><br>
+		<br><br><br>
+		
 	<div id="item_detail" style="text-align:center;">
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br>
+	<br><br><br>
+	<br><br><br>
+	<br><br><br>
+	<br><br><br>
+	<br><br><br>
+	<br><br><br>
 		<b style="font-size: 20px;">상품 상세 정보</b>
 		<hr noshade>
 		<img src="${item.itemInfo}" width="1000px">

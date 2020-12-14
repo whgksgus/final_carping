@@ -11,7 +11,7 @@ public class Notice {
 	private String memberId;
 	
 	public Notice() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public Notice(int nKey, String nTitle, String nContent, Date nWriteDate, int nCount, String memberId) {

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carping.spring.cart.domain.Cart;
-import com.carping.spring.common.PageInfo;
+import com.carping.spring.item.domain.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
 import com.carping.spring.item.store.ItemStore;
@@ -142,9 +142,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Cart insertCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertCart(Cart cart) {
+		return iStore.insertCart(cart);
 	}
 
 	@Override
@@ -156,6 +155,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Item selectItemDetail(int itemKey) {
 		return iStore.selectItemDetail(itemKey);
+	}
+
+	@Override
+	public int checkItemKey(int itemKey) {
+		return iStore.checkItemKey( itemKey );
+	}
+
+	@Override
+	public int updateCart(Cart cart) {
+		return iStore.updateCart( cart );
 	}
 
 }

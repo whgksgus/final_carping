@@ -9,9 +9,16 @@ public class Cart {
 	private int itemKey;
 	private Date cartOrderDate;
 	private String memberId;
-	
+
 	public Cart() {
 		
+	}
+	
+	public Cart(int cartQuantity, int itemKey, String memberId) {
+		super();
+		this.cartQuantity = cartQuantity;
+		this.itemKey = itemKey;
+		this.memberId = memberId;
 	}
 
 	public Cart(int cartKey, int cartQuantity, String cartStatus, int itemKey, Date cartOrderDate, String memberId) {
