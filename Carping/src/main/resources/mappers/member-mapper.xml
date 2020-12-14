@@ -14,5 +14,19 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID=#{memberId} AND MEMBER_PWD=#{memberPwd}
 	</select>
+	
+	<select id="checkId" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO MEMBER
+		VALUES(#{memberId}, #{memberPwd}, #{memberName}, #{phone}, #{email}, #{memberAddress}, 'N')
+	</insert>
 
+	<insert id="insertAdmin">
+		INSERT INTO MEMBER
+		VALUES(#{memberId}, #{memberPwd}, #{memberName}, #{phone}, #{email}, #{memberAddress}, 'Y')
+	</insert>
+	
 </mapper>

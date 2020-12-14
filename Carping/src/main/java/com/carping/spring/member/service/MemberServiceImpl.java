@@ -19,14 +19,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mStore.insertMember(member);
 	}
 
 	@Override
 	public int checkIdDup(String memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mStore.checkIdDup(memberId);
 	}
 
 	@Override
@@ -51,6 +49,11 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(String memberId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int insertAdmin(Member member) {
+		return mStore.insertAdmin(member);
 	}
 
 }

@@ -71,7 +71,7 @@
 	</script>
 
 	<div style="margin-left: 100px;">
-		<form id="form">
+		<form id="form" method="post">
 			<h2 class="h2">차박 장소 추천</h2>
 			<div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
 			<br> <select name="sido" id="select1"
@@ -143,7 +143,10 @@
 			x = {
 				title : aList[i].areaName,
 				latlng : new kakao.maps.LatLng(aList[i].areaGeoCodeX,aList[i].areaGeoCodeY),
-				address : aList[i].areaAddress
+				address : aList[i].areaAddress,
+				aKey : aList[i].areaKey,
+				foodKey : aList[i].foodZoneKey,
+				plKey : aList[i].placeKey
 			}
 			arr2.push(x);
 		}
@@ -230,34 +233,67 @@
 						$('#reviewBox').html('');
 						$('#etcBox').html('');
 						$('#fzpl').html('');
-						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left: 5%; width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='display: inline-block; width: 70%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 15%; width: 70%;'></div><br><div id='div_1' style='width: 70%; height: 800px; margin-left: 15%;'><!-- 맛집&명소 --><div id='fzpl' style='width: 50%; float: left; display: block;'></div><div id='div_2' style='width: 50%; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 100%; display: inline-block;'></div><div id='div_3' style='width: 100%; height: 500px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
-						$('#image').append("<img align='center' style='width: 1000px; height:600px;' src='../../../resources/images/"+result.areaImage+"'>");
+						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left: 5%; width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='display: inline-block; width: 70%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 15%; width: 70%;'></div><br><div id='div_1' style='width: 70%; height: 800px; margin-left: 15%;'><!-- 맛집&명소 --><div id='fzpl' style='width: 50%; float: left; display: block;'></div><div id='div_2' style='width: 50%; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
+						$('#image').append("<img align='center' style='width: 1000px; height:600px;' src='../../../resources/areaImage/"+result.areaImage+"'>");
 						$('#areaName').append("<h1 class='h1' align='center'>"+result.areaName+"</h1>");
-						$('#areaAddress').append("<h3 class='h3'>"+result.areaAddress+"</h3>");
-						$('#fzpl').append("<h3 class='h3'>맛집&명소</h3><div style='width: 95%; display: inline-block; border-bottom: 2px solid lightgray;'></div><div id='fzImage' style='width:80%; height:300px; float:left;'align='center'></div><br><div id='pImage' style='width:80%; height:300px; float:left;'align='center'></div>");
-						$('#scoreAvg').append("<h3 class='h3' style='width: 45%; float: left;''>리뷰</h3><h3 class='h3' style='width:50%; float:left;'>"+result.scoreAvg + "</h3>");
+						$('#areaAddress').append("<h3 class='h3'>"+result.areaAddress+"</h3><br>");
+							if(result.areaGS25 == 1){
+								$('#areaAddress').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+							};
+							if(result.areaToilet == 1){
+								$('#areaAddress').append("<img src='../../../resources/images/toilet.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+							};
+							if(result.areaSink == 1){
+								$('#areaAddress').append("<img src='../../../resources/images/sink.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+							};
+							if(result.areaPool == 1){
+								$('#areaAddress').append("<img src='../../../resources/images/pool.png'>");
+							};
+						$('#areaAddress').append("<br><br>");
+						$('#fzpl').append("<h3 class='h3'>맛집&명소</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><div id='fzImage' style=' width:100%; height:200px;'></div><br><div id='pImage' style=' width:100%; height:200px;'></div>");
+						$('#scoreAvg').append("<h3 class='h3' style='width: 45%; float: left;'>리뷰</h3><h3 class='h3' style='width:50%; float:left;'>"+result.scoreAvg + "</h3>");
 						$('#areaEtc').append("<div id='areaEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.areaEtc+"</span></div>");
 						$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv3').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 					}
 				});
-				selectFz();
-
+				
+				/* 맛집 사진 */
+	            $.post("/selectFz.do", { "foodZoneKey" : positions.foodKey}, function(response) {
+	            	$('#fzImage').html('');
+	            	$('#fzImage').append("<img align='center' style='margin-top:5%;width: 90%; height:90%; align:center;' src='../../../resources/foodzoneImage/"+response.foodZoneImage+"'>")
+	            });
+				
+				/* 명소 사진 */
+	            $.post("/selectP.do", { "placeKey" : positions.plKey}, function(response) {
+	            	$('#pImage').html('');
+	            	$('#pImage').append("<img align='center' style='width: 90%; height:90%; align:center;' src='../../../resources/placeImage/"+response.placeImage+"'>")
+	            });
+				
+				/* 리뷰 */
+	            $.post("/selectAreview.do", { "areaKey" : positions.aKey}, function(response) {
+	            	if(response.length != 0){
+		            	$('#reviewBox').html('');
+		            	for(var i=0; i<response.length; i++){
+	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response[i]['memberId']+"] : </span><span>"+response[i]['arTitle']+"</span>&nbsp;&nbsp;<span> ("+response[i]['arRegDate']+")</span><div>");
+	                	 };
+	            	}else{
+	            		 $('#reviewBox').html('');
+	            		 $('#reviewBox').append("<span>작성된 리뷰가 없습니다.</span>");
+	            	};
+				},"json");
+				 
 				var offset = $("#areaInfo").offset();
 	          	$('html, body').animate({scrollTop : offset.top}, 500);
 				
 	          	infowindow.open(map, marker);
 
 			};
+		
+		
 		}
 		
-		function selectFz() {
-            $.post("/selectFz.do", { "foodZoneKey" : fzKey}, function(response) {
-            	
-            });
-         }
-
 		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 		function makeOutListener(infowindow) {
 			return function() {

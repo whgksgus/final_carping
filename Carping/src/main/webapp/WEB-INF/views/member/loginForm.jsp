@@ -66,12 +66,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</tr>
 					<tr>
 						<td colspan="2">
-							<button id="login-btn" class="btnLogin">로그인</button>
+							<button id="login-btn" class="btnLogin1">로그인</button>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<a class="loginA" href="enrollView.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a class="loginA" href="enrollForm.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a class="loginA" href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							<a class="loginA" href="#">비밀번호 찾기</a></td>
 					</tr>
