@@ -44,9 +44,11 @@
       
       )
    </insert>
-   
-   <update id="updateCart">
-   	UPDATE CART SET CART_QUANTITY=#{cartQuantity} WHERE ITEM_KEY=#{itemKey}
+     <update id="updateCart">
+  	 	UPDATE CART SET CART_QUANTITY=#{cartQuantity} 
+  	 	WHERE ITEM_KEY=#{itemKey}
    </update>
+  
+
    
 </mapper>

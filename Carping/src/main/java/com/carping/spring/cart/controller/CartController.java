@@ -25,20 +25,32 @@ public class CartController {
    @RequestMapping( value="cartListView.do", method = RequestMethod.GET )
 	public String cartListView(HttpServletRequest request, Model model) {
 	   ArrayList<Map<String, Object>> cart = cService.selectCartList();
-	   System.out.println( cart );
+		System.out.println( cart );
 	   model.addAttribute( "cart", cart );
 		return "item/cartListView";
 	}
 	
    // 선택한 상품 삭제
-   @RequestMapping( value = "deleteCart.do", method=RequestMethod.POST )
    @ResponseBody
-	public int deleteCart( @RequestBody int cartKey ) {
+   @RequestMapping( value = "deleteCart.do", method=RequestMethod.POST )
+	public String deleteCart( @RequestBody int cartKey ) {
 	   System.out.println( cartKey );
+	   
 	   int result = cService.deleteCart( cartKey );
-		return result;
+		   
+	   if ( result >0 ) {
+		   return "redirect:cartListView.do";
+	   } else {
+		   return "";
+	   }
 	}
 	
+	/*
+	 * public String modifyCartQuantity(HttpServletRequest request, Model model) {
+	 * return ""; }
+	 */
+   
+   
 	public String deleteAllCart(HttpServletRequest request, Model model) {
 		return "";
 	}

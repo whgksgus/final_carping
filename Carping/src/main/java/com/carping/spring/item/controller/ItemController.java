@@ -134,16 +134,16 @@ public class ItemController {
    }
  
    // 장바구니에 상품 등록   
-   @RequestMapping(value="insertCart.do", method=RequestMethod.POST)
    @ResponseBody
+   @RequestMapping(value="insertCart.do", method=RequestMethod.POST)
    public int insertCart( HttpServletRequest request, Model model, @RequestBody Map<String, Object> map ) {
 	   String path = "";
 	   int result = 0;
 	   
 	   	 HttpSession session = request.getSession();
-//	   	 String memberId = (String) session.getAttribute("loginUser");			// loginUser 하기 전까지 임의로 아이디 넣어줌
-	   	 String memberId = "user1";				// 로그인 처리되면 삭제하고 위의 memId로 사용하기
-	   	 int itemKey = Integer.parseInt( map.get( "itemKey" ).toString() );					// ajax 에서 넘어온 map에서 데이터 받아오기
+//	   	 String memberId = (String) session.getAttribute("loginUser");			
+	   	 String memberId = "user1";		
+	   	 int itemKey = Integer.parseInt( map.get( "itemKey" ).toString() );		// ajax 에서 넘어온 map에서 데이터 받아오기
 	   	 int cartQuantity = Integer.parseInt( map.get( "cartQuantity" ).toString() );
 	   	 
 	   	 Cart cart = new Cart( cartQuantity , itemKey, memberId );
