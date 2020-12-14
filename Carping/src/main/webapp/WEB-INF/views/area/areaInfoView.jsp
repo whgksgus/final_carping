@@ -12,6 +12,23 @@
 .display-none {
 	display: none;
 }
+.star-rating { 
+	margin-left: 10px;
+	margin-top: -15px;
+	width:205px; 
+	} 
+.star-rating,.star-rating span { display:inline-block; height:37px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
+.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top;}
+#star{
+   width : 120px;
+   /* display: table-cell; */
+   float: left;
+}
+
+#stars{
+	float: left;
+}
+
 </style>
 </head>
 <body>
@@ -70,8 +87,8 @@
 		}
 	</script>
 
-	<div style="margin-left: 100px;">
-		<form id="form" method="post">
+	<div style="margin-left: 15.5%; width:1400px;">
+		<form style="margin-left: 100px;" id="form" method="post">
 			<h2 class="h2">차박 장소 추천</h2>
 			<div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
 			<br> <select name="sido" id="select1"
@@ -84,10 +101,11 @@
 			</select> <input name="address" type="text" placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="검색" id="search" onclick="searchMap()">
 		</form>
+		<br>
+		<!-- 지도 표시되는 부분 -->
+		<div id="map" style="width: 1000px; height: 500px; margin-left: 100px;"></div>
 	</div>
 	<br>
-	<!-- 지도 표시되는 부분 -->
-	<div id="map" style="width: 1300px; height: 400px; margin-left: 100px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
 	<script>
 		var mapData;
@@ -215,7 +233,8 @@
 
 		function makeOverListener(map, marker, infowindow, positions) {
 			return function() {
-				
+				$.ajaxSetup({ async:false });
+
 				$.ajax({
 					url : "selectAreaInfo.do",
 					data : {"areaName" : positions.title},
@@ -233,8 +252,8 @@
 						$('#reviewBox').html('');
 						$('#etcBox').html('');
 						$('#fzpl').html('');
-						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left: 5%; width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='display: inline-block; width: 70%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 15%; width: 70%;'></div><br><div id='div_1' style='width: 70%; height: 800px; margin-left: 15%;'><!-- 맛집&명소 --><div id='fzpl' style='width: 50%; float: left; display: block;'></div><div id='div_2' style='width: 50%; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
-						$('#image').append("<img align='center' style='width: 1000px; height:600px;' src='../../../resources/areaImage/"+result.areaImage+"'>");
+						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='display: inline-block; width: 100%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 800px; margin-left: 100px;'><!-- 맛집&명소 --><div id='fzpl' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
+						$('#image').append("<img align='center' style='width: 1100px; height:600px;' src='../../../resources/areaImage/"+result.areaImage+"'>");
 						$('#areaName').append("<h1 class='h1' align='center'>"+result.areaName+"</h1>");
 						$('#areaAddress').append("<h3 class='h3'>"+result.areaAddress+"</h3><br>");
 							if(result.areaGS25 == 1){
@@ -250,8 +269,8 @@
 								$('#areaAddress').append("<img src='../../../resources/images/pool.png'>");
 							};
 						$('#areaAddress').append("<br><br>");
-						$('#fzpl').append("<h3 class='h3'>맛집&명소</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><div id='fzImage' style=' width:100%; height:200px;'></div><br><div id='pImage' style=' width:100%; height:200px;'></div>");
-						$('#scoreAvg').append("<h3 class='h3' style='width: 45%; float: left;'>리뷰</h3><h3 class='h3' style='width:50%; float:left;'>"+result.scoreAvg + "</h3>");
+						$('#fzpl').append("<h3 class='h3' style='width:200px; margin-left:100px;'>맛집&명소</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><div id='fzImage' align='left' style=' width:100%; height:200px;'></div><br><div id='pImage' align='left' style=' width:100%; height:200px;'></div>");
+						$('#scoreAvg').append("<h3 class='h3' style='width: 250px; float: left;'>리뷰</h3><h3 id='avg' class='h3' style='width:350px; float:left;' align='left'></h3>");
 						$('#areaEtc').append("<div id='areaEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.areaEtc+"</span></div>");
 						$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
@@ -262,13 +281,13 @@
 				/* 맛집 사진 */
 	            $.post("/selectFz.do", { "foodZoneKey" : positions.foodKey}, function(response) {
 	            	$('#fzImage').html('');
-	            	$('#fzImage').append("<img align='center' style='margin-top:5%;width: 90%; height:90%; align:center;' src='../../../resources/foodzoneImage/"+response.foodZoneImage+"'>")
+	            	$('#fzImage').append("<img style='position:absolute; margin-left: 20px; margin-top:10px; width: 240px; height:180px; align:center;' src='../../../resources/foodzoneImage/"+response.foodZoneImage+"'><span style='position:absolute; margin-left:280px; margin-top:60px; width:300px;'><a>["+response.foodZoneName+"]<br><br>"+response.foodZoneAddress+"</a></span>")
 	            });
 				
 				/* 명소 사진 */
 	            $.post("/selectP.do", { "placeKey" : positions.plKey}, function(response) {
 	            	$('#pImage').html('');
-	            	$('#pImage').append("<img align='center' style='width: 90%; height:90%; align:center;' src='../../../resources/placeImage/"+response.placeImage+"'>")
+	            	$('#pImage').append("<img style='position:absolute; margin-left: 20px; margin-top:10px; width: 240px; height:180px; align:center;' src='../../../resources/placeImage/"+response.placeImage+"'><span style='position:absolute; margin-left:280px; margin-top:60px; width:300px;'><a>["+response.placeName+"]<br><br>"+response.placeAddress+"</a></span>")
 	            });
 				
 				/* 리뷰 */
@@ -280,10 +299,48 @@
 	                	 };
 	            	}else{
 	            		 $('#reviewBox').html('');
-	            		 $('#reviewBox').append("<span>작성된 리뷰가 없습니다.</span>");
+	            		 $('#reviewBox').append("<br><span>작성된 리뷰가 없습니다.</span>");
 	            	};
 				},"json");
-				 
+				
+				/* 별점 */
+	             $.ajax({
+		    		url : "areaScoreAvgUpdate.do",
+		    		data : {"areaName" : positions.title},
+		    		type : "GET",
+		    		success : function(result){
+		    			if(result == 0){
+		    				$("#avg").html('');
+		    				$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars'><span class='star-rating'><span style ='width:0%;'></span></span></div>");
+		    			}else{
+		    				$("#avg").html('');
+		    				if(result > 0 && result < 0.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:0%;'></span></span></div>");	
+		    				} else if (result >= 0.5 && result < 1.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:10%;'></span></span></div>");
+		    				} else if (result >= 1.0 && result < 1.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:20%;'></span></span></div>");
+		    				} else if (result >= 1.5 && result < 2.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:30%;'></span></span></div>");
+		    				} else if (result >= 2.0 && result < 2.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:40%;'></span></span></div>");
+		    				} else if (result >= 2.5 && result < 3.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:50%;'></span></span></div>");
+		    				} else if (result >= 3.0 && result < 3.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:60%;'></span></span></div>");
+		    				} else if (result >= 3.5 && result < 4.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:70%;'></span></span></div>");
+		    				} else if (result >= 4.0 && result < 4.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:80%;'></span></span></div>");
+		    				} else if (result >= 4.5 && result < 5.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:90%;'></span></span></div>");
+		    				} else if(result==5.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:100%;'></span></span></div>");
+		    				}
+		    			}
+		    		}
+		    	}); 
+				
 				var offset = $("#areaInfo").offset();
 	          	$('html, body').animate({scrollTop : offset.top}, 500);
 				
@@ -302,7 +359,7 @@
 		}
 	</script>
 
-	<div id="areaInfo" style="text-align: center;" >
+	<div id="areaInfo" style="margin-left: 10%; width:1400px; text-align: center;" >
 		<%-- <br> <br>
 		<div id="lineDiv1" style="margin-left: 5%; width: 90%;"></div>
 		<br> <br>
@@ -345,6 +402,7 @@
 				
 			</div>
 		</div> --%>
+		
 	</div>
 	<br>
 	<br>

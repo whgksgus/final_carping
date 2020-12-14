@@ -60,9 +60,8 @@ public class AreaStoreLogic implements AreaStore {
 	}
 
 	@Override
-	public int selectAreaReviewScoreAvg(int areaKey) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double selectAreaReviewScoreAvg(int areaKey) {
+		return sqlSession.selectOne("AreaMapper.selectAreaAvg", areaKey);
 	}
 
 	@Override
