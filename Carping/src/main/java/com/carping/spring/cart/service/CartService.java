@@ -11,7 +11,7 @@ public interface CartService {
 	public int deleteCart(int cartKey);
 	public int deleteAllCart(String memberId);
 	public int orderCart(Cart cart);
-	public int updateCartList(String memberId);
+	public int updateCartList(Cart cart);
 	public ArrayList<Cart> selectOrderList(PageInfo pi, String memberId);
 	public int checkItemKey(int itemKey);
 	public int selectCartDetail( int itemKey );

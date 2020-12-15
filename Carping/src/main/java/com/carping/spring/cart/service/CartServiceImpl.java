@@ -29,8 +29,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int deleteCart(int cartKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cStore.deleteCart(cartKey);
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int updateCartList(String memberId) {
+	public int updateCartList(Cart cart) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -54,7 +54,7 @@
 		        $("#count").on("click", function(e){
 		           var amount = ( ${item.itemPrice} * $("#count").val() );
 		           $('#item_total b').empty();
-		           $("#item_total b").append("총 금액 : " + amount + "원");
+		           $("#item_total b").append("상품 금액 : " + amount + "원");
 		   		 });
 		    });
 </script>
@@ -127,7 +127,7 @@ ul, li {
 	<br>
 	<hr>
 		<div id="itemImage">
-			<img src="${item.itemImage}" style="width: 550px; height: 550px;">
+			<img src="../../../resources/itemImage/${item.itemImage}"  style="width: 550px; height: 550px;">
 		</div>
 
 		<div id="itemInfo">
@@ -162,7 +162,7 @@ ul, li {
 				
 				
 				<div id="item_total">
-						<b> 총 금액 : <fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/>원 </b>
+						<b>상품 금액 : <fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/>원 </b>
 						<input type="text" style="display:none" id="totalAmount"/>
 				</div>
 				<br><br>
@@ -177,6 +177,7 @@ ul, li {
 				</div>
 				</div>
 		<br><br><br>
+	<hr>
 		<br><br><br>
 		<br><br><br>
 		
@@ -190,7 +191,7 @@ ul, li {
 	<br><br><br>
 		<b style="font-size: 20px;">상품 상세 정보</b>
 		<hr noshade>
-		<img src="${item.itemInfo}" width="1000px">
+		<img src="../../../resources/itemImage/${item.itemInfo}" width="1000px">
 
 	</div>
 </body>

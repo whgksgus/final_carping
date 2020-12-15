@@ -20,7 +20,14 @@
 	</select>
 	
 	<delete id="deleteCart">
-		DELETE CART WHERE CART_KEY=#{cartKey}
+		DELETE FROM CART WHERE CART_KEY=#{cartKey}
 	</delete>
-  
+	
+
+    
+<!--     <update id="updateCartList">
+  	 	UPDATE CART SET CART_QUANTITY=#{cartQuantity} 
+  	 	WHERE ITEM_KEY=#{itemKey}
+   </update>
+   -->
 </mapper>
