@@ -21,6 +21,7 @@ import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.service.FoodZoneService;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @Controller
@@ -107,7 +108,8 @@ public class FoodZoneController {
 		int foodZoneKey = foodZone.getFoodZoneKey();
 		System.out.println(foodZoneKey);
 		ArrayList<TakeOut> tList = fzService.selectTakeOutMenu(foodZoneKey);
-		System.out.println(tList.isEmpty());
+		System.out.println(tList);
+		
 		mv.addObject("foodZone", foodZone).addObject("tList", tList);
 		mv.setViewName("foodzone/foodZoneTakeOut");
 		return mv;
