@@ -2,12 +2,13 @@ package com.carping.spring.place.store;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
@@ -19,9 +20,13 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getListCount(int placeKey) {
+		return sqlSession.selectOne("PlaceMapper.getplaceReviewListCount", placeKey);
+	}
+	
+	@Override
+	public int getListCount(Search search) {	
+		return sqlSession.selectOne("PlaceMapper.getplaceListCount", search);
 	}
  
 	@Override
@@ -31,7 +36,9 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 
 	@Override
 	public ArrayList<PlaceReview> selectPlaceReviewList(PageInfo pi, int placeKey) {
-		return (ArrayList)sqlSession.selectList("PlaceMapper.selectPlaceReviewList", placeKey);
+		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
+		return (ArrayList)sqlSession.selectList("PlaceMapper.selectPlaceReviewList", placeKey, rowBounds);
 	}
 
 	@Override
@@ -66,13 +73,14 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 
 	@Override
 	public int deletePlaceReviewComment(int prcKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("PlaceMapper.prCommentDelete", prcKey);
 	}
 
 	@Override
 	public Place selectOne(int placeKey) {
 		return sqlSession.selectOne("PlaceMapper.selectOne", placeKey);
 	}
+
+	
 
 }

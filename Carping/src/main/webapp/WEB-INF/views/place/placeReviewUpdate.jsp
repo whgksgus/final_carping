@@ -20,6 +20,7 @@
 	<br>
 	
 	<form action="placeReviewUpdate.do" method="post" enctype="multipart/form-data">
+		
       <table align="center">
          <tr>
             <td><input type="text" name="address" value="${place.placeName } : ${place.placeAddress}" size="50" readonly></td>
@@ -46,6 +47,7 @@
       <input type="hidden" name="memberId" value="${loginUser.memberId }">
       <input type="hidden" name="placeKey" value="${preview.placeKey }">
       <input type="hidden" name="prKey" value="${preview.prKey }">
+      <input type="hidden" name="prPhoto" value="${preview.prPhoto }">
 	</form>
 	<br>
 	<br>

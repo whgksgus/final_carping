@@ -91,4 +91,26 @@
 		PR_SCORE = #{prScore}, PR_TITLE = #{prTitle}, PR_CONTENT = #{prContent}, PR_REGDATE = SYSDATE, PR_HITS = #{prHits}, PR_PHOTO = #{prPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
 		WHERE PR_KEY = #{prKey}
 	</update>
+	
+	<delete id="prCommentDelete">
+		DELETE FROM PLACE_REVIEW_COMMENT
+		WHERE PRC_KEY = #{prcKey}
+	</delete>
+	
+	<select id="getplaceReviewListCount" resultType="int">
+		SELECT COUNT(*) FROM PLACE_REVIEW
+		WHERE PLACE_KEY = #{placeKey}
+	</select>
+	
+	<select id="getplaceListCount" resultMap="PlaceResultMap">
+		SELECT COUNT(*) FROM PLACE
+		<where>
+			<if test="searchCondition.toString() == '장소명'">
+				PLACE_NAME LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '주소'">
+				PLACE_ADDRESS LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
 </mapper>

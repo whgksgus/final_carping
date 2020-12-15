@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 

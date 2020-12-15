@@ -39,7 +39,7 @@
 	<table align="center" width="500" border="1" cellspacing="0" id="prctb">
 		<thead>
 		<tr>
-			<td colspan="2"><b id="prcCount"></b></td>
+			<td colspan="4"><b id="prcCount"></b></td>
 		</tr>
 		</thead>
 		<tbody></tbody>
@@ -60,6 +60,7 @@
 	<div align="center">
 	<c:url var="prDelete" value="placeReviewDelete.do">
 		<c:param name="prKey" value="${preview.prKey }"></c:param>
+		<c:param name="placeKey" value="${placeKey }"></c:param>
 	</c:url>
 	<c:url var="prUpdate" value="placeReviewUpdateView.do">
 		<c:param name="prKey" value="${preview.prKey }"></c:param>
@@ -97,6 +98,8 @@
 					}
 				});
 			});
+			
+			
 		})
 		
 		// 댓글 리스트를 불러오는 ajax Function
@@ -125,7 +128,7 @@
 							$prcWriter = $("<td width='100'>").text(data[i].prcWriter);
 							$prcContent = $("<td>").text(decodeURIComponent(data[i].prcContent).replace(/\+/g, " "));
 							$prcRegDate = $("<td width='100'>").text(data[i].prcRegDate);
-							$prcDelete = $("<td><input type='button' id='prcDelete' value='X'>");
+							$prcDelete = $("<td><input type='button' id='prcDelete' onclick='prcDelete("+data[i].prcKey+");' value='삭제'>");
 							$tr.append($prcWriter);
 							$tr.append($prcContent);
 							$tr.append($prcRegDate);
@@ -144,7 +147,8 @@
 			
 		}
 		
-		$("#prcDelete").on("click", function() {
+//		$("#prcDelete").on("click", function() {
+		function prcDelete(prcKey) {
 			$.ajax({
 				url : "prCommentDelete.do",
 				type : "get",
@@ -154,12 +158,11 @@
 						getReplyList(); // 댓글리스트를 불러오는 function 추가
 						$("#content").val("");
 					}else {
-						alert("댓글 등록 실패..");
+						alert("댓글 삭제 실패..");
 					}
 				}
 			});
-		});
-		
+		};
 	</script>
 	<br>
 	<br>
