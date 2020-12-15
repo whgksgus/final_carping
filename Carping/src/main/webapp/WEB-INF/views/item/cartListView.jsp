@@ -81,7 +81,7 @@ padding-right: 10%;
 }
 
 #title {
-   text-align: center;
+   text-align: left;
    font-size: 30px;
    font-weight: bold;
 }
@@ -129,6 +129,8 @@ padding-right: 10%;
 	text-align: center;
 	color: black;
 	font-size: 19px;
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
 }
 
 #ul>li>ul {
@@ -141,7 +143,6 @@ padding-right: 10%;
 #ul>li>ul>li {
 	float: left;
 	font-size: 10pt;
-	border-bottom: 1px solid lightgray;
 	vertical-align: center;
 }
 
