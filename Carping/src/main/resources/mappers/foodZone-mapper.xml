@@ -10,6 +10,7 @@
 		<result property="foodZonePhone" column="FOODZONE_PHONE"/>
 		<result property="foodZoneImage" column="FOODZONE_IMAGE"/>
 		<result property="foodZoneEtc" column="FOODZONE_ETC"/>
+		<result property="scoreAvg" column="SCOREAVG"/>
 		<result property="takeOutStatus" column="TAKEOUT_STATUS"/>
 	</resultMap>
 
