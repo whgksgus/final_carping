@@ -66,9 +66,12 @@
 		<c:param name="prKey" value="${preview.prKey }"></c:param>
 		<c:param name="placeKey" value="${placeKey }"></c:param>
 	</c:url>
-		<a href="${prUpdate }">수정하기</a>
-		<a href="${prDelete }">삭제하기</a>
-		<a href="#">목록으로</a>
+	<c:url var="prList" value="placeReviewListView.do">
+    	<c:param name="placeKey" value="${placeKey }"></c:param>
+    </c:url>
+		<c:if test="${preview.memberId eq loginUser.memberId }"><a href="${prUpdate }">수정하기</a></c:if>
+		<c:if test="${preview.memberId eq loginUser.memberId }"><a onclick="return Del();" href="${prDelete }">삭제하기</a></c:if>
+		<a href="${prList }">목록으로</a>
     </div>
 	
 	
@@ -81,6 +84,7 @@
 				 getReplyList();
 			}, 3000);
 			$("#submit").on("click", function() {
+				/* if(confirm("댓글을 등록하시겠습니까?")) */
 				// 댓글 등록 ajax
 				var prcContent = $("#content").val();
 				var prKey = ${preview.prKey };
@@ -97,9 +101,7 @@
 						}
 					}
 				});
-			});
-			
-			
+			});	
 		})
 		
 		// 댓글 리스트를 불러오는 ajax Function
@@ -115,7 +117,7 @@
 					// db에 있는 데이터를 json형태로 가져와서
 					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
 					$tableBody = $("#prctb tbody");
-					$tableBody.html(""); // tbody에 존재하는 값을 초기화
+						$tableBody.html("<th>작성자</th><th>내용</th><th>작성일자</th><th>삭제</th></tr>"); // tbody에 존재하는 값을 초기화
 					var $tr;
 					var $prcWriter;
 					var $prcContent;
@@ -124,11 +126,17 @@
 					$("#prcCount").text("댓글 (" + data.length + ")"); // 댓글의 개수 표시
 					if (data.length > 0) {;
 						for (var i in data) {
+							var checkId = '${loginUser.memberId}';
 							$tr = $("<tr>");
 							$prcWriter = $("<td width='100'>").text(data[i].prcWriter);
 							$prcContent = $("<td>").text(decodeURIComponent(data[i].prcContent).replace(/\+/g, " "));
 							$prcRegDate = $("<td width='100'>").text(data[i].prcRegDate);
-							$prcDelete = $("<td><input type='button' id='prcDelete' onclick='prcDelete("+data[i].prcKey+");' value='삭제'>");
+							$memberId = data[i].prcWriter;
+							if(checkId == $memberId) {
+							$prcDelete = $("<td width='48'><input type='button' id='prcDelete' onclick='prcDelete("+data[i].prcKey+");' value='삭제'>");
+							}else {
+								$prcDelete = $("<td width='48'>");
+							}
 							$tr.append($prcWriter);
 							$tr.append($prcContent);
 							$tr.append($prcRegDate);
@@ -137,7 +145,7 @@
 						}
 					} else {
 						$tr = $("<tr>");
-						$prcContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+						$prcContent = $("<td colspan='4'>").text("등록된 댓글이 없습니다.");
 						
 						$tr.append($prcContent); // <tr><td colspan='3'>no reply</td></tr>
 						$tableBody.append($tr);
@@ -163,6 +171,40 @@
 				}
 			});
 		};
+	</script>
+	<script>
+		function Del() {
+			return confirm("리뷰를 삭제하시겠습니까?")
+		}
+		
+		function Submit() {
+			var sb = document.getElementById('submit');
+			
+			sb.onclick = function() {
+				if(content == "") {
+					alert('내용을 입력해주세요');
+				}
+			}
+		}
+		
+		/* function CommentAdd() {
+			return confirm("댓글을 등록하시겠습니까?")
+		} 
+		
+		function DeleteAdd() {
+			return confirm("댓글을 삭제하시겠습니까?")
+		}
+		
+		function CommentAdd(){
+			var question = confirm('댓글을 등록하시겠습니까?');
+			if(question){
+				return true;
+				}
+			}else{
+				return false;
+         } */
+		
+	</script>
 	</script>
 	<br>
 	<br>

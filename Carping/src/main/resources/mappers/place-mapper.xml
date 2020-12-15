@@ -52,7 +52,7 @@
 	
 	<select id="selectPlaceReviewList" resultMap="PlaceReviewResultMap">
 		SELECT * FROM PLACE_REVIEW
-		WHERE PLACE_KEY = #{placeKey}
+		WHERE PLACE_KEY = #{placeKey} ORDER BY PR_KEY DESC
 	</select>
 	
 	<insert id="insertPlaceReview">
@@ -102,7 +102,7 @@
 		WHERE PLACE_KEY = #{placeKey}
 	</select>
 	
-	<select id="getplaceListCount" resultMap="PlaceResultMap">
+	<select id="getplaceListCount" resultType="int">
 		SELECT COUNT(*) FROM PLACE
 		<where>
 			<if test="searchCondition.toString() == '장소명'">
@@ -113,4 +113,51 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="searchBoardList" resultMap="PlaceReviewResultMap">
+		SELECT * FROM PLACE_REVIEW
+		<where> PLACE_KEY = #{placeKey} AND
+			<if test="searchCondition.toString() == '제목'">
+				PR_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				PR_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+		ORDER BY PR_KEY DESC
+	</select>
+	
+	<select id="searchBoardListCount" resultType="int">
+		SELECT COUNT(*) FROM PLACE_REVIEW
+		<where> PLACE_KEY = #{placeKey} AND
+			<if test="searchCondition.toString() == '제목'">
+				PR_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				PR_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
+	
+	<update id="placeReviewHits">
+		UPDATE PLACE_REVIEW SET
+		PR_HITS = PR_HITS + 1
+		WHERE PR_KEY = #{prKey}
+	</update>
 </mapper>
+
+
+
+
+
+
+
+
+
+

@@ -3,15 +3,19 @@ package com.carping.spring.place.store;
 import java.util.ArrayList;
 
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.BoardSearch;
 import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
 
 public interface PlaceReviewStore {
-	public int getListCount(int placeKey);
-	public int getListCount(Search search);
-	public ArrayList<Place> searchPlaceReview(Search search);
+	public int getPlaceListCount(int placeKey);
+	public int getReviewListCount(Search search);
+	public int getSearchReviewListCount(BoardSearch boardSearch);
+	public int placeReviewHits(int prKey);
+	public ArrayList<Place> searchPlaceReview(PageInfo pi, Search search);
+	public ArrayList<PlaceReview> searchPlaceBoardReview(PageInfo pi, BoardSearch boardSearch);
 	public Place selectOne(int placeKey);
 	public ArrayList<PlaceReview> selectPlaceReviewList(PageInfo pi, int placeKey);
 	public PlaceReview selectPlaceReviewDetail(int prKey);

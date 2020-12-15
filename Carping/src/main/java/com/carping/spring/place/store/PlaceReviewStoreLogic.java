@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.BoardSearch;
 import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
@@ -20,18 +21,38 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int getListCount(int placeKey) {
+	public int getPlaceListCount(int placeKey) {
 		return sqlSession.selectOne("PlaceMapper.getplaceReviewListCount", placeKey);
 	}
 	
 	@Override
-	public int getListCount(Search search) {	
+	public int getReviewListCount(Search search) {	
 		return sqlSession.selectOne("PlaceMapper.getplaceListCount", search);
+	}
+	
+	@Override
+	public int getSearchReviewListCount(BoardSearch boardSearch) {
+		int result = sqlSession.selectOne("PlaceMapper.searchBoardListCount", boardSearch);
+		return result;
+	}
+	
+	@Override
+	public int placeReviewHits(int prKey) {
+		return sqlSession.update("PlaceMapper.placeReviewHits", prKey);
 	}
  
 	@Override
-	public ArrayList<Place> searchPlaceReview(Search search) {
-		return (ArrayList)sqlSession.selectList("PlaceMapper.searchList", search);
+	public ArrayList<Place> searchPlaceReview(PageInfo pi, Search search) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
+		return (ArrayList)sqlSession.selectList("PlaceMapper.searchList", search, rowBounds);
+	}
+	
+	@Override
+	public ArrayList<PlaceReview> searchPlaceBoardReview(PageInfo pi, BoardSearch boardSearch) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
+		return (ArrayList)sqlSession.selectList("PlaceMapper.searchBoardList", boardSearch, rowBounds);
 	}
 
 	@Override
@@ -80,7 +101,5 @@ public class PlaceReviewStoreLogic implements PlaceReviewStore {
 	public Place selectOne(int placeKey) {
 		return sqlSession.selectOne("PlaceMapper.selectOne", placeKey);
 	}
-
-	
 
 }

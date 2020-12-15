@@ -39,8 +39,11 @@
          </tr>
          <tr>
             <td colspan="2" align="center">
-               <input type="submit" value="등록"> &nbsp;
-               <a href="#">목록으로</a>
+               <input type="submit" onclick="return Add();" value="등록"> &nbsp;
+               <c:url var="prList" value="placeReviewListView.do">
+               	<c:param name="placeKey" value="${place.placeKey }"></c:param>
+               </c:url>
+               <a href="${prList }">목록으로</a>
             </td>
          </tr>
       </table>
@@ -62,5 +65,10 @@
 	<br>
 	<br>
 	<br>
+	<script>
+	function Add() {
+		return confirm("리뷰를 등록하시겠습니까?")
+		}
+	</script>
 </body>
 </html>

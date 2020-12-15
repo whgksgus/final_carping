@@ -18,13 +18,13 @@
 		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 	</div>
 	<br>
-	<form id="form" action="placeReviewSearch.do" method="post">
+	<form id="form" action="placeReviewSearch.do" method="get">
 	<div style="text-align:center;">
 		<select id="searchCondition" name="searchCondition">
-			<option value="장소명">장소명</option>
-			<option value="주소">주소</option>
+			<option value="장소명" <c:if test="${search.searchCondition == '장소명'}">selected</c:if>>장소명</option>
+			<option value="주소" <c:if test="${search.searchCondition == '주소'}">selected</c:if>>주소</option>
 		</select>&nbsp;&nbsp;
-		<input type="text" id="searchValue" name="searchValue" size="50;" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" id="searchValue" name="searchValue" size="50;" value="${search.searchValue }" required/>&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="submit" value="검색" id="search"/>
 	</div>
 	</form>
@@ -44,7 +44,7 @@
 		<tr>
 			<td>${list.placeName }</td>
 			<td>${list.placeAddress }</td>
-			<td><input type="radio" name="placeKey" value="${list.placeKey }"/></td>
+			<td><input type="radio" name="placeKey" value="${list.placeKey }" required/></td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -58,18 +58,22 @@
 				</c:if>
 				<c:if test="${pi.currentPage > 1 }">
 					<c:url var="before" value="placeReviewSearch.do">
-						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
+						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>
 					<a href="${before }">[이전]</a>&nbsp;
 				</c:if>
 				<!-- 페이지  -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 					<c:if test="${pi.currentPage == p }">
-             	  	   ${p }&nbsp;
+             	  	   <b style="color:blue">${p }</b>&nbsp;
             	  	</c:if>
             	  	<c:if test="${pi.currentPage != p }">
 					<c:url var="pagination" value="placeReviewSearch.do">
-						<c:param name="page" value="${p }"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
+						<c:param name="page" value="${p}"></c:param>
 					</c:url>
 					<a href="${pagination }">${p }</a>&nbsp;
 					</c:if>
@@ -80,6 +84,8 @@
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="placeReviewSearch.do">
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					</c:url>
 					<a href="${after }">[다음]</a>&nbsp;
