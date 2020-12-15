@@ -115,6 +115,12 @@ public class MemberController {
 		return "member/myInfoPwCheckForm";
 	}
 	
+	@RequestMapping(value="memberDeletePwCheckForm.do", method=RequestMethod.GET)
+	public String deletePwCheckForm() {
+		return "member/memberDeletePwCheckForm";
+	}
+	
+	
 	@RequestMapping(value="myInfoForm.do", method=RequestMethod.POST)
 	public ModelAndView myInfoForm(ModelAndView mv,String memberId, String memberPwd, HttpServletRequest request) {
 		System.out.println(memberId);
@@ -147,12 +153,8 @@ public class MemberController {
 		}
 	}
 	
-	
-	public String deletePwCheckForm() {
-		return "";
-	}
-	
-	public String deleteMember(String memberPwd, HttpServletRequest request, Model model) {
+	@RequestMapping(value="", method=RequestMethod.POST)
+	public String deleteMember(String memberId, String memberPwd, HttpServletRequest request, Model model) {
 		return "";
 	}
 }

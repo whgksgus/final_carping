@@ -105,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="myInfoPwCheckForm.do">회원정보 수정</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">회원탈퇴</a></li>
+										style="display: block; padding: 1px 5px;" href="memberDeletePwCheckForm.do">회원탈퇴</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="areaInsertView.do">장소추가</a></li>
 									</c:if>
