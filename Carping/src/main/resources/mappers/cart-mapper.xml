@@ -23,11 +23,9 @@
 		DELETE FROM CART WHERE CART_KEY=#{cartKey}
 	</delete>
 	
-
-    
-<!--     <update id="updateCartList">
+     <update id="updateCartList">
   	 	UPDATE CART SET CART_QUANTITY=#{cartQuantity} 
-  	 	WHERE ITEM_KEY=#{itemKey}
+  	 	WHERE CART_KEY=#{cartKey}
    </update>
-   -->
+   
 </mapper>

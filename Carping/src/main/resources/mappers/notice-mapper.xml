@@ -10,7 +10,7 @@
       <result property="nCount" column="NOTICE_COUNT"/>
       <result property="memberId" column="MEMBER_ID"/>
    </resultMap>
-   
+  
      <select id="getListCount" resultType="int">
       SELECT COUNT(*)
       FROM NOTICE
@@ -18,7 +18,7 @@
   
 	<insert id="insertNotice">
 		INSERT INTO NOTICE
-		VALUES(SEQ_NKEY.NEXTVAL, #{nTitle}, #{nContent}, SYSDATE, #{nCount}, #{memberId})
+		VALUES(SEQ_NKEY.NEXTVAL, #{nTitle}, #{nContent}, SYSDATE, '1', #{memberId})
 	</insert>
 	
 	

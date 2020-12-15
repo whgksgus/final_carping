@@ -23,6 +23,7 @@ import com.carping.spring.item.domain.Item;
 import com.carping.spring.item.domain.PageInfo;
 import com.carping.spring.item.domain.Pagination;
 import com.carping.spring.item.service.ItemService;
+import com.carping.spring.member.domain.Member;
 
 @Controller
 public class ItemController {
@@ -140,26 +141,28 @@ public class ItemController {
 	   String path = "";
 	   int result = 0;
 	   
-	   	 HttpSession session = request.getSession();
-//	   	 String memberId = (String) session.getAttribute("loginUser");			
-	   	 String memberId = "user1";		
-	   	 int itemKey = Integer.parseInt( map.get( "itemKey" ).toString() );		// ajax 에서 넘어온 map에서 데이터 받아오기
-	   	 int cartQuantity = Integer.parseInt( map.get( "cartQuantity" ).toString() );
+	   HttpSession session = request.getSession();
+	   Member mem = (Member) session.getAttribute( "loginUser" );
 	   	 
-	   	 Cart cart = new Cart( cartQuantity , itemKey, memberId );
-	   	 int itemCheck = iService.checkItemKey(itemKey);
-	   	 if( itemCheck > 0 ) {
-	   		 // 기존 장바구니에 데이터가 있을 경우 >>> update
-	   		 int oldItemQuantity = cSvc.selectCartDetail( itemKey );
-	   		 int newItemQuantity = cartQuantity + oldItemQuantity;		// 기존 수량에 추가된 수량 더하기
-	   		 cart.setCartQuantity( newItemQuantity );
-	   		 result = iService.updateCart( cart );
-	   	 } else {
-	   		 // 신규 아이템 등록
-	   		 result = iService.insertCart( cart );
-	   	 }
+	   String memberId = mem.getMemberId();
+	   System.out.println( "loginUser, session.getMemberId>>> " + memberId );
+	   int itemKey = Integer.parseInt( map.get( "itemKey" ).toString() );		// ajax 에서 넘어온 map에서 데이터 받아오기
+	   int cartQuantity = Integer.parseInt( map.get( "cartQuantity" ).toString() );
+	   
+	   Cart cart = new Cart( cartQuantity , itemKey, memberId );
+	   int itemCheck = iService.checkItemKey(itemKey);
+	   if( itemCheck > 0 ) {
+		   // 기존 장바구니에 데이터가 있을 경우 >>> update
+	   		int oldItemQuantity = cSvc.selectCartDetail( itemKey );
+	   		int newItemQuantity = cartQuantity + oldItemQuantity;		// 기존 수량에 추가된 수량 더하기
+	   		cart.setCartQuantity( newItemQuantity );
+	   		result = iService.updateCart( cart );
+	   } else {
+	   	 // 신규 아이템 등록
+	   	 result = iService.insertCart( cart );
+	   }
 	   	 
-	      return result;
+	   return result;
    }
    
    public String orderItem(int cartQuantity, HttpServletRequest request, int itemKey, Model model) {

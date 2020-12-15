@@ -11,7 +11,7 @@
 	<br style="clear:both">
 	<h1 align="center">공지글 등록페이지</h1>
 	<br><br>
-	<form action="noticeInsert.do" method="post" enctype="multipart/form-data">
+	<form action="noticeInsert.do" method="post">
 		<table align="center" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" size="50" name="nWriter" value="${loginUser.userId }" readonly></td>
+				<td><input type="text" size="50" name="nWriter" value="${loginUser.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td>내용</td>

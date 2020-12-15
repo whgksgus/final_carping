@@ -45,8 +45,7 @@ public class CartStoreLogic implements CartStore {
 
 	@Override
 	public int updateCartList(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update( "CartMapper.updateCartList", cart );
 	}
 
 	@Override
