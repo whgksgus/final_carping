@@ -2,8 +2,8 @@ package com.carping.spring.place.store;
 
 import java.util.ArrayList;
 
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 

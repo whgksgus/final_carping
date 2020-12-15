@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.carping.spring.common.PageInfo;
-import com.carping.spring.common.Pagination;
 import com.carping.spring.common.Search;
 import com.carping.spring.member.domain.Member;
+import com.carping.spring.place.domain.PageInfo;
+import com.carping.spring.place.domain.Pagination;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
@@ -46,10 +46,16 @@ public class PlaceReviewController {
 	
 	// 명소 선택하는 메소드
 	@RequestMapping(value="placeReviewSearch.do", method=RequestMethod.POST)
-	public String placeReviewSearch(Search search, Model model) {
+	public String placeReviewSearch(Search search, Model model, @RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+//		int listCount = prService.getListCount(search);
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+//		int pageNum = listCount - (currentPage -1) * pi.getListLimit();
 		ArrayList<Place> pList = prService.searchPlaceReview(search);
 		if(!pList.isEmpty()) {
 			model.addAttribute("pList", pList);
+//			model.addAttribute("pageNum", pageNum);
+//			model.addAttribute("pi", pi);
 			model.addAttribute("search", search);
 			return "place/placeReviewSearch";
 		}else {
@@ -58,16 +64,19 @@ public class PlaceReviewController {
 	}
 	
 	// 명소 선택 후 리뷰 불러오는 메소드
-	@RequestMapping(value="placeReviewListView.do", method=RequestMethod.POST)
+	@RequestMapping(value="placeReviewListView.do", method=RequestMethod.GET)
 	public ModelAndView placeReviewListView(ModelAndView mv, 
 			@RequestParam(value="page", required = false) Integer page, int placeKey) {
-		int currentPage = 1;
-		int listCount = 1;
+		int currentPage = (page != null) ? page : 1;
+		int listCount = prService.getListCount(placeKey);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		int pageNum = listCount - (currentPage -1) * pi.getListLimit();
 		ArrayList<PlaceReview> prList = prService.selectPlaceReviewList(pi, placeKey);	
 		if(!prList.isEmpty()) {
 			mv.addObject("prList", prList);
 			mv.addObject("placeKey", placeKey);
+			mv.addObject("pageNum", pageNum);
+			mv.addObject("pi", pi);
 			mv.setViewName("place/placeReviewList");
 		}else {
 			mv.addObject("placeKey", placeKey);
@@ -89,7 +98,7 @@ public class PlaceReviewController {
 	
 	// 리뷰 등록
 	@RequestMapping(value="placeReviewInsert.do", method=RequestMethod.POST)
-	public String placeReviewInsert(PlaceReview pr, Model model, HttpServletRequest request,
+	public ModelAndView placeReviewInsert(PlaceReview pr, ModelAndView mv, int placeKey, Integer page, HttpServletRequest request,
 			@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) {
 		// 파일을 서버에 저장하는 작업
 		if(!uploadFile.getOriginalFilename().equals("")) {
@@ -99,15 +108,25 @@ public class PlaceReviewController {
 			}
 		}
 		int result = 0;
-		String path = null;
+		int currentPage = (page != null) ? page : 1;
+		int listCount = prService.getListCount(placeKey);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		int pageNum = pi.getListCount() - (currentPage -1) * pi.getListLimit();
 		result = prService.insertPlaceReview(pr);
+		ArrayList<PlaceReview> prList = prService.selectPlaceReviewList(pi, placeKey);	
 		if(result > 0) {
-			path = "place/placeReviewList";
+			mv.addObject("prList", prList);
+			mv.addObject("placeKey", placeKey);
+			mv.addObject("pageNum", pageNum);
+			mv.addObject("pi", pi);
+			mv.setViewName("place/placeReviewList");
 		}else {
-			model.addAttribute("msg", "등록 실패");
-			path = "common/errorPage";
+			mv.addObject("placeKey", placeKey);
+			mv.addObject("pageNum", pageNum);
+			mv.addObject("pi", pi);
+			mv.setViewName("place/placeReviewList");
 		}
-		return path;
+		return mv;
 	}
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
@@ -118,15 +137,18 @@ public class PlaceReviewController {
 			folder.mkdir();
 		}
 		String originalFileName = file.getOriginalFilename();
-		
 		String filePath = folder + "\\" + originalFileName;
-		
-		try {
-			file.transferTo(new File(filePath));
-		} catch(Exception e) {
-			e.printStackTrace();
+		if (originalFileName == "") {
+			return null;
+		}else {
+			try {
+				file.transferTo(new File(filePath));
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return originalFileName;
 		}
-		return originalFileName;
+		
 	}
 	
 	// 리뷰 상세보기
@@ -157,39 +179,54 @@ public class PlaceReviewController {
 	
 		// 리뷰 수정
 		@RequestMapping(value="placeReviewUpdate.do", method=RequestMethod.POST)
-		public String placeReviewUpdate(Model model, PlaceReview pr, HttpServletRequest request,
+		public ModelAndView placeReviewUpdate(ModelAndView mv, PlaceReview pr, int prKey, int placeKey, HttpServletRequest request,
 				@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile) {
 			if(reloadFile != null && !reloadFile.isEmpty()) {
 				deleteFile(pr.getPrPhoto(), request);
 			}
-			String renameFileName = saveFile(reloadFile, request);
+			String renameFileName = saveFile(reloadFile, request); // ""
 			if (renameFileName != null) {
-				pr.setPrPhoto(reloadFile.getOriginalFilename());
+				pr.setPrPhoto(reloadFile.getOriginalFilename()); // ""
 			}
 			int result = prService.updatePlaceReview(pr);
+			PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
 			if (result > 0) {
-				return "place/placeReviewList";
+				mv.addObject("preview", preview).addObject("placeKey", placeKey).setViewName("place/placeReviewDetail");
 			}else {
-				model.addAttribute("msg", "리뷰 수정 실패");
-				return "common/errorPage";
+				mv.addObject("msg", "게시글 상세조회 실패!");
+				mv.setViewName("common/errorPage");
 			}
+			return mv;
 		}
 		
 	
-	// 리뷰 삭제
-	@RequestMapping(value="placeReviewDelete.do", method=RequestMethod.GET)
-	public String placeReviewDelete(Model model, int prKey, HttpServletRequest request) {
-		PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
-		deleteFile(preview.getPrPhoto(), request);
-		// DB에서 데이터 삭제
-		int result = prService.deletePlaceReview(prKey);
-		if (result > 0) {
-			return "place/placeReviewList";
-		}else {
-			model.addAttribute("msg", "게시글 삭제 실패..");
-			return "common/errorPage";
+		// 리뷰 삭제
+		@RequestMapping(value="placeReviewDelete.do", method=RequestMethod.GET)
+		public ModelAndView placeReviewDelete(ModelAndView mv, int prKey, int placeKey, Integer page, HttpServletRequest request) {
+			PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
+			deleteFile(preview.getPrPhoto(), request);
+			// DB에서 데이터 삭제
+
+			int currentPage = (page != null) ? page : 1;
+			int listCount = prService.getListCount(placeKey);
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			int pageNum = pi.getListCount() - (currentPage -1) * pi.getListLimit();
+			int result = prService.deletePlaceReview(prKey);
+			ArrayList<PlaceReview> prList = prService.selectPlaceReviewList(pi, placeKey);	
+			if(result > 0) {
+				mv.addObject("prList", prList);
+				mv.addObject("placeKey", placeKey);
+				mv.addObject("pageNum", pageNum);
+				mv.addObject("pi", pi);
+				mv.setViewName("place/placeReviewList");
+			}else {
+				mv.addObject("placeKey", placeKey);
+				mv.addObject("pageNum", pageNum);
+				mv.addObject("pi", pi);
+				mv.setViewName("place/placeReviewList");
+			}
+			return mv;
 		}
-	}
 	
 	public void deleteFile(String prPhoto, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -227,14 +264,14 @@ public class PlaceReviewController {
 	}
 	
 	// 댓글 삭제
+	@ResponseBody
 	@RequestMapping(value="prCommentDelete.do", method=RequestMethod.GET)
 	public String placeReviewCommentDelete(int prcKey, Model model, HttpServletRequest request) {
 		int result = prService.deletePlaceReviewComment(prcKey);
 		if (result > 0) {
-			return "place/placeReviewList";
+			return "success";
 		} else {
-			model.addAttribute("msg", "게시글 삭제 실패");
-			return "common/errorPage";
+			return "fail";
 		}
 	}
 

@@ -33,7 +33,7 @@
 	<br>
 	
 	<!-- 검색 결과 출력  -->
-	<form action="placeReviewListView.do" method="post">
+	<form action="placeReviewListView.do" method="get">
 	<table align="center" border="1" width="700">
 		<tr text-align="center">
 			<th width="300">장소명</th>
@@ -49,6 +49,44 @@
 		</c:forEach>
 	</table>
 	<br>
+	
+	<c:if test="${pList ne null || !empty pList }">
+	<div align="center">
+				<!-- 이전 -->
+				<c:if test="${pi.currentPage <= 1 }">
+					[이전]&nbsp;
+				</c:if>
+				<c:if test="${pi.currentPage > 1 }">
+					<c:url var="before" value="placeReviewSearch.do">
+						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
+					</c:url>
+					<a href="${before }">[이전]</a>&nbsp;
+				</c:if>
+				<!-- 페이지  -->
+				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+					<c:if test="${pi.currentPage == p }">
+             	  	   ${p }&nbsp;
+            	  	</c:if>
+            	  	<c:if test="${pi.currentPage != p }">
+					<c:url var="pagination" value="placeReviewSearch.do">
+						<c:param name="page" value="${p }"></c:param>
+					</c:url>
+					<a href="${pagination }">${p }</a>&nbsp;
+					</c:if>
+				</c:forEach>
+				<!-- 다음 -->
+				<c:if test="${pi.currentPage >= pi.maxPage }">
+					[다음]&nbsp;
+				</c:if>
+				<c:if test="${pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="placeReviewSearch.do">
+						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+					</c:url>
+					<a href="${after }">[다음]</a>&nbsp;
+				</c:if>
+			</div>
+	</c:if>
+	
 	<c:if test="${pList ne null || !empty pList }">
 	<input style="margin-left:1060px;" type="submit" value="다음"/>
 	</c:if>

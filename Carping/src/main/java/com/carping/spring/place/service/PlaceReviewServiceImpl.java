@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carping.spring.common.PageInfo;
+
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.PlaceReviewComment;
@@ -19,9 +20,13 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	private PlaceReviewStore pStore;
 	
 	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getListCount(int placeKey) {
+		return pStore.getListCount(placeKey);
+	}
+
+	@Override
+	public int getListCount(Search search) {
+		return pStore.getListCount(search);
 	}
 
 	@Override
@@ -66,8 +71,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 	@Override
 	public int deletePlaceReviewComment(int prcKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return pStore.deletePlaceReviewComment(prcKey);
 	}
 
 	@Override

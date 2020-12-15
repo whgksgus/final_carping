@@ -33,14 +33,13 @@
 		</tr>
 		<c:if test="${prList eq null || empty prList }">
 			<tr>
-				<td colspan="6" align="center">등록된 정보가 없습니다.</td>
+				<td colspan="7" align="center">등록된 정보가 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:if test="${prList ne null || !empty prList }">
-		<c:forEach items="${prList }" var="prlist" varStatus="status">
-		
+		<c:forEach items="${prList }" var="prlist" varStatus="status">		
 		<tr>
-			<td>${status.index }</td>
+			<td>${pageNum - status.index }</td>
 			<td>
 				<c:url var="prDetail" value="placeReviewDetail.do">
 					<c:param name="prKey" value="${prlist.prKey }"/>
@@ -67,6 +66,45 @@
 	<br>
 	<input style="margin-left:1045px;" type="submit" value="글쓰기"/>
 	</form>
+	
+			<div align="center">
+				<!-- 이전 -->
+				<c:if test="${pi.currentPage <= 1 }">
+					[이전]&nbsp;
+				</c:if>
+				<c:if test="${pi.currentPage > 1 }">
+					<c:url var="before" value="placeReviewListView.do">
+						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
+						<c:param name="placeKey" value="${placeKey}"></c:param>
+					</c:url>
+					<a href="${before }">[이전]</a>&nbsp;
+				</c:if>
+				<!-- 페이지  -->
+				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+					<c:if test="${pi.currentPage == p }">
+             	  	   ${p }&nbsp;
+            	  	</c:if>
+            	  	<c:if test="${pi.currentPage != p }">
+					<c:url var="pagination" value="placeReviewListView.do">
+					<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="page" value="${p }"></c:param>
+					</c:url>
+					<a href="${pagination }">${p }</a>&nbsp;
+					</c:if>
+				</c:forEach>
+				<!-- 다음 -->
+				<c:if test="${pi.currentPage >= pi.maxPage }">
+					[다음]&nbsp;
+				</c:if>
+				<c:if test="${pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="placeReviewListView.do">
+						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+						<c:param name="placeKey" value="${placeKey}"></c:param>
+					</c:url>
+					<a href="${after }">[다음]</a>&nbsp;
+				</c:if>
+			</div>
+	
 	<br><br>
 	<form id="form" action="placeReviewSearch.do" method="post">
 	<div style="text-align:center;">
