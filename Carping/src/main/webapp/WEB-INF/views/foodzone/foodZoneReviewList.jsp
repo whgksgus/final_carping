@@ -39,7 +39,7 @@
 							</tr>
 							<c:if test="${fzrList eq null || empty fzrList}">
 								<tr>
-									<td class="col-md-12">등록된 리뷰가 없어요~</td>
+									<td colspan="5" class="col-md-12 text-center">등록된 리뷰가 없어요~</td>
 								</tr>
 							</c:if>
 							<c:if test="${fzrList ne null && !empty fzrList }">

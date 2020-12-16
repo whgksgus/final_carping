@@ -11,6 +11,7 @@ import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
+import com.carping.spring.foodzone.domain.TakeOutReserve;
 @Repository
 public class FoodZoneStoreLogic implements FoodZoneStore {
 	@Autowired
@@ -65,6 +66,22 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	public ArrayList<TakeOut> takeOutMenu(int foodZoneKey) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("FoodZoneMapper.takeOutMenuAll", foodZoneKey);
+	}
+
+	@Override
+	public FoodZone selectFoodZoneInfoByKey(int foodZoneKey) {
+		return sqlSession.selectOne("FoodZoneMapper.selectFoodZoneInfoByKey", foodZoneKey);
+	}
+
+	@Override
+	public TakeOut selectTakeOut(TakeOut takeOut) {
+		return sqlSession.selectOne("FoodZoneMapper.selectTakeOut",takeOut);
+	}
+
+	@Override
+	public int insertTakeout(TakeOutReserve tor) {
+		int result = sqlSession.insert("FoodZoneMapper.insertTakeOut", tor);
+		return result;
 	}
 
 }

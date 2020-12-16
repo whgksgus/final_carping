@@ -1,13 +1,20 @@
 package com.carping.spring.foodzone.controller;
 
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +30,13 @@ import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.TakeOut;
+import com.carping.spring.foodzone.domain.TakeOutReserve;
 import com.carping.spring.foodzone.service.FoodZoneService;
 import com.carping.spring.member.domain.Member;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 
 @Controller
 public class FoodZoneController {
@@ -129,12 +138,49 @@ public class FoodZoneController {
 		return "";
 	}
 	
-	
-	@RequestMapping(value="takeOutInsert.do", method = RequestMethod.GET)
-	public String takeOutMenuInsert(@RequestParam String data) {
-		
-		System.out.println(data);
-		return "";
+	@ResponseBody
+	@RequestMapping(value="takeOutInsert.do", method = RequestMethod.POST)
+	public int takeOutMenuInsert(@RequestParam String data , HttpServletRequest request) {
+		// json-simple jar -> pom.xml
+		// string -> jsonArray, jsonArray -> json    arr[0]
+		// json 데이터 추출
+		// 추출한 데이터 VO에 담기
+		// insert
+		int result=0;
+		HttpSession session = request.getSession();
+		JsonParser jsonParser = new JsonParser();
+		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
+		System.out.println(jsonArray);
+		for(int i=0; i<jsonArray.size();i++) {
+			JsonObject object = (JsonObject)jsonArray.get(i);
+			String takeOutMenu = object.get("takeOutMenu").getAsString();
+			String menuEa = object.get("menuEa").getAsString();
+			String menuPrice = object.get("menuPrice").getAsString();
+			String regDate = object.get("regDate").getAsString();
+			String time = object.get("time").getAsString();
+			String totalPrice = object.get("totalPrice").getAsString();
+			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+			String foodZoneKey = object.get("foodZoneKey").getAsString();
+			
+			TakeOut takeOut = new TakeOut();
+			takeOut.setFoodZoneKey(Integer.parseInt(foodZoneKey));
+			takeOut.setTakeOutMenu(takeOutMenu);
+			
+			TakeOut takeOutFind = fzService.selectTakeOut(takeOut);
+			TakeOutReserve tor = new TakeOutReserve();
+			tor.setTakeOutKey(takeOutFind.getTakeOutKey());
+			tor.setTorEa(Integer.parseInt(menuEa));
+			tor.setTorPrice(Integer.parseInt(menuPrice));
+			tor.setTorRegDate(regDate+", "+time);
+			tor.setTorTotalPrice(Integer.parseInt(totalPrice));
+			tor.setMemberId(memberId);
+			tor.setFoodZoneKey(Integer.parseInt(foodZoneKey));
+				
+			result = fzService.insertTakeout(tor);
+			
+				
+		}
+		return result;
 	}
 	
 	@RequestMapping(value="takeOutSuccess.do", method = RequestMethod.GET)

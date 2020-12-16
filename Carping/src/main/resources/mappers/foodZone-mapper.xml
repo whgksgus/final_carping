@@ -35,13 +35,14 @@
 	</resultMap>
 	
 	<resultMap type="TakeOutReserve" id="TakeOutReserveResultMap">
-		<id property="torKey" column="TOR_KEY"></id>
+		<id property="torKey" column="TOR_KEY"/>
 		<result property="memberId" column="MEMBER_ID"/>
 		<result property="takeOutKey" column="TAKEOUT_KEY"/>
 		<result property="torEa" column="TOR_EA"/>
 		<result property="torPrice" column="TOR_PRICE"/>
 		<result property="torRegDate" column="TOR_REGDATE"/>
-		<result property="torTime" column="TOR_TIME"/>
+		<result property="torTotalPrice" column="TOR_TOTALPRICE"/>
+		<result property="foodZoneKey" column="FOODZONE_KEY"/>
 	</resultMap>
 	<select id="selectAll" resultMap="FoodZoneResultMap">
 		SELECT * FROM FOODZONE
@@ -85,4 +86,26 @@
 	<select id="selectFoodZoneReviewList" resultMap="FoodZoneReviewResultMap">
 		SELECT * FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey} ORDER BY 6 DESC
 	</select>
+	
+	<update id="foodZoneReviewHits">
+		UPDATE FOOD_REVIEW SET FR_HITS = FR_HITS+1
+		WHERE FR_KEY = #{frKey}
+	</update>
+	
+	
+	<select id="foodZoneReviewDetail" resultMap="FoodZoneReviewResultMap">
+		SELECT * FROM FOOD_REVIEW WHERE FR_KEY = #{frKey}
+	</select>
+	
+	<select id="selectFoodZoneInfoByKey" resultMap="FoodZoneResultMap">
+		SELECT * FROM FOODZONE WHERE FOODZONE_KEY = #{foodZoneKey}
+	</select>
+	
+	<select id="selectTakeOut" resultMap="TakeOutResultMap">
+		SELECT * FROM TAKEOUTMENU WHERE FOODZONE_KEY=#{foodZoneKey} AND TAKEOUT_MENU=#{takeOutMenu}
+	</select>
+	
+	<insert id="insertTakeOut">
+		INSERT INTO TAKEOUT_RESERVE VALUES(SEQ_TOR.NEXTVAL,#{memberId}, #{takeOutKey}, #{torEa}, #{torPrice}, #{torRegDate}, #{torTotalPrice}, #{foodZoneKey})
+	</insert>
 </mapper>
