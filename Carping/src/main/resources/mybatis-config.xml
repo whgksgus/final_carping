@@ -15,6 +15,7 @@
         <typeAlias type="com.carping.spring.notice.domain.Notice" alias="Notice"/>
         <typeAlias type="com.carping.spring.place.domain.PlaceReviewComment" alias="PlaceReviewComment"/>
         <typeAlias type="com.carping.spring.foodzone.domain.TakeOut" alias="TakeOut"/>
+        <typeAlias type="com.carping.spring.suggestion.domain.Suggestion" alias="Suggestion"/>
 
 		<typeAlias type="com.carping.spring.place.domain.PlaceReview" alias="PlaceReview"/>
 		<typeAlias type="com.carping.spring.place.domain.PlaceReviewComment" alias="PlaceReviewComment"/>
@@ -32,6 +33,7 @@
 		<mapper resource="mappers/area-mapper.xml"/>
 		<mapper resource="mappers/place-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
-      <mapper resource="mappers/cart-mapper.xml"/>
+      	<mapper resource="mappers/cart-mapper.xml"/>
+      	<mapper resource="mappers/suggestion-mapper.xml"/>
 	</mappers>
 </configuration>

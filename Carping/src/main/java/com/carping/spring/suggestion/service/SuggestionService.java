@@ -2,15 +2,18 @@ package com.carping.spring.suggestion.service;
 
 import java.util.ArrayList;
 
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.suggestion.domain.Answer;
+import com.carping.spring.suggestion.domain.PageInfo;
 import com.carping.spring.suggestion.domain.Suggestion;
 
 public interface SuggestionService {
+	public int getSugListCount();
+	public int getSugSearchList(Search search);
+	public int sugCount(int suggestionKey);
 	public ArrayList<Suggestion> selectList(PageInfo pi);
 	public Suggestion selectOne(int suggestionKey);
-	public int registerSug(Suggestion suggestion);
+	public int insertSug(Suggestion suggestion);
 	public int modifySug(Suggestion suggestion);
 	public int deleteSug(Suggestion suggestion);
 	public ArrayList<Suggestion> selectSearList(Search search);

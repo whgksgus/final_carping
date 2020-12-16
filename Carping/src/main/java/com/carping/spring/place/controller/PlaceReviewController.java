@@ -264,10 +264,11 @@ public class PlaceReviewController {
 	@ResponseBody
 	@RequestMapping(value="prCommentAdd.do", method = RequestMethod.POST)
 	public String placeReviewCommentAdd(PlaceReviewComment prc, HttpSession session) {
+		int result;
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String prcWriter = loginUser.getMemberId();
 		prc.setPrcWriter(prcWriter);
-		int result = prService.insertPlaceReviewComment(prc);
+		result = prService.insertPlaceReviewComment(prc);
 		if (result > 0) {
 			return "success";
 		}else {

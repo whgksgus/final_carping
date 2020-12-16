@@ -24,16 +24,15 @@ public class PlaceStoreLogic implements PlaceStore {
 	}
 
 	@Override
-	public Place selectPlaceInfo(String areaAddress) {
-		// TODO Auto-generated method stub
-		return null;
+	public Place selectPlaceInfo(String placeName) {
+		Place place = sqlSession.selectOne("PlaceMapper.selectPlace", placeName);
+		return place;
 	}
 
 	
 	@Override
-	public ArrayList<PlaceReview> selectPlaceReviewlist(int placeKey, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PlaceReview> selectPlaceReviewlist(int placeKey) {
+		return (ArrayList)sqlSession.selectList("PlaceMapper.selectPrList", placeKey);
 	}
 
 	@Override
@@ -43,9 +42,8 @@ public class PlaceStoreLogic implements PlaceStore {
 	}
 
 	@Override
-	public double selectPlaceReviewStoreAvg(int placeKey) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double selectPlaceReviewScoreAvg(int placeKey) {
+		return sqlSession.selectOne("PlaceMapper.selectPlaceAvg", placeKey);
 	}
 
 	@Override

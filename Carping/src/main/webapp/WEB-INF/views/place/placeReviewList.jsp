@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰게시판 - 명소 검색</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -28,12 +29,10 @@
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
-			<th>별점</th>
-			<th>첨부파일</th>
 		</tr>
 		<c:if test="${prList eq null || empty prList }">
 			<tr>
-				<td colspan="7" align="center">등록된 정보가 없습니다.</td>
+				<td colspan="5" align="center">등록된 정보가 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:if test="${prList ne null || !empty prList }">
@@ -50,15 +49,6 @@
 			<td>${prlist.memberId }</td>
 			<td>${prlist.prRegDate }</td>
 			<td>${prlist.prHits }</td>
-			<td>${prlist.prScore }</td>
-			<td>
-				<c:if test="${!empty prlist.prPhoto }">
-					O
-				</c:if>
-				<c:if test="${empty prlist.prPhoto }">
-					X
-				</c:if>
-			</td>
 		</tr>
 		</c:forEach>
 		</c:if>

@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.place.domain.Place;
+import com.carping.spring.place.domain.PlaceReview;
 import com.carping.spring.place.domain.Search;
 import com.carping.spring.place.service.PlaceService;
+import com.google.gson.Gson;
 
 @Controller
 public class PlaceController {
@@ -30,10 +32,10 @@ public class PlaceController {
 	@RequestMapping(value="placeView.do",method=RequestMethod.GET)
 	public ModelAndView placeInfoView(ModelAndView mv) {
 		ArrayList<Place> pList = pService.selectPlaceList();
-			mv.addObject("pList", pList);
-			mv.setViewName("place/placeInfoView");
-			return mv;
-		}
+		mv.addObject("pList", pList);
+		mv.setViewName("place/placeInfoView");
+		return mv;
+	}
 	
 	@RequestMapping(value="psearchsido.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -52,21 +54,40 @@ public class PlaceController {
 		return "";
 	}
 	
-	public String placeInfoSelect(String placeAddress, Model model) {
-		return "";
+	@RequestMapping(value="selectPlaceInfo.do", method=RequestMethod.GET)
+	@ResponseBody
+	public Place placeInfoSelect(String placeName, Model model) {
+		Place place = pService.selectPlaceInfo(placeName);
+		return place;
 	}
 	
-	public ModelAndView placeReviewList(ModelAndView mv, 
-			@RequestParam(value="page", required = false)Integer page, int placeKey) {
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="selectPlaceReview.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String placeReviewList(int placeKey) {
+		ArrayList<PlaceReview> prList = pService.selectPlaceReviewlist(placeKey);
+		Gson gson = new Gson();
+		String jsonPlaceReview = gson.toJson(prList);
+//		System.out.println(jsonPlaceReview);
+		return jsonPlaceReview;
 	}
 	
 	public String placeReviewScoreAvg(int placeKey, Model model) {
 		return "";
 	}
 	
-	public String scoreAvgUpdate(int placeKey, int scoreAvg, Model model) {
-		return "";
+	@ResponseBody
+	@RequestMapping(value="placeScoreAvgUpdate.do", method=RequestMethod.GET)
+	public double scoreAvgUpdate(String placeName, Model model) {
+		Place place = pService.selectPlaceInfo(placeName);
+		int placeKey = place.getPlaceKey();
+		double placeAvg = 0;
+		try {
+			placeAvg = pService.selectPlaceReviewScoreAvg(placeKey);
+		} catch(Exception e) {
+			placeAvg = 0;
+			e.printStackTrace();
+		}
+		return placeAvg;
 	}
 	
 	public String insertPlace(Place place, Model model, HttpServletRequest request, 

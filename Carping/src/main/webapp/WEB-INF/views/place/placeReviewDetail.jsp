@@ -84,10 +84,11 @@
 				 getReplyList();
 			}, 3000);
 			$("#submit").on("click", function() {
-				/* if(confirm("댓글을 등록하시겠습니까?")) */
-				// 댓글 등록 ajax
 				var prcContent = $("#content").val();
 				var prKey = ${preview.prKey };
+				if(prcContent == "") {
+					alert('댓글 내용을 입력해주세요');
+				}else {
 				$.ajax({
 					url : "prCommentAdd.do",
 					type : "post",
@@ -101,6 +102,7 @@
 						}
 					}
 				});
+				}
 			});	
 		})
 		
@@ -175,16 +177,6 @@
 	<script>
 		function Del() {
 			return confirm("리뷰를 삭제하시겠습니까?")
-		}
-		
-		function Submit() {
-			var sb = document.getElementById('submit');
-			
-			sb.onclick = function() {
-				if(content == "") {
-					alert('내용을 입력해주세요');
-				}
-			}
 		}
 		
 		/* function CommentAdd() {
