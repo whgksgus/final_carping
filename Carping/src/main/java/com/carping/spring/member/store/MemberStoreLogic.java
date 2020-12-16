@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.carping.spring.member.domain.FindId;
 import com.carping.spring.member.domain.Member;
 
 @Repository
@@ -29,9 +30,8 @@ public class MemberStoreLogic implements MemberStore {
 	}
 
 	@Override
-	public int findIdCheck(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member findIdCheck(FindId fId) {
+		return sqlSession.selectOne("MemberMapper.findId", fId);
 	}
 
 	@Override
@@ -46,14 +46,13 @@ public class MemberStoreLogic implements MemberStore {
 	}
 
 	@Override
-	public int deleteMember(String memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertAdmin(Member member) {
+		return sqlSession.insert("MemberMapper.insertAdmin", member);
 	}
 
 	@Override
-	public int insertAdmin(Member member) {
-		return sqlSession.insert("MemberMapper.insertAdmin", member);
+	public int deleteMember(Member member) {
+		return sqlSession.delete("MemberMapper.deleteMember", member);
 	}
 
 }

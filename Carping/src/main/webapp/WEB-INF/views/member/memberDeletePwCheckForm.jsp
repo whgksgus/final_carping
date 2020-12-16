@@ -44,52 +44,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 span.guide {
 		display:none;
 		font-size : 15px;
-		top : 12px;
-		right : 10px;
-		margin-left: 20px;
 		font-weight: bold;
 	}
 	
 span.guide2 {
 		display:none;
 		font-size : 15px;
-		top : 12px;
-		right : 10px;
-		margin-left: 20px;
 		font-weight: bold;
 	}
 	
 span.ok{color:#FFFFFF}
 span.error{color:red}
 </style>
-<script>
-//비밀번호 일치 검사
-$("#password").on("blur", function() {
-	var password = $("#passwordChk").val();
-	var passwordChk = $(this).val();
-	
-	if(password === passwordChk) {
-		$(".guide2.error").hide();
-		$(".guide2.ok").show()
-		$("#pwCheck").val(1);
-	}else{
-		$(".guide2.error").show();
-		$(".guide2.ok").hide()
-		$("#pwCheck").val(0);
-	}
-	
-});
-</script>
+
 </head>
 <body>
 	<div class="banner" id="home">
 		<div class="loginBox">
 			<div class="loginBox2">
-			<form action="myInfoForm.do" method="post">
+			<form action="memberDelete.do" method="post">
 				<table class="loginTable">
 					<tr>
 						<td colspan="2">
-							<h1 class="h1" align="center">회원정보 수정</h1>
+							<h1 class="h1" align="center">회원탈퇴</h1>
 							<br>
 						</td>
 					</tr>
@@ -98,19 +75,21 @@ $("#password").on("blur", function() {
 						<td colspan="2" style="font-weight:bold;">비밀번호를 입력해주세요.</td>
 					</tr>
 					<tr>
+						<td colspan="2"><input class="form-control" style="width:100%;" type="hidden" value="${loginUser.memberPwd }" id="passwordChk"></td>
+					</tr>
+					<tr>
 						<td colspan="2"><input class="form-control" style="width:100%;" type="password" id="password" name="memberPwd"></td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<input type="submit" id="login-btn" class="btnLogin1" value="확인"></button>
+						<td colspan="2" style="width:100%; text-align:center;">
+							<span class="guide2 ok">비밀번호가 일치합니다.</span>
+							<span class="guide2 error">비밀번호가 일치하지 않습니다.</span>
+							<input type="hidden" id="pwCheck" value="0">
 						</td>
 					</tr>
 					<tr>
-						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="hidden" value="${loginUser.memberPwd }" id="passwordChk"></td>
-						<td style="width:160px;">
-							<span style="margin-left: 20px;" class="guide2 ok">일치합니다.</span>
-							<span style="margin-left: 20px;" class="guide2 error">일치하지 않습니다.</span>
-							<input type="hidden" id="pwCheck" value="0">
+						<td colspan="2">
+							<input type="submit" id="delete-btn" class="btnLogin1" value="탈퇴하기">
 						</td>
 					</tr>
 				</table>
@@ -118,5 +97,32 @@ $("#password").on("blur", function() {
 			</div>
 		</div>
 	</div>
+	<script>
+$("#password").on("blur", function() {
+	var passwordChk = $("#passwordChk").val();
+	var password = $(this).val();
+	
+	if(password === passwordChk) {
+		$(".guide2.error").hide();
+		$(".guide2.ok").show()
+	}else{
+		$(".guide2.error").show();
+		$(".guide2.ok").hide()
+	}
+	
+});
+
+$('#delete-btn').on("click",function(){
+	var passwordChk = $("#passwordChk").val();
+	var password = $("#password").val();
+	if(password === passwordChk) {
+		return confirm("정말 탈퇴하시겠습니까?");
+	}else{
+		alert("비밀번호가 일치하지 않습니다.");
+		$("#password").focus();
+		return false;
+	}
+});
+</script>
 </body>
 </html>

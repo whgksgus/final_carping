@@ -3,6 +3,7 @@ package com.carping.spring.member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.carping.spring.member.domain.FindId;
 import com.carping.spring.member.domain.Member;
 import com.carping.spring.member.store.MemberStore;
 
@@ -28,9 +29,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int findIdCheck(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member findIdCheck(FindId fId) {
+		return mStore.findIdCheck(fId);
 	}
 
 	@Override
@@ -45,14 +45,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertAdmin(Member member) {
+		return mStore.insertAdmin(member);
 	}
 
 	@Override
-	public int insertAdmin(Member member) {
-		return mStore.insertAdmin(member);
+	public int deleteMember(Member member) {
+		return mStore.deleteMember(member);
 	}
 
 }

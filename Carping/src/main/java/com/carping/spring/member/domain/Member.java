@@ -10,7 +10,6 @@ public class Member {
 	private String admin;
 	
 	public Member() {
-		
 	}
 	
 	public Member(String memberId, String memberPwd) {
