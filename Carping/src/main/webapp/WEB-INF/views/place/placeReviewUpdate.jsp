@@ -39,7 +39,7 @@
          </tr>
          <tr>
             <td colspan="2" align="center">
-               <input type="submit" value="수정"> &nbsp;
+               <input type="submit" onclick="return Update();" value="수정"> &nbsp;
                <a href="javascript:history.go(-1);">이전페이지로</a>
             </td>
          </tr>
@@ -64,5 +64,10 @@
 	<br>
 	<br>
 	<br>
+	<script>
+	function Update() {
+		return confirm("리뷰를 수정하시겠습니까?")
+	}
+	</script>
 </body>
 </html>

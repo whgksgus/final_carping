@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.carping.spring.common.Search;
+import com.carping.spring.place.domain.BoardSearch;
 import com.carping.spring.place.domain.PageInfo;
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
@@ -20,18 +21,34 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	private PlaceReviewStore pStore;
 	
 	@Override
-	public int getListCount(int placeKey) {
-		return pStore.getListCount(placeKey);
+	public int getPlaceListCount(int placeKey) {
+		return pStore.getPlaceListCount(placeKey);
 	}
 
 	@Override
-	public int getListCount(Search search) {
-		return pStore.getListCount(search);
+	public int getReviewListCount(Search search) {
+		return pStore.getReviewListCount(search);
+	}
+	
+	
+	@Override
+	public int getSearchReviewListCount(BoardSearch boardSearch) {
+		return pStore.getSearchReviewListCount(boardSearch);
+	}
+	
+	@Override
+	public int placeReviewHits(int prKey) {
+		return pStore.placeReviewHits(prKey);
 	}
 
 	@Override
-	public ArrayList<Place> searchPlaceReview(Search search) {
-		return pStore.searchPlaceReview(search);
+	public ArrayList<Place> searchPlaceReview(PageInfo pi, Search search) {
+		return pStore.searchPlaceReview(pi, search);
+	}
+	
+	@Override
+	public ArrayList<PlaceReview> searchPlaceBoardReview(PageInfo pi, BoardSearch boardSearch) {
+		return pStore.searchPlaceBoardReview(pi, boardSearch);
 	}
 
 	@Override

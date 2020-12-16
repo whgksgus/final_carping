@@ -66,29 +66,53 @@
 	<br>
 	<input style="margin-left:1045px;" type="submit" value="글쓰기"/>
 	</form>
-	
+		<c:if test="${prList ne null || !empty prList }">
 			<div align="center">
 				<!-- 이전 -->
 				<c:if test="${pi.currentPage <= 1 }">
 					[이전]&nbsp;
 				</c:if>
 				<c:if test="${pi.currentPage > 1 }">
+					<!-- 그냥 실행했을때 -->
 					<c:url var="before" value="placeReviewListView.do">
 						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 						<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
+					<!-- 검색어가 있으면 검색어만 볼 수 있도록 url을 search쪽으로 보내줌 -->
+					<c:if test="${search.searchValue ne null }">
+					<c:url var="before" value="searchPlaceBoardReview.do">
+						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
+						<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
+					</c:url>
+					</c:if>
 					<a href="${before }">[이전]</a>&nbsp;
 				</c:if>
 				<!-- 페이지  -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 					<c:if test="${pi.currentPage == p }">
-             	  	   ${p }&nbsp;
+             	  	   <b style="color:blue">${p }</b>&nbsp;
             	  	</c:if>
-            	  	<c:if test="${pi.currentPage != p }">
+            	  	<c:if test="${pi.currentPage != p }">	
+            	  	<!--  그냥 실행했을때 -->
 					<c:url var="pagination" value="placeReviewListView.do">
-					<c:param name="placeKey" value="${placeKey}"></c:param>
 						<c:param name="page" value="${p }"></c:param>
+						<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
+					<!-- 검색어가 있으면 검색어만 볼 수 있도록 url을 search쪽으로 보내줌 -->
+					<c:if test="${search.searchValue ne null }">
+					<c:url var="pagination" value="searchPlaceBoardReview.do">
+						<c:param name="page" value="${p }"></c:param>
+						<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
+					</c:url>
+					</c:if>
 					<a href="${pagination }">${p }</a>&nbsp;
 					</c:if>
 				</c:forEach>
@@ -97,22 +121,37 @@
 					[다음]&nbsp;
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
+				<!--  그냥 실행했을때 -->
 					<c:url var="after" value="placeReviewListView.do">
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 						<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
+					<!-- 검색어가 있으면 검색어만 볼 수 있도록 url을 search쪽으로 보내줌 -->
+					<c:if test="${search.searchValue ne null }">
+					<c:url var="after" value="searchPlaceBoardReview.do">
+						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+						<c:param name="placeKey" value="${placeKey}"></c:param>
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
+					</c:url>
+					</c:if>
 					<a href="${after }">[다음]</a>&nbsp;
 				</c:if>
 			</div>
+		</c:if>
 	
 	<br><br>
-	<form id="form" action="placeReviewSearch.do" method="post">
+	<form id="form" action="searchPlaceBoardReview.do" method="get">
+	<input type="hidden" name="placeKey" value="${placeKey}"/>
 	<div style="text-align:center;">
 		<select id="searchCondition" name="searchCondition">
-			<option value="제목">제목</option>
-			<option value="작성자">작성자</option>
+			<option value="제목" <c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>
+			<option value="내용" <c:if test="${search.searchCondition == '내용'}">selected</c:if>>내용</option>
+			<option value="작성자" <c:if test="${search.searchCondition == '작성자'}">selected</c:if>>작성자</option>
 		</select>&nbsp;&nbsp;
-		<input type="text" id="searchValue" name="searchValue" size="50;" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" id="searchValue" name="searchValue" size="50;" value="${search.searchValue }" required/>&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="submit" value="검색" id="search"/>
 	</div>
 	</form>
