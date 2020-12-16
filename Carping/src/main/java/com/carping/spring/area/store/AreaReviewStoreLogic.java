@@ -3,31 +3,66 @@ package com.carping.spring.area.store;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.domain.AreaReview;
 import com.carping.spring.area.domain.AreaReviewComment;
-import com.carping.spring.common.PageInfo;
-import com.carping.spring.common.Search;
+import com.carping.spring.area.domain.BoardSearch;
 
+@Repository
 public class AreaReviewStoreLogic implements AreaReviewStore {
 
+	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Override
-	public int getListCount() {
+	public int getAreaListCount(int areaKey) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public ArrayList<Area> searchAreaReview(Search search) {
+	public int getReviewListCount(com.carping.spring.area.domain.Search search) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSearchReviewListCount(BoardSearch boardSearch) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int areaReviewHits(int arKey) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Area> searchAreaReview(com.carping.spring.area.domain.PageInfo pi,
+			com.carping.spring.area.domain.Search search) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<AreaReview> selectAreaReviewList(PageInfo pi, int areaKey) {
+	public ArrayList<AreaReview> searchAreaBoardReview(com.carping.spring.area.domain.PageInfo pi,
+			BoardSearch boardSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Area selectOne(int areaKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Area> selectAreaReviewList(com.carping.spring.area.domain.PageInfo pi, int areaKey) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -73,7 +108,7 @@ public class AreaReviewStoreLogic implements AreaReviewStore {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 	
-
-}
+	
+	
+	}

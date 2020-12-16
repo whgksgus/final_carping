@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디/비밀번호 찾기</title>
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,37 +38,60 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<style>
+.full{
+width: 100%;
+  height: 100vh;
+	 display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+</style>
 </head>
 <body>
-<div id="ex1" class="modal">
-  <span id="id_value"></span>
-  <a href="#" rel="modal:close">닫기</a>
+<!-- modal -->
+<div id="ex1" class="modal" align="center" style="text-align:center; width:400px; height:200px;">
+  <h3 id="titleH1" class="h3"></h3>
+  <br>
+  <span id="id_value1"></span>
+  <br>
+  <span id="id_value2"></span>
+  <br>
+  <a style="margin-left:-10px; text-decoration:none; position:absolute; bottom: 10px;" href="#" rel="modal:close">닫기</a>
 </div>
  
 <p><a id="modalTag" href="#ex1" rel="modal:open"></a></p>
 
+
 	<div class="full">
-		<div class="container">
+		<div class="container" style="width:500px;">
 			<div class="area_inputs wow fadeIn">
-				<div class="sub_title font-weight-bold text-white">
+				<div class="sub_title font-weight-bold text-white" align="center">
 					<h3>아이디/비밀번호 찾기</h3>
-					<p>인증된 이메일만 정보 찾기가 가능합니다 :)</p>
+					<br>
 				</div>
-				<div style="margin-bottom: 10px;"
+				<div align="center" style="width:50%; float:left;"
 					class="custom-control custom-radio custom-control-inline">
 					<input type="radio" class="custom-control-input" id="search_1"
 						name="search_total" onclick="search_check(1)" checked="checked">
 					<label class="custom-control-label font-weight-bold text-white"
 						for="search_1">아이디 찾기</label>
 				</div>
-				<div class="custom-control custom-radio custom-control-inline">
+				<div align="center" class="custom-control custom-radio custom-control-inline" style="width:50%; float:left;">
 					<input type="radio" class="custom-control-input" id="search_2"
 						name="search_total" onclick="search_check(2)"> <label
 						class="custom-control-label font-weight-bold text-white"
 						for="search_2">비밀번호 찾기</label>
 				</div>
+				<br>
+				<br>
 				<div id="searchI">
 					<div class="form-group">
 						<label class="font-weight-bold text-white" for="inputName_1">이름</label>
@@ -88,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<button id="searchBtn" type="button" onclick="idSearch_click()"
 							class="btn btn-primary btn-block">확인</button>
 						<a class="btn btn-danger btn-block"
-							href="${pageContext.request.contextPath}" onclick="search_check(1)">취소</a>
+							href="${pageContext.request.contextPath}">취소</a>
 					</div>
 				</div>
 				<div id="searchP" style="display: none;">
@@ -110,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<button id="searchBtn2" type="button" onclick="pwSearch_click()"
 							class="btn btn-primary btn-block">확인</button>
 						<a class="btn btn-danger btn-block"
-							href="${pageContext.request.contextPath}" onclick="search_check(2)">취소</a>
+							href="${pageContext.request.contextPath}">취소</a>
 					</div>
 				</div>
 			</div>
@@ -133,13 +156,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var memberName = $('#memberName').val();
 			var phone = $('#phone').val();
 			$.post("/findId.do", {"memberName" : memberName,"phone" : phone}, function(response) {
-				console.log(response);
-				console.log(response.memberId);
-				if (response == null) {
-					$('#id_value').text("회원 정보를 확인해주세요!");
+				if (response == null ) {
+					$('#titleH1').text(memberName+"님의  아이디는");
+					$('#id_value1').text("존재하지 않습니다.");
+					$('#id_value2').text("입력 정보를 다시 확인해주세요.");
 					$('#modalTag').get(0).click();
 				} else {
-					$('#id_value').text(response.memberId);
+					$('#titleH1').text(memberName+"님의  아이디는");
+					$('#id_value1').text("["+response.memberId+"] 입니다.");
+					$('#id_value2').text("해당 아이디로 로그인해주세요.");
 					$('#modalTag').get(0).click();
 				}
             });
@@ -151,12 +176,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var email = $('#email').val();
 			$.post("/findPw.do", {"memberId" : memberId,"email" : email}, function(response) {
 				console.log(response);
-				console.log(response.memberPwd);
 				if (response == null) {
-					$('#id_value').text("회원 정보를 확인해주세요!");
+					$('#titleH1').text(memberId+"님의  비밀번호는");
+					$('#id_value1').text("존재하지 않습니다.");
+					$('#id_value2').text("입력 정보를 다시 확인해주세요.");
 					$('#modalTag').get(0).click();
 				} else {
-					$('#id_value').text(response.memberPwd);
+					$('#titleH1').text(memberId+"님의  비밀번호는");
+					$('#id_value1').text("["+email+"]로 보냈으니");
+					$('#id_value2').text("해당 이메일을 통해 확인하시기 바랍니다.");
 					$('#modalTag').get(0).click();
 				}
             });
