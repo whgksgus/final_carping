@@ -71,8 +71,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<tr>
 						<td colspan="2" align="center">
 							<a class="loginA" href="enrollForm.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a class="loginA" href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-							<a class="loginA" href="#">비밀번호 찾기</a></td>
+							<a class="loginA" href="findIdPwForm.do">아이디 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							<a class="loginA" href="findIdPwForm.do">비밀번호 찾기</a></td>
 					</tr>
 				</table>
 			</form>

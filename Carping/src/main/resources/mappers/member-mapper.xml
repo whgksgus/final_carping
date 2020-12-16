@@ -34,4 +34,14 @@
 		MEMBER_NAME = #{memberName}, PHONE = #{phone}, EMAIL = #{email}, MEMBER_ADDRESS = #{memberAddress}
 		WHERE MEMBER_ID = #{memberId}
 	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+	</delete>
+	
+	<select id="findId" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_NAME=#{memberName} AND PHONE=#{phone}
+	</select>
 </mapper>

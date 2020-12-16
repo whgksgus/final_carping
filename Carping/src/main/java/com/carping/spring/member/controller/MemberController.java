@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.carping.spring.member.domain.FindId;
 import com.carping.spring.member.domain.Member;
 import com.carping.spring.member.service.MemberService;
 
@@ -35,10 +37,7 @@ public class MemberController {
 		return "member/adminEnrollForm";
 	}
 	
-	@RequestMapping(value="findPwForm.do", method=RequestMethod.GET)
-	public String findPwForm() {
-		return "member/findPwForm";
-	}
+	
 	
 	@RequestMapping(value="loginMember.do", method=RequestMethod.POST)
 	public ModelAndView memberLogin(String memberId, String memberPwd, ModelAndView mv, HttpServletRequest request) {
@@ -102,8 +101,18 @@ public class MemberController {
 		return isUsable+"";
 	}
 	
-	public ModelAndView findId(ModelAndView mv, String memberName, String email) {
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="findId.do", method=RequestMethod.POST)
+	public Member findId(String memberName, String phone) {
+		System.out.println(memberName+", "+phone);
+		FindId fId = new FindId(memberName, phone);
+		Member member = mService.findIdCheck(fId);
+		return member;
+	}
+	
+	@RequestMapping(value="findIdPwForm.do", method=RequestMethod.GET)
+	public String findIdPwForm() {
+		return "member/memberSearch";
 	}
 	
 	public ModelAndView findPw(ModelAndView mv, String memberId, String memberName) {
@@ -114,12 +123,6 @@ public class MemberController {
 	public String myInfoPwCheckForm() {
 		return "member/myInfoPwCheckForm";
 	}
-	
-	@RequestMapping(value="memberDeletePwCheckForm.do", method=RequestMethod.GET)
-	public String deletePwCheckForm() {
-		return "member/memberDeletePwCheckForm";
-	}
-	
 	
 	@RequestMapping(value="myInfoForm.do", method=RequestMethod.POST)
 	public ModelAndView myInfoForm(ModelAndView mv,String memberId, String memberPwd, HttpServletRequest request) {
@@ -153,8 +156,26 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="", method=RequestMethod.POST)
+	
+	@RequestMapping(value="memberDeletePwCheckForm.do", method=RequestMethod.GET)
+	public String deletePwCheckForm() {
+		return "member/memberDeletePwCheckForm";
+	}
+	
+	@RequestMapping(value="memberDelete.do", method=RequestMethod.POST)
 	public String deleteMember(String memberId, String memberPwd, HttpServletRequest request, Model model) {
-		return "";
+		HttpSession session = request.getSession();
+		Member member = new Member(memberId, memberPwd);
+		int result = mService.deleteMember(member);
+		if(result > 0) {
+			session.invalidate();
+			model.addAttribute("msg", "회원정보 탈퇴에 성공했습니다."); 
+			model.addAttribute("url", "home.do"); 
+			return "common/redirect";
+		}else {
+			model.addAttribute("msg", "회원정보 탈퇴에 실패했습니다.");
+			model.addAttribute("url", "myInfoPwCheckForm.do");
+			return "common/redirect";
+		}
 	}
 }
