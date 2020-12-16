@@ -24,16 +24,14 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public Place selectPlaceInfo(String areaAddress) {
-		// TODO Auto-generated method stub
-		return null;
+	public Place selectPlaceInfo(String placeName) {
+		return pStore.selectPlaceInfo(placeName);
 	}
 
 
 	@Override
-	public ArrayList<PlaceReview> selectPlaceReviewlist(int placeKey, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PlaceReview> selectPlaceReviewlist(int placeKey) {
+		return pStore.selectPlaceReviewlist(placeKey);
 	}
 
 	@Override
@@ -43,9 +41,8 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public double selectPlaceReviewStoreAvg(int placeKey) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double selectPlaceReviewScoreAvg(int placeKey) {
+		return pStore.selectPlaceReviewScoreAvg(placeKey);
 	}
 
 	@Override

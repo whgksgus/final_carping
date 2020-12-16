@@ -150,6 +150,26 @@
 		PR_HITS = PR_HITS + 1
 		WHERE PR_KEY = #{prKey}
 	</update>
+	
+	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 여기서부터 명소(Place) 관련 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+	
+	<select id="selectPlace" resultMap="PlaceResultMap">
+		SELECT * FROM PLACE
+		WHERE PLACE_NAME = #{placeName}
+	</select>
+	
+	<select id="selectPrList" resultMap="PlaceReviewResultMap">
+		SELECT * FROM PLACE_REVIEW
+		WHERE PLACE_KEY = #{placeKey} AND 3>=ROWNUM
+		ORDER BY PR_REGDATE DESC
+	</select>
+	
+	<select id="selectPlaceAvg" resultType="double">
+		SELECT ROUND(AVG(PR_SCORE),1) FROM PLACE_REVIEW
+		WHERE PLACE_KEY = #{placeKey}
+	</select>
+	
+	
 </mapper>
 
 

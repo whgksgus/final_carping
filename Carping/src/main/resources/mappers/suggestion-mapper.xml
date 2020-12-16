@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Suggestion">
+	
+	<resultMap type="Suggestion" id="SuggestionResultMap">
+		<id property="suggestionKey" column="SUGGESTION_KEY"></id>
+		<result property="suggestionTitle" column="SUGGESTION_TITLE"></result>
+		<result property="suggestionContent" column="SUGGESTION_CONTENT"></result>
+		<result property="suggestionEnrollDate" column="SUGGESTION_ENROLL_DATE"></result>
+		<result property="suggestionCount" column="SUGGESTION_COUNT"></result>
+		<result property="memberId" column="MEMBER_ID"></result>
+	</resultMap>
+	
+	<select id="selectList" resultMap="SuggestionResultMap">
+		SELECT * FROM SUGGESTION ORDER BY  SUGGESTION_KEY DESC
+	</select>
+	
+	<insert id="insertSug">
+		INSERT INTO SUGGESTION VALUES
+		(SEQ_SUGKEY.NEXTVAL, #{suggestionTitle}, #{suggestionContent}, SYSDATE, #{suggestionCount}, #{memberId})
+	</insert>
+	
+	<update id="sugHitsCount">
+		UPDATE SUGGESTION SET
+		SUGGESTION_COUNT = SUGGESTION_COUNT + 1
+		WHERE SUGGESTION_KEY = #{suggestionKey} 
+	</update>
+	
+	<select id="selectOne" resultMap="SuggestionResultMap">
+		SELECT * FROM SUGGESTION
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</select>
+	
+
+</mapper>

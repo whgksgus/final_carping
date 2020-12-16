@@ -86,13 +86,21 @@
    <br>
 	<!-- 지도 표시되는 부분 -->
 	<div id="map" style="width:1300px;height:400px; margin-left:100px;"></div>
+	<br>
+	<div id="Info" style="text-align: center;">
+	
+	</div>
+	<span id="reviewAvg" style="font-size:1.8em"></span>
+	<div id="review">
+	
+	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
 	<script>
 	var mapData;
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
-        level: 7 // 지도의 확대 레벨
+        level: 9 // 지도의 확대 레벨
     };
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -135,7 +143,9 @@
 		for(var i=0; i<pList.length; i++) {
 			x = {
 					title : pList[i].placeName,
-					latlng : new kakao.maps.LatLng(pList[i].placeGeoCodeX, pList[i].placeGeoCodeY)
+					latlng : new kakao.maps.LatLng(pList[i].placeGeoCodeX, pList[i].placeGeoCodeY),
+					address : pList[i].placeAddress,
+					pKey : pList[i].placeKey
 			}
 			// for문으로 pList에 있는 객체배열 순서대로 title, latlng를 빼와서 x라는 배열에 저장
 			arr2.push(x);
@@ -162,21 +172,22 @@
 		        position: positions[i].latlng, // 마커를 표시할 위치
 		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 		        image : markerImage, // 마커 이미지
-		        clickable: true //  마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다.
 		    });
 		
-		  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-	          iwContent = '<div style="padding:5px;">'+positions[i].title+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	              iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+		 // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+			var iwContent = '<div style="padding:5px; width:200px; height:100px;">'+positions[i].title + '<br><br>' + positions[i].address+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
-	          // 인포윈도우를 생성합니다
-	          var infowindow = new kakao.maps.InfoWindow({
-	              content : iwContent,
-	              removable : iwRemoveable
-	          });
-     		 
+			// 인포윈도우를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({
+				content : iwContent,
+				removable : iwRemoveable
+			});
+		  
+			kakao.maps.event.addListener(marker, 'click', makeOverListener(map,
+					marker, infowindow, positions[i]));
+		  
 	      } 
-		
 		
 		$('#search').on('click', function() {
 	        $.ajax({
@@ -205,28 +216,124 @@
            
         })
         
-        kakao.maps.event.addListener(marker, 'click', function() {
-        	console.log(postitions.title);
-        	infowindow.open(map, marker);
-        	$.ajax({
-        		url : "selectPlaceInfo.do",
-        		type : "POST",
-        		data : {"placeName" : ' 사근진해변'},
-        		success : function(data) {
-        			alert(data.placeName);
-        		}
-        		,deforeSend:function() {
-        			$('.placeInfo').addClass('display-none');
-        		}
-        		,complete:function() {
-        			$('.placeInfo').removeClass('display-none');
-        		}
-        	});
-        });
+        function makeOverListener(map, marker, infowindow, positions) {
+			return function() {
+				$.ajaxSetup({ async:false });
+				$.ajax({
+					url : "selectPlaceInfo.do",
+					data : {"placeName" : positions.title},
+					type : "GET",
+					success : function(result) {
+						$('#placeInfo').html('');
+						$('#image').html('');
+						$('#placeName').html('');
+						$('#placeAddress').html('');
+						$('#scoreAvg').html('');
+						$('#placeEtc').html('');
+						$('#lineDiv1').html('');
+						$('#lineDiv2').html('');
+						$('#lineDiv3').html('');
+						$('#placeEtc').html('');
+						$('#reviewBox').html('');
+						$('#placeInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='placeName'></div><br><div id='placeAddress' align='center'style='display: inline-block; width: 100%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 800px; margin-left: 100px;'><!-- 맛집&명소 --><div id='placeEtc' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='placeEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
+						$('#image').append("<img align='center' style='width: 1100px; height:600px;' src='../../../resources/placeImage/"+result.placeImage+"'>");
+						$('#placeName').append("<h1 class='h1' align='center'>"+result.placeName+"</h1>");
+						$('#placeAddress').append("<h3 class='h3'>"+result.placeAddress+"</h3><br>");
+						if(result.placeGS25 == 1){
+							$('#placeAddress').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						};
+						if(result.placeToilet == 1){
+							$('#placeAddress').append("<img src='../../../resources/images/toilet.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						};
+						if(result.placeParking == 1){
+							$('#placeAddress').append("<img src='../../../resources/images/park.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						};
+						$('#placeAddress').append("<br><br>");
+						$('#placeEtc').append("<h3 class='h3' style='width:200px; margin-left:100px;'>기타사항</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><br><div id='pImage' align='left' style=' width:100%; height:200px;'>"+result.placeEtc+"</div>");
+						$('#scoreAvg').append("<h3 class='h3' style='width: 250px; float: left;'>리뷰</h3><h3 id='avg' class='h3' style='width:350px; float:left;' align='left'></h3>");
+//						$('#placeEtc').append("<div id='placeEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.placeEtc+"</span></div>");
+						$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+						$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+						$('#lineDiv3').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+					}
+				});
+				
+				/* 리뷰 */
+	            $.post("/selectPlaceReview.do", { "placeKey" : positions.pKey}, function(response) {
+	            	if(response.length != 0){
+		            	$('#reviewBox').html('');
+		            	for(var i=0; i<response.length; i++){
+	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response[i]['memberId']+"] : </span><span>"+response[i]['prTitle']+"</span>&nbsp;&nbsp;<span> ("+response[i]['prRegDate']+")</span><div>");
+	                	 };
+	            	}else{
+	            		 $('#reviewBox').html('');
+	            		 $('#reviewBox').append("<br><span>작성된 리뷰가 없습니다.</span>");
+	            	};
+				},"json");
+        
+	            /* 별점 */
+	             $.ajax({
+		    		url : "placeScoreAvgUpdate.do",
+		    		data : {"placeName" : positions.title},
+		    		type : "GET",
+		    		success : function(result){
+		    			if(result == 0){
+		    				$("#avg").html('');
+		    				$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars'><span class='star-rating'><span style ='width:0%;'></span></span></div>");
+		    			}else{
+		    				$("#avg").html('');
+		    				if(result > 0 && result < 0.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:0%;'></span></span></div>");	
+		    				} else if (result >= 0.5 && result < 1.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:10%;'></span></span></div>");
+		    				} else if (result >= 1.0 && result < 1.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:20%;'></span></span></div>");
+		    				} else if (result >= 1.5 && result < 2.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:30%;'></span></span></div>");
+		    				} else if (result >= 2.0 && result < 2.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:40%;'></span></span></div>");
+		    				} else if (result >= 2.5 && result < 3.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:50%;'></span></span></div>");
+		    				} else if (result >= 3.0 && result < 3.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:60%;'></span></span></div>");
+		    				} else if (result >= 3.5 && result < 4.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:70%;'></span></span></div>");
+		    				} else if (result >= 4.0 && result < 4.5){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:80%;'></span></span></div>");
+		    				} else if (result >= 4.5 && result < 5.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:90%;'></span></span></div>");
+		    				} else if(result==5.0){
+		    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:100%;'></span></span></div>");
+		    				}
+		    			}
+		    		}
+		    	}); 
+				
+				var offset = $("#placeInfo").offset();
+	          	$('html, body').animate({scrollTop : offset.top}, 500);
+				
+	          	infowindow.open(map, marker);
 
+			};
+		
+		
+		}
+		
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+			return function() {
+				infowindow.close();
+			};
+		}
+        
 	</script>
 	
-	<div class="placeInfo display-none">
+	<div id="placeInfo" style="margin-left: 10%; width:1400px; text-align: center;" >
+	
+	</div>
+	
+	
+	<%-- <div class="placeInfo display-none">
 	<br>
 	<br>
 	<div style="margin-left: 5%; width:1000px; height:600px; align:center;" src="/resources/images/${place.placeImage }"></div>
@@ -240,6 +347,7 @@
 	<br>
 	<div style="margin-left : 15%; width: 70%; border-bottom: 2px solid lightgray;"></div>
 	<br>
+	</div> --%>
 	
 	
 	
