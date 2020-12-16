@@ -8,12 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.carping.spring.member.domain.Email;
 import com.carping.spring.member.domain.FindId;
+import com.carping.spring.member.domain.FindPw;
 import com.carping.spring.member.domain.Member;
+import com.carping.spring.member.service.EmailSender;
 import com.carping.spring.member.service.MemberService;
 
 @Controller
@@ -21,6 +23,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private EmailSender emailSender;
+	
+	@Autowired
+	private Email emailMsg;
 	
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public String loginForm() {
@@ -66,7 +74,7 @@ public class MemberController {
 	
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
 	public String memberRegister(Model model, Member member, String jibunAddress, String detailAddress) {
-		member.setMemberAddress(jibunAddress+" "+detailAddress);
+		member.setMemberAddress(jibunAddress+", "+detailAddress);
 		int result = mService.insertMember(member);
 		if (result > 0) {
 			model.addAttribute("msg", "회원가입에 성공하였습니다."); 
@@ -104,10 +112,13 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="findId.do", method=RequestMethod.POST)
 	public Member findId(String memberName, String phone) {
-		System.out.println(memberName+", "+phone);
 		FindId fId = new FindId(memberName, phone);
 		Member member = mService.findIdCheck(fId);
-		return member;
+		if(member != null) {
+			return member;
+		}else {
+			return null;
+		}
 	}
 	
 	@RequestMapping(value="findIdPwForm.do", method=RequestMethod.GET)
@@ -115,8 +126,20 @@ public class MemberController {
 		return "member/memberSearch";
 	}
 	
-	public ModelAndView findPw(ModelAndView mv, String memberId, String memberName) {
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="findPw.do", method=RequestMethod.POST)
+	public Member findPw(String memberId, String email) throws Exception {
+		FindPw fPw = new FindPw(memberId, email);
+		Member member = mService.findPwCheckIdName(fPw);
+		if(member != null) {
+			emailMsg.setContent("안녕하세요. ["+member.getMemberName()+"] 님의 비밀번호는 ["+ member.getMemberPwd()+"] 입니다.");
+			emailMsg.setReceiver(member.getEmail());
+			emailMsg.setSubject("Carping 비밀번호 재발급 이메일입니다.");
+			emailSender.SendEmail(emailMsg);
+			return member;
+		}else {
+			return null;
+		}
 	}
 	
 	@RequestMapping(value="myInfoPwCheckForm.do", method=RequestMethod.GET)
@@ -178,4 +201,6 @@ public class MemberController {
 			return "common/redirect";
 		}
 	}
+	
+	
 }

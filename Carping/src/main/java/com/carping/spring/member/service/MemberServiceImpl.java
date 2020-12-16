@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carping.spring.member.domain.FindId;
+import com.carping.spring.member.domain.FindPw;
 import com.carping.spring.member.domain.Member;
 import com.carping.spring.member.store.MemberStore;
 
@@ -34,9 +35,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int findPwCheckIdName(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member findPwCheckIdName(FindPw fPw) {
+		return mStore.findPwCheckIdName(fPw);
 	}
 
 	@Override

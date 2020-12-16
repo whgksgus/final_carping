@@ -31,4 +31,27 @@
    		<property name="maxInMemorySize" value="100000000"></property>
    </bean>
    
+   
+   
+  <!-- 메일 보내기  -->
+	   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	      <property name="host" value="smtp.gmail.com" />
+	      <property name="port" value="587" />
+	      <property name="defaultEncoding" value="utf-8"/>
+	      <property name="username" value="shc3912@gmail.com" />
+	      <property name="password" value="shin@7198@" />
+	      <!-- email 요청시는 SMTP -->
+	      <property name="javaMailProperties">
+	         <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	         </props>
+	      </property>
+	   </bean>
+	<bean id="email" class="com.carping.spring.member.domain.Email">
+	</bean>
+	<bean id="emailSender" class="com.carping.spring.member.service.EmailSender">
+	</bean>
+   	
 </beans>

@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Carping 로그인</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -71,9 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<a class="loginA" href="enrollForm.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a class="loginA" href="findIdPwForm.do">아이디 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-							<a class="loginA" href="findIdPwForm.do">비밀번호 찾기</a></td>
+							<a class="loginA" href="enrollForm.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a class="loginA" href="findIdPwForm.do">아이디/비밀번호 찾기</a>
 					</tr>
 				</table>
 			</form>

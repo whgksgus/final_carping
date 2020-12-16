@@ -190,7 +190,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="gal-spin-effect vertical ">
 									<img src="resources/images/my1.jpg" alt=" " />
 									<div class="gal-text-box">
-										<div class="info-gal-con">
+										<div class="info-gal-con" onclick="location.href='areaInfoView.do'">
 											<h4>차박 장소 추천</h4>
 											<span class="separator"></span>
 											<p>차박차박~</p>
@@ -220,7 +220,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="gal-spin-effect vertical ">
 									<img src="resources/images/my3.jpg" alt=" " />
 									<div class="gal-text-box">
-										<div class="info-gal-con">
+										<div class="info-gal-con" onclick="location.href='tentListView.do'">
 											<h4>차박물품쇼핑</h4>
 											<span class="separator"></span>
 											<p>질러 질러~</p>

@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.domain.AreaReview;
 import com.carping.spring.area.domain.AreaReviewComment;
-import com.carping.spring.common.PageInfo;
-import com.carping.spring.common.Search;
+import com.carping.spring.area.domain.BoardSearch;
+import com.carping.spring.area.domain.PageInfo;
+import com.carping.spring.area.domain.Search;
 
 public interface AreaReviewService {
-	public int getListCount();
-	public ArrayList<Area> searchAreaReview(Search search);
+	public int getAreaListCount(int areaKey);
+	public int getReviewListCount(Search search);
+	public int getSearchReviewListCount(BoardSearch boardSearch);
+	public int areaReviewHits(int arKey);
+	public ArrayList<Area> searchAreaReview(PageInfo pi, Search search);
+	public ArrayList<AreaReview> searchAreaBoardReview(PageInfo pi, BoardSearch boardSearch);
+	public Area selectOne(int areaKey);
 	public ArrayList<AreaReview> selectAreaReviewList(PageInfo pi, int areaKey);
 	public AreaReview selectAreaReviewDetail(int arKey);
 	public int insertAreaReview(AreaReview ar);

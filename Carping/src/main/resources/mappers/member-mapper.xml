@@ -44,4 +44,9 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_NAME=#{memberName} AND PHONE=#{phone}
 	</select>
+	
+	<select id="findPw" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_ID=#{memberId} AND EMAIL=#{email}
+	</select>
 </mapper>
