@@ -46,8 +46,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int updateCartList(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cStore.updateCartList(cart);
 	}
 
 	@Override

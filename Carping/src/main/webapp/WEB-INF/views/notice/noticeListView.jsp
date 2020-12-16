@@ -33,7 +33,7 @@
 <jsp:include page="../common/nav.jsp"/>
 	 <legend id="title">공지사항</legend>
 	<br><br>
-	<c:if test="${loginUser.memberId == 'admin' }">
+	<c:if test="${loginUser.memberId == 'user1' }">
 		<div align="center">
 			<button onclick="location.href='noticeWriteView.do'">글쓰기</button>
 		</div>

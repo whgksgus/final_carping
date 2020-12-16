@@ -62,7 +62,7 @@ a {
 }
 
 #item_img {
-	margin: 20px 10px;
+	margin: 20px 17px;
 	width: 350px;
 	height: 350px;
 }

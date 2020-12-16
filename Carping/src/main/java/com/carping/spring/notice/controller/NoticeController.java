@@ -30,10 +30,19 @@ public class NoticeController {
 	public String noticeWriteView() {
 		return "notice/noticeWriteForm";
 	}
-	
+	@RequestMapping(value="noticeInsert.do", method=RequestMethod.POST)
 	public String noticeInsert(Notice notice, Model model, HttpServletRequest request) {
-		return "";
+		int result=0;
+		String path = null;
+		result = nService.insertNotice(notice);
+		if (result>0) {
+			path = "redirect:noticeList.do";
+		} else {
+			model.addAttribute("msg", "공지사항 등록 실패");
+			path = "common/errorPage";
 	}
+	return path;
+}
 	
 	// 공지사항 목록
 	@RequestMapping(value="noticeList.do", method=RequestMethod.GET)

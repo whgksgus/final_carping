@@ -10,36 +10,41 @@
 <title>장바구니</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-
-       function deleteItem() {
+       function deleteItem( itemId ) {
          if( confirm( "선택한 상품을 삭제하시겠습니까?" ) ) {
             // delete item
-            var cartKey = JSON.stringify( $( '#cartKey' ).val() );
-            console.log( $("#delItem").attr( "data-cartNum" ) );
-            
+            var cartKey = itemId;
+            console.log( cartKey );
             $.ajax({
-                 url: "deleteCart.do",
-                 type: "POST",
-                 data: cartKey,
-                 dataType : "json",
-                 contentType: "application/json; charset=utf-8",
-               }).done( function( data ) {
-                  console.log( data );
-                  if( data > 0 ) {
-                     window.location.reload();
-                  } else {
-                     alert( "선택한 상품의 삭제에 실패하였습니다." );
-                     return false;
-                  }
-               }).fail( function( error ) {
-                  console.log( error );
-               });
+              url: "deleteCart.do",
+              type: "POST",
+              data: cartKey,
+              //dataType : "json",
+              contentType: "application/json; charset=utf-8",
+            }).done( function( data ) {
+               console.log( data );
+               if( data > 0 ) {
+                  window.location.reload();
+               } else {
+                  alert( "선택한 상품의 삭제에 실패하였습니다." );
+                  return false;
+               }
+            }).fail( function( error ) {
+               console.log( error );
+            });
          } else {
             return false;
          }
       }
        
-       function modifyCartQuantity() {
+       function modifyCartQuantity(quantity, itemKey) {
+    	   var quan = quantity;
+    	   var cartKey = itemKey;
+    	   var data = {
+    			cartKey : cartKey,
+    			cartQuantity : quan
+    	   };
+    	   console.log( data );
           if( confirm( "수량을 변경하시겠습니까?" ) ) {
              // modify quantity
              $.ajax({
@@ -48,27 +53,21 @@
                  data: JSON.stringify( data ),
                  dataType : "json",
                  contentType: "application/json; charset=utf-8",
-               }).done( function( data ) {
-                  // data > 0 >>> 장바구니 등록 성공 / data == 0 >>> 장바구니 등록 실패
-                  if( data > 0 ) {
-                     if( confirm( "변경을 확인하시겠습니까?" ) ) {
-                        // 페이지 이동
-                        window.location.href = "cartListView.do";
-                     } else {
-                        // 현재 페이지 위치
-                        return false;
-                     }
-                  } else {
-                     alert( "수량 변경에 실패하였습니다." );
-                     return false;
-                  }
-               }).fail( function( error ) {
-                  console.log( error );
-               });
+             }).done( function( data ) {
+                if( data > 0 ) {
+                	window.location.reload();
+                } else {
+                   alert( "수량 변경에 실패하였습니다." );
+                   return false;
+                }
+             }).fail( function( error ) {
+                console.log( error );
+             });
           } else {
              return false;
           }
-       }
+       } // function modifyCartQuantity
+       
     </script>
     
 <style>
@@ -225,36 +224,34 @@ padding-right: 10%;
 						<li class="li">삭제</li>
 					</ul>
 				</li>
-
 				<li class="li">
 					<c:forEach items="${cart}" var="test" varStatus="status">
 						<c:url var="iDetail" value="itemDetail.do">
-                        	<c:param name="itemKey" value="${test.ITEM_KEY}"></c:param>
-                        </c:url>
-					
+                        	<c:param name="itemKey${test.ITEM_KEY}" value="${test.ITEM_KEY}"></c:param>
+                        </c:url> 
 						<ul class="ul">
-							<li class="li"> ${status.count }</li>
+							<li class="li"> ${status.count}</li>
 							<li class="li">
-								 <a href="${iDetail }"> 
+								 <a href="${iDetail}"> 
 									<img src="../../../resources/itemImage/${test.ITEM_IMAGE}" width="170px" height="170px" style="margin: 20px 30px;">
 								</a>
 							</li>
 							<li class="li" style="text-align: left;">
-								 <a href="${iDetail }"> 
+								 <a href="${iDetail}"> 
 									<span style="font-size: 18px;">
 									${test.ITEM_NAME}</span>
-								</a>
+								</a> 
 							</li>
 							<li class="li">
 								<span style="font-size: 18px;">
                            			<fmt:formatNumber value="${test.ITEM_PRICE}" pattern="#,###"/>원
  								</span></li>
 							<li class="li">
-								<input type="number" value="${test.CART_QUANTITY}" min="1" max="99" style="width: 50px; height: 25px; text-align: right;"id="cartQuantity" name="cartQuantity">
-                		     	<input type="button" value="변경" id="modifyQuantity" onclick="modifyCartQuantity()" style="text-align: right;" />
-                		     </li>
-							<li class="li">${text.CART_STATUS }</li>
-							<li class="li"><input type="button" value= "삭제" id="delItem" data-cartNum="${test.CART_KEY}" onclick="deleteItem()"></li>
+								<input type="number" value="${test.CART_QUANTITY}" min="1" max="99" style="width: 50px; height:25px; text-align: right;"id="cartQuantity${test.CART_QUANTITY}" name="cartQuantity">
+                		     	<input type="button" value="변경" id="modifyQuantity" onclick="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(),${test.CART_KEY} )" style="text-align: right;" />
+                		    </li>
+							<li class="li" style="font-size: 15px;">대기</li>
+							<li class="li"><input type="button" value= "삭제" id="delItem" onclick="deleteItem( '${test.CART_KEY}' )"></li>
 						</ul>
 					</c:forEach>
 				</li>
@@ -273,10 +270,10 @@ padding-right: 10%;
          <span> 총 구매 금액</span>
       </div>
             <div style="text-align: right; font-size: 20px;">
-               <span id="Price">${test.ITEM_PRICE * test.CART_QUANTITY}원 +</span> 
+               <span id="totalPrice"> <fmt:formatNumber value="${grandTotal}" pattern="#,###"/>원 +</span> 
                <span id="DeliveryPrice">3,000원 =</span> 
-               <span id="TotalPrice" style="text-weight:bold;">
-               <fmt:formatNumber value="${(test.ITEM_PRICE * test.CART_QUANTITY)+3000}" pattern="#,###"/>원
+               <span id="TotalPrice" style="text-weight:bold; font-size: 20px;">
+               <fmt:formatNumber value="${grandTotal+3000}" pattern="#,###"/>원
                </span>
             </div>
             <br><br>
