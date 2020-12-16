@@ -1,6 +1,7 @@
  package com.carping.spring.item.store;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,8 +31,8 @@ public class ItemStoreLogic implements ItemStore {
       return (ArrayList)sqlSession.selectList("ItemMapper.selectTentList", null, rowBounds);
    }
    
-   public int checkItemKey( int itemKey ) {
-	   return sqlSession.selectOne( "ItemMapper.checkItemKey", itemKey );
+   public int checkItemKey( Map<String, Object> map ) {
+	   return sqlSession.selectOne( "ItemMapper.checkItemKey", map );
    }
    
    public int updateCart( Cart cart ) {

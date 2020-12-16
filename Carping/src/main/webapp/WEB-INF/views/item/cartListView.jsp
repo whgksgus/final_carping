@@ -68,6 +68,48 @@
           }
        } // function modifyCartQuantity
        
+       
+       function go(){
+		 	tableFormat();
+	 		$.ajax({
+	    		url : "orderInsert.do",
+	    		data : {data : jsonArr},
+	    		dataType : "json",
+	    		type : "get",
+	    		success: function(e){
+	    			
+	    		}
+	    		
+	    	});
+		 }
+       function pay(){
+       	var IMP = window.IMP;
+       IMP.init('imp42719088');
+
+       IMP.request_pay({
+           pg : 'inicis', // version 1.1.0부터 지원.
+           pay_method : 'card',
+           merchant_uid : 'merchant_' + new Date().getTime(),
+           name : '주문명: Carping 결제테스트',
+           amount : 100, //판매 가격
+           buyer_email : 'iamport@siot.do',
+           buyer_name : '차박차박',
+           buyer_tel : '010-1234-5678',
+           buyer_addr : '서울특별시 강남구 삼성동',
+           buyer_postcode : '12345'
+       }, function(rsp) {
+           if ( rsp.success ) {
+               var msg = '결제가 완료되었습니다.';
+               msg += '고유ID : ' + rsp.imp_uid;
+               msg += '상점 거래ID : ' + rsp.merchant_uid;
+               msg += '결제 금액 : ' + rsp.paid_amount;
+               msg += '카드 승인번호 : ' + rsp.apply_num;
+           } else {
+               var msg = '결제에 실패하였습니다.';
+               msg += '에러내용 : ' + rsp.error_msg;
+           }
+           alert(msg);
+       });
     </script>
     
 <style>
@@ -209,7 +251,7 @@ padding-right: 10%;
          </c:if>
       </form>
 		
-		<div id="cart">
+	<div id="cart">
       <c:if test="${not empty cart}">
          <form action="#" method="post">
          	<ul id="ul">
@@ -227,7 +269,8 @@ padding-right: 10%;
 				<li class="li">
 					<c:forEach items="${cart}" var="test" varStatus="status">
 						<c:url var="iDetail" value="itemDetail.do">
-                        	<c:param name="itemKey${test.ITEM_KEY}" value="${test.ITEM_KEY}"></c:param>
+                        	<%-- <c:param name="itemKey${test.ITEM_KEY}" value="${test.ITEM_KEY}"></c:param> --%>
+                        	<c:param name="itemKey" value="${test.ITEM_KEY}"></c:param>
                         </c:url> 
 						<ul class="ul">
 							<li class="li"> ${status.count}</li>
@@ -238,8 +281,7 @@ padding-right: 10%;
 							</li>
 							<li class="li" style="text-align: left;">
 								 <a href="${iDetail}"> 
-									<span style="font-size: 18px;">
-									${test.ITEM_NAME}</span>
+									<span style="font-size: 18px;">${test.ITEM_NAME}</span>
 								</a> 
 							</li>
 							<li class="li">
@@ -248,7 +290,7 @@ padding-right: 10%;
  								</span></li>
 							<li class="li">
 								<input type="number" value="${test.CART_QUANTITY}" min="1" max="99" style="width: 50px; height:25px; text-align: right;"id="cartQuantity${test.CART_QUANTITY}" name="cartQuantity">
-                		     	<input type="button" value="변경" id="modifyQuantity" onclick="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(),${test.CART_KEY} )" style="text-align: right;" />
+                		     	<input type="button" value="변경" id="modifyQuantity" onclick="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(), ${test.CART_KEY} )" style="text-align: right;" />
                 		    </li>
 							<li class="li" style="font-size: 15px;">대기</li>
 							<li class="li"><input type="button" value= "삭제" id="delItem" onclick="deleteItem( '${test.CART_KEY}' )"></li>
@@ -280,6 +322,7 @@ padding-right: 10%;
             <br>
             
       <input type="submit" value="구매하기" id="btnbuy"/>
+      <button onclick="go();">결제하기</button>
       
       <br><br><br><br>
    </div>

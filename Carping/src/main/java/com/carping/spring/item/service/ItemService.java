@@ -1,6 +1,7 @@
 package com.carping.spring.item.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.item.domain.PageInfo;
@@ -26,12 +27,12 @@ public interface ItemService {
 	public ArrayList<Item> searchSleepList(PageInfo pi, Search search);
 	public ArrayList<Item> selectEtcList(PageInfo pi);
 	public ArrayList<Item> selectEtcNew(PageInfo pi);
-	public ArrayList<Item> selectEtcLow(PageInfo pi);
+	public ArrayList<Item> selectEtcLow(PageInfo pi); 
 	public ArrayList<Item> selectEtcHigh(PageInfo pi);
 	public ArrayList<Item> searchEtcList(PageInfo pi, Search search);
 	public Item selectItemDetail(int itemKey);
 	public int insertCart(Cart cart);
 	public int updateCart( Cart cart );
-	public int checkItemKey( int itemKey );
+	public int checkItemKey( Map<String, Object> map );
 	public Cart insertOrder(Cart cart);
 }

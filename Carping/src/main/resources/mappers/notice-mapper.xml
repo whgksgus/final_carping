@@ -18,12 +18,26 @@
   
 	<insert id="insertNotice">
 		INSERT INTO NOTICE
-		VALUES(SEQ_NKEY.NEXTVAL, #{nTitle}, #{nContent}, SYSDATE, '1', #{memberId})
+		VALUES(SEQ_NKEY.NEXTVAL, #{nTitle}, #{nContent}, SYSDATE, DEFAULT, #{memberId})
 	</insert>
 	
 	
 	<select id="selectList" resultMap="noticeResultMap">
       SELECT * FROM NOTICE
-       ORDER BY NOTICE_ENROLL_DATE DESC
+      ORDER BY NOTICE_ENROLL_DATE DESC
    </select>
+   
+   <select id="selectOne" resultMap="noticeResultMap">
+   		SELECT * FROM NOTICE
+   		WHERE NOTICE_KEY = #{nKey}	
+   </select>
+      
+      
+   <update id="updateCount">
+      UPDATE NOTICE
+      SET NOTICE_COUNT = NOTICE_COUNT + 1
+      WHERE NOTICE_KEY = #{nKey}	
+   </update> 
+   
+   
 </mapper>

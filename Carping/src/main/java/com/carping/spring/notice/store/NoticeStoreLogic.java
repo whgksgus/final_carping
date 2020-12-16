@@ -32,14 +32,13 @@ public class NoticeStoreLogic implements NoticeStore {
 
 	@Override
 	public int addReadCount(int nKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("NoticeMapper.updateCount", nKey);
 	}
 
 	@Override
 	public Notice selectNotice(int nKey) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return sqlSession.selectOne("NoticeMapper.selectOne", nKey);
 	}
 
 	@Override

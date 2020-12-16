@@ -28,14 +28,12 @@ public class NoticeServiceImpl implements NoticeService  {
 
 	@Override
 	public int addReadCount(int nKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nStore.addReadCount(nKey);
 	}
 
 	@Override
 	public Notice selectNotice(int nKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return nStore.selectNotice(nKey);
 	}
 
 	@Override

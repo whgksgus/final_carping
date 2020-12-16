@@ -12,6 +12,8 @@
 <script type="text/javascript">
 
 	        function fnCart(itemName, itemPrice) {
+	        	console.log( "itemName", itemName );
+	        	console.log( "itemPrice", itemPrice );
 	        	if(confirm("장바구니에 담으시겠습니까?")) {
 	        		var data = {
 	        			cartQuantity : $("#count").val(),			// 상품수량
@@ -140,7 +142,7 @@ ul, li {
 				<hr>
 				<li style="margin: 20px 10px;">가격<span
 					style="position: relative; left: 131px;">
-				<fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/>원</span></li>
+				<fmt:formatNumber value="${item.itemPrice}" pattern="#,###"/>원</span></li>
 
 				<li style="margin: 20px 10px;">배송방법<span
 					style="position: relative; left: 104px;">택배 (평일 기준 3~5일 소요)</span></li>
@@ -162,7 +164,7 @@ ul, li {
 				
 				
 				<div id="item_total">
-						<b>상품 금액 : <fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/>원 </b>
+						<b>상품 금액 : <fmt:formatNumber value="${item.itemPrice}" pattern="#,###"/>원 </b>
 						<input type="text" style="display:none" id="totalAmount"/>
 				</div>
 				<br><br>

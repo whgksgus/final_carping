@@ -3,6 +3,7 @@ package com.carping.spring.notice.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.common.Search;
+import com.carping.spring.member.domain.Member;
 import com.carping.spring.notice.domain.Notice;
 import com.carping.spring.notice.domain.PageInfo;
 import com.carping.spring.notice.domain.Pagination;
@@ -67,10 +69,23 @@ public class NoticeController {
 		return "";
 	}
 	
-	public ModelAndView noticeDetail(ModelAndView mv, int nKey, Integer page) {
+	
+	// 공지글 상세 조회
+	@RequestMapping(value="noticeDetail.do", method=RequestMethod.GET)
+	public ModelAndView noticeDetail( int nKey, ModelAndView mv, Integer page ) {
+		int currentPage = page != null ? page : 1;
+		nService.addReadCount(nKey);
+		Notice notice = nService.selectNotice(nKey);
+		if(notice != null) {
+			mv.addObject("notice", notice).addObject("currentPage", currentPage).setViewName("notice/noticeDetailView");
+		}else {
+			mv.addObject("msg", "자유게시판 상세조회 실패");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
+
 	public String noticeDelete(int nKey, Model model, HttpServletRequest request) {
 		return "";
 	}

@@ -11,20 +11,27 @@
    </resultMap>
    
    <select id="selectCartList" resultType="MAP">
-      SELECT * FROM CART A, ITEM B WHERE A.ITEM_KEY=B.ITEM_KEY
+      SELECT 
+      	* 
+      FROM CART A, ITEM B 
+      WHERE A.ITEM_KEY=B.ITEM_KEY 
+      AND MEMBER_ID=#{memberId}
    </select>
    
    <select id="selectCartDetail" resultType="int">
-		SELECT CART_QUANTITY FROM CART
+		SELECT CART_QUANTITY 
+		FROM CART
 		WHERE ITEM_KEY = #{itemKey}
 	</select>
 	
 	<delete id="deleteCart">
-		DELETE FROM CART WHERE CART_KEY=#{cartKey}
+		DELETE FROM CART 
+		WHERE CART_KEY=#{cartKey}
 	</delete>
 	
      <update id="updateCartList">
-  	 	UPDATE CART SET CART_QUANTITY=#{cartQuantity} 
+  	 	UPDATE CART 
+  	 	SET CART_QUANTITY=#{cartQuantity} 
   	 	WHERE CART_KEY=#{cartKey}
    </update>
    

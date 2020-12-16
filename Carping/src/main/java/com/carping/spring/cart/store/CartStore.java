@@ -7,7 +7,7 @@ import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.common.PageInfo;
 
 public interface CartStore {
-	public ArrayList<Map<String, Object>> selectCartList();
+	public ArrayList<Map<String, Object>> selectCartList( String memberId );
 	public int deleteCart(int cartKey);
 	public int deleteAllCart(String memberId);
 	public int orderCart(Cart cart);

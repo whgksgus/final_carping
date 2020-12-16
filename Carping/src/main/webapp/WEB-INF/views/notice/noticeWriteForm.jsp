@@ -15,15 +15,15 @@
 		<table align="center" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" size="50" name="nTitle"></td>
+				<td><input type="text" size="50" name="nTitle" placeholder = "제목을 입력해주세요. "></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" size="50" name="nWriter" value="${loginUser.memberId }" readonly></td>
+				<td><input type="text" size="50" name="memberId" value="${loginUser.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="7" cols="50" name="nContent"></textarea></td>
+				<td><textarea rows="7" cols="50" name="nContent" placeholder = "내용을 입력해주세요. "></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

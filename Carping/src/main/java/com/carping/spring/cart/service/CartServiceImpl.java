@@ -17,8 +17,8 @@ public class CartServiceImpl implements CartService {
 	private CartStore cStore;
 	
 	@Override
-	public ArrayList<Map<String, Object>> selectCartList() {
-		return cStore.selectCartList();
+	public ArrayList<Map<String, Object>> selectCartList( String memberId ) {
+		return cStore.selectCartList( memberId );
 	}
 	
 	@Override

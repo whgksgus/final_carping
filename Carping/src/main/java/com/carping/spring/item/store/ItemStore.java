@@ -1,6 +1,7 @@
 package com.carping.spring.item.store;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.item.domain.PageInfo;
@@ -32,6 +33,6 @@ public interface ItemStore {
 	public Item selectItemDetail(int itemKey);
 	public int insertCart(Cart cart);
 	public Cart insertOrder(Cart cart);
-	public int checkItemKey(int itemKey);
+	public int checkItemKey( Map<String, Object> map );
 	public int updateCart( Cart cart );
 }

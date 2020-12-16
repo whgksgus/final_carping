@@ -17,8 +17,8 @@ public class CartStoreLogic implements CartStore {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Map<String, Object>> selectCartList() {
-		return (ArrayList) sqlSession.selectList("CartMapper.selectCartList");
+	public ArrayList<Map<String, Object>> selectCartList( String memberId ) {
+		return (ArrayList) sqlSession.selectList("CartMapper.selectCartList", memberId );
 	}
 
 	@Override

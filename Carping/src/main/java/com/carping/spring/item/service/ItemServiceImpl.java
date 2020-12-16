@@ -1,6 +1,7 @@
 package com.carping.spring.item.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import com.carping.spring.item.store.ItemStore;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-	@Autowired
+	@Autowired 
 	private ItemStore iStore;
 	
 	@Override
@@ -158,8 +159,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int checkItemKey(int itemKey) {
-		return iStore.checkItemKey( itemKey );
+	public int checkItemKey( Map<String, Object> map ) {
+		return iStore.checkItemKey( map );
 	}
 
 	@Override

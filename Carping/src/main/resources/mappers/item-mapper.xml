@@ -17,14 +17,17 @@
       WHERE ITEM_CATEGORY = 'TENT'
    </select>
    
-     <select id="getListCount" resultType="int">
+   <select id="getListCount" resultType="int">
       SELECT COUNT(*)
       FROM ITEM
       WHERE ITEM_CATEGORY = 'TENT'
    </select>
    
    <select id="checkItemKey" resultType="int">
-	SELECT COUNT(*) FROM CART WHERE ITEM_KEY=#{itemKey}   	
+		SELECT COUNT(*) 
+		FROM CART 
+		WHERE ITEM_KEY=#{itemKey} 
+		AND MEMBER_ID=#{memberId}
    </select>
       
    	<select id="selectItemDetail" resultMap="itemResultMap">
@@ -45,10 +48,9 @@
       )
    </insert>
      <update id="updateCart">
-  	 	UPDATE CART SET CART_QUANTITY=#{cartQuantity} 
+  	 	UPDATE CART 
+  	 	SET CART_QUANTITY=#{cartQuantity} 
   	 	WHERE ITEM_KEY=#{itemKey}
    </update>
   
-
-   
 </mapper>

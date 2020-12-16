@@ -1,6 +1,7 @@
 package com.carping.spring.item.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -138,25 +139,29 @@ public class ItemController {
    @ResponseBody
    @RequestMapping(value="insertCart.do", method=RequestMethod.POST)
    public int insertCart( HttpServletRequest request, Model model, @RequestBody Map<String, Object> map ) {
-	   String path = "";
 	   int result = 0;
 	   
 	   HttpSession session = request.getSession();
 	   Member mem = (Member) session.getAttribute( "loginUser" );
-	   	 
+	   System.out.println( "itemController session memberdto >>>>> " + mem.toString() );
+	   
 	   String memberId = mem.getMemberId();
-	   System.out.println( "loginUser, session.getMemberId>>> " + memberId );
+	   System.out.println( "itemController session memberId >>>>> " + memberId );
 	   int itemKey = Integer.parseInt( map.get( "itemKey" ).toString() );		// ajax 에서 넘어온 map에서 데이터 받아오기
 	   int cartQuantity = Integer.parseInt( map.get( "cartQuantity" ).toString() );
 	   
 	   Cart cart = new Cart( cartQuantity , itemKey, memberId );
-	   int itemCheck = iService.checkItemKey(itemKey);
+	   
+	   Map<String, Object> paramMap = new HashMap<String, Object>();
+	   paramMap.put( "itemKey", itemKey );
+	   paramMap.put("memberId", memberId );
+	   int itemCheck = iService.checkItemKey( paramMap );	// 
 	   if( itemCheck > 0 ) {
-		   // 기존 장바구니에 데이터가 있을 경우 >>> update
-	   		int oldItemQuantity = cSvc.selectCartDetail( itemKey );
-	   		int newItemQuantity = cartQuantity + oldItemQuantity;		// 기존 수량에 추가된 수량 더하기
-	   		cart.setCartQuantity( newItemQuantity );
-	   		result = iService.updateCart( cart );
+	   // 기존 장바구니에 데이터가 있을 경우 >>> update
+   		int oldItemQuantity = cSvc.selectCartDetail( itemKey );
+   		int newItemQuantity = cartQuantity + oldItemQuantity;		// 기존 수량에 추가된 수량 더하기
+   		cart.setCartQuantity( newItemQuantity );
+   		result = iService.updateCart( cart );
 	   } else {
 	   	 // 신규 아이템 등록
 	   	 result = iService.insertCart( cart );

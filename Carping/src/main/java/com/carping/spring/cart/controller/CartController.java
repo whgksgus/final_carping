@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.cart.service.CartService;
+import com.carping.spring.member.domain.Member;
 @Controller
 public class CartController {
 	
@@ -28,9 +30,15 @@ public class CartController {
 	// 장바구니 등록 후 장바구니 페이지 이동
    @RequestMapping( value="cartListView.do", method = RequestMethod.GET )
 	public String cartListView(HttpServletRequest request, Model model) {
-	   ArrayList<Map<String, Object>> cart = cService.selectCartList();
-	   ArrayList<Map<String, Object>> calList = new ArrayList<Map<String, Object>>();
+	   // 로그인 유저 아이디 불러오기
+	   HttpSession session = request.getSession();
+	   Member mem = (Member) session.getAttribute( "loginUser" );
+	   String memberId = mem.getMemberId();
+	   System.out.println( "memberId in cartController>>>>> " + memberId );
+	   
+	   ArrayList<Map<String, Object>> cart = cService.selectCartList( memberId );
 	   int grandTotal = 0;
+	   
 	   for( Map<String, Object> map : cart ) {
 		   int cartQuantity = Integer.parseInt( map.get("CART_QUANTITY").toString() );
 		   int cartPrice = Integer.parseInt( map.get( "ITEM_PRICE").toString() );
@@ -48,13 +56,7 @@ public class CartController {
    @ResponseBody
    @RequestMapping( value = "deleteCart.do", method=RequestMethod.POST )
 	public int deleteCart( @RequestBody int cartKey, Model model ) {
-	   
-	   int result = cService.deleteCart( cartKey );
-	   if ( result > 0 ) {
-		   return result;
-	   } else {
-		   return result;
-	   }
+	   return cService.deleteCart( cartKey );
 	}
 	
    
@@ -62,16 +64,16 @@ public class CartController {
    @ResponseBody
    @RequestMapping( value = "updateCartList.do", method = RequestMethod.POST )
 	public int modifyCartQuantity( @RequestBody Cart cart ) {
-	   System.out.println( "update cart dto >>>>> " + cart );
-	   int rslt = cService.updateCartList( cart );
-	   return rslt;
+	   return cService.updateCartList( cart );
 	}
 	
 	public String deleteAllCart(HttpServletRequest request, Model model) {
 		return "";
 	}
-	
-	public String orderCart(HttpServletRequest request, int totalPrice, Model model) {
+	@RequestMapping ( value="insertOrder.do", method=RequestMethod.GET )
+	public String orderCart( @RequestParam String data ) {
+		System.out.println(data);
+		
 		return "";
 	}
 	
