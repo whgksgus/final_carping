@@ -75,7 +75,7 @@
 							<h5>차박 장소 후기를 회원들과 공유해보세요~</h5>
 						 </div>
 					</div></a>
-					<a href="#">
+					<a href="foodZoneReviewSearch.do">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>맛집</span>
 						<img src="resources/images/ReviewFoodImage.jpg" height="100%">

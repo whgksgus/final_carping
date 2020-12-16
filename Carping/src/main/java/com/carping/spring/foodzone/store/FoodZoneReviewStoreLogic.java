@@ -2,28 +2,32 @@ package com.carping.spring.foodzone.store;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import com.carping.spring.common.PageInfo;
 import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.FoodZoneReviewComment;
+import com.carping.spring.foodzone.domain.PageInfo;
 
+@Repository
 public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
-
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
 	public ArrayList<FoodZone> searchFoodZone(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("FoodZoneMapper.searchList", search);
 	}
 
 	@Override
 	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
+		return (ArrayList)sqlSession.selectList("FoodZoneMapper.selectFoodZoneReviewList", foodZoneKey, rowBounds);
 	}
 
 	@Override
@@ -69,9 +73,8 @@ public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
 	}
 
 	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getListCount(int foodZoneKey) {
+		return sqlSession.selectOne("FoodZoneMapper.getFoodZoneReviewListCount", foodZoneKey);
 	}
 
 }

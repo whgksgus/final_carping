@@ -2,8 +2,11 @@ package com.carping.spring.foodzone.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,8 @@ import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.service.FoodZoneService;
+import com.carping.spring.member.domain.Member;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -31,6 +36,7 @@ public class FoodZoneController {
 	
 	@RequestMapping(value="foodZoneView.do", method = RequestMethod.GET)
 	public ModelAndView foodZoneInfoView(ModelAndView mv) {
+		
 		ArrayList<FoodZone> fList = fzService.selectFoodZoneList();
 		mv.addObject("fList", fList);
 		//맛집리스트 리뷰 리스트
@@ -121,6 +127,19 @@ public class FoodZoneController {
 	
 	public String foodZoneRegisterForm() {
 		return "";
+	}
+	
+	
+	@RequestMapping(value="takeOutInsert.do", method = RequestMethod.GET)
+	public String takeOutMenuInsert(@RequestParam String data) {
+		
+		System.out.println(data);
+		return "";
+	}
+	
+	@RequestMapping(value="takeOutSuccess.do", method = RequestMethod.GET)
+	public String takeOutSuccess() {
+		return "foodzone/takeOutMenuSuccess";
 	}
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {

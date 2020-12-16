@@ -34,6 +34,15 @@
 		<result property="takeOutMenuPhoto" column="TAKEOUT_MENU_PHOTO"/>
 	</resultMap>
 	
+	<resultMap type="TakeOutReserve" id="TakeOutReserveResultMap">
+		<id property="torKey" column="TOR_KEY"></id>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="takeOutKey" column="TAKEOUT_KEY"/>
+		<result property="torEa" column="TOR_EA"/>
+		<result property="torPrice" column="TOR_PRICE"/>
+		<result property="torRegDate" column="TOR_REGDATE"/>
+		<result property="torTime" column="TOR_TIME"/>
+	</resultMap>
 	<select id="selectAll" resultMap="FoodZoneResultMap">
 		SELECT * FROM FOODZONE
 	</select>
@@ -56,4 +65,24 @@
 		SELECT * FROM TAKEOUTMENU WHERE FOODZONE_KEY=#{foodZoneKey}
 	</select>
 	
+	<select id="searchList" resultMap="FoodZoneResultMap">
+		SELECT * FROM FOODZONE 
+		<where>
+			<if test="searchCondition.toString() == '맛집이름'">
+				FOODZONE_NAME LIKE '%' || #{searchValue} || '%'
+			</if>
+			
+			<if test="searchCondition.toString() == '주소'">
+				FOODZONE_ADDRESS LIKE '%' || #{searchValue} || '%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="getFoodZoneReviewListCount" resultType="int">
+		SELECT COUNT(*) FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey} 
+	</select>
+	
+	<select id="selectFoodZoneReviewList" resultMap="FoodZoneReviewResultMap">
+		SELECT * FROM FOOD_REVIEW WHERE FOODZONE_KEY = #{foodZoneKey} ORDER BY 6 DESC
+	</select>
 </mapper>

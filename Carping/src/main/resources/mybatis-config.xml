@@ -21,6 +21,7 @@
 		<typeAlias type="com.carping.spring.cart.domain.Cart" alias="Cart"/>
         <typeAlias type="com.carping.spring.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.carping.spring.area.domain.AreaReview" alias="AreaReview"/>
+		<typeAlias type="com.carping.spring.foodzone.domain.TakeOutReserve" alias="TakeOutReserve"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/notice-mapper.xml"/>

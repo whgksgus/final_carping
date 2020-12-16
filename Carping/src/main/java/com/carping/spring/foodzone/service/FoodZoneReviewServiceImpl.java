@@ -2,27 +2,29 @@ package com.carping.spring.foodzone.service;
 
 import java.util.ArrayList;
 
-import com.carping.spring.common.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.FoodZoneReviewComment;
+import com.carping.spring.foodzone.domain.PageInfo;
+
 import com.carping.spring.foodzone.store.FoodZoneReviewStore;
-
+@Service
 public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
-
+	@Autowired
 	private FoodZoneReviewStore fzrStore;
 	
 	@Override
 	public ArrayList<FoodZone> searchFoodZone(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return fzrStore.searchFoodZone(search);
 	}
 
 	@Override
 	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return fzrStore.selectFoodZoneReviewList(foodZoneKey, pi);
 	}
 
 	@Override
@@ -68,9 +70,8 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 	}
 
 	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getListCount(int foodZoneKey) {
+		return fzrStore.getListCount(foodZoneKey);
 	}
 
 }

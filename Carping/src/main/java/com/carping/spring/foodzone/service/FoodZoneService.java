@@ -2,10 +2,9 @@ package com.carping.spring.foodzone.service;
 
 import java.util.ArrayList;
 
-import com.carping.spring.common.PageInfo;
-import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
+import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
 
 public interface FoodZoneService {
