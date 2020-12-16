@@ -29,8 +29,7 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 
 	@Override
 	public FoodZoneReview selectFoodZoneReviewDetail(int frKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return fzrStore.selectFoodZoneReviewDetail(frKey);
 	}
 
 	@Override
@@ -72,6 +71,12 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 	@Override
 	public int getListCount(int foodZoneKey) {
 		return fzrStore.getListCount(foodZoneKey);
+	}
+
+	@Override
+	public int foodZoneReviewHits(int frKey) {
+		// TODO Auto-generated method stub
+		return fzrStore.foodZoneReviewHits(frKey);
 	}
 
 }

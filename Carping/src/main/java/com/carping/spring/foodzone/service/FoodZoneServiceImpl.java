@@ -9,6 +9,7 @@ import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
+import com.carping.spring.foodzone.domain.TakeOutReserve;
 import com.carping.spring.foodzone.store.FoodZoneStore;
 
 @Service
@@ -66,5 +67,24 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 	public ArrayList<TakeOut> selectTakeOutMenu(int foodZoneKey) {
 		return fzStore.takeOutMenu(foodZoneKey);
 	}
+
+	@Override
+	public FoodZone selectFoodZoneInfoByKey(int foodZoneKey) {
+		return fzStore.selectFoodZoneInfoByKey(foodZoneKey);
+	}
+
+	@Override
+	public TakeOut selectTakeOut(TakeOut takeOut) {
+		return fzStore.selectTakeOut(takeOut);
+	}
+
+	@Override
+	public int insertTakeout(TakeOutReserve tor) {
+		int result = fzStore.insertTakeout(tor);
+		
+		return result;
+	}
+
+
 
 }

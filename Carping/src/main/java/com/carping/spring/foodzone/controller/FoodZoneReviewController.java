@@ -24,11 +24,15 @@ import com.carping.spring.foodzone.domain.PageInfo;
 import com.carping.spring.foodzone.domain.Pagination;
 
 import com.carping.spring.foodzone.service.FoodZoneReviewService;
+import com.carping.spring.foodzone.service.FoodZoneService;
 
 @Controller
 public class FoodZoneReviewController {
 	@Autowired
-	private FoodZoneReviewService fzrSrvice;
+	private FoodZoneReviewService fzrService;
+	
+	@Autowired
+	private FoodZoneService fzService;
 
 	@RequestMapping(value="foodZoneReviewSearch.do", method = RequestMethod.GET)
 	public String foodZoneReviewSearchForm() {
@@ -39,7 +43,7 @@ public class FoodZoneReviewController {
 	public String foodZoneSearch(Search search, Model model, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1;
 		
-		ArrayList<FoodZone> fList = fzrSrvice.searchFoodZone(search);
+		ArrayList<FoodZone> fList = fzrService.searchFoodZone(search);
 		if(!fList.isEmpty()) {
 			model.addAttribute("fList", fList);
 			model.addAttribute("search", search);
@@ -55,10 +59,10 @@ public class FoodZoneReviewController {
 	public ModelAndView foodZoneReviewListView(ModelAndView mv, @RequestParam(value="page", required = false)
 	Integer page, int foodZoneKey) {
 		int currentPage = (page != null) ? page : 1;
-		int listCount = fzrSrvice.getListCount(foodZoneKey);
+		int listCount = fzrService.getListCount(foodZoneKey);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		int pageNum = listCount - (currentPage -1) * pi.getListLimit();
-		ArrayList<FoodZoneReview> fzrList = fzrSrvice.selectFoodZoneReviewList(foodZoneKey, pi);
+		ArrayList<FoodZoneReview> fzrList = fzrService.selectFoodZoneReviewList(foodZoneKey, pi);
 		if(!fzrList.isEmpty()) {
 			mv.addObject("fzrList", fzrList);
 			mv.addObject("foodZoneKey", foodZoneKey);
@@ -74,7 +78,19 @@ public class FoodZoneReviewController {
 		return mv;
 	}
 	
-	public ModelAndView foodZoneReviewDetail(ModelAndView mv, int foodZoneKey, Integer page) {
+	@RequestMapping(value="foodZoneReviewDetail.do", method = RequestMethod.GET)
+	public ModelAndView foodZoneReviewDetail(ModelAndView mv, int foodZoneKey, int frKey, Integer page) {
+		fzrService.foodZoneReviewHits(frKey);
+		FoodZoneReview fReview = fzrService.selectFoodZoneReviewDetail(frKey);
+		FoodZone foodZone = fzService.selectFoodZoneInfoByKey(foodZoneKey);
+		if(fReview != null && foodZone !=null) {
+			mv.addObject("fReview", fReview).addObject("foodZone", foodZone).setViewName("foodzone/foodZoneReviewDetail");
+		}else {
+			mv.addObject("msg", "실패..");
+			mv.addObject("url", "javascript:history.back();");
+			mv.setViewName("common/redirect");
+		}
+		
 		return mv;
 	}
 	

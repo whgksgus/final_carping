@@ -32,8 +32,7 @@ public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
 
 	@Override
 	public FoodZoneReview selectFoodZoneReviewDetail(int frKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("FoodZoneMapper.foodZoneReviewDetail", frKey);
 	}
 
 	@Override
@@ -77,4 +76,9 @@ public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
 		return sqlSession.selectOne("FoodZoneMapper.getFoodZoneReviewListCount", foodZoneKey);
 	}
 
+	@Override
+	public int foodZoneReviewHits(int frKey) {
+		return sqlSession.update("FoodZoneMapper.foodZoneReviewHits",frKey);
+	}
+	
 }

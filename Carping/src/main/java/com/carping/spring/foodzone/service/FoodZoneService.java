@@ -6,6 +6,7 @@ import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
+import com.carping.spring.foodzone.domain.TakeOutReserve;
 
 public interface FoodZoneService {
 	public ArrayList<FoodZone> searchFoodZone(Search search);
@@ -17,5 +18,7 @@ public interface FoodZoneService {
 	public int modifyFoodZoneAvg(int foodZoneKey, double scoreAvg);
 	public int insertFoodZone(FoodZone foodZone);
 	public ArrayList<FoodZone> selectFoodZoneList();
-	
+	public FoodZone selectFoodZoneInfoByKey(int foodZoneKey);
+	public TakeOut selectTakeOut(TakeOut takeOut);
+	public int insertTakeout(TakeOutReserve tor);
 }

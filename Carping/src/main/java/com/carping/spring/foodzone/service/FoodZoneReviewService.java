@@ -21,4 +21,5 @@ public interface FoodZoneReviewService {
 	public ArrayList<FoodZoneReviewComment> selectFoodZoneReviewCommentList(int frcKey);
 	public int deleteFoodZoneReviewComment(int frcKey);
 	public int getListCount(int foodZoneKey);
+	public int foodZoneReviewHits(int frKey);
 }

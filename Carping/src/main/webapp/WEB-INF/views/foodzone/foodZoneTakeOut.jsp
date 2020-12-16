@@ -71,7 +71,7 @@
 </tbody>
 </table>
 <div id="total" style="text-align: center;"></div>
-<button onclick="go();">결제하기</button>
+<button onclick="pay();">결제하기</button>
 	<script>
 		
 	 //로딩이 된 후 선택자 선택 후 금액 계산(컬럼당 총 금액 , 전체 금액)
@@ -120,7 +120,7 @@
 	 		
 	 		var tr = $("#menuList").children();
 	 		var x = $("#menu tbody tr").length;
-	 		
+	 		jsonArr.splice(0,x);
 	 		for(var i=0; i<x; i++){
 	 			var js = new Object();
 	 			js.takeOutMenu = tr.eq(i).children().eq(1).text();
@@ -129,21 +129,26 @@
 	 			js.regDate = $("#takeOutDay").val();
 	 			js.time = $("#takeOutTime").val();
 	 			js.totalPrice = tr.eq(i).children().eq(4).children().eq(1).val();
+	 			js.foodZoneKey = ${foodZone.foodZoneKey};
 	 			jsonArr.push(js);
 	 			JSON.stringify(jsonArr);
 	 			
 	 		}
 	 		console.log(jsonArr);
 	 	}
+	 	
 	 	function go(){
 		 	tableFormat();
 	 		$.ajax({
 	    		url : "takeOutInsert.do",
-	    		data : {data : jsonArr},
-	    		dataType : "json",
-	    		type : "get",
-	    		success: function(e){
-	    			
+	    		data : {data : JSON.stringify(jsonArr)},
+	    		type : "post",
+	    		success: function(result){
+	    			if(result==1){
+	    				location.href="takeOutSuccess.do";
+	    			}else{
+	    				location.href="error.do";
+	    			}
 	    		}
 	    		
 	    	});
@@ -170,12 +175,9 @@
 			    	
 			    	
 			        var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			        go();
 			        
-			        location.href="takeOutSuccess.do";
+			        
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
