@@ -48,6 +48,7 @@
 			<td>${sList.memberId }</td>
 			<td>${sList.suggestionEnrollDate }</td>
 			<td>${sList.suggestionCount }</td>
+			<td></td>
 		</tr>
 		</c:forEach>
 		</c:if>
@@ -63,14 +64,14 @@
 				</c:if>
 				<c:if test="${pi.currentPage > 1 }">
 					<!-- 그냥 실행했을때 -->
-					<c:url var="before" value="placeReviewListView.do">
+					<c:url var="before" value="selectList.do">
 						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
 					<!-- 검색어가 있으면 검색어만 볼 수 있도록 url을 search쪽으로 보내줌 -->
 					<c:if test="${search.searchValue ne null }">
-					<c:url var="before" value="searchPlaceBoardReview.do">
+					<c:url var="before" value="sugSearchList.do">
 						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -85,14 +86,14 @@
             	  	</c:if>
             	  	<c:if test="${pi.currentPage != p }">	
             	  	<!--  그냥 실행했을때 -->
-					<c:url var="pagination" value="placeReviewListView.do">
+					<c:url var="pagination" value="selectList.do">
 						<c:param name="page" value="${p }"></c:param>
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
 					<!-- 검색어가 있으면 검색어만 볼 수 있도록 url을 search쪽으로 보내줌 -->
 					<c:if test="${search.searchValue ne null }">
-					<c:url var="pagination" value="searchPlaceBoardReview.do">
+					<c:url var="pagination" value="sugSearchList.do">
 						<c:param name="page" value="${p }"></c:param>
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -107,14 +108,14 @@
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
 				<!--  그냥 실행했을때 -->
-					<c:url var="after" value="placeReviewListView.do">
+					<c:url var="after" value="selectList.do">
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
 					<!-- 검색어가 있으면 검색어만 볼 수 있도록 url을 search쪽으로 보내줌 -->
 					<c:if test="${search.searchValue ne null }">
-					<c:url var="after" value="searchPlaceBoardReview.do">
+					<c:url var="after" value="sugSearchList.do">
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -126,8 +127,7 @@
 		</c:if>
 	
 	<br><br>
-	<form id="form" action="searchPlaceBoardReview.do" method="get">
-	<input type="hidden" name="placeKey" value="${placeKey}"/>
+	<form id="form" action="sugSearchList.do" method="get">
 	<div style="text-align:center;">
 		<select id="searchCondition" name="searchCondition">
 			<option value="제목" <c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>

@@ -20,14 +20,13 @@ public class SuggestionStoreLogic implements SuggestionStore {
 	
 	@Override
 	public int getSugListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("Suggestion.getSugListCount");
 	}
 
 	@Override
 	public int getSugSearchList(Search search) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.selectOne("Suggestion.getSearchList", search);
+		return result;
 	}
 
 	@Override
@@ -55,20 +54,19 @@ public class SuggestionStoreLogic implements SuggestionStore {
 
 	@Override
 	public int modifySug(Suggestion suggestion) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("Suggestion.updateSug", suggestion);
 	}
 
 	@Override
-	public int deleteSug(Suggestion suggestion) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteSug(int suggestionKey) {
+		return sqlSession.delete("Suggestion.deleteSug", suggestionKey);
 	}
 
 	@Override
-	public ArrayList<Suggestion> selectSearList(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Suggestion> selectSearList(PageInfo pi, Search search) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
+		return (ArrayList)sqlSession.selectList("Suggestion.searchSugList", search, rowBounds);
 	}
 
 	@Override
