@@ -7,7 +7,7 @@ import com.carping.spring.area.domain.AreaReview;
 import com.carping.spring.area.domain.AreaReviewComment;
 import com.carping.spring.area.domain.BoardSearch;
 import com.carping.spring.area.domain.PageInfo;
-import com.carping.spring.area.domain.Search;
+import com.carping.spring.common.Search;
 
 public interface AreaReviewService {
 	public int getAreaListCount(int areaKey);

@@ -109,9 +109,9 @@ width: 100%;
 					</div>
 					<div class="form-group">
 						<button id="searchBtn" type="button" onclick="idSearch_click()"
-							class="btn btn-primary btn-block">확인</button>
-						<a class="btn btn-danger btn-block"
-							href="${pageContext.request.contextPath}">취소</a>
+							class="btn btn-primary btn-block" style="width:45%; margin-left:2%; float:left;">확인</button>
+						<button class="btn btn-danger btn-block"
+							onclick="location.href='login.do';" style=" width:45%; margin-left:6%; float:left;">취소</button>
 					</div>
 				</div>
 				<div id="searchP" style="display: none;">
@@ -131,9 +131,9 @@ width: 100%;
 					</div>
 					<div class="form-group">
 						<button id="searchBtn2" type="button" onclick="pwSearch_click()"
-							class="btn btn-primary btn-block">확인</button>
-						<a class="btn btn-danger btn-block"
-							href="${pageContext.request.contextPath}">취소</a>
+							class="btn btn-primary btn-block" style="width:45%; margin-left:2%; float:left;">확인</button>
+						<button class="btn btn-danger btn-block" style=" width:45%; margin-left:6%; float:left;"
+							onclick="location.href='login.do';">취소</button>
 					</div>
 				</div>
 			</div>
@@ -155,39 +155,47 @@ width: 100%;
 		function idSearch_click() {
 			var memberName = $('#memberName').val();
 			var phone = $('#phone').val();
-			$.post("/findId.do", {"memberName" : memberName,"phone" : phone}, function(response) {
-				if (response == null ) {
-					$('#titleH1').text(memberName+"님의  아이디는");
-					$('#id_value1').text("존재하지 않습니다.");
-					$('#id_value2').text("입력 정보를 다시 확인해주세요.");
-					$('#modalTag').get(0).click();
-				} else {
-					$('#titleH1').text(memberName+"님의  아이디는");
-					$('#id_value1').text("["+response.memberId+"] 입니다.");
-					$('#id_value2').text("해당 아이디로 로그인해주세요.");
-					$('#modalTag').get(0).click();
-				}
-            });
+			if(memberName != ''){
+				$.post("/findId.do", {"memberName" : memberName,"phone" : phone}, function(response) {
+					if (response == null) {
+						$('#titleH1').text(memberName+"님의  아이디는");
+						$('#id_value1').text("존재하지 않습니다.");
+						$('#id_value2').text("입력 정보를 다시 확인해주세요.");
+						$('#modalTag').get(0).click();
+					} else {
+						$('#titleH1').text(memberName+"님의  아이디는");
+						$('#id_value1').text("["+response.memberId+"] 입니다.");
+						$('#id_value2').text("해당 아이디로 로그인해주세요.");
+						$('#modalTag').get(0).click();
+					}
+	            });
+			}else{
+				alert('값을 입력해주세요.');
+			}
 		}
 		
 		// 아이디 이메일 받고 비밀번호 출력하는 ajax
 		function pwSearch_click() {
 			var memberId = $('#memberId').val();
 			var email = $('#email').val();
-			$.post("/findPw.do", {"memberId" : memberId,"email" : email}, function(response) {
-				console.log(response);
-				if (response == null) {
-					$('#titleH1').text(memberId+"님의  비밀번호는");
-					$('#id_value1').text("존재하지 않습니다.");
-					$('#id_value2').text("입력 정보를 다시 확인해주세요.");
-					$('#modalTag').get(0).click();
-				} else {
-					$('#titleH1').text(memberId+"님의  비밀번호는");
-					$('#id_value1').text("["+email+"]로 보냈으니");
-					$('#id_value2').text("해당 이메일을 통해 확인하시기 바랍니다.");
-					$('#modalTag').get(0).click();
-				}
-            });
+			if(memberId != ''){
+				$.post("/findPw.do", {"memberId" : memberId,"email" : email}, function(response) {
+					console.log(response);
+					if (response == null) {
+						$('#titleH1').text(memberId+"님의  비밀번호는");
+						$('#id_value1').text("존재하지 않습니다.");
+						$('#id_value2').text("입력 정보를 다시 확인해주세요.");
+						$('#modalTag').get(0).click();
+					} else {
+						$('#titleH1').text(memberId+"님의  비밀번호는");
+						$('#id_value1').text("["+email+"]로 보냈으니");
+						$('#id_value2').text("해당 이메일을 통해 확인하시기 바랍니다.");
+						$('#modalTag').get(0).click();
+					}
+	            });
+			}else{
+				alert('값을 입력해주세요.');
+			}
 		}
 	</script>
 </body>

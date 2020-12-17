@@ -86,8 +86,12 @@ span.error{color:red}
 						<td colspan="3">
 							<h2 class="h2" align="center">정보수정</h2>
 							<input class="form-control" style="margin-left: 20px; width:300px;" type="hidden" name="memberId" id="memberId" value="${loginUser.memberId }" readonly>
-							<input class="form-control" style="width:300px; margin-left: 20px;" type="hidden" name="memberPwd" id="password" value="${loginUser.memberPwd }" readonly>
+							
 						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">비밀번호</td>
+						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" name="memberPwd" id="password" value="${loginUser.memberPwd }" required></td>
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">이름</td>
@@ -102,23 +106,23 @@ span.error{color:red}
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="email" value="${loginUser.email }" required></td>
 					</tr>
 					<c:forTokens var="addr" items="${loginUser.memberAddress }" delims="," varStatus="status">
-						<c:if test="${status.index eq 0 }">
-							<tr>
-								<td style="font-weight:bold;">주소</td>
-								<td style="width:320px;">
-									<input type="text" id="jibunAddress" name="jibunAddress" class="form-control" style="width:300px; margin-left: 20px;" required>
-								</td>
-								<td style="width:160px;"><button class="btnLogin" style="float:left; margin-left: 20px;" type="button" onclick="daumPostcode()">검색</button></td>
-							</tr>
-						</c:if>
-						<c:if test="${status.index eq 1 }">
-							<tr>
-								<td style="font-weight:bold;">상세주소</td>
-								<td style="width:320px;">
-									<input type="text" id="detailAddress" name="detailAddress" class="form-control" style="width:300px; margin-left: 20px;">
-								</td>
-							</tr>
-						</c:if>
+								<c:if test="${status.index eq 0 }">
+									<tr>
+										<td style="font-weight:bold;">주소</td>
+										<td style="width:320px;">
+											<input type="text" id="jibunAddress" name="jibunAddress" class="form-control" style="width:300px; margin-left: 20px;" value="${addr}" required>
+										</td>
+										<td style="width:160px;"><button class="btnLogin" style="float:left; margin-left: 20px;" type="button" onclick="daumPostcode()">검색</button></td>
+									</tr>
+								</c:if>
+								<c:if test="${status.index eq 1 }">
+									<tr>
+										<td style="font-weight:bold;">상세주소</td>
+										<td style="width:320px;">
+											<input type="text" id="detailAddress" name="detailAddress" class="form-control" value="${addr}" style="width:300px; margin-left: 20px;" required>
+										</td>
+									</tr>
+								</c:if> 
 					</c:forTokens>
 					<tr>
 						<td colspan="3" align="center">

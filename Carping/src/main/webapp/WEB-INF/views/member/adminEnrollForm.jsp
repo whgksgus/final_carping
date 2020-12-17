@@ -89,7 +89,7 @@ span.error{color:red}
 					<tr>
 						<td style="font-weight:bold;">아이디 </td>
 						<td style="width:320px;">
-							<input class="form-control" style="margin-left: 20px; width:300px;" type="text" name="memberId" id="memberId">
+							<input class="form-control" style="margin-left: 20px; width:300px;" type="text" name="memberId" id="memberId" required>
 						</td>
 						<td style="width:160px;">
 							<span style="margin-left: 20px;" class="guide ok">사용 가능합니다.</span>
@@ -99,11 +99,11 @@ span.error{color:red}
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">비밀번호 </td>
-						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" name="memberPwd" id="password"></td>
+						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" name="memberPwd" id="password" required></td>
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">비밀번호 확인</td>
-						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" id="passwordChk"></td>
+						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" id="passwordChk" required></td>
 						<td style="width:160px;">
 							<span style="margin-left: 20px;" class="guide2 ok">일치합니다.</span>
 							<span style="margin-left: 20px;" class="guide2 error">일치하지 않습니다.</span>
@@ -112,27 +112,27 @@ span.error{color:red}
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">이름</td>
-						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="memberName"></td>
+						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="memberName" required></td>
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">전화번호</td>
-						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="phone" maxlength="13" placeholder="000-0000-0000식으로 입력해주세요."></td>
+						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="phone" maxlength="13" placeholder="000-0000-0000식으로 입력해주세요." required></td>
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">이메일</td>
-						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="email"></td>
+						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="email" required></td>
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">주소</td>
 						<td style="width:320px;">
-							<input type="text" id="jibunAddress" name="jibunAddress" class="form-control" style="width:300px; margin-left: 20px;">
+							<input type="text" id="jibunAddress" name="jibunAddress" class="form-control" style="width:300px; margin-left: 20px;" required>
 						</td>
 						<td style="width:160px;"><button class="btnLogin" style="float:left; margin-left: 20px;" type="button" onclick="daumPostcode()">검색</button></td>
 					</tr>
 					<tr>
 						<td style="font-weight:bold;">상세주소</td>
 						<td style="width:320px;">
-							<input type="text" id="detailAddress" name="detailAddress" class="form-control" style="width:300px; margin-left: 20px;">
+							<input type="text" id="detailAddress" name="detailAddress" class="form-control" style="width:300px; margin-left: 20px;" required>
 						</td>
 					</tr>
 					<tr>

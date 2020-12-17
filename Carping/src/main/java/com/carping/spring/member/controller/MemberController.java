@@ -45,7 +45,10 @@ public class MemberController {
 		return "member/adminEnrollForm";
 	}
 	
-	
+	@RequestMapping(value="insertInfo.do", method=RequestMethod.GET)
+	public String insertInfoForm() {
+		return "member/insertInfo";
+	}
 	
 	@RequestMapping(value="loginMember.do", method=RequestMethod.POST)
 	public ModelAndView memberLogin(String memberId, String memberPwd, ModelAndView mv, HttpServletRequest request) {

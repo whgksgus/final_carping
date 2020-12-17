@@ -136,7 +136,7 @@
                   <input id="chkBox4" type="checkbox" name="areaPool" value="1"> 물놀이&nbsp;&nbsp;
                </div>
                <h3 class="h3">기타사항</h3>
-               <textarea name="areaEtc" cols="50" rows="5" style="resize: none;"></textarea>
+               <textarea name="areaEtc" cols="50" rows="5" style="resize: none; color:black;"></textarea>
                <br>
                <h3 class="h3">사진 첨부</h3>
                <input class="loginBtn" type="file" name="uploadFile">

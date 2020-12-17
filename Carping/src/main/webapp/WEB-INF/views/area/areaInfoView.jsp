@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>차박 장소 추천</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
@@ -150,7 +153,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	       mapOption = { 
 	           center: new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
-	           level: 11 // 지도의 확대 레벨
+	           level: 6 // 지도의 확대 레벨
 	       };
 	   
 	   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -256,18 +259,18 @@
 						$('#image').append("<img align='center' style='width: 1100px; height:600px;' src='../../../resources/areaImage/"+result.areaImage+"'>");
 						$('#areaName').append("<h1 class='h1' align='center'>"+result.areaName+"</h1>");
 						$('#areaAddress').append("<h3 class='h3'>"+result.areaAddress+"</h3><br>");
-							if(result.areaGS25 == 1){
-								$('#areaAddress').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-							};
-							if(result.areaToilet == 1){
-								$('#areaAddress').append("<img src='../../../resources/images/toilet.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-							};
-							if(result.areaSink == 1){
-								$('#areaAddress').append("<img src='../../../resources/images/sink.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-							};
-							if(result.areaPool == 1){
-								$('#areaAddress').append("<img src='../../../resources/images/pool.png'>");
-							};
+						if(result.areaGS25 == 1){
+							$('#areaAddress').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						};
+						if(result.areaToilet == 1){
+							$('#areaAddress').append("<img src='../../../resources/images/toilet.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						};
+						if(result.areaSink == 1){
+							$('#areaAddress').append("<img src='../../../resources/images/sink.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						};
+						if(result.areaPool == 1){
+							$('#areaAddress').append("<img src='../../../resources/images/pool.png'>");
+						};
 						$('#areaAddress').append("<br><br>");
 						$('#fzpl').append("<h3 class='h3' style='width:200px; margin-left:100px;'>맛집&명소</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><div id='fzImage' align='left' style=' width:100%; height:200px;'></div><br><div id='pImage' align='left' style=' width:100%; height:200px;'></div>");
 						$('#scoreAvg').append("<h3 class='h3' style='width: 250px; float: left;'>리뷰</h3><h3 id='avg' class='h3' style='width:350px; float:left;' align='left'></h3>");
@@ -281,13 +284,41 @@
 				/* 맛집 사진 */
 	            $.post("/selectFz.do", { "foodZoneKey" : positions.foodKey}, function(response) {
 	            	$('#fzImage').html('');
-	            	$('#fzImage').append("<img style='position:absolute; margin-left: 20px; margin-top:10px; width: 240px; height:180px; align:center;' src='../../../resources/foodzoneImage/"+response.foodZoneImage+"'><span style='position:absolute; margin-left:280px; margin-top:60px; width:300px;'><a>["+response.foodZoneName+"]<br><br>"+response.foodZoneAddress+"</a></span>")
+	            	$('#fzImage').append("<img style='position:absolute; margin-left: 20px; margin-top:10px; width: 240px; height:180px; align:center;' src='../../../resources/foodzoneImage/"+response.foodZoneImage+"'><span style='position:absolute; margin-left:280px; margin-top:60px; width:300px;'><a onclick='foodClick()'>["+response.foodZoneName+"]<br><br>"+response.foodZoneAddress+"</a></span>");
+	            	$('#foodzoneTitle').html(''); 
+	            	$('#foodzoneTitle').text("[ "+response.foodZoneName+" ]");
+	            	$('#foodImage').html(''); 
+	            	$('#foodImage').append("<img style='width: 400px; height:280px; align:center;' src='../../../resources/foodzoneImage/"+response.foodZoneImage+"'>");
+	            	$('#foodAddrSpan').html(''); 
+	            	$('#foodAddrSpan').text("[주소 ]  "+response.foodZoneAddress)
+	            	$('#foodPhone').html(''); 
+	            	$('#foodPhone').text("[전화번호]  "+response.foodZonePhone);
+	            	$('#foodEtc').html(''); 
+	            	$('#foodEtc').text("[기타사항 ]  "+response.foodZoneEtc);
 	            });
 				
 				/* 명소 사진 */
 	            $.post("/selectP.do", { "placeKey" : positions.plKey}, function(response) {
 	            	$('#pImage').html('');
-	            	$('#pImage').append("<img style='position:absolute; margin-left: 20px; margin-top:10px; width: 240px; height:180px; align:center;' src='../../../resources/placeImage/"+response.placeImage+"'><span style='position:absolute; margin-left:280px; margin-top:60px; width:300px;'><a>["+response.placeName+"]<br><br>"+response.placeAddress+"</a></span>")
+	            	$('#pImage').append("<img style='position:absolute; margin-left: 20px; margin-top:10px; width: 240px; height:180px; align:center;' src='../../../resources/placeImage/"+response.placeImage+"'><span style='position:absolute; margin-left:280px; margin-top:60px; width:300px;'><a onclick='placeClick()'>["+response.placeName+"]<br><br>"+response.placeAddress+"</a></span>");
+	            	$('#placeTitle').html('');
+	            	$('#placeTitle').text("[ "+response.placeName+" ]");
+	            	$('#placeImage').html('');
+	            	$('#placeImage').append("<img style='width: 400px; height:280px; align:center;' src='../../../resources/placeImage/"+response.placeImage+"'>");
+	            	$('#placeAddrSpan').html('');
+	            	$('#placeAddrSpan').text("[주소]  "+response.placeAddress);
+	            	$('#placeEtc').html('');
+	            	$('#placeEtc').text("[기타사항]  "+response.placeEtc);
+	            	$('#placeGs').html('');
+	            	if(response.placeGS25 == 1){
+						$('#placeGs').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+					};
+					if(response.placeToilet == 1){
+						$('#placeGs').append("<img src='../../../resources/images/toilet.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+					};
+					if(response.placeParking == 1){
+						$('#placeGs').append("<img src='../../../resources/images/park.png'>");
+					};
 	            });
 				
 				/* 리뷰 */
@@ -295,7 +326,7 @@
 	            	if(response.length != 0){
 		            	$('#reviewBox').html('');
 		            	for(var i=0; i<response.length; i++){
-	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response[i]['memberId']+"] : </span><span>"+response[i]['arTitle']+"</span>&nbsp;&nbsp;<span> ("+response[i]['arRegDate']+")</span><div>");
+	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response[i]['memberId']+"] : </span><a href='areaReviewDetail.do?areaKey="+response[i]['areaKey']+"&arKey="+response[i]['arKey']+"'>"+response[i]['arTitle']+"</>&nbsp;&nbsp;<span> ("+response[i]['arRegDate']+")</span><div>");
 	                	 };
 	            	}else{
 	            		 $('#reviewBox').html('');
@@ -351,6 +382,15 @@
 		
 		}
 		
+		function foodClick(){
+			$('#modalTagF').get(0).click();
+		};
+		
+		
+		function placeClick(){
+			$('#modalTagP').get(0).click();
+		}
+		
 		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 		function makeOutListener(infowindow) {
 			return function() {
@@ -358,6 +398,38 @@
 			};
 		}
 	</script>
+	
+<!-- modal 맛집 -->
+<div id="ex1" class="modal" align="center" style="text-align:center; width:650px; height:550px;">
+  <h3 id="foodzoneTitle" class="h3"></h3>
+  <br>
+  <div id="foodImage"></div>
+  <br>
+  <span id="foodAddrSpan"></span>
+  <br>
+  <span id="foodPhone"></span>
+  <br>
+  <span id="foodEtc"></span>
+</div>
+ 
+<p><a id="modalTagF" href="#ex1" rel="modal:open"></a></p>
+
+<!-- modal 맛집 -->
+<div id="ex2" class="modal" align="center" style="text-align:center; width:650px; height:580px;">
+  <h3 id="placeTitle" class="h3"></h3>
+  <br>
+  <div id="placeImage"></div>
+  <br>
+  <span id="placeAddrSpan"></span>
+  <br>
+  <span id="placeEtc"></span>
+  <br>
+  <span>[편의시설]</span>
+  <br>
+  <div id="placeGs"></div>
+</div>
+ 
+<p><a id="modalTagP" href="#ex2" rel="modal:open"></a></p>
 
 	<div id="areaInfo" style="margin-left: 10%; width:1400px; text-align: center;" >
 		<%-- <br> <br>
