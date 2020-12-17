@@ -70,12 +70,12 @@ public class CartController {
 	public String deleteAllCart(HttpServletRequest request, Model model) {
 		return "";
 	}
-	@RequestMapping ( value="insertOrder.do", method=RequestMethod.GET )
-	public String orderCart( @RequestParam String data ) {
-		System.out.println(data);
-		
-		return "";
+	
+	 @RequestMapping ( value="insertOrder.do", method=RequestMethod.GET ) public
+	 String orderCart( @RequestParam String data ) {
+		 return "";
 	}
+	
 	
 	public ModelAndView orderListView(HttpServletRequest request, ModelAndView mv, Integer page) {
 		return mv;

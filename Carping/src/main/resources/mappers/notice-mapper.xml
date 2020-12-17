@@ -21,7 +21,6 @@
 		VALUES(SEQ_NKEY.NEXTVAL, #{nTitle}, #{nContent}, SYSDATE, DEFAULT, #{memberId})
 	</insert>
 	
-	
 	<select id="selectList" resultMap="noticeResultMap">
       SELECT * FROM NOTICE
       ORDER BY NOTICE_ENROLL_DATE DESC
@@ -32,12 +31,29 @@
    		WHERE NOTICE_KEY = #{nKey}	
    </select>
       
-      
    <update id="updateCount">
       UPDATE NOTICE
       SET NOTICE_COUNT = NOTICE_COUNT + 1
       WHERE NOTICE_KEY = #{nKey}	
    </update> 
+   
+   <select id="searchNotice" resultMap="noticeResultMap">
+      SELECT * FROM NOTICE
+      <where>
+         <if test="searchCondition.toString() == 'title'">
+            NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+         </if>
+         <if test="searchCondition.toString() == 'content'">
+            NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'
+         </if>
+         <if test="searchCondition.toString() == 'all'">
+            NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+            OR NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'
+         </if>
+      </where>
+   </select>
+   
+   
    
    
 </mapper>

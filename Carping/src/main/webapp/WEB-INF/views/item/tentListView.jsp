@@ -58,11 +58,11 @@ a {
 }
 
 #item {
-	margin: 100px 100px;
+	margin: 50px 100px;
 }
 
 #item_img {
-	margin: 20px 17px;
+	margin: 20px 20px;
 	width: 350px;
 	height: 350px;
 }
@@ -98,9 +98,8 @@ ul, li {
 	transition-duration: 0.7s;
 	transform: scale(1.2);
 }
-
-
 </style>
+
 <body>
 	<jsp:include page="../common/nav.jsp" />
 	<div id="shopping" style="padding-left: 150px;">
@@ -130,11 +129,18 @@ ul, li {
 	<hr>
 
 
-
 	<div id="item_sortby">
 		<a href="#"><span id="sortby">최신순</span></a>| <a href="#"><span
 			id="sortby">낮은가격순</span></a>| <a href="#"><span id="sortby">높은가격순</span></a>
 	</div>
+	
+	<div id="searchArea" align="right" style="margin: 65px 120px; ">
+		<form action="searchTent.do" method="get">	
+			<input type="text" name="searchValue" value="${search.searchValue }">
+			<input type="submit" value="검색">
+		</form>
+	</div>
+	
 	<div id="item"
 		style="width: 100%; height: 800px; float: left; padding-left: 100px; padding-right: 150px;">
 		

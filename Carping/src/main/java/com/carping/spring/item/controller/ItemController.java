@@ -19,10 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.cart.service.CartService;
-import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
 import com.carping.spring.item.domain.PageInfo;
 import com.carping.spring.item.domain.Pagination;
+import com.carping.spring.item.domain.Search;
 import com.carping.spring.item.service.ItemService;
 import com.carping.spring.member.domain.Member;
 
@@ -65,8 +65,17 @@ public class ItemController {
       return mv;
    }
    
-   public ModelAndView searchTent(ModelAndView mv, Integer page, Search search) {
-      return mv;
+   @RequestMapping( value="searchTent.do", method=RequestMethod.GET )
+   public String searchTent(Search search, Model model) {
+	   ArrayList<Item> searchList = iService.searchTentList(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("iList", searchList);
+			model.addAttribute("search", search);
+			return "item/tentListView";
+		}else {
+			model.addAttribute("msg", "텐트 상품 검색 실패");
+			return "common/erroePage";
+		}
    }
    
    // 

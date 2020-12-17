@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carping.spring.cart.domain.Cart;
-import com.carping.spring.common.Search;
 import com.carping.spring.item.domain.Item;
 import com.carping.spring.item.domain.PageInfo;
+import com.carping.spring.item.domain.Search;
 
 @Repository
 public class ItemStoreLogic implements ItemStore {
@@ -58,9 +58,8 @@ public class ItemStoreLogic implements ItemStore {
    }
 
    @Override
-   public ArrayList<Item> searchTentList(PageInfo pi, Search search) {
-      // TODO Auto-generated method stub
-      return null;
+   public ArrayList<Item> searchTentList(Search search) {
+      return (ArrayList)sqlSession.selectList("ItemMapper.searchTent", search);
    }
 
    @Override
@@ -88,7 +87,7 @@ public class ItemStoreLogic implements ItemStore {
    }
 
    @Override
-   public ArrayList<Item> searchCookList(PageInfo pi, Search search) {
+   public ArrayList<Item> searchCookList(Search search) {
       // TODO Auto-generated method stub
       return null;
    }
@@ -118,7 +117,7 @@ public class ItemStoreLogic implements ItemStore {
    }
 
    @Override
-   public ArrayList<Item> searchSleepList(PageInfo pi, Search search) {
+   public ArrayList<Item> searchSleepList(Search search) {
       // TODO Auto-generated method stub
       return null;
    }
@@ -148,7 +147,7 @@ public class ItemStoreLogic implements ItemStore {
    }
 
    @Override
-   public ArrayList<Item> searchEtcList(PageInfo pi, Search search) {
+   public ArrayList<Item> searchEtcList(Search search) {
       // TODO Auto-generated method stub
       return null;
    }

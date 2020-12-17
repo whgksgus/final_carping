@@ -52,7 +52,6 @@ public class NoticeController {
 		int currentPage = (page != null) ? page : 1;
 	    int listCount = nService.getListCount();
 	    PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
 		ArrayList<Notice> nList = nService.selectList(pi);
 		if(!nList.isEmpty()) {
 			mv.addObject("nList", nList);
@@ -65,8 +64,17 @@ public class NoticeController {
 		return mv;
 	}
 	
+	@RequestMapping( value="noticeSearch.do", method=RequestMethod.GET )
 	public String noticeSearch(Search search, Model model) {
-		return "";
+		ArrayList<Notice> searchList = nService.selectSearchList(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("nList", searchList);
+			model.addAttribute("search", search);
+			return "notice/noticeListView";
+		}else {
+			model.addAttribute("msg", "자유게시판 검색 실패");
+			return "common/erroePage";
+		}
 	}
 	
 	

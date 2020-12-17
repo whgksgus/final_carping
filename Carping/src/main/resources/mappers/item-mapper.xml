@@ -44,7 +44,6 @@
       	, SYSDATE
       	, #{itemKey}
       	, #{memberId} 
-      
       )
    </insert>
      <update id="updateCart">
@@ -53,4 +52,9 @@
   	 	WHERE ITEM_KEY=#{itemKey}
    </update>
   
+  <select id="searchTent" resultMap="itemResultMap">
+      SELECT * FROM ITEM
+      WHERE ITEM_NAME LIKE '%' || #{searchValue} || '%'
+		 AND ITEM_CATEGORY = 'TENT'
+   </select>
 </mapper>

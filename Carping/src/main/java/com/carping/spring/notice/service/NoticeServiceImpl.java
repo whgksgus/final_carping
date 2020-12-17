@@ -55,8 +55,7 @@ public class NoticeServiceImpl implements NoticeService  {
 
 	@Override
 	public ArrayList<Notice> selectSearchList(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return nStore.selectSearchList(search);
 	}
 
 }
