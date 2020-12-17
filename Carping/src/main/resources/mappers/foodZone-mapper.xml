@@ -108,4 +108,8 @@
 	<insert id="insertTakeOut">
 		INSERT INTO TAKEOUT_RESERVE VALUES(SEQ_TOR.NEXTVAL,#{memberId}, #{takeOutKey}, #{torEa}, #{torPrice}, #{torRegDate}, #{torTotalPrice}, #{foodZoneKey})
 	</insert>
+	
+	<insert id="insertFoodZone">
+		INSERT INTO FOOD_REVIEW VALUES(TEST_FRKEY.NEXTVAL,#{foodZoneKey}, #{frScore}, #{frTitle}, #{frContent}, SYSDATE, #{frHits}, #{frPhoto,jdbcType=VARCHAR}, #{memberId})
+	</insert>
 </mapper>

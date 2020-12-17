@@ -1,5 +1,6 @@
 package com.carping.spring.foodzone.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,14 +102,58 @@ public class FoodZoneReviewController {
 	public void foodZoneReviewCommentList(HttpServletResponse response, int foodZoneKey) {
 	
 	}
+	@RequestMapping(value="foodZoneReviewInsertForm.do", method = RequestMethod.GET)
+	public ModelAndView foodZoneInsertFormView(ModelAndView mv, int foodZoneKey) {
+		FoodZone foodZone = fzService.selectFoodZoneInfoByKey(foodZoneKey);
+		mv.addObject("foodZone", foodZone);
+		mv.setViewName("foodzone/foodZoneReviewInsertForm");
+		return mv;
+	}
 	
-	public String insertFoodZoneReview(FoodZoneReview fzr, Model model, HttpServletRequest request,
-			@RequestParam(name="frPhoto", required = false) MultipartFile uploadFile) {
-		return "";
+	@RequestMapping(value="foodZoneInsert.do", method = RequestMethod.POST)
+	public ModelAndView insertFoodZoneReview(FoodZoneReview fzr, ModelAndView mv, HttpServletRequest request,Integer page,
+			 @RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) {
+
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String fileName = saveFile(uploadFile, request);
+			if(fileName != null) {
+				fzr.setFrPhoto(uploadFile.getOriginalFilename());
+			}
+		}
+		
+		int currentPage = (page != null) ? page : 1;
+		int listCount = fzrService.getListCount(fzr.getFoodZoneKey());
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		int result = fzrService.insertFoodZoneReview(fzr);
+		ArrayList<FoodZoneReview> fzrList = fzrService.selectFoodZoneReviewList(fzr.getFoodZoneKey(), pi);
+		if(result>0) {
+			mv.addObject("fzrList", fzrList).addObject("foodZoneKey", fzr.getFoodZoneKey());
+			mv.setViewName("redirect:foodZoneReviewListView.do");
+		}else {
+			mv.addObject("msg", "다시 시도해주세요");
+		}
+		return mv;
 	}
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		return "";
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\foodZoneImage";
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		String originalFileName = file.getOriginalFilename();
+		String filePath = folder + "\\" + originalFileName;
+		if (originalFileName == "") {
+			return null;
+		}else {
+			try {
+				file.transferTo(new File(filePath));
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return originalFileName;
+		}
 	}
 	
 	public void deleteFile(MultipartFile file, HttpServletRequest request) {

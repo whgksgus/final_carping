@@ -25,7 +25,7 @@
 			<h3>맛집 리뷰리스트</h3>
 			<br><br><br>
 			
-			<form action="foodZoneReviewInsertForm.do" method="post">
+			
 				<div class="container">
 				<div class="col-md-1"></div>
 					<div class="col-md-10">
@@ -62,6 +62,12 @@
 						</table>
 					</div>
 				<div class="com-md-1"></div>
+				</div>
+			<form action="foodZoneReviewInsertForm.do" method="get">
+				<div class="container" style="margin-left: 210px;">
+					<div class="col-md-10"></div>
+					<div class="col-md-1"><input type="submit" class="btn btn-info" value="리뷰 작성"></div>
+					<div class="col-md-1"><input type="hidden" name="foodZoneKey" value="${foodZoneKey}"></div>
 				</div>
 			</form>
 			<div class="container">
@@ -104,8 +110,7 @@
 					
 				</div>
 			</div>
-			<div>
-			</div>
+			
 		</article>
 	</section>
 </body>

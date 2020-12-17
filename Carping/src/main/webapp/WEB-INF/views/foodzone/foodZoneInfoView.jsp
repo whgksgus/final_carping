@@ -198,8 +198,8 @@
 	    			}else{
 	    				$('#review').html('');	
 	    				for(var i=0; i<result.frList.length; i++){
-	    					
-	    					$('#review').append("<p>"+result.frList[i].memberId+" : "+result.frList[i].frContent+"</p><br>");
+	    					console.log(result.frList[i].frKey+" , "+result.frList[i].foodZoneKey);
+	    					$('#review').append("<p>"+result.frList[i].memberId+" : <a href='foodZoneReviewDetail.do?frKey="+result.frList[i].frKey+"&foodZoneKey="+result.frList[i].foodZoneKey+"'>"+result.frList[i].frContent+"</p><br>");
 		    			}
 	    			}
 	    		}

@@ -37,8 +37,7 @@ public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
 
 	@Override
 	public int insertFoodZoneReview(FoodZoneReview foodZoneReview) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("FoodZoneMapper.insertFoodZone",foodZoneReview);
 	}
 
 	@Override

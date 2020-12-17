@@ -29,7 +29,7 @@
 <body>
 <!-- 아이디 찾기 modal -->
 		<div id="ex1" class="modal" align="center" style="text-align:center; width:500px; height:500px; padding: 0px;">
-		  <img src="../../../resources/images/b1.jpg" style="width: 500px; height: 500px; ">
+		  <img src="../../../resources/foodzoneImage/${fReview.frPhoto}" style="width: 500px; height: 500px; ">
 		 </div>
 		 
 		
@@ -79,20 +79,58 @@
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;">
-					
-					</textarea>
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${fReview.frContent}</textarea>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
-			<div class="container">
+			<br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<p>첨부파일</p><p><a id="modalTag" href="#ex1" rel="modal:open">${fReview.frPhoto}</a></p>
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">사진</label>
+					
+					<c:choose>
+						<c:when test="${fReview.frPhoto eq null}">
+							<p style="font-family: 'Sunflower', sans-serif;">첨부파일이 없습니다.</p>
+							
+						</c:when>
+						<c:otherwise>
+							<a id="modalTag" href="#ex1" rel="modal:open"><img src="../../../resources/images/camera.jpg" style="width: 40px; height: 40px;"></a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br><br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+				<div class="col-md-2"></div>
+				<div class="col-md-8" style="margin-left: -30px;">
+					<div class="col-md-3"></div>
+					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<c:if test="${fReview.memberId eq loginUser.memberId}">
+						<div class="col-md-1"></div>
+						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="">수정</button>
+						<div class="col-md-1"></div>
+						<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return chk();">삭제</button>
+					</c:if>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
 		</article>
 	</section>
+	<script>
+		function back(){
+			location.href="foodZoneReviewListView.do?foodZoneKey="+${fReview.foodZoneKey};
+		}
+		
+		function chk(){
+			var question = confirm("게시글을 삭제하시겠어요?");
+			if(question){
+				location.href="foodZoneReviewListDelete.do?frKey="+${fReview.foodZoneKey};
+			}else{
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>

@@ -34,8 +34,7 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 
 	@Override
 	public int insertFoodZoneReview(FoodZoneReview foodZoneReview) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzrStore.insertFoodZoneReview(foodZoneReview);
 	}
 
 	@Override
