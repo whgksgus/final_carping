@@ -142,14 +142,19 @@ public class SuggestionController {
 	
 		// 건의사항 답변 등록
 		@RequestMapping(value="insertAnswerView.do", method=RequestMethod.GET)
-		public String insertAnswerView() {
+		public String insertAnswerView(Model model, int suggestionKey) {
+			model.addAttribute("suggestionKey", suggestionKey);
 			return "suggestion/answerInsert";
 		}
 	
 	// 건의사항 답변 등록
 	@RequestMapping(value="insertAnswer.do", method=RequestMethod.POST)
-	public String insertAnswer(Answer answer, Model model) {
-		System.out.println(answer);
+	public String insertAnswer(Answer answer, Model model, int suggestionKey) {
+		int result = sService.insertAnswer(answer);
+		Suggestion sug = sService.selectOne(suggestionKey);
+		if(result > 0) {
+			
+		}
 		return "suggestion/sugList";
 	}
 	

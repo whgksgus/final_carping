@@ -64,8 +64,7 @@ public class SuggestionServiceImpl implements SuggestionService {
 
 	@Override
 	public int insertAnswer(Answer answer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sStore.insertAnswer(answer);
 	}
 
 	@Override

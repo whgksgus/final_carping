@@ -11,6 +11,14 @@
 		<result property="memberId" column="MEMBER_ID"></result>
 	</resultMap>
 	
+	<resultMap type="Answer" id="AnswerResultMap">
+		<id property="answerKey" column="ANSWER_KEY"></id>
+		<result property="answerTitle" column="ANSWER_TITLE"></result>
+		<result property="answerContent" column="ANSWER_CONTENT"></result>
+		<result property="answerEnrollDate" column="ANSWER_ENROLL_DATE"></result>
+		<result property="suggestionKey" column="SUGGESTION_KEY"></result>
+	</resultMap>
+	
 	<select id="getSugListCount" resultType="int">
 		SELECT COUNT(*) FROM SUGGESTION 
 	</select>
@@ -77,5 +85,10 @@
 		</where>
 		ORDER BY SUGGESTION_KEY DESC
 	</select>
+	
+	<insert id="insertAnswer">
+		INSERT INTO ANSWER VALUES
+		(SEQ_ANSKEY.NEXTVAL, #{answerTitle}, #{answerContent}, SYSDATE, #{suggestionKey})
+	</insert>
 
 </mapper>

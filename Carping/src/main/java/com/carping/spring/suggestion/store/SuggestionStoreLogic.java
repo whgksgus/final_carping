@@ -71,8 +71,7 @@ public class SuggestionStoreLogic implements SuggestionStore {
 
 	@Override
 	public int insertAnswer(Answer answer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("Suggestion.insertAnswer", answer);
 	}
 
 	@Override

@@ -20,6 +20,7 @@
 	<br>
 	
 	<form action="insertAnswer.do" method="post">
+      <input type="hidden" name="suggestionKey" value="${suggestionKey}"/>
       <table align="center">
          <tr>
             <td><input type="text" name="answerTitle" placeholder="답변 제목을 입력해주세요" size="50" required></td>
