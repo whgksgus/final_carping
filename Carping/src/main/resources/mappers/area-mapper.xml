@@ -51,6 +51,13 @@
 		<result property="memberId" column="MEMBER_ID"/>
 	</resultMap>
 	
+	<resultMap type="AreaReviewComment" id="AreaReviewCommentResultMap">
+		<id property="arcKey" column="ARC_KEY"/>
+		<result property="arcContent" column="ARC_CONTENT"/>
+		<result property="arKey" column="AR_KEY"/>
+		<result property="arcWriter" column="ARC_WRITER"/>
+		<result property="arcRegDate" column="ARC_REGDATE"/>
+	</resultMap>
 	
 	<select id="selectList" resultMap="areaResultMap">
 		SELECT * FROM AREA
@@ -96,4 +103,117 @@
 		SELECT ROUND(AVG(AR_SCORE),1) FROM AREA_REVIEW 
 		WHERE AREA_KEY = #{areaKey}
 	</select>
+	
+	<select id="getAreaReviewListCount" resultType="int">
+		SELECT COUNT(*) FROM AREA_REVIEW
+		WHERE AREA_KEY = #{areaKey}
+	</select>
+	
+	<select id="getAreaListCount" resultType="int">
+		SELECT COUNT(*) FROM AREA
+		<where>
+			<if test="searchCondition.toString() == '장소명'">
+				AREA_NAME LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '주소'">
+				AREA_ADDRESS LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchBoardListCount" resultType="int">
+		SELECT COUNT(*) FROM AREA_REVIEW
+		<where> AREA_KEY = #{areaKey} AND
+			<if test="searchCondition.toString() == '제목'">
+				AR_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				AR_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
+	
+	<update id="areaReviewHits">
+		UPDATE AREA_REVIEW SET
+		AR_HITS = AR_HITS + 1
+		WHERE AR_KEY = #{arKey}
+	</update>
+	
+	<select id="searchList" resultMap="areaResultMap">
+		SELECT * FROM AREA
+		<where>
+			<if test="searchCondition.toString() == '장소명'">
+				AREA_NAME LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '주소'">
+				AREA_ADDRESS LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchBoardList" resultMap="AreaReviewResultMap">
+		SELECT * FROM AREA_REVIEW
+		<where> AREA_KEY = #{areaKey} AND
+			<if test="searchCondition.toString() == '제목'">
+				AR_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				AR_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+		ORDER BY AR_KEY DESC
+	</select>
+	
+	<select id="selectOne" resultMap="areaResultMap">
+		SELECT * FROM AREA
+		WHERE AREA_KEY = #{areaKey}
+	</select>
+	
+	<select id="selectAreaReviewList" resultMap="AreaReviewResultMap">
+		SELECT * FROM AREA_REVIEW
+		WHERE AREA_KEY = #{areaKey} ORDER BY AR_KEY DESC
+	</select>
+	
+	<select id="AreaReviewDetail" resultMap="AreaReviewResultMap">
+		SELECT * FROM AREA_REVIEW
+		WHERE AR_KEY = #{arKey}
+	</select>
+	
+	<insert id="insertAreaReview">
+		INSERT INTO AREA_REVIEW
+		VALUES(SEQ_ARKEY.NEXTVAL, #{areaKey}, #{arScore}, #{arTitle}, #{arContent}, SYSDATE, #{arHits}, #{arPhoto,jdbcType=VARCHAR}, #{memberId})
+	</insert>
+	
+	<update id="updateAreaReview">
+		UPDATE AREA_REVIEW SET
+		AR_SCORE = #{arScore}, AR_TITLE = #{arTitle}, AR_CONTENT = #{arContent}, AR_REGDATE = SYSDATE, AR_HITS = #{arHits}, AR_PHOTO = #{arPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
+		WHERE AR_KEY = #{arKey}
+	</update>
+	
+	<delete id="deleteAreaReview">
+		DELETE FROM AREA_REVIEW
+		WHERE AR_KEY = #{arKey}
+	</delete>
+	
+	<insert id="arCommentAdd">
+		INSERT INTO AREA_REVIEW_COMMENT
+		VALUES(SEQ_ARCKEY.NEXTVAL, #{arcContent}, #{arKey}, #{arcWriter}, SYSDATE) 
+	</insert>
+	
+	<select id="arCommentList" resultMap="AreaReviewCommentResultMap">
+		SELECT * FROM AREA_REVIEW_COMMENT
+		WHERE AR_KEY = #{arKey}
+		ORDER BY ARC_KEY DESC
+	</select>
+
+	<delete id="arCommentDelete">
+		DELETE FROM AREA_REVIEW_COMMENT
+		WHERE ARC_KEY = #{arcKey}
+	</delete>
 </mapper>

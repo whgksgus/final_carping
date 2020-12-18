@@ -2,6 +2,7 @@ package com.carping.spring.area.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +25,12 @@ import com.carping.spring.area.domain.AreaReviewComment;
 import com.carping.spring.area.domain.BoardSearch;
 import com.carping.spring.area.domain.PageInfo;
 import com.carping.spring.area.domain.Pagination;
-import com.carping.spring.area.domain.Search;
 import com.carping.spring.area.service.AreaReviewService;
+import com.carping.spring.common.Search;
 import com.carping.spring.member.domain.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 @Controller
 public class AreaReviewController {
 	
@@ -36,17 +38,12 @@ public class AreaReviewController {
 	private AreaReviewService arService;
 	
 	
-	public String reviewCategoryForm() {
+	@RequestMapping(value="areaReviewSerachForm.do", method=RequestMethod.GET)
+	public String areaReviewSearchForm() {
 		return "area/areaReviewSearch";
 	}
 	
-	
-	@RequestMapping(value="areaReviewSerachForm.do", method=RequestMethod.GET)
-	public String areaReviewSearchForm() {
-		return "";
-	}
-	
-	@RequestMapping(value="areaReviewSearch.do", method=RequestMethod.GET)
+	@RequestMapping(value="areaReviewSearch.do", method=RequestMethod.POST)
 	public String areaReviewSearch(Search search, Model model, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page: 1;
 		int listCount = arService.getReviewListCount(search);
@@ -90,7 +87,7 @@ public class AreaReviewController {
 		
 		// 리뷰 등록 폼으로 이동하는 메소드
 		@RequestMapping(value="areaReviewInsertForm.do", method=RequestMethod.POST)
-		public String placeReviewInsertForm(Model model, int areaKey) {
+		public String areaReviewInsertForm(Model model, int areaKey) {
 			Area area = arService.selectOne(areaKey);
 			if(area != null) {
 				model.addAttribute("area", area);
@@ -106,7 +103,7 @@ public class AreaReviewController {
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String fileName = saveFile(uploadFile, request);
 				if(fileName != null) {
-					ar.setArPhoto(uploadFile.getOriginalFilename());
+					ar.setArPhoto(fileName);
 				}
 			}
 			int currentPage = (page != null) ? page : 1;
@@ -127,34 +124,39 @@ public class AreaReviewController {
 		}
 		
 		public String saveFile(MultipartFile file, HttpServletRequest request) {
+
 			String root = request.getSession().getServletContext().getRealPath("resources");
 			String savePath = root + "\\areaImage";
+
 			File folder = new File(savePath);
-			if(!folder.exists()) {
+			if (!folder.exists()) {
 				folder.mkdir();
 			}
-			String originalFileName = file.getOriginalFilename();
-			String filePath = folder + "\\" + originalFileName;
-			if (originalFileName == "") {
-				return null;
-			}else {
-				try {
-					file.transferTo(new File(filePath));
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-				return originalFileName;
+			// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
+			// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
+			// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMddHmmss");
+			String originalFilename = file.getOriginalFilename();
+			String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
+					+ originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+			String filePath = folder + "\\" + renameFilename;
+
+			try {
+				file.transferTo(new File(filePath));
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
+			return renameFilename;
 		}
 		
 		// 리뷰 상세보기
 		@RequestMapping(value="areaReviewDetail.do", method=RequestMethod.GET)
 		public ModelAndView areaReviewDetail(ModelAndView mv, int areaKey, int arKey, Integer page) {
+			System.out.println(areaKey+", "+arKey);
 			arService.areaReviewHits(arKey);
 			AreaReview areview = arService.selectAreaReviewDetail(arKey);
 			if (areview != null) {
-				mv.addObject("areview", areview).addObject("areaKey", areaKey).setViewName("place/placeReviewDetail");
+				mv.addObject("areview", areview).addObject("areaKey", areaKey).setViewName("area/areaReviewDetail");
 			}else {
 				mv.addObject("msg", "리뷰 상세조회 실패! 새로고침 후 다시 실행해주세요");
 				mv.addObject("url", "javascript:history.back();");
@@ -180,12 +182,14 @@ public class AreaReviewController {
 			@RequestMapping(value="areaReviewUpdate.do", method=RequestMethod.POST)
 			public ModelAndView areaReviewUpdate(ModelAndView mv, AreaReview ar, int arKey, int areaKey, HttpServletRequest request,
 					@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile) {
+				System.out.println("t1"+arKey);
+				System.out.println("t2"+areaKey);
 				if(reloadFile != null && !reloadFile.isEmpty()) {
 					deleteFile(ar.getArPhoto(), request);
 				}
 				String renameFileName = saveFile(reloadFile, request); // ""
 				if (renameFileName != null) {
-					ar.setArPhoto(reloadFile.getOriginalFilename()); // ""
+					ar.setArPhoto(renameFileName); // ""
 				}
 				int result = arService.updateAreaReview(ar);
 				AreaReview areview = arService.selectAreaReviewDetail(arKey);
@@ -202,7 +206,7 @@ public class AreaReviewController {
 		
 			// 리뷰 삭제
 			@RequestMapping(value="areaReviewDelete.do", method=RequestMethod.GET)
-			public ModelAndView placeReviewDelete(ModelAndView mv, int arKey, int areaKey, Integer page, HttpServletRequest request) {
+			public ModelAndView areaReviewDelete(ModelAndView mv, int arKey, int areaKey, Integer page, HttpServletRequest request) {
 				AreaReview areview = arService.selectAreaReviewDetail(arKey);
 				deleteFile(areview.getArPhoto(), request);
 				// DB에서 데이터 삭제

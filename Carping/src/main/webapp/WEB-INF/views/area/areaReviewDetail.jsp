@@ -64,7 +64,7 @@
 	</c:url>
 	<c:url var="arUpdate" value="areaReviewUpdateView.do">
 		<c:param name="arKey" value="${areview.arKey }"></c:param>
-		<c:param name="alaceKey" value="${areaKey }"></c:param>
+		<c:param name="areaKey" value="${areaKey }"></c:param>
 	</c:url>
 	<c:url var="arList" value="areaReviewListView.do">
     	<c:param name="areaKey" value="${areaKey }"></c:param>
@@ -88,6 +88,9 @@
 				// 댓글 등록 ajax
 				var arcContent = $("#content").val();
 				var arKey = ${areview.arKey };
+				if(arcContent == ""){
+					alert('댓글 내용을 입력해주세요.');
+				}else{
 				$.ajax({
 					url : "arCommentAdd.do",
 					type : "post",
@@ -101,13 +104,14 @@
 						}
 					}
 				});
+				}
 			});	
 		})
 		
 		// 댓글 리스트를 불러오는 ajax Function
 		function getReplyList() {
 			
-			var prKey = ${areview.arKey };
+			var arKey = ${areview.arKey };
 			$.ajax({
 				url : "arCommentList.do",
 				type : "get",
@@ -135,7 +139,7 @@
 							if(checkId == $memberId) {
 							$arcDelete = $("<td width='48'><input type='button' id='arcDelete' onclick='arcDelete("+data[i].arcKey+");' value='삭제'>");
 							}else {
-								$prcDelete = $("<td width='48'>");
+								$arcDelete = $("<td width='48'>");
 							}
 							$tr.append($arcWriter);
 							$tr.append($arcContent);
@@ -177,47 +181,6 @@
 			return confirm("리뷰를 삭제하시겠습니까?")
 		}
 		
-		function Submit() {
-			var sb = document.getElementById('submit');
-			
-			sb.onclick = function() {
-				if(content == "") {
-					alert('내용을 입력해주세요');
-				}
-			}
-		}
-		
-		/* function CommentAdd() {
-			return confirm("댓글을 등록하시겠습니까?")
-		} 
-		
-		function DeleteAdd() {
-			return confirm("댓글을 삭제하시겠습니까?")
-		}
-		
-		function CommentAdd(){
-			var question = confirm('댓글을 등록하시겠습니까?');
-			if(question){
-				return true;
-				}
-			}else{
-				return false;
-         } */
-		
-	</script>
-	</script>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+		</script>		
 </body>
 </html>

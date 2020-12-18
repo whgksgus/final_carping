@@ -106,9 +106,6 @@ public class AreaController {
 		return "";
 	}
 
-	public String areaRegisterForm() {
-		return "";
-	}
 
 	@ResponseBody
 	@RequestMapping(value = "selectFzList.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -137,7 +134,6 @@ public class AreaController {
 		if (!uploadFile.getOriginalFilename().equals("")) {
 			String renameFilename = saveFile(uploadFile, request);
 			if (renameFilename != null) {
-				area.setAreaImage(uploadFile.getOriginalFilename());
 				area.setAreaImage(renameFilename);
 			}
 	}
@@ -166,7 +162,7 @@ public class AreaController {
 	// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
 	// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
 	// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMddHmmss");
 	String originalFilename = file.getOriginalFilename();
 	String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
 			+ originalFilename.substring(originalFilename.lastIndexOf(".")+1);

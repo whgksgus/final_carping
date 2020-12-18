@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Outdoors a Travel Category  Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>장소 추가</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Outdoors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -61,10 +61,10 @@
 	<jsp:include page="../common/nav.jsp"/>
 	<div class="blogs" id="blogs">
 		<div class="container">
-		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">리뷰게시판</h3>
-		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s">여러분들의 소중한 경험들을 회원들과 함께 공유해보세요</p>
+		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">장소 추가</h3>
+		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s"></p>
 				<div class="inst-grids">
-					<a href="areaReviewSerachForm.do">
+					<a href="areaInsertView.do">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>차박 장소</span>
 						<img src="resources/images/ReviewCarCampingImage.jpg" height="100%">
@@ -72,10 +72,10 @@
 							<h4><span class="big"></span>차박 장소</h4>
 						</div> -->
 						<div class="blog-description-w3agile">
-							<h5>차박 장소 후기를 회원들과 공유해보세요~</h5>
+							<h5>차박 장소를 등록해주세요.</h5>
 						 </div>
 					</div></a>
-					<a href="foodZoneReviewSearch.do">
+					<a href="#">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>맛집</span>
 						<img src="resources/images/ReviewFoodImage.jpg" height="100%">
@@ -83,10 +83,10 @@
 							<h4><span class="big"></span>맛집</h4>
 						</div> -->
 						<div class="blog-description-w3agile">
-							<h5>차박 장소 주변 맛집 리뷰를 지금 확인해보세요.</h5>
+							<h5>차박 장소 주변 맛집을 등록해주세요.</h5>
 						 </div>
 					</div></a>
-					<a href="placeReviewSearchForm.do">
+					<a href="#">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>명소</span>
 						<img src="resources/images/b3.jpg">
@@ -94,7 +94,7 @@
 							<h4><span class="big"></span>명소</h4>
 						</div> -->
 						<div class="blog-description-w3agile">
-							<h5>차박 장소 주변 명소 리뷰를 지금 확인해보세요.</h5>
+							<h5>차박 장소 주변 명소를 등록해주세요.</h5>
 						 </div>
 					</div></a>
 
