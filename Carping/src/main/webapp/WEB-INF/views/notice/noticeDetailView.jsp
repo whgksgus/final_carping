@@ -36,14 +36,14 @@
 		<c:if test="${ loginUser.memberId eq notice.memberId }">
 			<tr>
 				<td colspan="2" align="center">
-					<c:url var="nUpdate" value="noticeUpdateForm.do">
+					<c:url var="nUpdate" value="noticeUpdateView.do">
 						<c:param name="nKey" value="${notice.nKey }"></c:param>
 					</c:url>
-					<a href="${bUpdate}">수정하기</a> &nbsp;&nbsp;
+					<a href="${nUpdate}">수정하기</a> &nbsp;&nbsp;
 					<c:url var="nDelete" value="noticeDelete.do">
 						<c:param name="nKey" value="${notice.nKey }"></c:param>
 					</c:url>
-					<a href="${bDelete }">삭제하기</a>
+					<a href="${nDelete }">삭제하기</a>
 				</td>
 			
 			</tr>

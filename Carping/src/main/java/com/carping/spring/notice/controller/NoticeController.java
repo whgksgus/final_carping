@@ -94,14 +94,19 @@ public class NoticeController {
 	}
 	
 
+	// 공지글 삭제
 	public String noticeDelete(int nKey, Model model, HttpServletRequest request) {
 		return "";
 	}
 	
+	// 공지글 수정 폼 연결
+	@RequestMapping(value="noticeUpdateView.do", method=RequestMethod.GET)
 	public String noticeUpdateView(int nKey, Model model) {
-		return "";
+		model.addAttribute("notice", nService.selectNotice(nKey));
+		return "notice/noticeUpdateForm";
 	}
 	
+	// 공지글 수정
 	public String noticeUpdate(Notice notcie, Model model, HttpServletRequest request) {
 		return "";
 	}
