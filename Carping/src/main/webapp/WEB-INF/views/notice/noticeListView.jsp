@@ -32,7 +32,7 @@ a {
 
 .ul {
 	margin-top: 10px;
-	width: 90%;
+	width: 80%;
 	display:inline-block;
 }
 
@@ -66,39 +66,24 @@ a {
 }
 
 #ul>li>ul>li:first-child {
-	width: 5%;
+	width: 10%;
 } /*번호 열 크기*/
 
 #ul>li>ul>li:first-child+li {
-	width: 25%;
-} /*이미지 열 크기*/
+	width: 55%;
+} /*제목 열 크기*/
 
 #ul>li>ul>li:first-child+li+li {
-	width: 26%;
-	
-} /*상품정보 열 크기*/
+	width: 15%;
+} /*작성자 열 크기*/
 
 #ul>li>ul>li:first-child+li+li+li {
-	width: 15%;
-} /*가격 열 크기*/
+	width: 10%;
+} /*조회수 열 크기*/
 
 #ul>li>ul>li:first-child+li+li+li+li {
 	width: 10%;
-} /*수량 열 크기*/
-
-#ul>li>ul>li:first-child+li+li+li+li+li {
-	width: 10%;
-} /*상태 열 크기*/
-
-#ul>li>ul>li:first-child+li+li+li+li+li+li {
-	width: 5%;
-} /*삭제 열 크기*/
-
-#ul>li>ul>li:first-child+li+li+li+li+li+li+li {
-	width: 7%;
-} 
-
-
+} /*작성날짜 열 크기*/
 
 </style>
 <body>
@@ -125,10 +110,10 @@ a {
 		<li class="li">
 			<c:forEach items="${nList }" var="notice">
 				<ul class="ul">
-					<li class="li"><a href="${nDetail }">${notice.nKey }</a></li>
-		<%-- 			<c:url var="nDetail" value="noticeDetail.do">
+					<li class="li">${notice.nKey }</li>
+						<c:url var="nDetail" value="noticeDetail.do">
 							<c:param name="nKey" value="${notice.nKey }"></c:param>
-						</c:url> --%>
+						</c:url> 
 					<li class="li"><a href="${nDetail }">${notice.nTitle }</a></li>
 					<li class="li">${notice.memberId }</li>
 					<li class="li">${notice.nCount }</li>
@@ -137,8 +122,49 @@ a {
 			</c:forEach>
 		</li>
 	</ul>
+
 	<br>
-	<%-- <!-- 게시물 검색하기 -->
+	<br>
+	<br>
+	<table style="width: 100%; text-align: center; padding-top: 300px;">
+		<tr align="center" height="20">
+			<td colspan="6">
+				<!-- 이전 --> 
+				<c:if test="${pi.currentPage <= 1 }">
+					◀&nbsp;
+				</c:if> <c:if test="${pi.currentPage > 1 }">
+					<c:url var="before" value="noticeListView.do">
+						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
+					</c:url>
+					<a href="${before }">◀</a>&nbsp;
+				</c:if> 
+				
+				<!-- 페이지 -->
+				 <c:forEach var="p" begin="${pi.startPage }"
+					end="${pi.endPage }">
+					<c:if test="${p eq pi.currentPage }">
+						<font style="font-weight: bold;">${p }</font>
+					</c:if>
+					<c:url var="pagination" value="noticeList.do">
+						<c:param name="page" value="${p }"></c:param>
+					</c:url>
+					<c:if test="${p ne pi.currentPage }">
+						<a href="${pagination }">${p }</a>&nbsp;
+					</c:if>
+				</c:forEach> <!-- 다음 --> <c:if test="${pi.currentPage >= pi.maxPage }">
+					▶&nbsp;
+				</c:if> <c:if test="${pi.currentPage < pi.maxPage }">
+					<c:url var="next" value="noticeList.do">
+						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+					</c:url>
+					<a href="${next }">▶</a>&nbsp;
+				</c:if>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
 	<div id="searchArea" align="center">
 		<form action="noticeSearch.do" method="get">
 			<select id="searchCondition" name="searchCondition">
@@ -148,20 +174,14 @@ a {
 			</select>		
 			<input type="text" name="searchValue" value="${search.searchValue }">
 			<input type="submit" value="검색">
-	
 		</form>
-	</div> --%>
+	</div> <br>
+	
+	<br>
+	<br>
 	<p align="center">
 		<a href="#">시작페이지로 이동</a> <a href="#">목록 전체보기</a>
 	</p>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<br>
 	<br>
 	<br>

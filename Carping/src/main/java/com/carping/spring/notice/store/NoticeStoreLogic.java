@@ -60,8 +60,7 @@ public class NoticeStoreLogic implements NoticeStore {
 
 	@Override
 	public ArrayList<Notice> selectSearchList(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("NoticeMapper.searchNotice", search);
 	}
 
 }
