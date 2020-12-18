@@ -27,24 +27,34 @@
                 <br>
                 
 	<div align="center">
-	<c:url var="sugUpdate" value="placeReviewUpdateView.do">
+	<c:url var="sugUpdate" value="sugUpdateView.do">
 		<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param>
 	</c:url>
-	<c:url var="sugDelete" value="placeReviewDelete.do">
+	<c:url var="sugDelete" value="sugDelete.do">
 		<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param>
 	</c:url>
 	<c:url var="sugList" value="selectList.do">
     </c:url>
+    <c:url var="insertAnswer" value="insertAnswerView.do">
+    	<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param>
+    </c:url>
+    <c:url var="deleteAnswer" value="deleteAnswer.do">
+    	<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param>
+    </c:url>
 		<c:if test="${sList.memberId eq loginUser.memberId }"><a href="${sugUpdate }">수정하기</a></c:if>
-		<c:if test="${sList.memberId eq loginUser.memberId }"><a onclick="return Del();" href="${sugDelete }">삭제하기</a></c:if>
+		<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}"><a onclick="return Del();" href="${sugDelete }">삭제하기</a></c:if>
 		<a href="${sugList }">목록으로</a>
+		<!-- 관리자 답변  -->
+		<c:if test="${'admin' eq loginUser.memberId }"><a href="${insertAnswer }">답변 등록</a></c:if>
+		<c:if test="${'admin' eq loginUser.memberId }"><a href="${deleteAnswer }">답변 삭제</a></c:if>
+		
     </div>
 	
 	
 	
 	<script>
 		function Del() {
-			return confirm("리뷰를 삭제하시겠습니까?")
+			return confirm("건의사항을 삭제하시겠습니까?")
 		}
 	</script>
 	<br>

@@ -106,7 +106,7 @@ public class PlaceReviewController {
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String fileName = saveFile(uploadFile, request);
 			if(fileName != null) {
-				pr.setPrPhoto(uploadFile.getOriginalFilename());
+				pr.setPrPhoto(fileName);
 			}
 		}
 		int currentPage = (page != null) ? page : 1;
@@ -133,20 +133,19 @@ public class PlaceReviewController {
 		if(!folder.exists()) {
 			folder.mkdir();
 		}
-		String originalFileName = file.getOriginalFilename();
-		String filePath = folder + "\\" + originalFileName;
-		if (originalFileName == "") {
-			return null;
-		}else {
-			try {
-				file.transferTo(new File(filePath));
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			return originalFileName;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		   String originalFilename = file.getOriginalFilename();
+		   String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
+		         + originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+		   String filePath = folder + "\\" + renameFilename;
+
+		   try {
+		      file.transferTo(new File(filePath));
+		   } catch (Exception e) {
+		      e.printStackTrace();
+		   }
+		   return renameFilename;
 		}
-		
-	}
 	
 	// 리뷰 상세보기
 	@RequestMapping(value="placeReviewDetail.do", method=RequestMethod.GET)
@@ -185,7 +184,7 @@ public class PlaceReviewController {
 			}
 			String renameFileName = saveFile(reloadFile, request); // ""
 			if (renameFileName != null) {
-				pr.setPrPhoto(reloadFile.getOriginalFilename()); // ""
+				pr.setPrPhoto(renameFileName); // ""
 			}
 			int result = prService.updatePlaceReview(pr);
 			PlaceReview preview = prService.selectPlaceReviewDetail(prKey);

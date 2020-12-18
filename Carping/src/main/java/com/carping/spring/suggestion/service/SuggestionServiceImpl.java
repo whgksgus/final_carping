@@ -19,14 +19,12 @@ public class SuggestionServiceImpl implements SuggestionService {
 	
 	@Override
 	public int getSugListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sStore.getSugListCount();
 	}
 
 	@Override
 	public int getSugSearchList(Search search) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sStore.getSugSearchList(search);
 	}
 
 	@Override
@@ -51,26 +49,22 @@ public class SuggestionServiceImpl implements SuggestionService {
 
 	@Override
 	public int modifySug(Suggestion suggestion) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sStore.modifySug(suggestion);
 	}
 
 	@Override
-	public int deleteSug(Suggestion suggestion) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteSug(int suggestionKey) {
+		return sStore.deleteSug(suggestionKey);
 	}
 
 	@Override
-	public ArrayList<Suggestion> selectSearList(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Suggestion> selectSearList(PageInfo pi, Search search) {
+		return sStore.selectSearList(pi, search);
 	}
 
 	@Override
 	public int insertAnswer(Answer answer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sStore.insertAnswer(answer);
 	}
 
 	@Override

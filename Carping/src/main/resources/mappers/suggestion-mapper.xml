@@ -11,6 +11,33 @@
 		<result property="memberId" column="MEMBER_ID"></result>
 	</resultMap>
 	
+	<resultMap type="Answer" id="AnswerResultMap">
+		<id property="answerKey" column="ANSWER_KEY"></id>
+		<result property="answerTitle" column="ANSWER_TITLE"></result>
+		<result property="answerContent" column="ANSWER_CONTENT"></result>
+		<result property="answerEnrollDate" column="ANSWER_ENROLL_DATE"></result>
+		<result property="suggestionKey" column="SUGGESTION_KEY"></result>
+	</resultMap>
+	
+	<select id="getSugListCount" resultType="int">
+		SELECT COUNT(*) FROM SUGGESTION 
+	</select>
+	
+	<select id="getSearchList" resultType="int">
+		SELECT COUNT(*) FROM SUGGESTION
+		<where>
+			<if test="searchCondition.toString() == '제목'">
+				SUGGESTION_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				SUGGESTION_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+	</select>
+	
 	<select id="selectList" resultMap="SuggestionResultMap">
 		SELECT * FROM SUGGESTION ORDER BY  SUGGESTION_KEY DESC
 	</select>
@@ -31,5 +58,37 @@
 		WHERE SUGGESTION_KEY = #{suggestionKey}
 	</select>
 	
+	<update id="updateSug">
+		UPDATE SUGGESTION SET
+		SUGGESTION_TITLE = #{suggestionTitle}, SUGGESTION_CONTENT = #{suggestionContent}
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</update>
+	
+	
+	<delete id="deleteSug">
+		DELETE FROM SUGGESTION
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</delete>
+	
+	<select id="searchSugList" resultMap="SuggestionResultMap">
+		SELECT * FROM SUGGESTION
+		<where>
+			<if test="searchCondition.toString() == '제목'">
+				SUGGESTION_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				SUGGESTION_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+		ORDER BY SUGGESTION_KEY DESC
+	</select>
+	
+	<insert id="insertAnswer">
+		INSERT INTO ANSWER VALUES
+		(SEQ_ANSKEY.NEXTVAL, #{answerTitle}, #{answerContent}, SYSDATE, #{suggestionKey})
+	</insert>
 
 </mapper>

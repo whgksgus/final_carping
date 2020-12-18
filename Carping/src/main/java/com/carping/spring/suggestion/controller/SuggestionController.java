@@ -33,9 +33,12 @@ public class SuggestionController {
 		}
 	
 	// 건의사항 수정 페이지로 이동
-	@RequestMapping(value="sugUpdate.do", method=RequestMethod.GET)
-	public String sugInfoView() {
-		return "suggestion/sugList";
+	@RequestMapping(value="sugUpdateView.do", method=RequestMethod.GET)
+	public ModelAndView sugUpdateView(ModelAndView mv, int suggestionKey) {
+		Suggestion sug = sService.selectOne(suggestionKey);
+		mv.addObject("sList", sug);
+		mv.setViewName("suggestion/sugUpdate");
+		return mv;
 	}
 	
 	// 건의사항 리스트
@@ -89,20 +92,70 @@ public class SuggestionController {
 		return url;
 	}
 	
-	public String modifySug(Suggestion suggestion, Model model) {
-		return "";
+	// 건의사항 수정 메소드
+	@RequestMapping(value="sugUpdate.do", method=RequestMethod.POST)
+	public ModelAndView updateSug(ModelAndView mv, Suggestion suggestion, Model model, int suggestionKey) {
+		int result = sService.modifySug(suggestion);
+		Suggestion sug = sService.selectOne(suggestionKey);
+		if(result > 0) {
+			mv.addObject("sList", sug);
+			mv.setViewName("suggestion/sugDetail");
+		}else {
+			mv.addObject("msg", "건의사항 수정 실패! 새로고침 후 다시 실행해주세요");
+			mv.addObject("url", "javascript:history.back();");
+			mv.setViewName("common/redirect");
+		}
+		return mv;
 	}
 	
-	public String deleteSug(int suggestionKey, Model model) {
-		return "";
+	// 건의사항 삭제 메소드
+	@RequestMapping(value="sugDelete.do", method=RequestMethod.GET)
+	public ModelAndView deleteSug(ModelAndView mv, int suggestionKey, Model model) {
+		int result = sService.deleteSug(suggestionKey);
+		if(result > 0) {
+			mv.setViewName("redirect:selectList.do");
+		}else {
+			mv.addObject("msg", "건의사항 삭제 실패! 새로고침 후 다시 실행해주세요");
+			mv.setViewName("redirect:selectList.do");
+		}
+		return mv;
 	}
 	
-	public String selectSearchList(Search search, Model model) {
-		return "";
+	// 건의사항 검색 메소드
+	@RequestMapping(value="sugSearchList.do", method=RequestMethod.GET)
+	public String selectSearchList(Search search, Model model, Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount = sService.getSugSearchList(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		int pageNum = listCount - (currentPage -1) * pi.getListLimit();
+		ArrayList<Suggestion> sugsearch = sService.selectSearList(pi, search);
+		if(!sugsearch.isEmpty()) {
+			model.addAttribute("sList", sugsearch);
+			model.addAttribute("search", search);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("pi", pi);
+			return "suggestion/sugList";
+		}else {
+			return "suggestion/sugList";
+		}
 	}
 	
-	public String insertAnswer(Answer answer, Model model) {
-		return "";
+		// 건의사항 답변 등록
+		@RequestMapping(value="insertAnswerView.do", method=RequestMethod.GET)
+		public String insertAnswerView(Model model, int suggestionKey) {
+			model.addAttribute("suggestionKey", suggestionKey);
+			return "suggestion/answerInsert";
+		}
+	
+	// 건의사항 답변 등록
+	@RequestMapping(value="insertAnswer.do", method=RequestMethod.POST)
+	public String insertAnswer(Answer answer, Model model, int suggestionKey) {
+		int result = sService.insertAnswer(answer);
+		Suggestion sug = sService.selectOne(suggestionKey);
+		if(result > 0) {
+			
+		}
+		return "suggestion/sugList";
 	}
 	
 	public String selectAnswer(int suggestionKey, Model model) {

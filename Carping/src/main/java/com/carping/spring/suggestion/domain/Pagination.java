@@ -9,7 +9,7 @@ public class Pagination {
       int startPage;      
       int endPage;      
       
-      int itemLimit = 8; // 한 페이지에 보여줄 상품 갯수
+      int itemLimit = 10; // 한 페이지에 보여줄 상품 갯수
       
       maxPage = (int)((double)listCount / itemLimit + 0.9);
       
