@@ -64,7 +64,7 @@
 	</c:url>
 	<c:url var="arUpdate" value="areaReviewUpdateView.do">
 		<c:param name="arKey" value="${areview.arKey }"></c:param>
-		<c:param name="alaceKey" value="${areaKey }"></c:param>
+		<c:param name="areaKey" value="${areaKey }"></c:param>
 	</c:url>
 	<c:url var="arList" value="areaReviewListView.do">
     	<c:param name="areaKey" value="${areaKey }"></c:param>

@@ -182,6 +182,8 @@ public class AreaReviewController {
 			@RequestMapping(value="areaReviewUpdate.do", method=RequestMethod.POST)
 			public ModelAndView areaReviewUpdate(ModelAndView mv, AreaReview ar, int arKey, int areaKey, HttpServletRequest request,
 					@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile) {
+				System.out.println("t1"+arKey);
+				System.out.println("t2"+areaKey);
 				if(reloadFile != null && !reloadFile.isEmpty()) {
 					deleteFile(ar.getArPhoto(), request);
 				}
