@@ -9,6 +9,7 @@
 		<result property="suggestionEnrollDate" column="SUGGESTION_ENROLL_DATE"></result>
 		<result property="suggestionCount" column="SUGGESTION_COUNT"></result>
 		<result property="memberId" column="MEMBER_ID"></result>
+		<result property="answerCheck" column="ANSWER_CHECK"></result>
 	</resultMap>
 	
 	<resultMap type="Answer" id="AnswerResultMap">
@@ -44,7 +45,7 @@
 	
 	<insert id="insertSug">
 		INSERT INTO SUGGESTION VALUES
-		(SEQ_SUGKEY.NEXTVAL, #{suggestionTitle}, #{suggestionContent}, SYSDATE, #{suggestionCount}, #{memberId})
+		(SEQ_SUGKEY.NEXTVAL, #{suggestionTitle}, #{suggestionContent}, SYSDATE, #{suggestionCount}, #{memberId}, #{answerCheck})
 	</insert>
 	
 	<update id="sugHitsCount">
@@ -90,5 +91,27 @@
 		INSERT INTO ANSWER VALUES
 		(SEQ_ANSKEY.NEXTVAL, #{answerTitle}, #{answerContent}, SYSDATE, #{suggestionKey})
 	</insert>
+	
+	<select id="selectAnswer" resultMap="AnswerResultMap">
+		SELECT * FROM ANSWER
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</select>
+	
+	<delete id="deleteAnswer">
+		DELETE FROM ANSWER
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</delete>
+	
+	<update id="updateOne">
+		UPDATE SUGGESTION SET
+		ANSWER_CHECK = 1
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</update>
+	
+	<update id="updateZero">
+		UPDATE SUGGESTION SET
+		ANSWER_CHECK = 0
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</update>
 
 </mapper>

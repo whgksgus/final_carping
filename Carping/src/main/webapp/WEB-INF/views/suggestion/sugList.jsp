@@ -48,7 +48,12 @@
 			<td>${sList.memberId }</td>
 			<td>${sList.suggestionEnrollDate }</td>
 			<td>${sList.suggestionCount }</td>
-			<td></td>
+			<c:if test="${sList.answerCheck eq 0 }">
+			<td>X</td>
+			</c:if>
+			<c:if test="${sList.answerCheck eq 1 }">
+			<td>O</td>
+			</c:if>
 		</tr>
 		</c:forEach>
 		</c:if>

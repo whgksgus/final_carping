@@ -53,7 +53,7 @@
 	<br>
 	<script>
 	function Add() {
-		return confirm("리뷰를 등록하시겠습니까?")
+		return confirm("건의사항을 등록하시겠습니까?")
 		}
 	</script>
 </body>

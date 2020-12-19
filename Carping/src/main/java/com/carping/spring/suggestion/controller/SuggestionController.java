@@ -65,8 +65,10 @@ public class SuggestionController {
 	public ModelAndView selectOne(ModelAndView mv, int suggestionKey) {
 		sService.sugCount(suggestionKey);
 		Suggestion sug = sService.selectOne(suggestionKey);
+		Answer answer = sService.selectAnswer(suggestionKey);
 		if (sug != null) {
 			mv.addObject("sList", sug);
+			mv.addObject("answer", answer);
 			mv.setViewName("suggestion/sugDetail");
 		}else {
 			mv.addObject("msg", "건의사항 상세보기 실패!");
@@ -140,29 +142,45 @@ public class SuggestionController {
 		}
 	}
 	
-		// 건의사항 답변 등록
-		@RequestMapping(value="insertAnswerView.do", method=RequestMethod.GET)
-		public String insertAnswerView(Model model, int suggestionKey) {
-			model.addAttribute("suggestionKey", suggestionKey);
-			return "suggestion/answerInsert";
-		}
-	
+	// 건의사항 답변 등록화면
+	@RequestMapping(value="insertAnswerView.do", method=RequestMethod.GET)
+	public String insertAnswerView(Model model, int suggestionKey) {
+		model.addAttribute("suggestionKey", suggestionKey);
+		return "suggestion/answerInsert";
+	}
+
 	// 건의사항 답변 등록
 	@RequestMapping(value="insertAnswer.do", method=RequestMethod.POST)
-	public String insertAnswer(Answer answer, Model model, int suggestionKey) {
+	public ModelAndView insertAnswer(ModelAndView mv, Answer answer, Model model, int suggestionKey) {
 		int result = sService.insertAnswer(answer);
+		sService.updateOne(suggestionKey);
+		Suggestion sug = sService.selectOne(suggestionKey);
+		Answer ans = sService.selectAnswer(suggestionKey);
+		if(result > 0) {
+			mv.addObject("sList", sug);
+			mv.addObject("answer", ans);
+			mv.setViewName("suggestion/sugDetail");
+		}else {
+			mv.addObject("msg", "답변 등록에 실패하였습니다");
+			mv.addObject("url", "javascript:history.back();");
+			mv.setViewName("common/redirect");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="deleteAnswer.do", method=RequestMethod.GET)
+	// 건의사항 답변 삭제
+	public String deleteAnswer(int suggestionKey, Model model) {
+		int result = sService.deleteAnswer(suggestionKey);
+		sService.updateZero(suggestionKey);
 		Suggestion sug = sService.selectOne(suggestionKey);
 		if(result > 0) {
-			
+			model.addAttribute("sList", sug);
+			return "suggestion/sugDetail";
+		}else {
+			model.addAttribute("msg", "답변 삭제에 실패하였습니다.");
+			model.addAttribute("url", "javascript:history.back();");
+			return "common/redirect";
 		}
-		return "suggestion/sugList";
-	}
-	
-	public String selectAnswer(int suggestionKey, Model model) {
-		return "";
-	}
-	
-	public String deleteAnswer(int suggestionKey, Model model) {
-		return "";
 	}
 }
