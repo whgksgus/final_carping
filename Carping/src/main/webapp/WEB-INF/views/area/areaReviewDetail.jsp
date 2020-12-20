@@ -6,75 +6,187 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰게시판 - 상세보기</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css'
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
-<body>
-	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<br>
-	<br>
+<style>
+.star-rating {
+	width: 205px;
+}
 
-	<div style="margin-left: 100px;">
-		<h2 class="h2">리뷰게시판 - 상세보기</h2>
-		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+.star-rating, .star-rating span {
+	display: inline-block;
+	height: 39px;
+	overflow: hidden;
+	background: url(../../../resources/images/star.png) no-repeat;
+}
+
+.star-rating span {
+	background-position: left bottom;
+	line-height: 0;
+	vertical-align: top;
+}
+
+#star {
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#star div {
+	float: left;
+}
+</style>
+<body>
+	<div id="ex1" class="modal" align="center"
+		style="text-align: center; width: 500px; height: 500px; padding: 0px;">
+		<img src="../../../resources/areaImage/${areview.arPhoto}"
+			style="width: 500px; height: 500px;">
 	</div>
-	<br>
-                <div style="font-size:20px; margin: 0px auto; width:60%;">
-                	  ${areview.arTitle }
-                </div>
-                <br>
-                <textarea style="font-size:20px; resize:none; margin-left:150px; width: 60%; height: 270px;" readonly>${areview.arContent }
-                </textarea>
-                <br>
-                <c:if test="${areview.arPhoto ne null }">
-                <img style="margin-left:150px;" width="500px" height="300px" src="../../../resources/areaImage/${areview.arPhoto }"/>
-                </c:if>
-                <br>
-                
-                <div style="margin-left:150px;">
-  					별점 : ${areview.arScore }              
-                </div>
-	<br>
-	<br>
-	<!-- 댓글 목록 -->
-	<table align="center" width="500" border="1" cellspacing="0" id="arctb">
-		<thead>
-		<tr>
-			<td colspan="4"><b id="arcCount"></b></td>
-		</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
-	<br>
-	<!-- 댓글 등록 -->
-	<table style="margin: 0 auto;">
-	<tr>
-			<td>
-				<input type="text" id="content">
-				<button id="submit">등록하기</button>
-			</td>
-	<tr>
-	</table>
-	
-	
-	<br>
-	<div align="center">
-	<c:url var="arDelete" value="areaReviewDelete.do">
-		<c:param name="arKey" value="${areview.arKey }"></c:param>
-		<c:param name="areaKey" value="${areaKey }"></c:param>
-	</c:url>
-	<c:url var="arUpdate" value="areaReviewUpdateView.do">
-		<c:param name="arKey" value="${areview.arKey }"></c:param>
-		<c:param name="areaKey" value="${areaKey }"></c:param>
-	</c:url>
-	<c:url var="arList" value="areaReviewListView.do">
-    	<c:param name="areaKey" value="${areaKey }"></c:param>
-    </c:url>
-		<c:if test="${areview.memberId eq loginUser.memberId }"><a href="${arUpdate }">수정하기</a></c:if>
-		<c:if test="${areview.memberId eq loginUser.memberId }"><a onclick="return Del();" href="${arDelete }">삭제하기</a></c:if>
-		<a href="${arList }">목록으로</a>
-    </div>
-	
-	
+	<jsp:include page="../common/nav.jsp"></jsp:include>
+	<section style="margin-top: 40px;">
+
+		<div style="margin-left: 100px;">
+			<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰게시판 - 상세보기</h3>
+			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+		</div>
+		<br><br>
+		<article>
+
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 vcenter">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" readonly="readonly" value="${areview.arTitle }" class="col-md-8 form-control align-self-center" style="width : 50%;">
+						<div id='star'>
+						<div id="stars">
+							<span class='star-rating'>
+								<c:choose>
+									<c:when test="${areview.arScore == 1}">
+										<span style ='width:20%;'>
+										</span>
+									</c:when>
+									<c:when test="${areview.arScore == 2}">
+										<span style ='width:40%;'>
+										</span>
+									</c:when>
+									<c:when test="${areview.arScore == 3}">
+										<span style ='width:60%;'>
+										</span>
+									</c:when>
+									<c:when test="${areview.arScore == 4}">
+										<span style ='width:80%;'>
+										</span>
+									</c:when>
+									<c:otherwise>
+										<span style ='width:100%;'>
+										</span>
+									</c:otherwise>
+								</c:choose>
+								</span>
+					</div>
+				</div>
+					</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${areview.arContent }</textarea>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">사진</label>
+					
+					<c:choose>
+						<c:when test="${areview.arPhoto eq null}">
+							<p style="font-family: 'Sunflower', sans-serif;">첨부파일이 없습니다.</p>
+							
+						</c:when>
+						<c:otherwise>
+							<a id="modalTag" href="#ex1" rel="modal:open"><img src="../../../resources/images/camera.jpg" style="width: 40px; height: 40px;"></a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br><br>
+			<!--   -->
+			<div class="container"  style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">댓글</label>
+					<table id="frctb" class="col-md-6 table table-bordered" style="width: 560px;">
+						<thead>
+							<tr>
+								<td colspan="4"><b id="arcCount"></b></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+				<div class="col-md-2"></div>
+				<div class="col-md-9" style="margin-left: -20px;">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">
+						
+					</label>
+					<table class="col-md-6 table table-bordered" style="width: 560px;">
+						<thead>
+							<tr>
+								<td>
+									<textarea id="content" rows="5" cols="10" style="width: 543px; height: 67px; resize: none;"></textarea>
+								</td>
+								<td>
+									<button class="btn btn-default" style="width: 70px; height: 70px;" id="submit">등록</button>
+								</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+				<div class="col-md-2"></div>
+				<div class="col-md-8" style="margin-left: -30px;">
+					<div class="col-md-3"></div>
+					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<c:if test="${areview.memberId eq loginUser.memberId}">
+						<c:url var="arUpdate" value="areaReviewUpdateView.do">
+							<c:param name="arKey" value="${areview.arKey}"></c:param>
+							<c:param name="areaKey" value="${areaKey }"></c:param>
+						</c:url>
+						<c:url var="arDelete" value="areaReviewDelete.do">
+							<c:param name="arKey" value="${areview.arKey}"></c:param>
+							<c:param name="areaKey" value="${areaKey}"></c:param>
+						</c:url>
+						<div class="col-md-1"></div>
+						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return upChk();">수정</button>
+						<div class="col-md-1"></div>
+						<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return chk();">삭제</button>
+					</c:if>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</article>
+	</section>
 	<script>
 		$(function() {
 			getReplyList();
@@ -121,7 +233,7 @@
 					// db에 있는 데이터를 json형태로 가져와서
 					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
 					$tableBody = $("#arctb tbody");
-						$tableBody.html("<th>작성자</th><th>내용</th><th>작성일자</th><th>삭제</th></tr>"); // tbody에 존재하는 값을 초기화
+					$tableBody.html("<th>작성자</th><th>내용</th><th>작성일자</th><th>삭제</th></tr>"); // tbody에 존재하는 값을 초기화
 					var $tr;
 					var $arcWriter;
 					var $arcContent;
@@ -150,7 +262,6 @@
 					} else {
 						$tr = $("<tr>");
 						$arcContent = $("<td colspan='4'>").text("등록된 댓글이 없습니다.");
-						
 						$tr.append($arcContent); // <tr><td colspan='3'>no reply</td></tr>
 						$tableBody.append($tr);
 					}
@@ -159,28 +270,39 @@
 			
 		}
 		
-//		$("#prcDelete").on("click", function() {
 		function arcDelete(arcKey) {
-			$.ajax({
-				url : "arCommentDelete.do",
-				type : "get",
-				data : {"arcKey" : arcKey},
-				success : function(data) {
-					if (data == "success") {
-						getReplyList(); // 댓글리스트를 불러오는 function 추가
-						$("#content").val("");
-					}else {
-						alert("댓글 삭제 실패..");
+			var question = confirm("삭제하시겠습니까?");
+			if(question){
+				$.ajax({
+					url : "arCommentDelete.do",
+					type : "get",
+					data : {"arcKey" : arcKey},
+					success : function(data) {
+						if (data == "success") {
+							getReplyList(); // 댓글리스트를 불러오는 function 추가
+							$("#content").val("");
+						}else {
+							alert("댓글 삭제 실패..");
+						}
 					}
-				}
-			});
+				});
+			}
 		};
-	</script>
-	<script>
-		function Del() {
-			return confirm("리뷰를 삭제하시겠습니까?")
+		function back(){
+			location.href="areaReviewListView.do?areaKey="+${areview.areaKey};
 		}
-		
-		</script>		
+		function upChk(){
+			location.href="${arUpdate}";
+		}
+		function chk(){
+			var question = confirm("게시글을 삭제하시겠어요?");
+			if(question){
+				location.href='${arDelete}';
+				return true;
+			}else{
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>
