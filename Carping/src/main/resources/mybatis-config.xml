@@ -18,6 +18,11 @@
         <typeAlias type="com.carping.spring.foodzone.domain.TakeOut" alias="TakeOut"/>
         <typeAlias type="com.carping.spring.suggestion.domain.Suggestion" alias="Suggestion"/>
       <typeAlias type="com.carping.spring.foodzone.domain.TakeOutReserve" alias="TakeOutReserve"/>
+      <typeAlias type="com.carping.spring.suggestion.domain.Answer" alias="Answer"/>
+      <typeAlias type="com.carping.spring.foodzone.domain.FoodZoneReviewComment" alias="foodZoneReviewComment"/>
+      <typeAlias type="com.carping.spring.foodzone.domain.Tor" alias="Tor"/>
+      <typeAlias type="com.carping.spring.board.domain.Board" alias="Board"/>
+      <typeAlias type="com.carping.spring.board.domain.BoardReply" alias="BoardReply"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/notice-mapper.xml"/>
@@ -30,5 +35,6 @@
 		<mapper resource="mappers/notice-mapper.xml"/>
       	<mapper resource="mappers/cart-mapper.xml"/>
       	<mapper resource="mappers/suggestion-mapper.xml"/>
+      	<mapper resource="mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>

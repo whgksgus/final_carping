@@ -5,29 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰게시판 - 맛집 검색페이지</title>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<title>자유게시판</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 </head>
-
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-
-	<section style="margin-top: 40px;">
-		<article>
-			<h3>맛집 리뷰리스트</h3>
-			<br><br><br>
-			
-			
-				<div class="container">
-				<div class="col-md-1"></div>
+	<div class="blogs" id="blogs" style="padding: 30px; 30px;">
+		<div class="container">
+		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">자유게시판</h3>
+		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s">회원들과 자유롭게 소통을 나눠보세요</p>
+		</div>
+		<div class="container">
+			<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<table class="table table-striped">
 							<tr>
@@ -37,25 +27,24 @@
 								<th class="col-md-1 text-center">조회수</th>
 								<th class="col-md-2 text-center">작성날짜</th>
 							</tr>
-							<c:if test="${fzrList eq null || empty fzrList}">
+							<c:if test="${bList eq null || empty bList}">
 								<tr>
-									<td colspan="5" class="col-md-12 text-center">등록된 리뷰가 없어요~</td>
+									<td colspan="5" class="col-md-12 text-center">등록된 글이 없어요~</td>
 								</tr>
 							</c:if>
-							<c:if test="${fzrList ne null && !empty fzrList }">
-								<c:forEach items="${fzrList}" var="list" varStatus="status">
+							<c:if test="${bList ne null && !empty bList }">
+								<c:forEach items="${bList}" var="bList" varStatus="status">
 									<tr>
 										<td>${pageNum - status.index }</td>
 										<td>
-											<c:url var="fzrDetail" value="foodZoneReviewDetail.do">
-												<c:param name="frKey" value="${list.frKey }"></c:param>
-												<c:param name="foodZoneKey" value="${list.foodZoneKey }"></c:param>
+											<c:url var="boardDetail" value="boardDetail.do">
+												<c:param name="boardKey" value="${bList.boardKey}"></c:param>
 											</c:url>
-											<a href="${fzrDetail }">${list.frTitle }</a>
+											<a href="${boardDetail }">${bList.boardTitle}</a>
 										</td>
-										<td>${list.memberId }</td>
-										<td>${list.frHits }</td>
-										<td>${list.frRegDate}</td>
+										<td>${bList.memberId }</td>
+										<td>${bList.boardCount }</td>
+										<td>${bList.boardEnrollDate}</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -63,11 +52,11 @@
 					</div>
 				<div class="com-md-1"></div>
 				</div>
-			<form action="foodZoneReviewInsertForm.do" method="get">
+			<form action="BoardInsertForm.do" method="get">
 				<div class="container" style="margin-left: 210px;">
 					<div class="col-md-10"></div>
-					<div class="col-md-1"><input type="submit" class="btn btn-info" value="리뷰 작성"></div>
-					<div class="col-md-1"><input type="hidden" name="foodZoneKey" value="${foodZoneKey}"></div>
+					<div class="col-md-1"><input type="submit" class="btn btn-info" value="글 작성"></div>
+					<div class="col-md-1"><%-- <input type="hidden" name="foodZoneKey" value="${foodZoneKey}"> --%></div>
 				</div>
 			</form>
 			<div class="container">
@@ -77,9 +66,8 @@
 						<li class="page-item"><a href="javascript:void(0);" class="page-link">이전</a></li>
 					</c:if>
 					<c:if test="${pi.currentPage>1}">
-						<c:url var="before" value="foodZoneReviewListView.do">
+						<c:url var="before" value="BoardInfo.do">
 							<c:param name="page" value="${pi.currentPage-1}"></c:param>
-							<c:param name="foodZoneKey" value="${foodZoneKey}"></c:param>
 						</c:url>
 						
 							<li class="page-item"><a href="${before}" class="page-link">이전</a></li>
@@ -89,9 +77,8 @@
 							<li class="page-item"><a href="javascript:void(0);" class="page-link">${p}</a></li>
 						</c:if>
 						<c:if test="${pi.currentPage != p }">
-							<c:url var="pagination" value="foodZoneReviewListView.do">
+							<c:url var="pagination" value="BoardInfo.do">
 								<c:param name="page" value="${p}"></c:param>
-								<c:param name="foodZoneKey" value="${foodZoneKey }"></c:param>
 							</c:url>
 							<li class="page-item"><a href="${pagination}" class="page-link">${p}</a></li>
 						</c:if>
@@ -100,9 +87,8 @@
 						<li class="page-item"><a href="javascript:void(0);" class="page-link">다음</a></li>
 					</c:if>
 					<c:if test="${pi.currentPage<pi.maxPage }">
-						<c:url var="after" value="foodZoneReviewListView.do">
+						<c:url var="after" value="BoardInfo.do">
 							<c:param name="page" value="${pi.currentPage + 1}"></c:param>
-							<c:param name="foodZoneKey" value="${foodZoneKey}"></c:param>
 						</c:url>
 						<li class="page-item"><a href="${after}" class="page-link">다음</a></li>
 					</c:if>
@@ -112,8 +98,7 @@
 			</div>
 			<br><br>
 			
-			 <form action="searchFoodZoneBoardReview.do">
-			 <input type="hidden" name="foodZoneKey" value=${foodZoneKey }>
+			 <form action="searchBoard.do">
 				  	<div class="container">
 				  	<div class="col-md-2"></div>
 				  	<div class="col-md-8">
@@ -134,7 +119,8 @@
 				  	
 				  </div>
 			  </form>
-		</article>
-	</section>
+		</div>    
+		   
+	</div>
 </body>
 </html>

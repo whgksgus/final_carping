@@ -3,6 +3,7 @@ package com.carping.spring.foodzone.store;
 import java.util.ArrayList;
 
 import com.carping.spring.common.Search;
+import com.carping.spring.foodzone.domain.BoardSearch;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.FoodZoneReviewComment;
@@ -21,4 +22,5 @@ public interface FoodZoneReviewStore {
 	public int deleteFoodZoneReviewComment(int frcKey);
 	public int getListCount(int foodZoneKey);
 	public int foodZoneReviewHits(int frKey);
+	public ArrayList<FoodZoneReview> searchFoodZoneBoardReview(PageInfo pi, BoardSearch boardSearch);
 }

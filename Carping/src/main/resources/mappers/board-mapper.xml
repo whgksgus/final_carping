@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BoardMapper">
+	<resultMap type="Board" id="BoardResultMap">
+		<id property="boardKey" column="BOARD_KEY"/>
+		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="boardContent" column="BOARD_CONTENT"/>
+		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE"/>
+		<result property="boardModifyDate" column="BOARD_MODIFY_DATE"/>
+		<result property="boardCount" column="BOARD_COUNT"/>
+		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
+	<resultMap type="BoardReply" id="BoardReplyResultMap">
+		<id property="brKey" column="BR_KEY"/>
+		<result property="brContent" column="BR_CONTENT"/>
+		<result property="boardKey" column="BOARD_KEY"/>
+		<result property="brWriter" column="BR_WRITER"/>
+		<result property="brRegDate" column="BR_REGDATE"/>
+		<result property="brStatus" column="BR_STATUS"/>
+	</resultMap>
+	<select id="getBoardListCount" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	<select id="selectList" resultMap="BoardResultMap">
+		SELECT * FROM BOARD ORDER BY BOARD_KEY DESC
+	</select>
+	
+	<insert id="insertBoard">
+		INSERT INTO BOARD VALUES(SEQ_BKEY.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, #{boardCount}, #{memberId}, SYSDATE)
+	</insert>
+	
+	<select id="selectOne" resultMap="BoardResultMap">
+		SELECT * FROM BOARD WHERE BOARD_KEY = #{boardKey}
+	</select>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD WHERE BOARD_KEY = #{boardKey}
+	</delete>
+	
+	<update id="updateBoard">
+		UPDATE BOARD SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, BOARD_MODIFY_DATE = SYSDATE WHERE BOARD_KEY = #{boardKey}
+	</update>
+	
+	<select id="selectReplyList" resultMap="BoardReplyResultMap">
+		SELECT * FROM BOARD_REPLY WHERE BOARD_KEY=#{boardKey} AND BR_STATUS='Y' ORDER BY BR_KEY ASC
+	</select>
+	
+	<insert id="insertReply">
+		INSERT INTO BOARD_REPLY VALUES(SEQ_BRKEY.NEXTVAL, #{brContent}, #{boardKey}, #{brWriter}, SYSDATE, 'Y')
+	</insert>
+	
+	<delete id="deleteReply">
+		DELETE FROM BOARD_REPLY WHERE BR_KEY=#{brKey}
+	</delete>
+	<select id="searchListCount" resultType="int">
+		 SELECT COUNT(*) FROM BOARD
+   <where>
+   		<if test="searchCondition.toString() == '제목'">
+				BOARD_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				BOARD_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+   </where>
+	</select>
+	<select id="searchBoardList" resultMap="BoardResultMap">
+		 SELECT * FROM BOARD
+   <where>
+   		<if test="searchCondition.toString() == '제목'">
+				BOARD_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				BOARD_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+   </where>
+	</select>
+</mapper>

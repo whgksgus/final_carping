@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.carping.spring.foodzone.domain.BoardSearch;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.domain.TakeOutReserve;
+import com.carping.spring.foodzone.domain.Tor;
 import com.carping.spring.foodzone.store.FoodZoneStore;
 
 @Service
@@ -83,6 +85,17 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 		int result = fzStore.insertTakeout(tor);
 		
 		return result;
+	}
+
+	@Override
+	public ArrayList<Tor> selectTakeOutReserve(String memberId) {
+		// TODO Auto-generated method stub
+		return fzStore.selectTakeOutReserve(memberId);
+	}
+
+	@Override
+	public int getSearchReviewListCount(BoardSearch boardSearch) {
+		return fzStore.getSearchReviewListCount(boardSearch);
 	}
 
 

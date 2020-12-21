@@ -37,7 +37,7 @@
 		
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 	<section style="margin-top: 40px; ">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">${foodZone.foodZoneName } 리뷰 상세보기</h3>
+		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰 상세보기</h3>
 		<br><br>
 		<article>
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
@@ -102,31 +102,179 @@
 				<div class="col-md-2"></div>
 			</div>
 			<br><br>
+			<!--   -->
+			<div class="container"  style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">댓글</label>
+					<table id="frctb" class="col-md-6 table table-bordered" style="width: 560px;">
+						<thead>
+							<tr>
+								<td colspan="4"><b id="frcCount"></b></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+				<div class="col-md-2"></div>
+				<div class="col-md-9" style="margin-left: -20px;">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">
+						
+					</label>
+					<table class="col-md-6 table table-bordered" style="width: 560px;">
+						<thead>
+							<tr>
+								<td>
+									<textarea id="content" rows="5" cols="10" style="width: 543px; height: 67px; resize: none;"></textarea>
+								</td>
+								<td>
+									<button class="btn btn-default" style="width: 70px; height: 70px;" id="submit">등록</button>
+								</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<br><br>
 			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-3"></div>
 					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
 					<c:if test="${fReview.memberId eq loginUser.memberId}">
+						<c:url var="frUpdate" value="foodZoneReviewUpdate.do">
+							<c:param name="frKey" value="${fReview.frKey}"></c:param>
+							<c:param name="foodZoneKey" value="${foodZoneKey }"></c:param>
+						</c:url>
+						<c:url var="frDelete" value="foodZoneReviewDelete.do">
+							<c:param name="frKey" value="${fReview.frKey}"></c:param>
+							<c:param name="foodZoneKey" value="${foodZoneKey}"></c:param>
+						</c:url>
 						<div class="col-md-1"></div>
-						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="">수정</button>
+						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return upChk();">수정</button>
 						<div class="col-md-1"></div>
 						<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return chk();">삭제</button>
 					</c:if>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
+			
+			
 		</article>
 	</section>
 	<script>
+		$(function(){
+			getReplyList();
+			setInterval(function(){
+				getReplyList();
+			}, 3000);
+			$("#submit").on("click", function(){
+				var frcContent = $("#content").val();
+				var frKey = ${fReview.frKey};
+				if(frcContent == ""){
+					alert('댓글을 입력해주세요')
+				}else{
+					$.ajax({
+						url : "frCommentAdd.do",
+						type : "post",
+						data : {"frcContent" : frcContent, "frKey" : frKey},
+						success : function(data){
+							if(data == "success"){
+								getReplyList();
+								$("#content").val('');
+							}else{
+								alert("등록 실패");
+							}
+						}
+					});
+				}
+			});
+		})
+		
+		function getReplyList(){
+			
+			var frKey = ${fReview.frKey};
+			$.ajax({
+				url : "frCommentList.do",
+				type : "get",
+				data : {"frKey" : frKey},
+				dataType : "json",
+				success : function(data){
+					$tableBody = $("#frctb tbody");
+					$tableBody.html("<tr><th width='100px;' class='text-center'>작성자</th><th>내용</th><th width='110px;' class='text-center'>작성일자</th><th width='70px;' class='text-center'>삭제</th></tr>");
+					var $tr;
+					var $frcWriter;
+					var $frcContent;
+					var $frcRegDate;
+					var $frcDelete;
+					
+					$("#frcCount").text("댓글 "+data.length);
+					if(data.length>0){
+						for(var i in data){
+							var checkId = '${loginUser.memberId}';
+							$tr = $("<tr>");
+							$frcWriter = $("<td>").text(data[i].frcWriter);
+							$frcContent = $("<td>").text(decodeURIComponent(data[i].frcContent).replace(/\+/g, " "));
+							$frcRegDate = $("<td>").text(data[i].frcRegDate);
+							$memberId = data[i].frcWriter;
+							if(checkId == $memberId){
+								$frcDelete = $("<td><button style = 'padding : 0px 20px;' class='btn btn-danger' id='frcDelete' onclick='frcDelete("+data[i].frcKey+");'>X</button>");
+							}else{
+								$frcDelete = $("<td>");
+							}
+							$tr.append($frcWriter);
+							$tr.append($frcContent);
+							$tr.append($frcRegDate);
+							$tr.append($frcDelete);
+							$tableBody.append($tr);
+						}
+					}else{
+						$tr = $("<tr>");
+						$frcContent = $("<td colspan='4'>").text("등록된 댓글이 없어요");
+						$tr.append($frcContent);
+						$tableBody.append($tr);
+					}
+				}
+			})
+		}
+		function frcDelete(frcKey) {
+			var question = confirm("삭제하시겠습니까?");
+			if(question){
+				$.ajax({
+					url : "frCommentDelete.do",
+					type : "get",
+					data : {"frcKey" : frcKey},
+					success : function(data) {
+						if (data == "success") {
+							alert('삭제되었습니다.');
+							getReplyList(); // 댓글리스트를 불러오는 function 추가
+							$("#content").val("");
+						}else {
+							alert("댓글 삭제 실패..");
+						}
+					}
+				});
+			}
+			
+		};
 		function back(){
 			location.href="foodZoneReviewListView.do?foodZoneKey="+${fReview.foodZoneKey};
 		}
-		
+		function upChk(){
+			location.href="${frUpdate}";
+		}
 		function chk(){
 			var question = confirm("게시글을 삭제하시겠어요?");
 			if(question){
-				location.href="foodZoneReviewListDelete.do?frKey="+${fReview.foodZoneKey};
+				location.href='${frDelete}';
+				return true;
 			}else{
 				return false;
 			}
