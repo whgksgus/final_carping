@@ -5,57 +5,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>건의사항 - 수정</title>
+<title>건의사항 수정</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<br>
-	<br>
-
-	<div style="margin-left: 100px;">
-		<h2 class="h2">건의사항 - 수정</h2>
-		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
-	</div>
-	<br>
-	
+	<section style="margin-top: 40px;">
+		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 수정</h3>
+		<br><br>
 	<form action="sugUpdate.do" method="post">
-		
-      <table align="center">
-         <tr>
-            <td><input type="text" name="suggestionTitle" placeholder="제목을 입력해주세요" size="50" required value="${sList.suggestionTitle }"></td>
-         </tr>
-         <tr>
-            <td><textarea placeholder="내용을 입력해주세요" cols="50" rows="7" name="suggestionContent" style="resize:none" required>${sList.suggestionContent }</textarea></td>
-         </tr>
-         <tr>
-            <td colspan="2" align="center">
-               <input type="submit" onclick="return Update();" value="수정"> &nbsp;
-               <a href="javascript:history.go(-1);">이전페이지로</a>
-            </td>
-         </tr>
-      </table>
-      <input type="hidden" name="memberId" value="${loginUser.memberId }">
-      <input type="hidden" name="suggestionKey" value="${sList.suggestionKey }">
+		<input type="hidden" name="memberId" value="${loginUser.memberId }">
+		<input type="hidden" name="suggestionKey" value="${sList.suggestionKey }">
+		<article>
+			<div class="container" style="font-family:'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 vcenter">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" name="suggestionTitle" placeholder="제목을 입력해주세요" required class="col-md-8 form-control align-self-center" style="width : 564px;" value="${sList.suggestionTitle }">
+				</div><br><br>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 vcenter">
+				<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea name="suggestionContent" placeholder="내용을 입력해주세요" class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" required>${sList.suggestionContent }</textarea>
+				</div>
+            <div class="container" style="font-family: 'Sunflower', sans-serif;"></div>
+            	<div class="col-md-2"></div>
+            	<div class="col-md-8" style="margin-left:400px;">
+            	<br><br>
+               <button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
+               <div class="col-md-2"></div>
+               <input type="submit" class="col-md-2 btn btn-info" style="height:40px;" onclick="return Update();" value="수정하기"> &nbsp;
+               </div>
+               <div class="col-md-2"></div>
+               </div>
+               </article>
 	</form>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	</section>
 	<script>
 	function Update() {
 		return confirm("건의사항을 수정하시겠습니까?")
+	}
+	
+	function back() {
+		location.href="javascript:histroy.back();"
 	}
 	</script>
 </body>

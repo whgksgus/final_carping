@@ -5,76 +5,165 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰게시판 - 상세보기</title>
+<title>리뷰 상세보기 페이지</title>
+<style>
+	.star-rating { width:205px; } 
+.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
+.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top;}
+#star{
+	width : 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+#star div{
+	float: left;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
+	<div id="ex1" class="modal" align="center" style="text-align:center; width:500px; height:500px; padding: 0px;">
+		  <img src="../../../resources/placeImage/${preview.prPhoto}" style="width: 500px; height: 500px; ">
+		 </div>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<br>
-	<br>
-
-	<div style="margin-left: 100px;">
-		<h2 class="h2">리뷰게시판 - 상세보기</h2>
-		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
-	</div>
-	<br>
-                <div style="font-size:20px; margin: 0px auto; width:60%;">
-                	  ${preview.prTitle }
-                </div>
+	<section style="margin-top: 40px; ">
+		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰 상세보기</h3>
+		<br><br>
+		<article>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 vcenter">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" readonly="readonly" value="${preview.prTitle }" class="col-md-8 form-control align-self-center" style="width : 50%;">
+                <div id='star'>
+					<div id="stars">
+						<span class='star-rating'>
+							<c:choose>
+								<c:when test="${preview.prScore == 1}">
+									<span style ='width:20%;'>
+									</span>
+								</c:when>
+								<c:when test="${preview.prScore == 2}">
+									<span style ='width:40%;'>
+									</span>
+								</c:when>
+								<c:when test="${preview.prScore == 3}">
+									<span style ='width:60%;'>
+									</span>
+								</c:when>
+								<c:when test="${preview.prScore == 4}">
+									<span style ='width:80%;'>
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span style ='width:100%;'>
+									</span>
+								</c:otherwise>
+							</c:choose>
+							
+						</span>
+					</div>
+				</div>
+					</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${preview.prContent }</textarea>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
                 <br>
-                <textarea style="font-size:20px; resize:none; margin-left:150px; width: 60%; height: 270px;" readonly>${preview.prContent }
-                </textarea>
-                <br>
-                <c:if test="${preview.prPhoto ne null }">
-                <img style="margin-left:150px;" width="500px" height="300px" src="../../../resources/placeImage/${preview.prPhoto }"/>
-                </c:if>
-                <br>
-                
-                <div style="margin-left:150px;">
-  					별점 : ${preview.prScore }              
-                </div>
-	<br>
-	<br>
-	<!-- 댓글 목록 -->
-	<table align="center" width="500" border="1" cellspacing="0" id="prctb">
-		<thead>
-		<tr>
-			<td colspan="4"><b id="prcCount"></b></td>
-		</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
-	<br>
-	<!-- 댓글 등록 -->
-	<table style="margin: 0 auto;">
-	<tr>
-			<td>
-				<input type="text" id="content">
-				<button id="submit">등록하기</button>
-			</td>
-	<tr>
-	</table>
+                <div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">사진</label>
+					
+					<c:choose>
+						<c:when test="${preview.prPhoto eq null}">
+							<p style="font-family: 'Sunflower', sans-serif;">첨부파일이 없습니다.</p>
+						</c:when>
+						<c:otherwise>
+							<a id="modalTag" href="#ex1" rel="modal:open"><img src="../../../resources/images/camera.jpg" style="width: 40px; height: 40px;"></a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+                <br><br>
+                <div class="container"  style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">댓글</label>
+					<table id="prctb" class="col-md-6 table table-bordered" style="width: 560px;">
+						<thead>
+							<tr>
+								<td colspan="4"><b id="prcCount"></b></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+				<div class="col-md-2"></div>
+				<div class="col-md-9" style="margin-left: -20px;">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">
+						
+					</label>
+					<table class="col-md-6 table table-bordered" style="width: 560px;">
+						<thead>
+							<tr>
+								<td>
+									<textarea id="content" rows="5" cols="10" style="width: 543px; height: 67px; resize: none;"></textarea>
+								</td>
+								<td>
+									<button class="btn btn-default" style="width: 70px; height: 70px;" id="submit">등록</button>
+								</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<br><br>
+			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+				<div class="col-md-2"></div>
+				<div class="col-md-8" style="margin-left: -30px;">
+					<div class="col-md-3"></div>
+					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<c:url var="prList" value="placeReviewListView.do">
+    						<c:param name="placeKey" value="${placeKey }"></c:param>
+    				</c:url>
+					<c:if test="${preview.memberId eq loginUser.memberId}">
+						<c:url var="prUpdate" value="placeReviewUpdateView.do">
+							<c:param name="prKey" value="${preview.prKey }"></c:param>
+							<c:param name="placeKey" value="${placeKey }"></c:param>
+						</c:url>
+						<c:url var="prDelete" value="placeReviewDelete.do">
+							<c:param name="prKey" value="${preview.prKey }"></c:param>
+							<c:param name="placeKey" value="${placeKey }"></c:param>
+						</c:url>
+						<div class="col-md-1"></div>
+						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return upChk();">수정</button>
+						<div class="col-md-1"></div>
+						<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return chk();">삭제</button>
+					</c:if>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
 	
-	
-	<br>
-	<div align="center">
-	<c:url var="prDelete" value="placeReviewDelete.do">
-		<c:param name="prKey" value="${preview.prKey }"></c:param>
-		<c:param name="placeKey" value="${placeKey }"></c:param>
-	</c:url>
-	<c:url var="prUpdate" value="placeReviewUpdateView.do">
-		<c:param name="prKey" value="${preview.prKey }"></c:param>
-		<c:param name="placeKey" value="${placeKey }"></c:param>
-	</c:url>
-	<c:url var="prList" value="placeReviewListView.do">
-    	<c:param name="placeKey" value="${placeKey }"></c:param>
-    </c:url>
-		<c:if test="${preview.memberId eq loginUser.memberId }"><a href="${prUpdate }">수정하기</a></c:if>
-		<c:if test="${preview.memberId eq loginUser.memberId }"><a onclick="return Del();" href="${prDelete }">삭제하기</a></c:if>
-		<a href="${prList }">목록으로</a>
-    </div>
-	
-	
+		</article>
+	</section>
 	<script>
 		$(function() {
 			getReplyList();
@@ -98,7 +187,7 @@
 							getReplyList(); // 댓글리스트를 불러오는 function 추가
 							$("#content").val("");
 						}else {
-							alert("댓글 등록 실패..");
+							alert("등록 실패");
 						}
 					}
 				});
@@ -119,13 +208,13 @@
 					// db에 있는 데이터를 json형태로 가져와서
 					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
 					$tableBody = $("#prctb tbody");
-						$tableBody.html("<th>작성자</th><th>내용</th><th>작성일자</th><th>삭제</th></tr>"); // tbody에 존재하는 값을 초기화
+					$tableBody.html("<tr><th width='100px;' class='text-center'>작성자</th><th>내용</th><th width='110px;' class='text-center'>작성일자</th><th width='70px;' class='text-center'>삭제</th></tr>");
 					var $tr;
 					var $prcWriter;
 					var $prcContent;
 					var $prcRegDate;
 					var $prcDelete;
-					$("#prcCount").text("댓글 (" + data.length + ")"); // 댓글의 개수 표시
+					$("#prcCount").text("댓글 ("+data.length+")");
 					if (data.length > 0) {;
 						for (var i in data) {
 							var checkId = '${loginUser.memberId}';
@@ -135,9 +224,9 @@
 							$prcRegDate = $("<td width='100'>").text(data[i].prcRegDate);
 							$memberId = data[i].prcWriter;
 							if(checkId == $memberId) {
-							$prcDelete = $("<td width='48'><input type='button' id='prcDelete' onclick='prcDelete("+data[i].prcKey+");' value='삭제'>");
+							$prcDelete = $("<td><button style = 'padding : 0px 20px;' class='btn btn-danger' id='prcDelete' onclick='prcDelete("+data[i].prcKey+");'>X</button>");
 							}else {
-								$prcDelete = $("<td width='48'>");
+								$prcDelete = $prcDelete = $("<td>");
 							}
 							$tr.append($prcWriter);
 							$tr.append($prcContent);
@@ -147,8 +236,7 @@
 						}
 					} else {
 						$tr = $("<tr>");
-						$prcContent = $("<td colspan='4'>").text("등록된 댓글이 없습니다.");
-						
+						$prcContent = $("<td colspan='4'>").text("등록된 댓글이 없어요");
 						$tr.append($prcContent); // <tr><td colspan='3'>no reply</td></tr>
 						$tableBody.append($tr);
 					}
@@ -159,12 +247,15 @@
 		
 //		$("#prcDelete").on("click", function() {
 		function prcDelete(prcKey) {
+			var question = confirm("삭제하시겠습니까?");
+			if(question) {
 			$.ajax({
 				url : "prCommentDelete.do",
 				type : "get",
 				data : {"prcKey" : prcKey},
 				success : function(data) {
 					if (data == "success") {
+						alert('삭제되었습니다.');
 						getReplyList(); // 댓글리스트를 불러오는 function 추가
 						$("#content").val("");
 					}else {
@@ -172,44 +263,28 @@
 					}
 				}
 			});
+		}
 		};
 	</script>
 	<script>
-		function Del() {
-			return confirm("리뷰를 삭제하시겠습니까?")
+		
+		function back(){
+			location.href="${prList}";
 		}
 		
-		/* function CommentAdd() {
-			return confirm("댓글을 등록하시겠습니까?")
-		} 
-		
-		function DeleteAdd() {
-			return confirm("댓글을 삭제하시겠습니까?")
+		function upChk(){
+			location.href="${prUpdate}";
 		}
-		
-		function CommentAdd(){
-			var question = confirm('댓글을 등록하시겠습니까?');
+		function chk(){
+			var question = confirm("게시글을 삭제하시겠어요?");
 			if(question){
+				location.href='${prDelete}';
 				return true;
-				}
 			}else{
 				return false;
-         } */
+			}
+		}
 		
 	</script>
-	</script>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 </body>
 </html>

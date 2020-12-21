@@ -5,56 +5,81 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰게시판 - 명소 검색</title>
+<title>명소 리뷰게시판 검색</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<br>
-	<br>
-
-	<div style="margin-left: 100px;">
-		<h2 class="h2">리뷰게시판 - 명소 검색</h2>
-		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
-	</div>
-	<br>
-	<form id="form" action="placeReviewSearch.do" method="get">
-	<div style="text-align:center;">
-		<select id="searchCondition" name="searchCondition">
-			<option value="장소명" <c:if test="${search.searchCondition == '장소명'}">selected</c:if>>장소명</option>
+	<section style="margin-top:40px;">
+		<article>
+			<h3>명소 검색</h3>
+	<form action="placeReviewSearch.do" method="get">
+	<div class="container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8" style="float:left;">
+		<select id="searchCondition" name="searchCondition" class="form-control col-sm-2" style="width:20%; text-align:center;"> 
+			<option value="명소이름" <c:if test="${search.searchCondition == '명소이름'}">selected</c:if>>명소 이름</option>
 			<option value="주소" <c:if test="${search.searchCondition == '주소'}">selected</c:if>>주소</option>
-		</select>&nbsp;&nbsp;
-		<input type="text" id="searchValue" name="searchValue" size="50;" value="${search.searchValue }" required/>&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="검색" id="search"/>
+		</select>&nbsp;
+		<input type="text" class="form-control col-sm-7" style="width:50%;" id="searchValue" name="searchValue" value="${search.searchValue }"/>&nbsp;
+		<input type="submit" class="btn btn-default col-sm-1" value="검색" id="search"/>
+	</div>
+	<div class="col-sm-2"></div>
+	</div>
 	</div>
 	</form>
-
-	<br>
-	<br>
-	
+	<br><br><br>
 	<!-- 검색 결과 출력  -->
 	<form action="placeReviewListView.do" method="get">
-	<table align="center" border="1" width="700">
-		<tr text-align="center">
-			<th width="300">장소명</th>
-			<th width="300">주소</th>
-			<th>선택</th>
+	<div class="container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-7">
+		<table class="table table-striped" style="text-align:center;">
+			<tr>
+			<th class="col-md-3 text-center">장소명</th>
+			<th class="col-md-7 text-center">주소</th>
+			<th class="col-md-2">선택</th>
 		</tr>
-		<c:forEach items="${pList }" var="list">
+		<c:forEach items="${pList }" var="list" varStatus="status">
 		<tr>
 			<td>${list.placeName }</td>
 			<td>${list.placeAddress }</td>
-			<td><input type="radio" name="placeKey" value="${list.placeKey }" required/></td>
+			<c:if test="${status.count eq 1 }">
+				<td class="text-center"><input type="radio" name="placeKey" value="${list.placeKey }" class="radio" checked="checked"></td>
+			</c:if>
+			<c:if test="${status.count ne 1 }">
+				<td class="text-center"><input type="radio" name="placeKey" value="${list.placeKey }" class="radio"></td>
+			</c:if>
 		</tr>
 		</c:forEach>
 	</table>
-	<br>
+	</div>
+	<div class="col-sm-3"></div>
+	</div>
+	</div>
+		<div class="container">
+		<div class="col-sm-2"></div>
+			<div class="col-sm-7">
+			<c:if test="${pList ne null || !empty pList }">
+			<input type="submit" class="btn btn-success" style="width:100%;" value="리뷰 보러 가기!" onsubmit="return chk();"/>
+			</c:if>
+		</div>
+			<div class="col-sm-3"></div>
+			</div>
+			<br><br>
+			</form>
+			</article>
+			</section>
 	
 	<c:if test="${pList ne null || !empty pList }">
-	<div align="center">
+	<div class="container">
+		<div class="col-md-11 text-center">
+			<ul class="pagination pagionation-sm">
 				<!-- 이전 -->
 				<c:if test="${pi.currentPage <= 1 }">
-					[이전]&nbsp;
+					<li class="page-item"><a href="javascript:void(0);" class="page-link">이전</a>
 				</c:if>
 				<c:if test="${pi.currentPage > 1 }">
 					<c:url var="before" value="placeReviewSearch.do">
@@ -62,12 +87,12 @@
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>
-					<a href="${before }">[이전]</a>&nbsp;
+					<li class="page-item"><a href="${before}" class="page-link">이전</a></li>
 				</c:if>
 				<!-- 페이지  -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 					<c:if test="${pi.currentPage == p }">
-             	  	   <b style="color:blue">${p }</b>&nbsp;
+             	  	   <li class="page-item"><a href="javascript:void(0);" class="page-link">${p}</a></li>
             	  	</c:if>
             	  	<c:if test="${pi.currentPage != p }">
 					<c:url var="pagination" value="placeReviewSearch.do">
@@ -75,12 +100,12 @@
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						<c:param name="page" value="${p}"></c:param>
 					</c:url>
-					<a href="${pagination }">${p }</a>&nbsp;
+					<li class="page-item"><a href="${pagination}" class="page-link">${p}</a></li>
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
 				<c:if test="${pi.currentPage >= pi.maxPage }">
-					[다음]&nbsp;
+					<li class="page-item"><a href="javascript:void(0);" class="page-link">다음</a></li>
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="placeReviewSearch.do">
@@ -88,16 +113,13 @@
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					</c:url>
-					<a href="${after }">[다음]</a>&nbsp;
+					<li class="page-item"><a href="${after}" class="page-link">다음</a></li>
 				</c:if>
+				</ul>
+			</div>
 			</div>
 	</c:if>
-	
-	<c:if test="${pList ne null || !empty pList }">
-	<input style="margin-left:1060px;" type="submit" value="다음"/>
-	</c:if>
-	
-	</form>
+
 	<script>
 	
 	/* var arr = [];
@@ -122,22 +144,5 @@
 		}) */
 	</script>
 
-
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 </body>
 </html>
