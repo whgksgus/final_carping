@@ -18,7 +18,7 @@
 	<section style="margin-top: 40px;">
 		<article>
 			<h3>건의사항 리스트</h3>
-			<br> <br> <br>
+			<br><br><br>
 			<div class="container">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">

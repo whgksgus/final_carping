@@ -179,7 +179,7 @@
 					alert('댓글 내용을 입력해주세요');
 				}else {
 				$.ajax({
-					url : "frCommentAdd.do",
+					url : "prCommentAdd.do",
 					type : "post",
 					data : {"prcContent" : prcContent, "prKey" : prKey},
 					success : function(data) {

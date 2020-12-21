@@ -53,8 +53,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public int insertPlace(Place place) {
-		// TODO Auto-generated method stub
-		return 0;
+		return pStore.insertPlace(place);
 	}
 
 	@Override

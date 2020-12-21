@@ -159,7 +159,7 @@
 					<c:url var="prList" value="placeReviewListView.do">
                			<c:param name="placeKey" value="${place.placeKey }"></c:param>
                		</c:url>
-					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
 					<div class="col-md-2"></div>
 					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;">글쓰기</button>
 				</div>

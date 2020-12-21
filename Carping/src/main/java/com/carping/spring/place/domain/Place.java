@@ -5,19 +5,17 @@ public class Place {
 	private String placeName;
 	private String placeAddress;
 	private String placeGeoCode;
-	private String placeGS25;
-	private String placeToilet;
-	private String placeParking;
+	private int placeGS25;
+	private int placeToilet;
+	private int placeParking;
 	private String placeImage;
 	private String placeEtc;
 	private double scoreAvg;
 	
-	public Place() {
-		
-	}
+	public Place() {}
 
-	public Place(int placeKey, String placeName, String placeAddress, String placeGeoCode, String placeGS25,
-			String placeToilet, String placeParking, String placeImage, String placeEtc, double scoreAvg) {
+	public Place(int placeKey, String placeName, String placeAddress, String placeGeoCode, int placeGS25,
+			int placeToilet, int placeParking, String placeImage, String placeEtc, double scoreAvg) {
 		super();
 		this.placeKey = placeKey;
 		this.placeName = placeName;
@@ -30,8 +28,6 @@ public class Place {
 		this.placeEtc = placeEtc;
 		this.scoreAvg = scoreAvg;
 	}
-
-
 
 	public int getPlaceKey() {
 		return placeKey;
@@ -65,27 +61,27 @@ public class Place {
 		this.placeGeoCode = placeGeoCode;
 	}
 
-	public String getPlaceGS25() {
+	public int getPlaceGS25() {
 		return placeGS25;
 	}
 
-	public void setPlaceGS25(String placeGS25) {
+	public void setPlaceGS25(int placeGS25) {
 		this.placeGS25 = placeGS25;
 	}
 
-	public String getPlaceToilet() {
+	public int getPlaceToilet() {
 		return placeToilet;
 	}
 
-	public void setPlaceToilet(String placeToilet) {
+	public void setPlaceToilet(int placeToilet) {
 		this.placeToilet = placeToilet;
 	}
 
-	public String getPlaceParking() {
+	public int getPlaceParking() {
 		return placeParking;
 	}
 
-	public void setPlaceParking(String placeParking) {
+	public void setPlaceParking(int placeParking) {
 		this.placeParking = placeParking;
 	}
 
