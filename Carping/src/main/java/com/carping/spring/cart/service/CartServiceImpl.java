@@ -56,8 +56,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int selectCartDetail(int itemKey) {
-		return cStore.selectCartDetail(itemKey);
+	public int selectCartDetail( Cart cart ) {
+		return cStore.selectCartDetail( cart );
 	}
 
 }

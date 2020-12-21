@@ -41,115 +41,135 @@ public class ItemStoreLogic implements ItemStore {
 
    @Override
    public ArrayList<Item> selectTentNew(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	  int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+      RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+      return (ArrayList)sqlSession.selectList("ItemMapper.selectTentNew", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectTentLow(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectTentLow", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectTentHigh(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectTentHigh", null, rowBounds);
    }
 
    @Override
-   public ArrayList<Item> searchTentList(Search search) {
-      return (ArrayList)sqlSession.selectList("ItemMapper.searchTent", search);
+   public ArrayList<Item> searchTentList(Search search, PageInfo pi) {
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.searchTent", search, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectCookList(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectCookList", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectCookNew(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectCookNew", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectCookLow(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectCookLow", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectCookHigh(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectCookHigh", null, rowBounds);
    }
 
    @Override
-   public ArrayList<Item> searchCookList(Search search) {
-      // TODO Auto-generated method stub
-      return null;
+   public ArrayList<Item> searchCookList(Search search, PageInfo pi) {
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.searchCook", search, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectSleepList(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectSleepList", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectSleepNew(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectSleepNew", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectSleepLow(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectSleepLow", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectSleepHigh(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectSleepHigh", null, rowBounds);
    }
 
    @Override
-   public ArrayList<Item> searchSleepList(Search search) {
-      // TODO Auto-generated method stub
-      return null;
+   public ArrayList<Item> searchSleepList(Search search, PageInfo pi) {
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.searchSleep", search, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectEtcList(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectEtcList", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectEtcNew(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectEtcNew", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectEtcLow(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectEtcLow", null, rowBounds);
    }
 
    @Override
    public ArrayList<Item> selectEtcHigh(PageInfo pi) {
-      // TODO Auto-generated method stub
-      return null;
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.selectEtcHigh", null, rowBounds);
    }
 
    @Override
-   public ArrayList<Item> searchEtcList(Search search) {
-      // TODO Auto-generated method stub
-      return null;
+   public ArrayList<Item> searchEtcList(Search search, PageInfo pi) {
+	   int offset = (pi.getCurrentPage()-1) * pi.getItemLimit();
+	   RowBounds rowBounds = new RowBounds(offset, pi.getItemLimit());
+	   return (ArrayList)sqlSession.selectList("ItemMapper.searchEtc", search, rowBounds);
    }
 
    @Override

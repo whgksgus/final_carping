@@ -14,5 +14,5 @@ public interface CartStore {
 	public int updateCartList(Cart cart);
 	public ArrayList<Cart> selectOrderList(PageInfo pi, String memberId);
 	public int checkItemKey(int itemKey);
-	public int selectCartDetail( int itemKey );
+	public int selectCartDetail( Cart cart );
 }

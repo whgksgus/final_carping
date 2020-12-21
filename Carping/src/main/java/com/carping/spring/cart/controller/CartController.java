@@ -38,6 +38,7 @@ public class CartController {
 	   
 	   ArrayList<Map<String, Object>> cart = cService.selectCartList( memberId );
 	   int grandTotal = 0;
+	   StringBuffer cartKeys = new StringBuffer();
 	   
 	   for( Map<String, Object> map : cart ) {
 		   int cartQuantity = Integer.parseInt( map.get("CART_QUANTITY").toString() );
@@ -45,9 +46,14 @@ public class CartController {
 		   int totalPrice = cartQuantity * cartPrice;
 		   grandTotal += totalPrice;
 		   map.put( "totalPrice", totalPrice );
+		   
+		   // CART_STATUS 업데이트를 위한 작업
+		   cartKeys.append( map.get("CART_KEY") );
+		   cartKeys.append( "/" );
 	   }
 	   // grandTotal을 model에 넣어줘야함
 	   model.addAttribute( "grandTotal", grandTotal );
+	   model.addAttribute( "cartKeys", cartKeys );
 	   model.addAttribute( "cart", cart );
 		return "item/cartListView";
 	}
@@ -71,9 +77,27 @@ public class CartController {
 		return "";
 	}
 	
-	 @RequestMapping ( value="insertOrder.do", method=RequestMethod.GET ) public
-	 String orderCart( @RequestParam String data ) {
-		 return "";
+	@ResponseBody
+	 @RequestMapping ( value="insertOrder.do", method=RequestMethod.POST ) 
+	 public int orderCart( HttpServletRequest request, @RequestBody String[] data ) {
+		// 로그인 유저 아이디 불러오기
+		HttpSession session = request.getSession();
+		Member mem = (Member) session.getAttribute( "loginUser" );
+		String memberId = mem.getMemberId();
+		
+		int result = 0;
+		
+		for( String i : data ) {
+			if( ! i.isEmpty() ) {
+				Cart cart = new Cart();
+				cart.setCartKey( Integer.parseInt(i) );
+				cart.setMemberId( memberId );
+				cart.setCartStatus( "Y" );
+				cService.orderCart( cart );
+				result ++;
+			}
+		} 
+		 return result;
 	}
 	
 	

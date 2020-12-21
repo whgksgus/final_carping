@@ -9,65 +9,115 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-       function deleteItem( itemId ) {
-         if( confirm( "선택한 상품을 삭제하시겠습니까?" ) ) {
-            // delete item
-            var cartKey = itemId;
-            console.log( cartKey );
-            $.ajax({
-              url: "deleteCart.do",
-              type: "POST",
-              data: cartKey,
-              //dataType : "json",
-              contentType: "application/json; charset=utf-8",
-            }).done( function( data ) {
-               console.log( data );
-               if( data > 0 ) {
-                  window.location.reload();
-               } else {
-                  alert( "선택한 상품의 삭제에 실패하였습니다." );
-                  return false;
-               }
-            }).fail( function( error ) {
-               console.log( error );
-            });
-         } else {
-            return false;
-         }
-      }
+	$.ajaxSetup({ async:false });
+      function deleteItem( itemId ) {
+        if( confirm( "선택한 상품을 삭제하시겠습니까?" ) ) {
+           // delete item
+           var cartKey = itemId;
+           console.log( cartKey );
+           $.ajax({
+             url: "deleteCart.do",
+             type: "POST",
+             data: cartKey,
+             //dataType : "json",
+             contentType: "application/json; charset=utf-8",
+           }).done( function( data ) {
+              console.log( data );
+              if( data > 0 ) {
+                 window.location.reload();
+              } else {
+                 alert( "선택한 상품의 삭제에 실패하였습니다." );
+                 return false;
+              }
+           }).fail( function( error ) {
+              console.log( error );
+           });
+        } else {
+           return false;
+        }
+     }
+      
+     function modifyCartQuantity(quantity, itemKey) {
+  	   var quan = quantity;
+  	   var cartKey = itemKey;
+  	   var data = {
+  			cartKey : cartKey,
+  			cartQuantity : quan
+  	   };
+  	   console.log( data );
+        if( confirm( "수량을 변경하시겠습니까?" ) ) {
+           // modify quantity
+           $.ajax({
+               url: "updateCartList.do",
+               type: "POST",
+               data: JSON.stringify( data ),
+               dataType : "json",
+               contentType: "application/json; charset=utf-8",
+           }).done( function( data ) {
+              if( data > 0 ) {
+              	window.location.reload();
+              } else {
+                 alert( "수량 변경에 실패하였습니다." );
+                 return false;
+              }
+           }).fail( function( error ) {
+              console.log( error );
+           });
+        } else {
+           return false;
+        }
+     } // function modifyCartQuantity
+     
+     // payment
+     function cartPay( cartAmount ){
+  	   var amount = cartAmount + 3000;
+  	   console.log( "totalAmount", amount );
+  	 afterPayment();
+		/* var IMP = window.IMP;
+		IMP.init('imp42719088');
+		IMP.request_pay({
+		    pg : 'html5_inicis',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : 100,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'http://localhost:9999/'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        afterPayment();
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		}); */
+}
        
-       function modifyCartQuantity(quantity, itemKey) {
-    	   var quan = quantity;
-    	   var cartKey = itemKey;
-    	   var data = {
-    			cartKey : cartKey,
-    			cartQuantity : quan
-    	   };
-    	   console.log( data );
-          if( confirm( "수량을 변경하시겠습니까?" ) ) {
-             // modify quantity
-             $.ajax({
-                 url: "updateCartList.do",
-                 type: "POST",
-                 data: JSON.stringify( data ),
-                 dataType : "json",
-                 contentType: "application/json; charset=utf-8",
-             }).done( function( data ) {
-                if( data > 0 ) {
-                	window.location.reload();
-                } else {
-                   alert( "수량 변경에 실패하였습니다." );
-                   return false;
-                }
-             }).fail( function( error ) {
-                console.log( error );
-             });
-          } else {
-             return false;
-          }
-       } // function modifyCartQuantity
-       
+       // after payment ajax
+		function afterPayment() {
+			var items = $("#allCartKeys").val().split("/");
+			$.ajax({
+				url: "insertOrder.do",
+				type: "POST",
+				data: JSON.stringify( items ),
+				dataType : "json",
+				contentType: "application/json; charset=utf-8",
+			}).done( function( data ) {
+				if( data > 0 ) {
+					window.location.reload();
+				}
+			}).fail( function( error ) {
+				console.log( error );
+			});
+		}
  
 </script>
 <style>
@@ -273,13 +323,14 @@ padding-right: 10%;
                <span id="totalPrice"> <fmt:formatNumber value="${grandTotal}" pattern="#,###"/>원 +</span> 
                <span id="DeliveryPrice">3,000원 =</span> 
                <span id="TotalPrice" style="text-weight:bold; font-size: 20px;">
-               <fmt:formatNumber value="${grandTotal+3000}" pattern="#,###"/>원
+               <fmt:formatNumber value="${grandTotal+3000}" pattern="#,###" />원
                </span>
+               <input type="hidden" id="allCartKeys" value="${cartKeys}"/>
             </div>
             <br><br>
             <br>
             
-      <input type="submit" value="구매하기" id="order"/>
+      <input type="button" value="구매하기" id="orderCart" onclick="cartPay(${grandTotal})"/>
 
       
       <br><br><br><br>

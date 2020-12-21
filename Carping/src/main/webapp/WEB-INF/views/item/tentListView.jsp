@@ -40,7 +40,7 @@ a {
 	font-weight: bold;
 }
 
-#item_sortby {
+#item_orderby {
 	float: left;
 	width: 100%;
 	text-align: right;
@@ -49,11 +49,11 @@ a {
 	padding-right: 100px;
 }
 
-#sortby {
+#orderby {
 	margin: 0px 16px;
 }
 
-#sortby:hover {
+#orderby:hover {
 	font-weight: bold;
 }
 
@@ -110,18 +110,25 @@ ul, li {
 		</legend>
 		<div id="item_category">
 			<ul>
-				<li id="li_category"><span id="category" style="color: #5bcdc5;">텐트&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<li id="li_category">
+					<span id="category" style="color: #5bcdc5;">
+						<a href="tentListView.do">텐트</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</span>
 				</li>
 				<li id="li_category">
-				<span id="category">취사도구&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-						</li>
-				<li id="li_category">
-				<span id="category">침구류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span id="category">
+						<a href="cookListView.do">취사도구</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</span>
 				</li>
 				<li id="li_category">
-				<span
-				id="category">기타용품&nbsp;</span>
-				
+					<span id="category">
+						<a href="sleepListView.do">침구류</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</span>
+				</li>
+				<li id="li_category">
+					<span id="category">
+						<a href="etcListView.do">기타용품&nbsp;</a>
+					</span>
 				</li>
 				</ul>
 		</div>
@@ -129,9 +136,10 @@ ul, li {
 	<hr>
 
 
-	<div id="item_sortby">
-		<a href="#"><span id="sortby">최신순</span></a>| <a href="#"><span
-			id="sortby">낮은가격순</span></a>| <a href="#"><span id="sortby">높은가격순</span></a>
+	<div id="item_orderby">
+		<a href="tentListNew.do"><span id="orderby">최신순</span></a>| 
+		<a href="tentListLow.do"><span id="orderby">낮은가격순</span></a>| 
+		<a href="tentListHigh.do"><span id="orderby">높은가격순</span></a>
 	</div>
 	
 	<div id="searchArea" align="right" style="margin: 65px 120px; ">
@@ -144,7 +152,6 @@ ul, li {
 	<div id="item"
 		style="width: 100%; height: 800px; float: left; padding-left: 100px; padding-right: 150px;">
 		
-		
 		<c:forEach items="${iList }" var="item">
 			<c:url var="iDetail" value="itemDetail.do">
 				<c:param name="itemKey" value="${item.itemKey }"></c:param>
@@ -156,15 +163,11 @@ ul, li {
 					src="../../../resources/itemImage/${item.itemImage}"
 					style="width: 300px; height: 300px;"></a><br> <a
 					href="${iDetail }">${item.itemName }</a> <br>
-				<fmt:formatNumber value="${item.itemPrice }" pattern="#,###" />
-				원
+				<fmt:formatNumber value="${item.itemPrice }" pattern="#,###" />원
 
 			</div>
 		</c:forEach>
-
-
 	</div>
-
 	<br>
 	<br>
 	<br>
@@ -177,8 +180,6 @@ ul, li {
 	<br>
 	<br>
 	<br>
-	<br>
-
 	<br>
 	<table style="width: 100%; text-align: center; padding-top: 300px;">
 		<tr align="center" height="20">
@@ -212,7 +213,6 @@ ul, li {
 			</td>
 		</tr>
 	</table>
-
 	<br>
 	<br>
 	<br>
