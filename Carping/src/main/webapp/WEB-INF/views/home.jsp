@@ -45,45 +45,141 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 
 </head>
+<!--banner Slider starts Here-->
+<style>
+	.wrap_center{
+    width: 100%;
+    height: 600px;
+	}
+	.containerBanner{
+	    width: 100%;
+	    height: 600px;
+	    overflow: hidden;
+	}
+	.img_wrap{
+	    width: 100%;
+	    height: 600px;
+	    position:absolute;
+	    overflow: hidden;
+	}
+	
+	/* 롤링 이미지 UL */
+	.rollimgs {
+	    list-style: none;
+	    padding: 0;
+	    margin: 0;
+	}
+	
+	.rollimgs li{
+    position: absolute;
+    background-size: cover;
+    width: 50%;
+    height: 600px;
+    left: 50%;
+}
+.rollimgs li img{
+background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.rollimgs li.currentroll{
+    left: 0;
+    transition: left .5s ease-in-out, right .5s ease-in-out;
+}
+.rollimgs li.prevroll{
+    left: -50%;
+    transition: left .5s ease-in-out, right .5s ease-in-out;
+}
+.rollimgs.reverse li.prevroll{
+    transition: none;
+}
+.rollimgs li.nextroll{
+    left: 50%;
+    display: block;
+    transition: none;
+}
+.rollimgs.reverse li.nextroll{
+    transition: left .5s ease-in-out, right .5s ease-in-out;
+}
+</style>
+<script>
+let banner = {
+	    rollId: null,
+	    interval: 2000,
+
+	    //롤링 배너 초기화
+	    rollInit: function (newinterval) {
+	        if(parseInt(newinterval) > 0){
+	            this.interval = newinterval;
+	        }
+	        //현재 배너
+	        let firstitem = document.querySelector('.rollimgs li');
+	        if(firstitem){
+	            firstitem.classList.add('currentroll');
+	        }
+	        //다음 배너
+	        let seconditem = document.querySelectorAll('.rollimgs li')[1];
+	        if(seconditem){
+	            seconditem.classList.add('nextroll');
+	        }
+	        //이전 배너
+	        document.querySelector('.rollimgs li:last-child').classList.add('prevroll');
+	        this.rollId = setInterval(this.rollNext, this.interval);//롤링 인터벌 호출
+	    },
+	    
+	    //다음 배너 롤링
+	    rollNext: function () {
+	        if(document.querySelector('.prevroll')){
+	            document.querySelector('.prevroll').classList.remove('prevroll');
+	        }
+	        if(document.querySelector('.currentroll')){
+	            document.querySelector('.currentroll').classList.add('prevroll');
+	            document.querySelector('.currentroll').classList.remove('currentroll');
+	        }
+	        if(document.querySelector('.nextroll')){
+	            document.querySelector('.nextroll').classList.add('currentroll');
+	            document.querySelector('.nextroll').classList.remove('nextroll');
+	        }
+	    //다음 이미지 있으면 다음 롤링 이미지로 선택, 없으면 첫번째 이미지를 롤링 이미지로 지정
+	        if(document.querySelector('.currentroll').nextElementSibling){
+	            document.querySelector('.currentroll').nextElementSibling.classList.add('nextroll');
+	        }else{
+	            document.querySelector('.rollimgs li').classList.add('nextroll');
+	        }
+	    }
+	}
+document.addEventListener('DOMContentLoaded', function(){
+    banner.rollInit(4000); // 배너 롤링
+});
+</script>
+   <!--banner Slider starts Here-->
 <body>
 <!--start-home-->
-		<div class="banner" id="home">
+	<div id="home">
 		<jsp:include page="../../WEB-INF/views/common/nav.jsp"/>
-		<!--banner Slider starts Here-->
-	  	<script src="resources/js/responsiveslides.min.js"></script>
-			 <script>
-			    // You can also use "$(window).load(function() {"
-			    $(function () {
-			      // Slideshow 4
-			      $("#slider4").responsiveSlides({
-			        auto: true,
-			        pager:true,
-			        nav:false,
-			        speed: 500,
-			        namespace: "callbacks",
-			        before: function () {
-			          $('.events').append("<li>before event fired.</li>");
-			        },
-			        after: function () {
-			          $('.events').append("<li>after event fired.</li>");
-			        }
-			      });
-			
-			    });
-			  </script>
-	      <!--banner Slider starts Here-->
+		<div class="wrap_center">
+		    <div class="containerBanner">
+		        <div class="img_wrap">
+		            <ul class="rollimgs">
+		                <li><img src="resources/images/carping1.jpg"></img></li>
+						<li><img src="resources/images/carping2.jpg"></img></li>
+						<li><img src="resources/images/carping3.jpg"></img></li>
+						<li><img src="resources/images/carping4.jpg"></img></li>
+		            </ul>
+		        </div>
+		      </div>
 
-		 <div class="down"><a class="scroll" href="#gallery"><img src="resources/images/down.png" alt=""></a></div>
+		 <div class="down" style="width:80px; height:50px;"><a class="scroll" href="#gallery" style="width:80px; height:50px;"><img style="width:80px; height:50px;" src="resources/images/down.png" alt=""></a></div>
 	</div>
-	
+	</div>
 	<!--Gallery-->
 	<div class="gallery" id="gallery">
-		<div class="container" style="width:1519px;">
+		<div class="container" style="width:1640px;">
 					<div class="gallery-grids" style="margin:0; padding:0;">
-						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical " onclick="location.href='areaInfoView.do'">
-									<img src="resources/images/my1.jpg" alt=" " />
+								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='areaInfoView.do'">
+									<img style="height:400px;" src="resources/images/my1.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='areaInfoView.do'">
 											<h4>차박 장소 추천</h4>
@@ -95,10 +191,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical ">
-									<img src="resources/images/my2.jpg" alt=" " />
+								<div style="height:400px;" class="gal-spin-effect vertical ">
+									<img style="height:400px;" src="resources/images/my2.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con">
 											<h4>맛집,명소 추천</h4>
@@ -110,10 +206,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical " onclick="location.href='tentListView.do'">
-									<img src="resources/images/my3.jpg" alt=" " />
+								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='tentListView.do'">
+									<img style="height:400px;" src="resources/images/my3.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='tentListView.do'">
 											<h4>차박물품쇼핑</h4>
@@ -125,10 +221,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:360px;">
+						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div class="gal-spin-effect vertical " onclick="location.href='reviewInfo.do'">
-									<img src="resources/images/my4.jpg" alt=" " />
+								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='reviewInfo.do'">
+									<img style="height:400px;" src="resources/images/my4.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='reviewInfo.do'">
 											<h4>후기게시판</h4>
@@ -157,7 +253,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li><a href="#" class="fb"> </a></li>
 										<li><a href="#" class="in"> </a></li>
 										<li><a href="#" class="dott"></a></li>
-										 <div class="clearfix"></div>
 									</ul>
 					 </div>
 	     </div>

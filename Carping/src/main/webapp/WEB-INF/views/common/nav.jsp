@@ -30,6 +30,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link
 	href='//fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700'
 	rel='stylesheet' type='text/css'>
+	
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">	
 <!--/script-->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -96,6 +99,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<c:if test="${loginUser.admin == 'N' }">
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="#">구매내역</a></li>
+									<li style="float: left;"><a
+									style="display: block; padding: 1px 5px;" href="myReserve.do">포장 예약내역</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="myInfoPwCheckForm.do">회원정보 수정</a></li>
 									<li style="float: left;"><a
