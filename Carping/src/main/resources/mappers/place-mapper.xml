@@ -41,7 +41,7 @@
 	<select id="searchList" resultMap="PlaceResultMap">
 		SELECT * FROM PLACE
 		<where>
-			<if test="searchCondition.toString() == '장소명'">
+			<if test="searchCondition.toString() == '명소이름'">
 				PLACE_NAME LIKE '%' || #{searchValue} || '%' 
 			</if>
 			<if test="searchCondition.toString() == '주소'">
@@ -105,7 +105,7 @@
 	<select id="getplaceListCount" resultType="int">
 		SELECT COUNT(*) FROM PLACE
 		<where>
-			<if test="searchCondition.toString() == '장소명'">
+			<if test="searchCondition.toString() == '명소이름'">
 				PLACE_NAME LIKE '%' || #{searchValue} || '%' 
 			</if>
 			<if test="searchCondition.toString() == '주소'">
@@ -171,13 +171,3 @@
 	
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-

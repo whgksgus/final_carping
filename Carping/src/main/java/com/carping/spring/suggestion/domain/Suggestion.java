@@ -10,13 +10,14 @@ public class Suggestion {
 	private Date suggestionModifyDate;
 	private int suggestionCount;
 	private String memberId;
+	private int answerCheck;
 	
 	public Suggestion() {
 		
 	}
 
 	public Suggestion(int suggestionKey, String suggestionTitle, String suggestionContent, Date suggestionEnrollDate,
-			Date suggestionModifyDate, int suggestionCount, String memberId) {
+			Date suggestionModifyDate, int suggestionCount, String memberId, int answerCheck) {
 		super();
 		this.suggestionKey = suggestionKey;
 		this.suggestionTitle = suggestionTitle;
@@ -25,6 +26,7 @@ public class Suggestion {
 		this.suggestionModifyDate = suggestionModifyDate;
 		this.suggestionCount = suggestionCount;
 		this.memberId = memberId;
+		this.answerCheck = answerCheck;
 	}
 
 	public int getSuggestionKey() {
@@ -83,14 +85,20 @@ public class Suggestion {
 		this.memberId = memberId;
 	}
 
+	public int getAnswerCheck() {
+		return answerCheck;
+	}
+
+	public void setAnswerCheck(int answerCheck) {
+		this.answerCheck = answerCheck;
+	}
+
 	@Override
 	public String toString() {
 		return "Suggestion [suggestionKey=" + suggestionKey + ", suggestionTitle=" + suggestionTitle
 				+ ", suggestionContent=" + suggestionContent + ", suggestionEnrollDate=" + suggestionEnrollDate
 				+ ", suggestionModifyDate=" + suggestionModifyDate + ", suggestionCount=" + suggestionCount
-				+ ", memberId=" + memberId + "]";
+				+ ", memberId=" + memberId + ", answerCheck=" + answerCheck + "]";
 	}
-	
-	
 	
 }

@@ -68,15 +68,23 @@ public class SuggestionServiceImpl implements SuggestionService {
 	}
 
 	@Override
-	public Suggestion selectAnswer(int suggestionKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public Answer selectAnswer(int suggestionKey) {
+		return sStore.selectAnswer(suggestionKey);
 	}
 
 	@Override
-	public int deleteAnswer(Answer answer) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteAnswer(int suggestionKey) {
+		return sStore.deleteAnswer(suggestionKey);
+	}
+
+	@Override
+	public int updateOne(int suggestionKey) {
+		return sStore.updateOne(suggestionKey);
+	}
+
+	@Override
+	public int updateZero(int suggestionKey) {
+		return sStore.updateZero(suggestionKey);
 	}
 
 }

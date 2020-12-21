@@ -75,15 +75,23 @@ public class SuggestionStoreLogic implements SuggestionStore {
 	}
 
 	@Override
-	public Suggestion selectAnswer(int suggestionKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public Answer selectAnswer(int suggestionKey) {
+		return sqlSession.selectOne("Suggestion.selectAnswer", suggestionKey);
 	}
 
 	@Override
-	public int deleteAnswer(Answer answer) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteAnswer(int suggestionKey) {
+		return sqlSession.delete("Suggestion.deleteAnswer", suggestionKey);
+	}
+
+	@Override
+	public int updateOne(int suggestionKey) {
+		return sqlSession.update("Suggestion.updateOne", suggestionKey);
+	}
+
+	@Override
+	public int updateZero(int suggestionKey) {
+		return sqlSession.update("Suggestion.updateZero", suggestionKey);
 	}
 
 }

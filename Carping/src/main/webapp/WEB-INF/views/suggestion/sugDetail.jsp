@@ -25,6 +25,14 @@
                 <textarea style="font-size:20px; resize:none; margin-left:150px; width: 60%; height: 270px;" readonly>${sList.suggestionContent }
                 </textarea>
                 <br>
+                <br>
+                <div style="font-size:20px; margin: 0px auto; width:60%;">
+                	  ${answer.answerTitle }
+                </div>
+                <br>
+                <textarea style="font-size:20px; resize:none; margin-left:150px; width: 60%; height: 270px;" readonly>${answer.answerContent }
+                </textarea>
+                <br>
                 
 	<div align="center">
 	<c:url var="sugUpdate" value="sugUpdateView.do">
@@ -44,18 +52,31 @@
 		<c:if test="${sList.memberId eq loginUser.memberId }"><a href="${sugUpdate }">수정하기</a></c:if>
 		<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}"><a onclick="return Del();" href="${sugDelete }">삭제하기</a></c:if>
 		<a href="${sugList }">목록으로</a>
-		<!-- 관리자 답변  -->
-		<c:if test="${'admin' eq loginUser.memberId }"><a href="${insertAnswer }">답변 등록</a></c:if>
-		<c:if test="${'admin' eq loginUser.memberId }"><a href="${deleteAnswer }">답변 삭제</a></c:if>
-		
+		<!-- 관리자 답변  --><br>
+		<c:if test="${'admin' eq loginUser.memberId }"><a id="url" href="${insertAnswer }">답변 등록</a></c:if>
+		<c:if test="${'admin' eq loginUser.memberId }"><a onclick="return AnswerDel();" href="${deleteAnswer }">답변 삭제</a></c:if>
     </div>
-	
-	
-	
+
+
+
 	<script>
 		function Del() {
 			return confirm("건의사항을 삭제하시겠습니까?")
 		}
+		
+		function AnswerDel() {
+			return confirm("답변을 삭제하시겠습니까?")
+		}
+	</script>
+	
+	<script>
+		$("#url").click(function() {
+			var test = ${answer.answerContent};
+			if (test != "") {
+				alert('답변 삭제 먼저 진행 후 시도해주세요');
+				$("a#url").attr("href", "${sugList}");
+			}
+		})
 	</script>
 	<br>
 	<br>
