@@ -61,7 +61,7 @@
 	<jsp:include page="../common/nav.jsp"/>
 	<div class="blogs" id="blogs">
 		<div class="container">
-		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">리뷰게시판</h3>
+		    <h3 class="tittle" style="margin-top: 100px; font-family: 'Poor story', cursive;">리뷰게시판</h3>
 		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s">여러분들의 소중한 경험들을 회원들과 함께 공유해보세요</p>
 				<div class="inst-grids">
 					<a href="areaReviewSerachForm.do">
@@ -103,5 +103,7 @@
 
 		</div>
 	</div>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

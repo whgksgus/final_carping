@@ -32,13 +32,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <style>
 .bannerLogin {
-	background: url(../images/banner.jpg) no-repeat 0px 0px;
+	background: url(../../../resources/images/background.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-ms-background-size: cover;
-	min-height: 800px;
+	min-height: 950px;
 	position: relative;
 }
 span.guide {
@@ -59,7 +59,7 @@ span.error{color:red}
 
 </head>
 <body>
-	<div class="banner" id="home">
+	<div class="bannerLogin" id="home">
 		<div class="loginBox">
 			<div class="loginBox2">
 			<form action="memberDelete.do" method="post">

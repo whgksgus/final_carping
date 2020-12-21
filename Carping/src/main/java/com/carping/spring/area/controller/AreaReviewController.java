@@ -97,7 +97,7 @@ public class AreaReviewController {
 		
 		// 리뷰 등록
 		@RequestMapping(value="areaReviewInsert.do", method=RequestMethod.POST)
-		public ModelAndView areaReviewInsert(AreaReview ar, ModelAndView mv, int areaKey, Integer page, HttpServletRequest request,
+		public ModelAndView areaReviewInsert(AreaReview ar, ModelAndView mv, Integer page, int areaKey, HttpServletRequest request,
 				@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) {
 			// 파일을 서버에 저장하는 작업
 			if(!uploadFile.getOriginalFilename().equals("")) {

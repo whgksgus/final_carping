@@ -27,6 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link
 	href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic'
 	rel='stylesheet' type='text/css'>
+
 <link
 	href='//fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700'
 	rel='stylesheet' type='text/css'>
@@ -60,12 +61,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    </script>
 </head>
 <body>
-	<div class="header-bottom">
+	<div id="home" class="header-bottom">
 		<div class="container">
 			<div class="fixed-header">
 				<!-- logo -->
 				<div class="logo">
-					<a href="home.do"><h1>Carping</h1></a>
+					<a href="home.do"><img src="resources/images/CarpingNav.png"></a>
 				</div>
 				<!-- //logo -->
 				<div class="top-menu">
@@ -115,14 +116,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										style="display: block; padding: 1px 5px;" href="insertInfo.do">장소추가</a></li>
 									</c:if>
 								</c:if>
-								</ul></li>
+								</ul>
+							</li>
 							<li><a data-hover="고객센터" href="#" class="scroll">고객센터</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="noticeList.do">공지사항</a></li>
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="sugList.do">건의사항</a></li>
-								</ul></li>
+										style="display: block; padding: 1px 5px;" href="selectList.do">건의사항</a></li>
+								</ul>
+							</li>
 							<li class="loginTBox scroll" style="width:300px; height:40px; margin-top:-10px;">
 								<c:if test="${!empty sessionScope.loginUser }">
 									<c:if test="${loginUser.admin == 'N' }">

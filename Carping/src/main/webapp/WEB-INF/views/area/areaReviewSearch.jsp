@@ -7,12 +7,18 @@
 <meta charset="UTF-8">
 <title>리뷰게시판 - 장소 검색</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px;">
+	<section style="width:100%; height:800px;">
 		<article>
-			<div>
+			<div style="height:100px; display:block;"></div>
+			<div align="center">
 				<h2 class="h2">리뷰게시판 - 장소 검색</h2>
 				<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 			</div>
@@ -47,28 +53,35 @@
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-7">
-							<table class="table table-striped" align="center" border="1" width="700">
-								<tr text-align="center">
-									<th class="col-md-3 text-center" width="300">장소명</th>
-									<th class="col-md-7 text-center" width="300">주소</th>
-									<th class="col-md-2">선택</th>
+							<table class="table table-striped" border="1">
+								<tr>
+									<th class="col-md-3 text-center">장소명</th>
+									<th class="col-md-7 text-center">주소</th>
+									<th class="col-md-1 text-center">선택</th>
 								</tr>
-								<c:forEach items="${aList }" var="list" varStatus="status">
+								<c:if test="${aList eq null || empty aList }">
 									<tr>
-										<td>${list.areaName }</td>
-										<td>${list.areaAddress }</td>
-										<c:if test="${status.count eq 1 }">
-											<td class="text-center"><input type="radio"
-												name="areaKey" value="${list.areaKey}" class="radio"
-												checked="checked" required></td>
-										</c:if>
-										<c:if test="${status.count ne 1 }">
-											<td class="text-center"><input type="radio"
-												name="areaKey" value="${list.areaKey}" class="radio"
-												required></td>
-										</c:if>
+										<td colspan="3" class="col-md-11 text-center">등록된 정보가 없습니다.</td>
 									</tr>
-								</c:forEach>
+								</c:if>
+								<c:if test="${aList ne null || !empty aList }">
+									<c:forEach items="${aList }" var="list" varStatus="status">
+										<tr>
+											<td>${list.areaName }</td>
+											<td>${list.areaAddress }</td>
+											<c:if test="${status.count eq 1 }">
+												<td class="text-center"><input type="radio"
+													name="areaKey" value="${list.areaKey}" class="radio"
+													checked="checked" required></td>
+											</c:if>
+											<c:if test="${status.count ne 1 }">
+												<td class="text-center"><input type="radio"
+													name="areaKey" value="${list.areaKey}" class="radio"
+													required></td>
+											</c:if>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</table>
 						</div>
 						<div class="col-sm-3"></div>
@@ -121,6 +134,7 @@
 					</div>
 				</c:if>
 				<div class="container">
+				<br>
 					<div class="col-sm-2"></div>
 					<div class="col-sm-7">
 						<c:if test="${aList ne null || !empty aList }">
@@ -133,5 +147,7 @@
 			</form>
 		</article>
 	</section>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function(){
    <!--banner Slider starts Here-->
 <body>
 <!--start-home-->
-	<div id="home">
 		<jsp:include page="../../WEB-INF/views/common/nav.jsp"/>
 		<div class="wrap_center">
 		    <div class="containerBanner">
@@ -170,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		      </div>
 
 		 <div class="down" style="width:80px; height:50px;"><a class="scroll" href="#gallery" style="width:80px; height:50px;"><img style="width:80px; height:50px;" src="resources/images/down.png" alt=""></a></div>
-	</div>
 	</div>
 	<!--Gallery-->
 	<div class="gallery" id="gallery">
@@ -230,7 +228,8 @@ document.addEventListener('DOMContentLoaded', function(){
 											<h4>후기게시판</h4>
 											<span class="separator"></span>
 											<p>후기쓰자!</p>
-											<span class="separator"></span>
+											<span class="sepa
+											rator"></span>
 										</div>
 									</div>
 								</div>
@@ -242,38 +241,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				</div>
 		</div>
 	<!-- //gallery -->
-
-	
 <!--footer-->
-		<div class="footer text-center">
-						<div class="container">
-									<p class="copy-right wow fadeInUp"  data-wow-duration="1s" data-wow-delay=".3s">&copy; 2016 Outdoors . All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-									<ul class="social wow slideInDown" data-wow-duration="1s" data-wow-delay=".3s">
-										<li><a href="#" class="tw"></a></li>
-										<li><a href="#" class="fb"> </a></li>
-										<li><a href="#" class="in"> </a></li>
-										<li><a href="#" class="dott"></a></li>
-									</ul>
-					 </div>
-	     </div>
-		<!--start-smooth-scrolling-->
-						<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
-								<!--end-smooth-scrolling-->
-		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	<jsp:include page="../../WEB-INF/views/common/footer.jsp"/>
 	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>

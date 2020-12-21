@@ -11,6 +11,11 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
       <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
       <script>
          function daumPostcode() {
             new daum.Postcode({
@@ -84,44 +89,61 @@
              },"json");
           }
       </script>
+<style>
+.bannerLogin {
+	background: url(../../../resources/images/fallStreet2.jpg) no-repeat 0px 0px;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	min-height: 950px;
+	position: relative;
+}
+</style>
    </head>
    <body>
-   <div class="banner2" id="home" style="color: #FFFFFF;">
+   <div class="bannerLogin" id="home" style="color: #FFFFFF;">
    <jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
       <div class="insertBox" align="center">
-         <div style="background-color: rgba(12, 12, 12, 0.36); width:1400px; height:1200px;" align="center">
-         	<h1 class="h1">차박 장소 추가</h1>
+         <div style="background-color: rgba(12, 12, 12, 0.4); width:1400px; height:1250px; margin-top:50px;" align="center">
+         	<h1 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h1">차박 장소 추가</h1>
+         	<div style="width: 350px; border-bottom: 2px solid gray;"></div>
          	<br>
             <form action="insertArea.do" method="post" enctype="multipart/form-data">
-               <h3 class="h3" align="center">장소이름</h3>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">장소이름</h3>
                <input class="form-control" style="width:400px;" type="text" name="areaName">
                <!-- <input class="form-control" type="text" id="zonecode"> -->
                <div style="width: 600px;">
-               <h3 class="h3">주소찾기</h3>
-               <input class="form-control" style="width:400px;" type="text" id="jibunAddress" name="areaAddress">
-               <input class="loginBtn" type="button" onclick="daumPostcode()" value="찾기">
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">주소찾기</h3>
+               <input class="form-control" style="margin-left:100px; width:400px;float:left;" type="text" id="jibunAddress" name="areaAddress">
+               <input class="form-control loginBtn" style="float:left; width:80px; height:35px;" type="button" onclick="daumPostcode()" value="찾기">
+               <br>
+               <br>
                <div id="map" style="width:100%;height:250px;"></div>
                </div>
                <input class="form-control" type="hidden" id="aGeoCode" name="areaGeoCode">
                <br>
                <div style="width: 1000px; display:inline-block">
                <div style="width: 50%; float: left" align="center">
-                  <h3 class="h3">근처 맛집 리스트</h3>
+                  <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">근처 맛집 리스트</h3>
+                  <br>
                   <table id="fListTable">
                      <tr>
-                        <th style="width:150px;">이름</th>
-                        <th style="width:250px;">주소</th>
-                        <th style="width:50px;">선택</th>
+                        <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:150px;">이름</th>
+                        <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:250px;">주소</th>
+                        <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:50px;">선택</th>
                      </tr>
                   </table>
                </div>
                   <div style="width: 50%; float: left" align="center">
-                     <h3 class="h3">근처 명소 리스트</h3>
+                     <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">근처 명소 리스트</h3>
+                     <br>
                      <table id="pListTable">
                         <tr>
-                           <th style="width:150px;">이름</th>
-                           <th style="width:250px;">주소</th>
-                           <th style="width:50px;">선택</th>
+                           <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:150px;">이름</th>
+                           <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:250px;">주소</th>
+                           <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:50px;">선택</th>
                         </tr>
                      </table>
                   </div>
@@ -129,23 +151,28 @@
                <br>
                <br>
                <div align="center" style="display:inline-block">
-                  <h3 class="h3">편의시설</h3>
-                  <input id="chkBox1" type="checkbox" name="areaGS25" value="1"> 화장실&nbsp;&nbsp;
-                  <input id="chkBox2" type="checkbox" name="areaToilet" value="1"> 편의점&nbsp;&nbsp;
-                  <input id="chkBox3" type="checkbox" name="areaSink" value="1"> 개수대&nbsp;&nbsp;
-                  <input id="chkBox4" type="checkbox" name="areaPool" value="1"> 물놀이&nbsp;&nbsp;
+                  <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">편의시설</h3>
+                  <br>
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox1" type="checkbox" name="areaGS25" value="1"> 화장실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox2" type="checkbox" name="areaToilet" value="1"> 편의점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox3" type="checkbox" name="areaSink" value="1"> 개수대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox4" type="checkbox" name="areaPool" value="1"> 물놀이
                </div>
-               <h3 class="h3">기타사항</h3>
-               <textarea name="areaEtc" cols="50" rows="5" style="resize: none; color:black;"></textarea>
                <br>
-               <h3 class="h3">사진 첨부</h3>
+               <br>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">기타사항</h3>
+               <textarea class="form-control" style="width:400px;" name="areaEtc" cols="50" rows="5" style="resize: none; color:black;"></textarea>
+               <br>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">사진 첨부</h3>
                <input class="loginBtn" type="file" name="uploadFile">
                <br>
                <br>
-               <input class="loginBtn" type="submit" value="등록">
+               <input class="form-control loginBtn" style="width:80px; height:35px;" type="submit" value="등록">
             </form>
          </div>
       </div>
       </div>
+      <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
    </body>
 </html>

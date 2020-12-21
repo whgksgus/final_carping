@@ -9,6 +9,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
@@ -90,19 +92,19 @@
 		}
 	</script>
 
-	<div style="margin-left: 15.5%; width:1400px;">
+	<div style="margin-left: 15.5%; width:1400px; margin-top:100px;">
 		<form style="margin-left: 100px;" id="form" method="post">
-			<h2 class="h2">차박 장소 추천</h2>
+			<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">차박 장소 추천</h2>
 			<div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
-			<br> <select name="sido" id="select1"
+			<br> <select style="width: 120px; font-family: 'Sunflower', sans-serif;" class="form-control col-sm-2" name="sido" id="select1"
 				onChange="chnQnaType(this.value)">
 				<option value="강원">강원</option>
 				<option value="경기">경기</option>
 				<option value="서울">서울</option>
-			</select> <select id="schQnaType" name="sigun"
-				style="width: 120px; display: none;">
-			</select> <input name="address" type="text" placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="검색" id="search" onclick="searchMap()">
+			</select> <select class="form-control col-sm-2" id="schQnaType" name="sigun"
+				style="width: 120px; font-family: 'Sunflower', sans-serif; display: none;">
+			</select> <input name="address" style="width:200px; font-family: 'Sunflower', sans-serif;" class="form-control col-sm-1" type="text" placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp;
+			<input class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif;" type="button" value="검색" id="search" onclick="searchMap()">
 		</form>
 		<br>
 		<!-- 지도 표시되는 부분 -->
@@ -255,9 +257,9 @@
 						$('#reviewBox').html('');
 						$('#etcBox').html('');
 						$('#fzpl').html('');
-						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='display: inline-block; width: 100%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 800px; margin-left: 100px;'><!-- 맛집&명소 --><div id='fzpl' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
+						$('#areaInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='areaName'></div><br><div id='areaAddress' align='center'style='background-color: rgba(99, 82, 63, 0.2); display: inline-block; width: 1200px; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 800px; margin-left: 100px;'><!-- 맛집&명소 --><div id='fzpl' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='areaEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
 						$('#image').append("<img align='center' style='width: 1100px; height:600px;' src='../../../resources/areaImage/"+result.areaImage+"'>");
-						$('#areaName').append("<h1 class='h1' align='center'>"+result.areaName+"</h1>");
+						$('#areaName').append("<h1 style='font-family: 'Sunflower', sans-serif; font-weight:bold;' class='h1' align='center'>"+result.areaName+"</h1>");
 						$('#areaAddress').append("<h3 class='h3'>"+result.areaAddress+"</h3><br>");
 						if(result.areaGS25 == 1){
 							$('#areaAddress').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -274,7 +276,7 @@
 						$('#areaAddress').append("<br><br>");
 						$('#fzpl').append("<h3 class='h3' style='width:200px; margin-left:100px;'>맛집&명소</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><div id='fzImage' align='left' style=' width:100%; height:200px;'></div><br><div id='pImage' align='left' style=' width:100%; height:200px;'></div>");
 						$('#scoreAvg').append("<h3 class='h3' style='width: 250px; float: left;'>리뷰</h3><h3 id='avg' class='h3' style='width:350px; float:left;' align='left'></h3>");
-						$('#areaEtc').append("<div id='areaEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.areaEtc+"</span></div>");
+						$('#areaEtc').append("<div id='areaEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(99, 82, 63, 0.3); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.areaEtc+"</span></div>");
 						$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv3').append("<div style='border-bottom: 2px solid lightgray;'></div>");
@@ -432,51 +434,8 @@
 <p><a id="modalTagP" href="#ex2" rel="modal:open"></a></p>
 
 	<div id="areaInfo" style="margin-left: 10%; width:1400px; text-align: center;" >
-		<%-- <br> <br>
-		<div id="lineDiv1" style="margin-left: 5%; width: 90%;"></div>
-		<br> <br>
-		<div id="image"></div>
-		<br>
-		<div id="areaName"></div>
-		<br>
-		<div id="areaAddress" align="center"
-			style="display: inline-block; width: 70%; height: 150px;"align="center">
-
-
-		</div>
-		<br>
-		<div id="lineDiv2" style="margin-left: 15%; width: 70%;"></div>
-		<br>
-		<div id="div_1" style="width: 70%; height: 800px; margin-left: 15%;">
-			<!-- 맛집&명소 -->
-			<div id="fzpl" style="width: 50%; float: left; display: block;">
-				
-				
-				<div style="width:100%; height:250px; align:center;"><img src="/resources/images/${fzList[0].foodZoneImage }"></div>
-			<div style="width:100%; height:250px; align:center;"><img src="/resources/images/${pList[0].placeImage }"></div>
-			</div>
-			<!-- 리뷰 -->
-			<div id="div_2" style="width: 50%; float: left; display: block;">
-				<div id="scoreAvg">
-					
-				</div>
-				<div id="lineDiv3" style="width: 100%; display: inline-block;"></div>
-				<div id="div_3" style="width: 100%; height: 500px; align: center;">
-					<!-- 리뷰 반복문 돌리기 -->
-					
-					<!-- <div id="reviewBox" style="width: 90%; margin-left: 5%; margin-top: 10px;">
-						<img src="../../resources/images/co.png"><span>와 정말
-							좋아요</span>
-					</div> -->
-				</div>
-			</div>
-			<div id="areaEtc" style="width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;">
-				
-			</div>
-		</div> --%>
-		
 	</div>
-	<br>
-	<br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -187,7 +187,7 @@
 	
 	<insert id="insertAreaReview">
 		INSERT INTO AREA_REVIEW
-		VALUES(SEQ_ARKEY.NEXTVAL, #{areaKey}, #{arScore}, #{arTitle}, #{arContent}, SYSDATE, #{arHits}, #{arPhoto,jdbcType=VARCHAR}, #{memberId})
+		VALUES(SEQ_ARKEY.NEXTVAL, #{areaKey}, #{arTitle}, #{arContent}, #{arScore}, SYSDATE, #{arHits}, #{arPhoto,jdbcType=VARCHAR}, #{memberId})
 	</insert>
 	
 	<update id="updateAreaReview">

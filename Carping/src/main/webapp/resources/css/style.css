@@ -65,9 +65,9 @@ label{
 	position:relative;
 }
 .down {
-      position: absolute;
+    position: absolute;
     left: 47.9%;
-    top: 624px;
+    top: 550px;
 }
 /*--head-top--*/
 .logo{
@@ -109,13 +109,14 @@ label{
 
 /*-- sticky-nav --*/
 .header-bottom {
+	position:absolute;
    padding: 0.5em 0em;
-    background-color:none;
     margin: 0 auto;
+    height: 70px;
     width:100%;
     text-align: center;
-	background-color: rgba(78, 46, 31, 0.9);
-	padding:15px 0px;
+	background-color: #5e4032;
+	/* padding:15px 0px; */
 }
 .fixed{
 	top: 0;
@@ -126,10 +127,9 @@ label{
 }
 /*-- sticky-nav --*/
 .subNav{
-	top: 10px;
-	width:600px;
+	top: 15px;
 	position: relative;
-	
+	background-color: #5e4032;
 }
 .top-menu {
     float: left;
@@ -142,6 +142,8 @@ label{
 }
 .top-menu li {
 	width: 150px;
+	height: 40px;
+	background-color: #5e4032;
 	text-transform:uppercase;
 	display:inline-block;
 }
@@ -857,7 +859,7 @@ p.agile{
 /*--blogs--*/
 .blogs{
 	padding:4em 0;
-	background: #f7f7f7;
+	background-color: rgba(241, 234, 222, 0.7);
 }
 .blogs h3.tittle{
 	text-align:center;
@@ -1131,7 +1133,8 @@ ul.social li a{
     -moz-transition: .5s all;
 }
 .footer {
-   background:#333;
+   background-color: #5e4032;
+   height: 200px;
    padding: 2em 0;
 }
 p.copy-right{

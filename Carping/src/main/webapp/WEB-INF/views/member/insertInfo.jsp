@@ -61,7 +61,7 @@
 	<jsp:include page="../common/nav.jsp"/>
 	<div class="blogs" id="blogs">
 		<div class="container">
-		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">장소 추가</h3>
+		    <h3 class="tittle" style="margin-top: 100px; font-family: 'Poor story', cursive;">장소 추가</h3>
 		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s"></p>
 				<div class="inst-grids">
 					<a href="areaInsertView.do">
@@ -78,7 +78,7 @@
 					<a href="#">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>맛집</span>
-						<img src="resources/images/ReviewFoodImage.jpg" height="100%">
+						<img src="resources/images/food1.png" height="100%">
 						<!-- <div class="date-w3">
 							<h4><span class="big"></span>맛집</h4>
 						</div> -->
@@ -103,5 +103,7 @@
 
 		</div>
 	</div>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -47,16 +47,11 @@
 }
 </style>
 <body>
-	<div id="ex1" class="modal" align="center"
-		style="text-align: center; width: 500px; height: 500px; padding: 0px;">
-		<img src="../../../resources/areaImage/${areview.arPhoto}"
-			style="width: 500px; height: 500px;">
-	</div>
-	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px;">
-
-		<div style="margin-left: 100px;">
-			<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰게시판 - 상세보기</h3>
+	<jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
+	<section style="width:100%; height:800px;">
+		<div style="height:100px;"></div>
+		<div align="center">
+			<h2 class="h2" style="font-weight:bold; font-family: 'Sunflower', sans-serif;">리뷰게시판 - 상세보기</h2>
 			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 		</div>
 		<br><br>
@@ -128,7 +123,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">댓글</label>
-					<table id="frctb" class="col-md-6 table table-bordered" style="width: 560px;">
+					<table id="arctb" class="col-md-6 table table-bordered" style="width: 560px;">
 						<thead>
 							<tr>
 								<td colspan="4"><b id="arcCount"></b></td>
@@ -185,8 +180,17 @@
 				</div>
 				<div class="col-md-2"></div>
 			</div>
+			<br>
+			<br>
 		</article>
+		<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	</section>
+	<div id="ex1" class="modal" align="center"
+		style="text-align: center; width: 500px; height: 500px; padding: 0px;">
+		<img src="../../../resources/areaImage/${areview.arPhoto}"
+			style="width: 500px; height: 500px;">
+	</div>
 	<script>
 		$(function() {
 			getReplyList();
@@ -249,7 +253,7 @@
 							$arcRegDate = $("<td width='100'>").text(data[i].arcRegDate);
 							$memberId = data[i].arcWriter;
 							if(checkId == $memberId) {
-							$arcDelete = $("<td width='48'><input type='button' id='arcDelete' onclick='arcDelete("+data[i].arcKey+");' value='삭제'>");
+							$arcDelete = $("<td width='48'><input class='col-sm-2 btn btn-danger' style='width:40px; height:30px;' align='center' type='button' id='arcDelete' onclick='arcDelete("+data[i].arcKey+");' value='삭제'>");
 							}else {
 								$arcDelete = $("<td width='48'>");
 							}

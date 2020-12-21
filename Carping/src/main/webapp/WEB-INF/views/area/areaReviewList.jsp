@@ -7,33 +7,37 @@
 <meta charset="UTF-8">
 <title>리뷰게시판 - 장소 검색</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<br>
-	<br>
-
-	<div style="margin-left: 100px;">
+	<div style="width:100%; height:800px;">
+	<div style="height:100px;"></div>
+	<div align="center">
 		<h2 class="h2">리뷰게시판 - 장소</h2>
 		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 	</div>
 	<br>
-	
+	<br>
 	<form action="areaReviewInsertForm.do" method="post">
 	<input type="hidden" name="areaKey" value="${areaKey}"/>
-	<table align="center" border="1" width="700">
-		<tr text-align="center">
-			<th>글번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-			<th>별점</th>
-			<th>첨부파일</th>
+	<table class="table table-striped" border="1" align="center" style="width:900px;">
+		<tr>
+			<th class="col-md-1 test-center">글번호</th>
+			<th class="col-md-3 test-center">제목</th>
+			<th class="col-md-1 test-center">작성자</th>
+			<th class="col-md-2 test-center">작성일</th>
+			<th class="col-md-1 test-center">조회수</th>
+			<th class="col-md-1 test-center">별점</th>
+			<th class="col-md-2 test-center">첨부파일</th>
 		</tr>
 		<c:if test="${arList eq null || empty arList }">
 			<tr>
-				<td colspan="7" align="center">등록된 정보가 없습니다.</td>
+				<td colspan="7" class="col-md-11 text-center" align="center">등록된 정보가 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:if test="${arList ne null || !empty arList }">
@@ -64,7 +68,7 @@
 		</c:if>
 	</table>
 	<br>
-	<input style="margin-left:1045px;" type="submit" value="글쓰기"/>
+	<input style="margin-left:1220px;" class="btn btn-info" type="submit" value="글쓰기"/>
 	</form>
 		<c:if test="${arList ne null || !empty arList }">
 			<div align="center">
@@ -143,32 +147,21 @@
 		</c:if>
 	
 	<br><br>
-	<form id="form" action="searchAreaBoardReview.do" method="get">
-	<input type="hidden" name="areaKey" value="${areaKey}"/>
-	<div style="text-align:center;">
-		<select id="searchCondition" name="searchCondition">
-			<option value="제목" <c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>
-			<option value="내용" <c:if test="${search.searchCondition == '내용'}">selected</c:if>>내용</option>
-			<option value="작성자" <c:if test="${search.searchCondition == '작성자'}">selected</c:if>>작성자</option>
-		</select>&nbsp;&nbsp;
-		<input type="text" id="searchValue" name="searchValue" size="50;" value="${search.searchValue }" required/>&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="검색" id="search"/>
+	
+		<form id="form" action="searchAreaBoardReview.do" method="get">
+		<input type="hidden" name="areaKey" value="${areaKey}"/>
+		<div style="margin-left:700px;">
+			<select class="form-control col-sm-2" style="width:120px;" id="searchCondition" name="searchCondition">
+				<option value="제목" <c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>
+				<option value="내용" <c:if test="${search.searchCondition == '내용'}">selected</c:if>>내용</option>
+				<option value="작성자" <c:if test="${search.searchCondition == '작성자'}">selected</c:if>>작성자</option>
+			</select>&nbsp;&nbsp;
+			<input type="text" class="form-control col-sm-1"  id="searchValue" name="searchValue" style="width:300px;" value="${search.searchValue }" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="submit" class="btn btn-default col-sm-1" style="width:80px;" value="검색" id="search"/>
+		</div>
+		</form>
 	</div>
-	</form>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
