@@ -6,12 +6,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import com.carping.spring.foodzone.domain.BoardSearch;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.domain.TakeOutReserve;
+import com.carping.spring.foodzone.domain.Tor;
 @Repository
 public class FoodZoneStoreLogic implements FoodZoneStore {
 	@Autowired
@@ -82,6 +83,17 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	public int insertTakeout(TakeOutReserve tor) {
 		int result = sqlSession.insert("FoodZoneMapper.insertTakeOut", tor);
 		return result;
+	}
+
+	@Override
+	public ArrayList<Tor> selectTakeOutReserve(String memberId) {
+		// TODO Auto-generated method stub
+		 return (ArrayList)sqlSession.selectList("FoodZoneMapper.selectTakeOutReserve", memberId);
+	}
+
+	@Override
+	public int getSearchReviewListCount(BoardSearch boardSearch) {
+		return sqlSession.selectOne("FoodZoneMapper.searchBoardListCount", boardSearch);
 	}
 
 }

@@ -78,7 +78,7 @@
 					<a href="foodZoneReviewSearch.do">
 					<div class="col-md-4 blog-gd-w3ls" style="text-align: center;">
 					<span>맛집</span>
-						<img src="resources/images/ReviewFoodImage.jpg" height="100%">
+						<img src="resources/images/food1.png" height="100%">
 						<!-- <div class="date-w3">
 							<h4><span class="big"></span>맛집</h4>
 						</div> -->

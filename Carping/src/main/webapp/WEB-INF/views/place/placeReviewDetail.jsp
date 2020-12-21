@@ -90,7 +90,7 @@
 					alert('댓글 내용을 입력해주세요');
 				}else {
 				$.ajax({
-					url : "prCommentAdd.do",
+					url : "frCommentAdd.do",
 					type : "post",
 					data : {"prcContent" : prcContent, "prKey" : prKey},
 					success : function(data) {

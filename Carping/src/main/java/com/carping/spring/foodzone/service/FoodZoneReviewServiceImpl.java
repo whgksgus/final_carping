@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carping.spring.common.Search;
+import com.carping.spring.foodzone.domain.BoardSearch;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
 import com.carping.spring.foodzone.domain.FoodZoneReviewComment;
@@ -39,32 +40,27 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 
 	@Override
 	public int insertFoodZoneReviewComment(FoodZoneReviewComment frc) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzrStore.insertFoodZoneReviewComment(frc);
 	}
 
 	@Override
 	public int updateFoodZoneReview(FoodZoneReview fzr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzrStore.updateFoodZoneReview(fzr);
 	}
 
 	@Override
 	public int deleteFoodZoneReview(int frKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzrStore.deleteFoodZoneReview(frKey);
 	}
 
 	@Override
 	public ArrayList<FoodZoneReviewComment> selectFoodZoneReviewCommentList(int frcKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return fzrStore.selectFoodZoneReviewCommentList(frcKey);
 	}
 
 	@Override
 	public int deleteFoodZoneReviewComment(int frcKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzrStore.deleteFoodZoneReviewComment(frcKey);
 	}
 
 	@Override
@@ -76,6 +72,11 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 	public int foodZoneReviewHits(int frKey) {
 		// TODO Auto-generated method stub
 		return fzrStore.foodZoneReviewHits(frKey);
+	}
+
+	@Override
+	public ArrayList<FoodZoneReview> searchFoodZoneBoardReview(PageInfo pi, BoardSearch boardSearch) {
+		return fzrStore.searchFoodZoneBoardReview(pi, boardSearch);
 	}
 
 }

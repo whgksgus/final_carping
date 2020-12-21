@@ -44,6 +44,21 @@
 		<result property="torTotalPrice" column="TOR_TOTALPRICE"/>
 		<result property="foodZoneKey" column="FOODZONE_KEY"/>
 	</resultMap>
+	<resultMap type="foodZoneReviewComment" id="foodZoneReviewCommentResultMap">
+		<id property="frcKey" column="FRC_KEY"/>
+		<result property="frcContent" column="FRC_CONTENT"/>
+		<result property="frKey" column="FR_KEY"/>
+		<result property="frcWriter" column="FRC_WRITER"/>
+		<result property="frcRegDate" column="FRC_REGDATE"/>
+	</resultMap>
+	<resultMap type="Tor" id="TorResultMap">
+      <result property="takeOutMenu" column="TAKEOUT_MENU"/>
+      <result property="torEa" column="TOR_EA"/>
+      <result property="torPrice" column="TOR_PRICE"/>
+      <result property="torRegDate" column="TOR_REGDATE"/>
+      <result property="torTotalPrice" column="TOR_TOTALPRICE"/>
+   </resultMap>
+	
 	<select id="selectAll" resultMap="FoodZoneResultMap">
 		SELECT * FROM FOODZONE
 	</select>
@@ -112,4 +127,59 @@
 	<insert id="insertFoodZone">
 		INSERT INTO FOOD_REVIEW VALUES(TEST_FRKEY.NEXTVAL,#{foodZoneKey}, #{frScore}, #{frTitle}, #{frContent}, SYSDATE, #{frHits}, #{frPhoto,jdbcType=VARCHAR}, #{memberId})
 	</insert>
+	
+	<delete id="deleteFoodZoneReview">
+		DELETE FROM FOOD_REVIEW WHERE FR_KEY=#{frKey}
+	</delete>
+	
+	<update id="updateFoodZoneReview">
+		UPDATE FOOD_REVIEW SET FR_SCORE = #{frScore}, FR_TITLE = #{frTitle}, FR_CONTENT = #{frContent}, FR_REGDATE = SYSDATE, FR_HITS =#{frHits}, FR_PHOTO = #{frPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId} WHERE FR_KEY = #{frKey} 
+	</update>
+	<select id="selectReviewComment" resultMap="foodZoneReviewCommentResultMap">
+		SELECT * FROM FOOD_REVIEW_COMMENT WHERE FR_KEY = #{frKey} ORDER BY FRC_KEY DESC
+	</select>
+	
+	<insert id="insertFoodZoneReviewComment">
+		INSERT INTO FOOD_REVIEW_COMMENT VALUES(SEQ_FRCKEY.NEXTVAL, #{frcContent}, #{frKey}, #{frcWriter}, SYSDATE)
+	</insert>
+	
+	<delete id="deleteReviewComment">
+		DELETE FROM FOOD_REVIEW_COMMENT WHERE FRC_KEY = #{frcKey}
+	</delete>
+	
+	<select id="selectTakeOutReserve" resultMap="TorResultMap">
+      SELECT O.TAKEOUT_MENU, R.TOR_EA, R.TOR_PRICE, R.TOR_REGDATE, R.TOR_TOTALPRICE FROM (SELECT * FROM TAKEOUT_RESERVE WHERE MEMBER_ID = #{memberId}) R JOIN TAKEOUTMENU O
+      ON R.TAKEOUT_KEY = O.TAKEOUT_KEY
+   </select>
+   
+   <select id="searchBoardListCount" resultType="int">
+   SELECT COUNT(*) FROM FOOD_REVIEW
+   <where>FOODZONE_KEY = #{foodZoneKey} AND
+   		<if test="searchCondition.toString() == '제목'">
+				FR_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				FR_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+   </where>
+   </select>
+   
+   <select id="selectBoardList" resultMap="FoodZoneReviewResultMap">
+   	SELECT * FROM FOOD_REVIEW
+		<where> FOODZONE_KEY = #{foodZoneKey} AND
+			<if test="searchCondition.toString() == '제목'">
+				FR_TITLE LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '내용'">
+				FR_CONTENT LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '작성자'">
+				MEMBER_ID LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+		ORDER BY FR_KEY DESC
+   </select>
 </mapper>
