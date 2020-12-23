@@ -41,8 +41,8 @@
       VALUES (
       	SEQ_CKEY.NEXTVAL
       	, #{cartQuantity}
-      	, 'N'
-      	, NULL
+      	, #{cartStatus}
+      	, SYSDATE
       	, #{itemKey}
       	, #{memberId} 
       )

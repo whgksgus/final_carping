@@ -179,13 +179,8 @@ a {
 	
 	<br>
 	<br>
-	<p align="center">
-		<a href="#">시작페이지로 이동</a> <a href="#">목록 전체보기</a>
-	</p>
 	<br>
 	<br>
 	<br>
-	<br>
-
 </body>
 </html>

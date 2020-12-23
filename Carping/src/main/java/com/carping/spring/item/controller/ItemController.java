@@ -399,6 +399,7 @@ public class ItemController {
 	   int cartQuantity = Integer.parseInt( map.get( "cartQuantity" ).toString() );
 	   
 	   Cart cart = new Cart( cartQuantity , itemKey, memberId );
+	   cart.setCartStatus( "N" );
 	   
 	   Map<String, Object> paramMap = new HashMap<String, Object>();
 	   paramMap.put( "itemKey", itemKey );
@@ -431,10 +432,22 @@ public class ItemController {
 			}
    }
    
-   
-   public String orderItem(int cartQuantity, HttpServletRequest request, int itemKey, Model model) {
-	      return "";
-	   }
+   // 상품 디테일 페이지에서 바로 구매
+   @ResponseBody
+   @RequestMapping(value="orderItem.do", method=RequestMethod.POST)
+   public int orderItem(@RequestBody Cart cart, HttpServletRequest request, Model model) {
 	   
+	   System.out.println( "cartQuantity from ajax>>> " + cart.getCartQuantity() );
+	   System.out.println( "cartQuantity from itemKey>>> " + cart.getItemKey() );
+	   
+		// 로그인 유저 아이디 불러오기
+		HttpSession session = request.getSession();
+		Member mem = (Member) session.getAttribute( "loginUser" );
+		String memberId = mem.getMemberId();
+		cart.setMemberId(memberId);
+		cart.setCartStatus( "Y" );
+		
+		return iService.insertCart(cart);
+	}
    
 }

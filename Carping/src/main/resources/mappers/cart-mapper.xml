@@ -33,6 +33,12 @@
 		WHERE CART_KEY=#{cartKey}
 	</delete>
 	
+	<delete id="deleteAllCart">
+		DELETE FROM CART 
+		WHERE CART_STATUS=#{cartStatus}
+		AND MEMBER_ID=#{memberId}
+	</delete>
+	
      <update id="updateCartList">
   	 	UPDATE CART 
   	 	SET CART_QUANTITY=#{cartQuantity} 
@@ -52,9 +58,9 @@
       	*
       FROM CART A, ITEM B 
       WHERE A.ITEM_KEY=B.ITEM_KEY 
-      AND MEMBER_ID=#{memberId}
-      AND CART_STATUS='Y'
+      AND MEMBER_ID=#{memberId} 
+      AND CART_STATUS='Y' 
+      ORDER BY CART_KEY DESC
    </select>
-   
    
 </mapper>

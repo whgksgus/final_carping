@@ -3,6 +3,7 @@ package com.carping.spring.cart.controller;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,8 +75,18 @@ public class CartController {
 	   return cService.updateCartList( cart );
 	}
 	
-	public String deleteAllCart(HttpServletRequest request, Model model) {
-		return "";
+   
+   
+   @ResponseBody
+   @RequestMapping( value = "deleteAllCart.do", method=RequestMethod.POST )
+	public int deleteAllCart(HttpServletRequest request, Model model) {
+	   Cart cart = new Cart();
+	   HttpSession session = request.getSession();
+	   Member mem = (Member) session.getAttribute( "loginUser" );
+	   String memberId = mem.getMemberId();
+	   cart.setMemberId(memberId);
+	   cart.setCartStatus( "N" );
+	   return cService.deleteAllCart( cart );
 	}
 	
 	@ResponseBody
@@ -108,10 +119,16 @@ public class CartController {
 		String memberId = mem.getMemberId();
 		
 		ArrayList<Map<String, Object>> rslt = cService.selectOrderList(memberId);
-		
+		System.out.println( "rslt npe fuck you>>> " + rslt );
 		for( Map<String, Object> map : rslt ) {
-			String date = new SimpleDateFormat( "yyyy-MM-dd" ).format( map.get( "CART_ORDERDATE" ) );
-			map.put( "CART_ORDERDATE", date );
+			if( map.containsKey( "CART_ORDERDATE" ) ) {
+				String date = new SimpleDateFormat( "yyyy-MM-dd" ).format( map.get( "CART_ORDERDATE" ) );
+				map.put( "CART_ORDERDATE", date );
+			}
+			int itemPrice = Integer.parseInt( map.get( "ITEM_PRICE" ).toString() );
+			int cartQuan = Integer.parseInt( map.get( "CART_QUANTITY" ).toString() );
+			int eachPrice = itemPrice * cartQuan;
+			map.put( "TOTAL_PRICE", eachPrice );
 		}
 		
 		model.addAttribute( "orderList", rslt );

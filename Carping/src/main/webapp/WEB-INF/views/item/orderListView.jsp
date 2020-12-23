@@ -79,29 +79,26 @@ padding-right: 10%;
 } /*이미지 열 크기*/
 
 #ul>li>ul>li:first-child+li+li {
-	width: 26%;
+	width: 30%;
 	
 } /*상품정보 열 크기*/
 
 #ul>li>ul>li:first-child+li+li+li {
 	width: 15%;
-} /*가격 열 크기*/
+} /*상품금액 열 크기*/
 
 #ul>li>ul>li:first-child+li+li+li+li {
-	width: 6%;
+	width: 5%;
 } /*수량 열 크기*/
 
 #ul>li>ul>li:first-child+li+li+li+li+li {
-	width: 10%;
-} /*상태 열 크기*/
+	width: 8%;
+} /*주문상태 열 크기*/
 
 #ul>li>ul>li:first-child+li+li+li+li+li+li {
-	width: 11%;
-} /*삭제 열 크기*/
+	width: 12%;
+} /*주문날짜 열 크기*/
 
-#ul>li>ul>li:first-child+li+li+li+li+li+li+li {
-	width: 7%;
-} 
 
 </style>
 
@@ -113,11 +110,11 @@ padding-right: 10%;
    <div id="contents">
       <form action="#" method="post">
 
-         <legend id="title">주문내역</legend>
+         <legend id="title">구매내역</legend>
          
          <br>
          <c:if test="${empty orderList}">
-            <p style="font-size: 23px;">주문내역이 비어있습니다.</p>
+            <p style="font-size: 23px;">구매내역이 비어있습니다.</p>
             <br>
             <br>
          </c:if>
@@ -158,7 +155,7 @@ padding-right: 10%;
 							</li>
 							<li class="li">
 								<span style="font-size: 18px;">
-                           			<fmt:formatNumber value="${order.ITEM_PRICE}" pattern="#,###"/>원
+                           			<fmt:formatNumber value="${order.TOTAL_PRICE}" pattern="#,###"/>원
  								</span></li>
 							<li class="li">
 								<span style="font-size: 18px;">${order.CART_QUANTITY}</span>
