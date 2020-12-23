@@ -7,9 +7,26 @@
 <meta charset="UTF-8">
 <title>명소 추천</title>
 <style>
-	/* .display-none {
-		display:none;
-	} */
+.display-none {
+	display: none;
+}
+.star-rating { 
+	margin-left: 10px;
+	margin-top: -15px;
+	width:205px; 
+	} 
+.star-rating,.star-rating span { display:inline-block; height:37px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
+.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top;}
+#star{
+   width : 120px;
+   /* display: table-cell; */
+   float: left;
+}
+
+#stars{
+	float: left;
+}
+
 </style>
 </head>
 <body>
@@ -90,10 +107,10 @@
 	<div id="Info" style="text-align: center;">
 	
 	</div>
-	<span id="reviewAvg" style="font-size:1.8em"></span>
+	<!-- <span id="reviewAvg" style="font-size:1.8em"></span>
 	<div id="review">
 	
-	</div>
+	</div> -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
 	<script>
 	var mapData;
@@ -251,7 +268,6 @@
 						$('#placeAddress').append("<br><br>");
 						$('#placeEtc').append("<h3 class='h3' style='width:200px; margin-left:100px;'>기타사항</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><br><div id='pImage' align='left' style=' width:100%; height:200px;'>"+result.placeEtc+"</div>");
 						$('#scoreAvg').append("<h3 class='h3' style='width: 250px; float: left;'>리뷰</h3><h3 id='avg' class='h3' style='width:350px; float:left;' align='left'></h3>");
-//						$('#placeEtc').append("<div id='placeEtc' style='width: 100%; height: 100%; text-align: center; background-color: rgba(12, 12, 12, 0.36); display: inline-block;'><br><h3 class='h3'>기타 사항</h3><br><span>"+result.placeEtc+"</span></div>");
 						$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
 						$('#lineDiv3').append("<div style='border-bottom: 2px solid lightgray;'></div>");
@@ -263,7 +279,7 @@
 	            	if(response.length != 0){
 		            	$('#reviewBox').html('');
 		            	for(var i=0; i<response.length; i++){
-	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response[i]['memberId']+"] : </span><span>"+response[i]['prTitle']+"</span>&nbsp;&nbsp;<span> ("+response[i]['prRegDate']+")</span><div>");
+	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response[i]['memberId']+"] : </span><a href='placeReviewDetail.do?placeKey="+response[i]['placeKey']+"&prKey="+response[i]['prKey']+"'>"+response[i]['prTitle']+"</span>&nbsp;&nbsp;<span> ("+response[i]['prRegDate']+")</span><div>");
 	                	 };
 	            	}else{
 	            		 $('#reviewBox').html('');

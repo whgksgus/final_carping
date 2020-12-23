@@ -54,8 +54,7 @@ public class PlaceStoreLogic implements PlaceStore {
 
 	@Override
 	public int insertPlace(Place place) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("PlaceMapper.insertPlace", place);
 	}
 
 	@Override

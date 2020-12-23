@@ -17,7 +17,7 @@
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 	<section style="margin-top: 40px;">
 		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 수정</h3>
-		<br><br>
+		<br><br><br><br>
 	<form action="sugUpdate.do" method="post">
 		<input type="hidden" name="memberId" value="${loginUser.memberId }">
 		<input type="hidden" name="suggestionKey" value="${sList.suggestionKey }">
@@ -38,7 +38,7 @@
             	<div class="col-md-2"></div>
             	<div class="col-md-8" style="margin-left:400px;">
             	<br><br>
-               <button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
+               <button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
                <div class="col-md-2"></div>
                <input type="submit" class="col-md-2 btn btn-info" style="height:40px;" onclick="return Update();" value="수정하기"> &nbsp;
                </div>
@@ -53,7 +53,7 @@
 	}
 	
 	function back() {
-		location.href="javascript:histroy.back();"
+		location.href="javascript:history.go(-1);"
 	}
 	</script>
 </body>

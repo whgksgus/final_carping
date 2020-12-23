@@ -169,5 +169,10 @@
 		WHERE PLACE_KEY = #{placeKey}
 	</select>
 	
+	<insert id="insertPlace">
+		INSERT INTO PLACE
+		VALUES(SEQ_PKEY.NEXTVAL, #{placeName}, #{placeAddress}, #{placeGeoCode}, #{placeGS25}, #{placeToilet}, #{placeParking}, #{placeImage}, #{placeEtc}, DEFAULT)
+	</insert>
+	
 	
 </mapper>

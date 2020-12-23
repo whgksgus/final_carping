@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 수정하기!</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <style>
 	           .star-input>.input,
 
@@ -93,27 +99,31 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px; ">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰 수정</h3>
-		<br><br>
+	<section style="width:100%; height:800px;">
+	<div style="height:100px; display:block;"></div>
+	<div align="center">
+		<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">리뷰 수정</h2>
+		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+	</div>
+	<br>
 	<form action="placeReviewUpdate.do" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="memberId" value="${loginUser.memberId }">
-    	<input type="hidden" name="placeKey" value="${preview.placeKey }">
-    	<input type="hidden" name="prKey" value="${preview.prKey }">
-    	<input type="hidden" name="prPhoto" value="${preview.prPhoto }">
+		<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="memberId" value="${loginUser.memberId }">
+    	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="placeKey" value="${preview.placeKey }">
+    	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="prKey" value="${preview.prKey }">
+    	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="prPhoto" value="${preview.prPhoto }">
     	
     	<article>
-    	<div class="container" style="font-family: 'Sunflower', sans-serif;">
+    	<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">장소</label><input type="text" name="address" readonly="readonly" value="${place.placeName } : ${place.placeAddress}" class="col-md-8 form-control align-self-center" style="width : 50%;">
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">장소</label><input type="text" name="address" readonly="readonly" value="${place.placeName } : ${place.placeAddress}" class="col-md-8 form-control align-self-center" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width : 50%;">
 				</div>
 				<div class="col-md-2"></div>
 			</div>
-			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-				<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" name="prTitle"class="col-md-8 form-control align-self-center" value="${preview.prTitle }" style="width : 50%;">
+				<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">제목</label><input type="text" name="prTitle"class="col-md-8 form-control align-self-center" value="${preview.prTitle }" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width : 50%;">
 				
 				<div class="col-md-2" style="margin-top: 10px;">
 					  <span class="star-input">
@@ -161,18 +171,18 @@
 			</div>
 			<div class="col-md-2"></div>
 			</div> 
-			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea name="prContent" class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;">${preview.prContent }</textarea>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">내용</label><textarea name="prContent" class="col-md-6 form-control" cols="5" rows="10" style="font-family: 'Sunflower', sans-serif; margin: 0px; width: 564px; height: 325px; resize: none;">${preview.prContent }</textarea>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
             <br>
-			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+					<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">사진</label>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">사진</label>
 					<input type="file" name="reloadFile">
 				</div>
 				<div class="col-md-2 align-self-left">
@@ -182,13 +192,13 @@
 				</div>
 			</div>
 			<br><br>
-			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-4"></div>
-					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button class="col-md-2 btn btn-default" style="font-family: 'Sunflower', sans-serif; font-weight:bold; height: 40px;" onclick="back();">목록으로</button>
 					<div class="col-md-2"></div>
-					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;">수정하기</button>
+					<button type="submit" class=" col-md-2 btn btn-info" style="font-family: 'Sunflower', sans-serif; font-weight:bold; height: 40px;">수정하기</button>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -197,6 +207,8 @@
 		</form>
 	</section>
 	<script>
+	<!--footer-->
+	/* <jsp:include page="../../../WEB-INF/views/common/footer.jsp"/> */
 		function back(){
 			location.href="placeReviewListView.do?placeKey="+${preview.placeKey};
 		}

@@ -97,6 +97,12 @@
 		WHERE SUGGESTION_KEY = #{suggestionKey}
 	</select>
 	
+	<update id="updateAnswer">
+		UPDATE ANSWER SET
+		ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent}, ANSWER_ENROLL_DATE = SYSDATE
+		WHERE SUGGESTION_KEY = #{suggestionKey}
+	</update>
+	
 	<delete id="deleteAnswer">
 		DELETE FROM ANSWER
 		WHERE SUGGESTION_KEY = #{suggestionKey}

@@ -17,7 +17,7 @@
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 	<section style="margin-top: 40px;">
 		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 등록</h3>
-		<br><br>
+		<br><br><br><br>
 	<form action="sugInsert.do" method="post">
 	<input type="hidden" name="memberId" value="${loginUser.memberId }">
       <article>
@@ -37,7 +37,9 @@
             	<div class="col-md-2"></div>
             	<div class="col-md-8" style="margin-left:400px;">
             	<br><br>
-               <button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
+            	<c:url var="sugList" value="selectList.do">
+    			</c:url>
+               <button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
                <div class="col-md-2"></div>
                <input type="submit" class="col-md-2 btn btn-info" style="height:40px;" onclick="return Add();" value="글쓰기"> &nbsp;
                </div>
@@ -53,7 +55,8 @@
 	</script>
 	<script>
 	function back() {
-		location.href="javascript:history.back();"
+		/* location.href="javascript:history.back();" */
+		location.href="${sugList}";
 	}
 	</script>
 </body>

@@ -96,7 +96,7 @@ public class SuggestionController {
 	
 	// 건의사항 수정 메소드
 	@RequestMapping(value="sugUpdate.do", method=RequestMethod.POST)
-	public ModelAndView updateSug(ModelAndView mv, Suggestion suggestion, Model model, int suggestionKey) {
+	public ModelAndView updateSug(ModelAndView mv, Suggestion suggestion, int suggestionKey) {
 		int result = sService.modifySug(suggestion);
 		Suggestion sug = sService.selectOne(suggestionKey);
 		if(result > 0) {
@@ -167,6 +167,33 @@ public class SuggestionController {
 		}
 		return mv;
 	}
+	
+	// 건의사항 답변 수정화면
+	@RequestMapping(value="updateAnswerView.do", method=RequestMethod.GET)
+	public String updateAnswerView(Model model, int suggestionKey) {
+		Answer answer = sService.selectAnswer(suggestionKey);
+		model.addAttribute("answer", answer);
+		return "suggestion/answerUpdate";
+	}
+		
+	// 건의사항 답변 수정 메소드
+	@RequestMapping(value="updateAnswer.do", method=RequestMethod.POST)
+	public ModelAndView updateAnswer(ModelAndView mv, Answer answer, int suggestionKey) {
+		int result = sService.updateAnswer(answer);
+		Suggestion sug = sService.selectOne(suggestionKey);
+		Answer answer1 = sService.selectAnswer(suggestionKey);
+		if(result > 0) {
+			mv.addObject("sList", sug);
+			mv.addObject("answer", answer1);
+			mv.setViewName("suggestion/sugDetail");
+		}else {
+			mv.addObject("msg", "답변 수정 실패! 새로고침 후 다시 실행해주세요");
+			mv.addObject("url", "javascript:history.back();");
+			mv.setViewName("common/redirect");
+		}
+		return mv;
+	}
+	
 	
 	@RequestMapping(value="deleteAnswer.do", method=RequestMethod.GET)
 	// 건의사항 답변 삭제

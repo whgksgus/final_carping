@@ -1,5 +1,7 @@
 package com.carping.spring.place.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +43,11 @@ public class PlaceController {
 	@ResponseBody
 	public String search(Search search) {
 		return search.getSido()+" "+search.getSigun()+" "+search.getAddress(); 
+	}
+	
+	@RequestMapping(value = "placeInsertView.do", method = RequestMethod.GET)
+	public String placeInsertView() {
+		return "place/placeInsertView";
 	}
 	
 	public String registerCategoryForm() {
@@ -90,12 +97,52 @@ public class PlaceController {
 		return placeAvg;
 	}
 	
+	@RequestMapping(value = "insertPlace.do", method = RequestMethod.POST)
 	public String insertPlace(Place place, Model model, HttpServletRequest request, 
 			@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) {
-		return "";
+		System.out.println(place.toString());
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String renameFilename = saveFile(uploadFile, request);
+			if (renameFilename != null) {
+				place.setPlaceImage(renameFilename);
+			}
+		}
+		int result = 0;
+		String path = null;
+		result = pService.insertPlace(place);
+		if (result > 0) {
+			path = "place/placeInsertView";
+		}else {
+			model.addAttribute("msg", "장소 등록 실패");
+			model.addAttribute("url", "placecView.do");
+			path = "common/redirect";
+		}
+		return path;
 	}
+	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		return "";
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\placeImage";
+
+		File folder = new File(savePath);
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+		// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
+		// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
+		// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMddHmmss");
+		String originalFilename = file.getOriginalFilename();
+		String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
+				+ originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+		String filePath = folder + "\\" + renameFilename;
+
+		try {
+			file.transferTo(new File(filePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return renameFilename;
 	}
 	
 	public void deleteFile(String areaImage, HttpServletRequest request) {

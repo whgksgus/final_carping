@@ -94,4 +94,9 @@ public class SuggestionStoreLogic implements SuggestionStore {
 		return sqlSession.update("Suggestion.updateZero", suggestionKey);
 	}
 
+	@Override
+	public int updateAnswer(Answer answer) {
+		return sqlSession.update("Suggestion.updateAnswer", answer);
+	}
+
 }

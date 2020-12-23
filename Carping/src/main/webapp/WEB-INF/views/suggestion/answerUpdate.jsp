@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>건의사항 답변 등록</title>
+<title>건의사항 답변 수정</title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -16,22 +16,22 @@
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 	<section style="margin-top: 40px;">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 답변 등록</h3>
+		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 답변 수정</h3>
 		<br><br><br><br>
-	<form action="insertAnswer.do" method="post">
-      <input type="hidden" name="suggestionKey" value="${suggestionKey}"/>
+	<form action="updateAnswer.do" method="post">
+      <input type="hidden" name="suggestionKey" value="${answer.suggestionKey}"/>
       <article>
 			<div class="container" style="font-family:'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" name="answerTitle" placeholder="답변 제목을 입력해주세요" required class="col-md-8 form-control align-self-center" style="width : 564px;">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" name="answerTitle" value="${answer.answerTitle }" required class="col-md-8 form-control align-self-center" style="width : 564px;">
 				</div><br><br>
 				<div class="col-md-2"></div>
 			</div>
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-				<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea name="answerContent" placeholder="답변 내용을 입력해주세요" class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" required></textarea>
+				<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea name="answerContent" class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" required>${answer.answerContent}</textarea>
 				</div>
             <div class="container" style="font-family: 'Sunflower', sans-serif;"></div>
             	<div class="col-md-2"></div>
@@ -39,7 +39,7 @@
             	<br><br>
                <button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
                <div class="col-md-2"></div>
-               <input type="submit" class="col-md-2 btn btn-info" style="height:40px;" onclick="return Add();" value="답변 등록"> &nbsp;
+               <input type="submit" class="col-md-2 btn btn-info" style="height:40px;" onclick="return Add();" value="답변 수정"> &nbsp;
                </div>
                <div class="col-md-2"></div>
                </div>
@@ -52,18 +52,9 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<script>
 	function Add() {
-		return confirm("답변을 등록하시겠습니까?")
+		return confirm("답변을 수정하시겠습니까?")
 		}
 	
 	function back() {
