@@ -178,9 +178,9 @@
 			
 		</article>
 		</form>
-		<!--footer-->
-	<%-- <jsp:include page="../../../WEB-INF/views/common/footer.jsp"/> --%>
 		</section>
+		<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	<script>
 		function back(){
 			location.href="${prList}";

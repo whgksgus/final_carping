@@ -24,11 +24,11 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="width:100%; height:800px;">
+	<section style="width:100%; height:1000px;">
 		<article>
 			<div style="height:100px; display:block;"></div>
 			<div align="center">
-				<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">명소 리뷰리스트</h2>
+				<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">리뷰게시판 - 명소</h2>
 				<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 			</div>
 			<br>
@@ -72,9 +72,7 @@
 					<div class="col-md-1">
 						<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="placeKey" value="${placeKey}" />
 					</div>
-					<div class="col=md-1">
-						<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="submit" class="btn btn-info" value="리뷰작성" />
-					</div>
+						<input style="font-family: 'Sunflower', sans-serif; margin-left:1150px; font-weight:bold;" type="submit" class="btn btn-info" value="리뷰작성" />
 				</div>
 			</form>
 			<div class="contatiner">
@@ -169,12 +167,8 @@
 			<br> <br>
 			<form id="form" action="searchPlaceBoardReview.do" method="get">
 				<input type="hidden" name="placeKey" value="${placeKey}" />
-				<div class="contatiner">
-					<div class="col-md-3"></div>
-					<div class="col-md-7">
-						<div class="col-md-1"></div>
-						<select class="col-md-2 from-control" id="searchCondition"
-							name="searchCondition" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width: 12%;">
+				<div style="margin-left:700px;">
+						<select class="form-control col-sm-2" style="width:120px; font-family: 'Sunflower', sans-serif; font-weight:bold;" id="searchCondition" name="searchCondition">
 							<option value="제목"
 								<c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>
 							<option value="내용"
@@ -182,20 +176,13 @@
 							<option value="작성자"
 								<c:if test="${search.searchCondition == '작성자'}">selected</c:if>>작성자</option>
 						</select>
-						<div class="col-md-6">
-							<input type="text" id="searchValue" name="searchValue" size="50;"
-								style="font-family: 'Sunflower', sans-serif; font-weight:bold;" value="${search.searchValue }" required />
-						</div>
-						<div class="col-md-2">
-							<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="submit" class="btn btn-into" value="검색" id="search" />
-						</div>
-					</div>
-					<div class="col-md-2"></div>
+						<input type="text" class="form-control col-sm-1"  id="searchValue" name="searchValue" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:300px;" value="${search.searchValue }" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px;" value="검색" id="search"/>
 				</div>
 			</form>
 		</article>
 	</section>
 	<!--footer-->
-	<%-- <jsp:include page="../../../WEB-INF/views/common/footer.jsp"/> --%>
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>건의사항</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
@@ -15,21 +21,22 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px;">
-		<article>
-			<h3>건의사항 리스트</h3>
-			<br><br><br>
+	<div style="width:100%; height:850px;">
+	<div style="height:100px;"></div>
+	<div align="center">
+		<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">건의사항</h2>
+		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div><br>
 			<div class="container">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<table class="table table-striped">
 						<tr>
-			<th class="col-md-1 test-center">글번호</th>
-			<th class="col-md-5 test-center">제목</th>
-			<th class="col-md-1 test-center">작성자</th>
-			<th class="col-md-1 test-center">조회수</th>
-			<th class="col-md-2 test-center">작성일</th>
-			<th class="col-md-1 test-center">답변여부</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">글번호</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-5 test-center">제목</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">작성자</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">조회수</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">작성일</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">답변여부</th>
 		</tr>
 		<c:if test="${sList eq null || empty sList }">
 			<tr>
@@ -39,21 +46,21 @@
 		<c:if test="${sList ne null || !empty sList }">
 		<c:forEach items="${sList }" var="sList" varStatus="status">		
 		<tr>
-			<td>${pageNum - status.index }</td>
-			<td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${pageNum - status.index }</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 			<c:url var="sugDetail" value="selectOne.do">
 				<c:param name="suggestionKey" value="${sList.suggestionKey }"/>
 			</c:url>
 			<a href="${sugDetail }">${sList.suggestionTitle }</a>
 			</td>
-			<td>${sList.memberId }</td>
-			<td>${sList.suggestionCount }</td>
-			<td>${sList.suggestionEnrollDate }</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${sList.memberId }</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${sList.suggestionCount }</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${sList.suggestionEnrollDate }</td>
 			<c:if test="${sList.answerCheck eq 0 }">
-			<td>X</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X</td>
 			</c:if>
 			<c:if test="${sList.answerCheck eq 1 }">
-			<td>O</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O</td>
 			</c:if>
 		</tr>
 		</c:forEach>
@@ -63,7 +70,7 @@
 	<div class="com-md-1"></div>
 	</div>
 	<form action="sugInsertView.do" method="post">
-	<input style="margin-left:1350px;" type="submit" class="btn btn-info" value="글쓰기"/>
+	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:1000px;" class="btn btn-info" type="submit"  value="글쓰기"/>
 	</form>
 			<div class="contatiner">
 			<div class="col-md-12 text-center">
@@ -71,7 +78,7 @@
 				<ul class="pagination pagination-sm">
 				<!-- 이전 -->
 				<c:if test="${pi.currentPage <= 1 }">
-					<li class="page-item"><a href="javascript:void(0);" class="page-link">이전</a></li>
+				<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">이전</a></li>
 				</c:if>
 				<c:if test="${pi.currentPage > 1 }">
 					<!-- 그냥 실행했을때 -->
@@ -88,7 +95,7 @@
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
 					</c:if>
-					<li class="page-item"><a href="${before }" class="page-link">이전</a></li>
+					<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${before}" class="page-link">이전</a></li>
 				</c:if>
 				<!-- 페이지  -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
@@ -115,7 +122,7 @@
 				</c:forEach>
 				<!-- 다음 -->
 				<c:if test="${pi.currentPage >= pi.maxPage }">
-					<li class="page-item"><a href="javascript:void(0);" class="page-link">다음</a></li>
+				<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">다음</a></li>
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
 				<!--  그냥 실행했을때 -->
@@ -132,7 +139,7 @@
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 					</c:url>
 					</c:if>
-					<li class="page-item"><a href="${after }" class="page-link">다음</a></li>
+				<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${after}" class="page-link">다음</a></li>
 				</c:if>
 				</ul>
 				</c:if>
@@ -140,26 +147,19 @@
 		</div>
 	<br><br>
 	<form id="form" action="sugSearchList.do" method="get">
-	<div class="contatiner">
-		<div class="col-md-3"></div>
-					<div class="col-md-7">
-						<div class="col-md-1"></div>
-						<select class="col-md-2 from-control" id="searchCondition" name="searchCondition" style="width: 12%;">
+	<div style="margin-left:700px;">
+			<select class="form-control col-sm-2" style="width:120px; font-family: 'Sunflower', sans-serif; font-weight:bold;" id="searchCondition" name="searchCondition">
 			<option value="제목" <c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>
 			<option value="내용" <c:if test="${search.searchCondition == '내용'}">selected</c:if>>내용</option>
 			<option value="작성자" <c:if test="${search.searchCondition == '작성자'}">selected</c:if>>작성자</option>
-		</select>
-		<div class="col-md-6">
-		<input type="text" id="searchValue" name="searchValue" size="50;" value="${search.searchValue }" required/>
-		</div>
-		<div class="col-md-2">
-		<input type="submit" class="btn btn-into" value="검색" id="search"/>
-		</div>
-	</div>
-	<div class="col-md-2"></div>
+		</select>&nbsp;&nbsp;
+		<input type="text" class="form-control col-sm-1" id="searchValue" name="searchValue" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:300px;" value="${search.searchValue }" required/>
+		<input type="submit" class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px;" value="검색" id="search"/>
 	</div>
 	</form>
-	</article>
-	</section>
+	</div>
+	</div>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
