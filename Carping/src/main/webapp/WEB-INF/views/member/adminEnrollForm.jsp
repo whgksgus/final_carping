@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Carping 회원가입</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -30,6 +32,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	rel='stylesheet' type='text/css'>
 <!--/script-->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script>
 function daumPostcode() {
     new daum.Postcode({
@@ -42,13 +48,13 @@ function daumPostcode() {
 
 <style>
 .bannerLogin {
-	background: url(../images/banner.jpg) no-repeat 0px 0px;
+	background: url(../../../resources/images/fallStreet2.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-ms-background-size: cover;
-	min-height: 800px;
+	min-height: 950px;
 	position: relative;
 }
 span.guide {
@@ -75,71 +81,73 @@ span.error{color:red}
 
 </head>
 <body>
-	<div class="banner" id="home">
+	<div class="bannerLogin" id="home" style="color: #FFFFFF;">
+		<jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
 		<div class="loginBox">
 			<div class="loginBox3">
 			<form action="adminRegister.do" method="post">
 				<table class="enrollTable">
 					<tr>
-						<td colspan="3">
-							<h2 class="h2" align="center">Carping 회원가입</h2>
+						<td colspan="3" align="center">
+							<h2 class="h2" style="font-family: 'Sunflower', sans-serif; font-weight:bold;" align="center">Carping 관리자 등록</h2>
+							<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
 							<br>
 						</td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">아이디 </td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-weight:bold;">아이디 </td>
 						<td style="width:320px;">
 							<input class="form-control" style="margin-left: 20px; width:300px;" type="text" name="memberId" id="memberId" required>
 						</td>
 						<td style="width:160px;">
-							<span style="margin-left: 20px;" class="guide ok">사용 가능합니다.</span>
-							<span style="margin-left: 20px;" class="guide error">사용할 수 없습니다.</span>
+							<span style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left: 20px;" class="guide ok">사용 가능합니다.</span>
+							<span style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left: 20px;" class="guide error">사용할 수 없습니다.</span>
 							<input type="hidden" id="idDuplicateCheck" value="0">
 						</td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">비밀번호 </td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">비밀번호 </td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" name="memberPwd" id="password" required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">비밀번호 확인</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">비밀번호 확인</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" id="passwordChk" required></td>
 						<td style="width:160px;">
-							<span style="margin-left: 20px;" class="guide2 ok">일치합니다.</span>
-							<span style="margin-left: 20px;" class="guide2 error">일치하지 않습니다.</span>
+							<span style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left: 20px;" class="guide2 ok">일치합니다.</span>
+							<span style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left: 20px;" class="guide2 error">일치하지 않습니다.</span>
 							<input type="hidden" id="pwCheck" value="0">
 						</td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">이름</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">이름</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="memberName" required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">전화번호</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">전화번호</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="phone" maxlength="13" placeholder="000-0000-0000식으로 입력해주세요." required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">이메일</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">이메일</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="email" required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">주소</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">주소</td>
 						<td style="width:320px;">
 							<input type="text" id="jibunAddress" name="jibunAddress" class="form-control" style="width:300px; margin-left: 20px;" required>
 						</td>
-						<td style="width:160px;"><button class="btnLogin" style="float:left; margin-left: 20px;" type="button" onclick="daumPostcode()">검색</button></td>
+						<td style="width:160px;"><button class="btnLogin" style="font-family: 'Sunflower', sans-serif; font-weight:bold; float:left; margin-left: 20px; width:70px;" type="button" onclick="daumPostcode()">검색</button></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">상세주소</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">상세주소</td>
 						<td style="width:320px;">
 							<input type="text" id="detailAddress" name="detailAddress" class="form-control" style="width:300px; margin-left: 20px;" required>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3" align="center">
-							<button class="btnLogin" onclick="return validate();">가입하기</button>
+							<button style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="btnLogin" onclick="return validate();">가입하기</button>
 							<!-- <input type="submit" value="가입하기"> -->
-							<button style="margin-left:10px;" class="btnLogin" type="button" onclick="location.href='home.do';">메인으로</button>
+							<button style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:10px;" class="btnLogin" type="button" onclick="location.href='home.do';">메인으로</button>
 						</td>
 					</tr>
 					
@@ -147,6 +155,8 @@ span.error{color:red}
 			</form>
 			</div>
 		</div>
+		 <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	</div>
 	<script type="text/javascript">
 	function validate() {

@@ -31,6 +31,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	rel='stylesheet' type='text/css'>
 <!--/script-->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script>
 function daumPostcode() {
     new daum.Postcode({
@@ -43,13 +47,13 @@ function daumPostcode() {
 
 <style>
 .bannerLogin {
-	background: url(../images/banner.jpg) no-repeat 0px 0px;
+	background: url(../../../resources/images/fallStreet2.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-ms-background-size: cover;
-	min-height: 800px;
+	min-height: 950px;
 	position: relative;
 }
 span.guide {
@@ -76,48 +80,49 @@ span.error{color:red}
 
 </head>
 <body>
+	<div class="bannerLogin" id="home" style="color: #FFFFFF;">
 	<jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
-	<div class="banner" id="home">
 		<div class="loginBox">
 			<div class="loginBox3">
 			<form action="updateMember.do" method="post">
 				<table class="enrollTable">
 					<tr>
-						<td colspan="3">
-							<h2 class="h2" align="center">정보수정</h2>
+						<td colspan="3" align="center">
+							<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2" align="center">정보수정</h2>
+							<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
 							<input class="form-control" style="margin-left: 20px; width:300px;" type="hidden" name="memberId" id="memberId" value="${loginUser.memberId }" readonly>
 							
 						</td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">비밀번호</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">비밀번호</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="password" name="memberPwd" id="password" value="${loginUser.memberPwd }" required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">이름</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">이름</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="memberName" value="${loginUser.memberName }" required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">전화번호</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">전화번호</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="phone" maxlength="13" value="${loginUser.phone }" required></td>
 					</tr>
 					<tr>
-						<td style="font-weight:bold;">이메일</td>
+						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">이메일</td>
 						<td style="width:320px;"><input class="form-control" style="width:300px; margin-left: 20px;" type="text" name="email" value="${loginUser.email }" required></td>
 					</tr>
 					<c:forTokens var="addr" items="${loginUser.memberAddress }" delims="," varStatus="status">
 								<c:if test="${status.index eq 0 }">
 									<tr>
-										<td style="font-weight:bold;">주소</td>
+										<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">주소</td>
 										<td style="width:320px;">
 											<input type="text" id="jibunAddress" name="jibunAddress" class="form-control" style="width:300px; margin-left: 20px;" value="${addr}" required>
 										</td>
-										<td style="width:160px;"><button class="btnLogin" style="float:left; margin-left: 20px;" type="button" onclick="daumPostcode()">검색</button></td>
+										<td style="width:160px;"><button class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; float:left; margin-left: 20px; width:70px;" type="button" onclick="daumPostcode()">검색</button></td>
 									</tr>
 								</c:if>
 								<c:if test="${status.index eq 1 }">
 									<tr>
-										<td style="font-weight:bold;">상세주소</td>
+										<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">상세주소</td>
 										<td style="width:320px;">
 											<input type="text" id="detailAddress" name="detailAddress" class="form-control" value="${addr}" style="width:300px; margin-left: 20px;" required>
 										</td>
@@ -126,14 +131,16 @@ span.error{color:red}
 					</c:forTokens>
 					<tr>
 						<td colspan="3" align="center">
-							<input type="submit" class="btnLogin" value="수정하기">
-							<button style="margin-left:10px;" class="btnLogin" type="button" onclick="location.href='home.do';">메인으로</button>
+							<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="submit" class="btnLogin" value="수정하기">
+							<button style="font-family: 'Sunflower', sans-serif; margin-left:10px;" class="btnLogin" type="button" onclick="location.href='home.do';">메인으로</button>
 						</td>
 					</tr>
 				</table>
 			</form>
 			</div>
 		</div>
+	 <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 </html>

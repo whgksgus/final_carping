@@ -6,12 +6,14 @@
    <head>
       <meta charset="UTF-8">
       <title>차박장소 추가</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
-      <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+      <!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -108,7 +110,7 @@
       <div class="insertBox" align="center">
          <div style="background-color: rgba(12, 12, 12, 0.4); width:1400px; height:1250px; margin-top:50px;" align="center">
          	<h1 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h1">차박 장소 추가</h1>
-         	<div style="width: 350px; border-bottom: 2px solid gray;"></div>
+         	<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
          	<br>
             <form action="insertArea.do" method="post" enctype="multipart/form-data">
                <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">장소이름</h3>
@@ -117,7 +119,7 @@
                <div style="width: 600px;">
                <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">주소찾기</h3>
                <input class="form-control" style="margin-left:100px; width:400px;float:left;" type="text" id="jibunAddress" name="areaAddress">
-               <input class="form-control loginBtn" style="float:left; width:80px; height:35px;" type="button" onclick="daumPostcode()" value="찾기">
+               <input class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; float:left; width:80px; height:35px;" type="button" onclick="daumPostcode()" value="찾기">
                <br>
                <br>
                <div id="map" style="width:100%;height:250px;"></div>
@@ -167,7 +169,7 @@
                <input class="loginBtn" type="file" name="uploadFile">
                <br>
                <br>
-               <input class="form-control loginBtn" style="width:80px; height:35px;" type="submit" value="등록">
+               <input class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px; height:35px;" type="submit" value="등록">
             </form>
          </div>
       </div>

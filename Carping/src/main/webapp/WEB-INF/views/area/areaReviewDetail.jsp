@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰게시판 - 상세보기</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
@@ -48,7 +50,7 @@
 </style>
 <body>
 	<jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
-	<section style="width:100%; height:800px;">
+	<section style="width:100%; height:1000px;">
 		<div style="height:100px;"></div>
 		<div align="center">
 			<h2 class="h2" style="font-weight:bold; font-family: 'Sunflower', sans-serif;">리뷰게시판 - 상세보기</h2>
@@ -123,7 +125,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">댓글</label>
-					<table id="arctb" class="col-md-6 table table-bordered" style="width: 560px;">
+					<table id="arctb" class="col-md-6 table" style="width: 560px; font-family: 'Sunflower', sans-serif; font-weight:bold;">
 						<thead>
 							<tr>
 								<td colspan="4"><b id="arcCount"></b></td>
@@ -143,14 +145,14 @@
 					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">
 						
 					</label>
-					<table class="col-md-6 table table-bordered" style="width: 560px;">
+					<table class="col-md-6 table" style="width: 560px;">
 						<thead>
 							<tr>
 								<td>
-									<textarea id="content" rows="5" cols="10" style="width: 543px; height: 67px; resize: none;"></textarea>
+									<textarea id="content" rows="5" cols="10" style="width: 543px; height: 67px; resize: none; font-family: 'Sunflower', sans-serif; font-weight:bold;"></textarea>
 								</td>
 								<td>
-									<button class="btn btn-default" style="width: 70px; height: 70px;" id="submit">등록</button>
+									<button class="btn btn-default" style="width: 70px; height: 70px; font-family: 'Sunflower', sans-serif; font-weight:bold;" id="submit">등록</button>
 								</td>
 							</tr>
 						</thead>
@@ -162,7 +164,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-3"></div>
-					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">목록으로</button>
 					<c:if test="${areview.memberId eq loginUser.memberId}">
 						<c:url var="arUpdate" value="areaReviewUpdateView.do">
 							<c:param name="arKey" value="${areview.arKey}"></c:param>
@@ -173,9 +175,9 @@
 							<c:param name="areaKey" value="${areaKey}"></c:param>
 						</c:url>
 						<div class="col-md-1"></div>
-						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return upChk();">수정</button>
+						<button class="col-md-2 btn btn-default" style="height: 40px;font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return upChk();">수정</button>
 						<div class="col-md-1"></div>
-						<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return chk();">삭제</button>
+						<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick= "return chk();">삭제</button>
 					</c:if>
 				</div>
 				<div class="col-md-2"></div>
@@ -250,10 +252,10 @@
 							$tr = $("<tr>");
 							$arcWriter = $("<td width='100'>").text(data[i].arcWriter);
 							$arcContent = $("<td>").text(decodeURIComponent(data[i].arcContent).replace(/\+/g, " "));
-							$arcRegDate = $("<td width='100'>").text(data[i].arcRegDate);
+							$arcRegDate = $("<td width='150'>").text(data[i].arcRegDate);
 							$memberId = data[i].arcWriter;
 							if(checkId == $memberId) {
-							$arcDelete = $("<td width='48'><input class='col-sm-2 btn btn-danger' style='width:40px; height:30px;' align='center' type='button' id='arcDelete' onclick='arcDelete("+data[i].arcKey+");' value='삭제'>");
+							$arcDelete = $("<td width='48'><input class='col-sm-2 btn btn-danger' style='padding: none; width:30px; height:30px;' align='center' type='button' id='arcDelete' onclick='arcDelete("+data[i].arcKey+");' value='X'>");
 							}else {
 								$arcDelete = $("<td width='48'>");
 							}

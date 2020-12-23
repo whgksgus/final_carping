@@ -4,6 +4,8 @@
 <html>
 <head>
 <title>Carping</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Outdoors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -156,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <body>
 <!--start-home-->
 		<jsp:include page="../../WEB-INF/views/common/nav.jsp"/>
+		<div style="height: 70px; display:block;"></div>
 		<div class="wrap_center">
 		    <div class="containerBanner">
 		        <div class="img_wrap">

@@ -90,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a data-hover="커뮤니티" href="#" class="scroll">커뮤니티</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">자유 게시판</a></li>
+										style="display: block; padding: 1px 5px;" href="BoardInfo.do">자유 게시판</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="reviewInfo.do">리뷰 게시판</a></li>
 								</ul></li>
@@ -114,6 +114,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										style="display: block; padding: 1px 5px;" href="memberDeletePwCheckForm.do">회원탈퇴</a></li>
 									<li style="float: left;"><a
 										style="display: block; padding: 1px 5px;" href="insertInfo.do">장소추가</a></li>
+									<li style="float: left;"><a
+										style="display: block; padding: 1px 5px;" href="foodZoneMenuInsertView.do">맛집 메뉴 등록</a></li>
 									</c:if>
 								</c:if>
 								</ul>
