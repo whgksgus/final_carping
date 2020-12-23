@@ -6,11 +6,18 @@
    <head>
       <meta charset="UTF-8">
       <title>명소 추가</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
-      <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <!-- 상단 아이콘 -->
+	<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
       <script>
          function daumPostcode() {
             new daum.Postcode({
@@ -52,41 +59,59 @@
             }).open();
          }
       </script>
+      <style>
+.bannerLogin {
+	background: url(../../../resources/images/fallStreet2.jpg) no-repeat 0px 0px;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	min-height: 950px;
+	position: relative;
+}
+</style>
    </head>
    <body>
-   <div class="banner2" id="home" style="color: #FFFFFF;">
+   <div class="bannerLogin" id="home" style="color: #FFFFFF;">
    <jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
       <div class="insertBox" align="center">
-         <div style="background-color: rgba(12, 12, 12, 0.36); width:1400px; height:1200px;" align="center">
-         	<h1 class="h1">명소 추가</h1>
+         <div style="background-color: rgba(12, 12, 12, 0.4); width:1400px; height:1250px; margin-top:50px;" align="center">
+         	<h1 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h1">명소 추가</h1>
+         	<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
          	<br>
             <form action="insertPlace.do" method="post" enctype="multipart/form-data">
-               <h3 class="h3" align="center">명소이름</h3>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">명소이름</h3>
                <input class="form-control" style="width:400px;" type="text" name="placeName">
                <div style="width: 600px;">
-               <h3 class="h3">주소찾기</h3>
-               <input class="form-control" style="width:400px;" type="text" id="jibunAddress" name="placeAddress">
-               <input class="loginBtn" type="button" onclick="daumPostcode()" value="찾기">
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">주소찾기</h3>
+               <input class="form-control" style="margin-left:100px; width:400px;float:left;" type="text" id="jibunAddress" name="placeAddress">
+               <input class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; float:left; width:80px; height:35px;" type="button" onclick="daumPostcode()" value="찾기">
+               <br><br>
                <div id="map" style="width:100%;height:250px;"></div>
                </div>
                <input class="form-control" type="hidden" id="pGeoCode" name="placeGeoCode">
                <div align="center" style="display:inline-block">
-                  <h3 class="h3">편의시설</h3>
-                  <input id="chkBox1" type="checkbox" name="placeToilet" value="1"> 화장실&nbsp;&nbsp;
-                  <input id="chkBox2" type="checkbox" name="placeGS25" value="1"> 편의점&nbsp;&nbsp;
-                  <input id="chkBox3" type="checkbox" name="placeParking" value="1"> 주차장&nbsp;&nbsp;
+                  <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">편의시설</h3>
+                  <br>
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox1" type="checkbox" name="placeToilet" value="1"> 화장실&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox2" type="checkbox" name="placeGS25" value="1"> 편의점&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox3" type="checkbox" name="placeParking" value="1"> 주차장&nbsp;&nbsp;
                </div>
-               <h3 class="h3">기타사항</h3>
-               <textarea name="placeEtc" cols="50" rows="5" style="resize: none; color:black;"></textarea>
+               <br><br>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">기타사항</h3>
+               <textarea class="form-control" name="placeEtc" cols="50" rows="5" style="resize: none; color:black; width:400px;"></textarea>
                <br>
-               <h3 class="h3">사진 첨부</h3>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">사진 첨부</h3>
                <input class="loginBtn" type="file" name="uploadFile">
                <br>
                <br>
-               <input class="loginBtn" type="submit" value="등록">
+               <input class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px; height:35px;" type="submit" value="등록">
             </form>
          </div>
       </div>
       </div>
+      <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
    </body>
 </html>
