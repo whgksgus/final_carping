@@ -1,6 +1,9 @@
 package com.carping.spring.foodzone.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,6 +14,7 @@ import java.util.Map;
 
 import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -33,6 +37,7 @@ import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.domain.TakeOutReserve;
 import com.carping.spring.foodzone.service.FoodZoneService;
 import com.carping.spring.member.domain.Member;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -87,9 +92,32 @@ public class FoodZoneController {
 	     return paramMap;
 	}
 	
-	public String insertFoodZone(FoodZone foodZone, Model model,
-			@RequestParam(name="foodZoneImage", required = false) MultipartFile uploadFile) {
-		return "";
+	@RequestMapping(value="foodZoneInsertView.do", method = RequestMethod.GET)
+	public String insertFoodZoneView() {
+		return "foodzone/insertFoodZone";
+	}
+	
+	@RequestMapping(value="insertFoodZone.do", method = RequestMethod.POST)
+	public void insertFoodZone(FoodZone foodZone, ModelAndView mv, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) throws Exception  {
+		
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String fileName = saveFile(uploadFile, request);
+			if(fileName!=null) {
+				foodZone.setFoodZoneImage(uploadFile.getOriginalFilename());
+			}
+		}
+		int result = 0;
+		result = fzService.insertFoodZone(foodZone);
+		response.setContentType("text/html; charset=utf-8");
+		
+		PrintWriter out = response.getWriter();
+		if(result>0) {
+			out.println("<script>alert('등록이 완료되었습니다. 메뉴판을 추가해보세요.'); location.href='insertInfo.do';</script>");
+		}else {
+			out.println("<script>alert('등록이 실패하였습니다.'); location.href='home.do';</script>");
+			
+		}
 	}
 	
 	public String foodZoneReviewScoreAvg(int foodZoneKey) {
@@ -189,9 +217,98 @@ public class FoodZoneController {
 	}
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		return "";
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\images";
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		String originalFileName = file.getOriginalFilename();
+		String filePath = folder + "\\" + originalFileName;
+		if (originalFileName == "") {
+			return null;
+		}else {
+			try {
+				file.transferTo(new File(filePath));
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return originalFileName;
+		}
 	}
 	
 	public void deleteFile(MultipartFile file, HttpServletRequest request) {
+	}
+	
+	@RequestMapping(value="foodZoneMenuInsertView.do", method =  RequestMethod.GET)
+	public String foodZoneMenuInsertView() {
+		return "foodzone/menuInsert";
+				
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="searchFoodZone", method = RequestMethod.GET,  produces = "application/text; charset=utf8")
+	public String searchFoodZone(String foodZoneName) {
+		ArrayList<FoodZone> fList = fzService.searchMenuFoodZone(foodZoneName);
+		Gson gson = new Gson();
+		String jsonFoodZone = gson.toJson(fList);
+		System.out.println(jsonFoodZone);
+		return jsonFoodZone;
+	}
+	
+	@RequestMapping(value="insertMenu.do", method = RequestMethod.POST)
+	public void menuInsert(@RequestParam(name="uploadFile", required = false) MultipartFile[] uploadFile, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		String[] foodZoneKey = request.getParameterValues("foodZoneKey");
+		String[] takeOutMenu = request.getParameterValues("takeOutMenu");
+		String[] takeOutMenuPrice = request.getParameterValues("takeOutMenuPrice");
+		int chk = 0;
+		response.setContentType("text/html; charset=utf-8");
+		for(int i=0; i<foodZoneKey.length;i++) {
+			TakeOut takeOut = new TakeOut();
+			takeOut.setFoodZoneKey(Integer.parseInt(foodZoneKey[i]));
+			takeOut.setTakeOutMenu(takeOutMenu[i]);
+			takeOut.setTakeOutMenuPrice(Integer.parseInt(takeOutMenuPrice[i]));
+			if(!uploadFile[i].getOriginalFilename().equals("")) {
+				String fileName = saveFileMenu(uploadFile[i], request);
+				if(fileName!=null) {
+					takeOut.setTakeOutMenuPhoto(uploadFile[i].getOriginalFilename());
+				}
+			}
+			
+			int result = fzService.insertMenu(takeOut);
+			if(result>0) {
+				chk++;
+			}
+			
+			if(i==foodZoneKey.length-1) {
+				if(chk==foodZoneKey.length) {
+					out.println("<script>alert('정상적으로 등록되었습니다.'); location.href='foodZoneMenuInsertView.do';</script>");
+				}else {
+					out.println("<script>alert('오류발생.'); location.href='foodZoneMenuInsertView.do';</script>");
+				}
+			}
+		}
+	}
+	
+	public String saveFileMenu(MultipartFile file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\images\\menu";
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		String originalFileName = file.getOriginalFilename();
+		String filePath = folder + "\\" + originalFileName;
+		if (originalFileName == "") {
+			return null;
+		}else {
+			try {
+				file.transferTo(new File(filePath));
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return originalFileName;
+		}
 	}
 }

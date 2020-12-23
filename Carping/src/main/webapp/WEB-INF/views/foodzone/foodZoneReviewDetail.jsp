@@ -147,7 +147,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-3"></div>
-					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
 					<c:if test="${fReview.memberId eq loginUser.memberId}">
 						<c:url var="frUpdate" value="foodZoneReviewUpdate.do">
 							<c:param name="frKey" value="${fReview.frKey}"></c:param>

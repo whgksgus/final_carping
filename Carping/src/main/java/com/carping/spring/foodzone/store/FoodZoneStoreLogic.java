@@ -54,8 +54,7 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 
 	@Override
 	public int insertFoodZone(FoodZone foodZone) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("FoodZoneMapper.adminInsertFoodZone", foodZone);
 	}
 
 	@Override
@@ -94,6 +93,18 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	@Override
 	public int getSearchReviewListCount(BoardSearch boardSearch) {
 		return sqlSession.selectOne("FoodZoneMapper.searchBoardListCount", boardSearch);
+	}
+
+	@Override
+	public ArrayList<FoodZone> searchMenuFoodZone(String foodZoneName) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("FoodZoneMapper.searchMenuFoodZoneList", foodZoneName);
+	}
+
+	@Override
+	public int insertMenu(TakeOut takeOut) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("FoodZoneMapper.insertMenu", takeOut);
 	}
 
 }

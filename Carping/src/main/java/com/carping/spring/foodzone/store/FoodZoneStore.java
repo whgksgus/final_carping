@@ -25,4 +25,6 @@ public interface FoodZoneStore {
 	public int insertTakeout(TakeOutReserve tor);
 	public ArrayList<Tor> selectTakeOutReserve(String memberId);
 	public int getSearchReviewListCount(BoardSearch boardSearch);
+	public ArrayList<FoodZone> searchMenuFoodZone(String foodZoneName);
+	public int insertMenu(TakeOut takeOut);
 }
