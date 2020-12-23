@@ -22,7 +22,7 @@
 			        		<option value="주소">주소</option>
 			        	</select>&nbsp;
 			        	<input type="text" class="form-control col-sm-7" style="width : 50%;" id="searchValue" name="searchValue">
-			        	&nbsp;<button class="btn btn-default col-sm-1">검색</button>
+			        	&nbsp;<button class="btn btn-default col-sm-1" onclick="return chk();">검색</button>
 			        </div>
 			        <div class="col-sm-2"></div>
 			    </div>
@@ -73,7 +73,16 @@
 		</article>
 	</section>
 	<script>
-		
+		function chk(){
+			var chk = $("#searchValue").val();
+			console.log(chk);
+			if(chk==''){
+				alert('장소를 입력해주세요.');
+				return false;
+			}else{
+				return true;
+			}
+		}
 	</script>
 </body>
 </html>

@@ -49,7 +49,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-4"></div>
-					<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
 					<div class="col-md-2"></div>
 					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;">글쓰기</button>
 				</div>
@@ -61,7 +61,7 @@
 	</section>
 	<script>
 		function back(){
-			location.href="foodZoneReviewListView.do?foodZoneKey="+${foodZoneKey};
+			location.href="BoardInfo.do";
 		}
 	</script>
 </body>

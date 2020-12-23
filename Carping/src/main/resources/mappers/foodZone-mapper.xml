@@ -182,4 +182,16 @@
 		</where>
 		ORDER BY FR_KEY DESC
    </select>
+   
+   <insert id="adminInsertFoodZone">
+		INSERT INTO FOODZONE VALUES(SEQ_FZKEY.NEXTVAL, #{foodZoneName}, #{foodZoneAddress}, #{foodZoneGeoCode}, #{foodZonePhone}, #{foodZoneImage}, #{foodZoneEtc}, 0.0, #{takeOutStatus})
+	</insert>
+	
+	<select id="searchMenuFoodZoneList" resultMap="FoodZoneResultMap">
+		SELECT * FROM FOODZONE WHERE FOODZONE_NAME=#{foodZoneName} AND TAKEOUT_STATUS = 'Y'
+	</select>
+	
+	<insert id="insertMenu">
+		INSERT INTO TAKEOUTMENU VALUES(SEQ_TK.NEXTVAL,#{foodZoneKey}, #{takeOutMenu}, #{takeOutMenuPrice}, #{takeOutMenuPhoto})
+	</insert>
 </mapper>

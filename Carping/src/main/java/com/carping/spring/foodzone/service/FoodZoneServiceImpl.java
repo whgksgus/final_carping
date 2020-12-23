@@ -56,8 +56,7 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 
 	@Override
 	public int insertFoodZone(FoodZone foodZone) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fzStore.insertFoodZone(foodZone);
 	}
 
 	@Override
@@ -96,6 +95,17 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 	@Override
 	public int getSearchReviewListCount(BoardSearch boardSearch) {
 		return fzStore.getSearchReviewListCount(boardSearch);
+	}
+
+	@Override
+	public ArrayList<FoodZone> searchMenuFoodZone(String foodZoneName) {
+		// TODO Auto-generated method stub
+		return fzStore.searchMenuFoodZone(foodZoneName);
+	}
+
+	@Override
+	public int insertMenu(TakeOut takeOut) {
+		return fzStore.insertMenu(takeOut);
 	}
 
 

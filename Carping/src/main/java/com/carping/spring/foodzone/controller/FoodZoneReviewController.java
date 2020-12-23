@@ -48,19 +48,15 @@ public class FoodZoneReviewController {
 	}
 	
 	@RequestMapping(value="foodZoneSearch.do", method = RequestMethod.POST)
-	public String foodZoneSearch(Search search, Model model, @RequestParam(value="page", required=false) Integer page) {
-		int currentPage = (page != null) ? page : 1;
-		
+	public ModelAndView foodZoneSearch(Search search, ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
+
 		ArrayList<FoodZone> fList = fzrService.searchFoodZone(search);
 		if(!fList.isEmpty()) {
-			model.addAttribute("fList", fList);
-			model.addAttribute("search", search);
-			System.out.println(fList.toString());
-			return "foodzone/foodZoneReviewSearch";
+			mv.addObject("fList", fList).addObject("search", search).setViewName("foodzone/foodZoneReviewSearch");
 		}else {
-			return "common/error";
+			mv.addObject("msg", "검색 결과가 없습니다..").addObject("url", "foodzone/foodZoneReviewSearch");
 		}
-		
+		return mv;
 	}
 	
 	@RequestMapping(value="foodZoneReviewListView.do", method = RequestMethod.GET)
@@ -144,6 +140,7 @@ public class FoodZoneReviewController {
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String fileName = saveFile(uploadFile, request);
 			if(fileName != null) {
+				System.out.println(uploadFile.getOriginalFilename());
 				fzr.setFrPhoto(uploadFile.getOriginalFilename());
 			}
 		}
