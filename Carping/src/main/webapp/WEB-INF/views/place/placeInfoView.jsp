@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>명소 추천</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <style>
 .display-none {
 	display: none;
@@ -45,36 +51,46 @@
           
           $('#schQnaType').empty();
           
-          if(type == '강원') { // 상품관련
-              $('#schQnaType').append("<option value='강릉시' >강릉시</option>'");
-              $('#schQnaType').append("<option value='고성군' >고성군</option>'");
-              $('#schQnaType').append("<option value='동해시' >동해시</option>'");
-              $('#schQnaType').append("<option value='삼척시' >삼척시</option>'");
-              $('#schQnaType').append("<option value='속초시' >속초시</option>'");
-              $('#schQnaType').append("<option value='양구군' >양구군</option>'");
-              $('#schQnaType').append("<option value='양양군' >양양군</option>'");
-              $('#schQnaType').append("<option value='연천군' >연천군</option>'");
-              $('#schQnaType').append("<option value='영월군' >영월군</option>'");
-              $('#schQnaType').append("<option value='원주시' >원주시</option>'");
-              $('#schQnaType').append("<option value='인제군' >인제군</option>'");
-              $('#schQnaType').append("<option value='정선군' >정선군</option>'");
-              $('#schQnaType').append("<option value='춘천시' >춘천시</option>'");
-              $('#schQnaType').append("<option value='철원군' >철원군</option>'");
-              $('#schQnaType').append("<option value='태백시' >태백시</option>'");
-              $('#schQnaType').append("<option value='평창군' >평창군</option>'");
-              $('#schQnaType').append("<option value='화천군' >화천군</option>'");
-              $('#schQnaType').append("<option value='홍천군' >홍천군</option>'");
-          } else if (type == '경기') {  // 일반관련
-              $('#schQnaType').append("<option value='21' >이용문의</option>'");
-              $('#schQnaType').append("<option value='22' >회원가입/로그인</option>'");
-              $('#schQnaType').append("<option value='23' >기타문의</option>'");
-          } else if ( type == '서울') {  // 주문관련
-              $('#schQnaType').append("<option value='31' >결제문의</option>'");
-              $('#schQnaType').append("<option value='32' >배송문의</option>'");
-              $('#schQnaType').append("<option value='33' >주문취소문의</option>'");
-              $('#schQnaType').append("<option value='34' >반품문의</option>'");
-              $('#schQnaType').append("<option value='35' >기타문의</option>'");
-          }
+          if (type == '강원') { // 상품관련
+				$('#schQnaType').append("<option value='강릉시' >강릉시</option>'");
+				$('#schQnaType').append("<option value='고성군' >고성군</option>'");
+				$('#schQnaType').append("<option value='동해시' >동해시</option>'");
+				$('#schQnaType').append("<option value='삼척시' >삼척시</option>'");
+				$('#schQnaType').append("<option value='속초시' >속초시</option>'");
+				$('#schQnaType').append("<option value='양구군' >양구군</option>'");
+				$('#schQnaType').append("<option value='양양군' >양양군</option>'");
+				$('#schQnaType').append("<option value='연천군' >연천군</option>'");
+				$('#schQnaType').append("<option value='영월군' >영월군</option>'");
+				$('#schQnaType').append("<option value='원주시' >원주시</option>'");
+				$('#schQnaType').append("<option value='인제군' >인제군</option>'");
+				$('#schQnaType').append("<option value='정선군' >정선군</option>'");
+				$('#schQnaType').append("<option value='춘천시' >춘천시</option>'");
+				$('#schQnaType').append("<option value='철원군' >철원군</option>'");
+				$('#schQnaType').append("<option value='태백시' >태백시</option>'");
+				$('#schQnaType').append("<option value='평창군' >평창군</option>'");
+				$('#schQnaType').append("<option value='화천군' >화천군</option>'");
+				$('#schQnaType').append("<option value='홍천군' >홍천군</option>'");
+			} else if (type == '경기') { // 일반관련
+				$('#schQnaType').append("<option value='고양시' >고양시</option>'");
+				$('#schQnaType').append("<option value='일산' >일산</option>'");
+				$('#schQnaType').append("<option value='인천' >인천</option>'");
+				$('#schQnaType').append("<option value='수원' >수원</option>'");
+				$('#schQnaType').append("<option value='용인' >용인</option>'");
+				$('#schQnaType').append("<option value='과천' >과천</option>'");
+				$('#schQnaType').append("<option value='의정부' >의정부</option>'");
+			} else if (type == '서울') { // 주문관련
+				$('#schQnaType').append("<option value='종로구' >종로구</option>'");
+				$('#schQnaType').append("<option value='동대문구' >동대문구</option>'");
+				$('#schQnaType').append("<option value='성북구' >성북구</option>'");
+				$('#schQnaType').append("<option value='은평구' >은평구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='송파구' >송파구</option>'");
+				$('#schQnaType').append("<option value='강남구' >강남구</option>'");
+			}
           document.getElementById("schQnaType").style.display = "";
           
           if ($.trim(select) != "") {
@@ -84,25 +100,27 @@
       }
 </script>
    
-   <div style="margin-left: 100px;">
-      <form id="form">
-         <h2 class="h2">명소 추천</h2>
+   <div style="margin-left: 15.5%; width:1400px; margin-top:100px;">
+		<form style="margin-left: 100px;" id="form">
+         <h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">명소 추천</h2>
          <div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
          <br> 
-         <select name="sido" id="select1" onChange="chnQnaType(this.value)" >
-             <option value="강원">강원</option>
-             <option value="경기">경기</option>
-             <option value="서울">서울</option>
+         <select style="width: 120px; font-family: 'Sunflower', sans-serif;" class="form-control col-sm-2" name="sido" id="select1"
+				onChange="chnQnaType(this.value)">
+				<option value="강원">강원</option>
+				<option value="경기">경기</option>
+				<option value="서울">서울</option>
          </select>    
-         <select id="schQnaType" name="sigun"   style="width:120px; display:none;" >
-         </select>
-         <input name="address" type="text"   placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp; 
-         <input type="button" value="검색" id="search"/>
+         <select class="form-control col-sm-2" id="schQnaType" name="sigun"
+				style="width: 120px; font-family: 'Sunflower', sans-serif; display: none;">
+			</select>
+          <input name="address" style="width:200px; font-family: 'Sunflower', sans-serif;" class="form-control col-sm-1" type="text" placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp; 
+         <input class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif;" type="button" value="검색" id="search" onclick="searchMap()">
       </form>
-   </div>
    <br>
 	<!-- 지도 표시되는 부분 -->
-	<div id="map" style="width:1300px;height:400px; margin-left:100px;"></div>
+	<div id="map" style="width: 1000px; height: 500px; margin-left: 100px;"></div>
+   </div>
 	<br>
 	<div id="Info" style="text-align: center;">
 	
@@ -117,7 +135,7 @@
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
-        level: 9 // 지도의 확대 레벨
+        level: 6 // 지도의 확대 레벨
     };
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -252,9 +270,9 @@
 						$('#lineDiv3').html('');
 						$('#placeEtc').html('');
 						$('#reviewBox').html('');
-						$('#placeInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='placeName'></div><br><div id='placeAddress' align='center'style='display: inline-block; width: 100%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 800px; margin-left: 100px;'><!-- 맛집&명소 --><div id='placeEtc' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div><div id='placeEtc' style='width: 100%; height: 200px; text-align: center;/*  background-color: rgba(12, 12, 12, 0.36); */ display: inline-block;'></div></div>");
+						$('#placeInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='placeName'></div><br><div id='placeAddress' align='center'style='background-color: rgba(99, 82, 63, 0.2); display: inline-block; width: 1200px; height: 150px;font-family: 'Sunflower', sans-serif; font-weight:bold;display: inline-block; width: 100%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 500px; margin-left: 100px;'><!-- 맛집&명소 --><div id='placeEtc' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div></div>");
 						$('#image').append("<img align='center' style='width: 1100px; height:600px;' src='../../../resources/placeImage/"+result.placeImage+"'>");
-						$('#placeName').append("<h1 class='h1' align='center'>"+result.placeName+"</h1>");
+						$('#placeName').append("<h1 style='font-family: 'Sunflower', sans-serif; font-weight:bold;' class='h1' align='center'>"+result.placeName+"</h1>");
 						$('#placeAddress').append("<h3 class='h3'>"+result.placeAddress+"</h3><br>");
 						if(result.placeGS25 == 1){
 							$('#placeAddress').append("<img src='../../../resources/images/gs25.png'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -368,8 +386,7 @@
 	
 	
 	
-	
-	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

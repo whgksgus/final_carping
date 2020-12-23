@@ -63,12 +63,6 @@
 									<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-7 text-center">주소</th>
 									<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 text-center">선택</th>
 								</tr>
-								<c:if test="${aList eq null || empty aList }">
-									<tr>
-										<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;" colspan="3" class="col-md-11 text-center">등록된 정보가 없습니다.</td>
-									</tr>
-								</c:if>
-								<c:if test="${aList ne null || !empty aList }">
 									<c:forEach items="${aList }" var="list" varStatus="status">
 										<tr>
 											<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${list.areaName }</td>
@@ -85,14 +79,13 @@
 											</c:if>
 										</tr>
 									</c:forEach>
-								</c:if>
 							</table>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
 				</div>
 				
-				
+				<c:if test="${aList ne null || !empty aList }">
 				<div class="container">
 				<div class="col-md-12 text-center">
 					<ul class="pagination pagination-sm">
@@ -130,6 +123,7 @@
 					
 				</div>
 			</div>
+			</c:if>
 			
 				<div class="container">
 				<br>

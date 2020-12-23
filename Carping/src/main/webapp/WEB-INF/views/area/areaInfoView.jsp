@@ -9,8 +9,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
@@ -72,16 +76,25 @@
 				$('#schQnaType').append("<option value='화천군' >화천군</option>'");
 				$('#schQnaType').append("<option value='홍천군' >홍천군</option>'");
 			} else if (type == '경기') { // 일반관련
-				$('#schQnaType').append("<option value='21' >이용문의</option>'");
-				$('#schQnaType').append(
-						"<option value='22' >회원가입/로그인</option>'");
-				$('#schQnaType').append("<option value='23' >기타문의</option>'");
+				$('#schQnaType').append("<option value='고양시' >고양시</option>'");
+				$('#schQnaType').append("<option value='일산' >일산</option>'");
+				$('#schQnaType').append("<option value='인천' >인천</option>'");
+				$('#schQnaType').append("<option value='수원' >수원</option>'");
+				$('#schQnaType').append("<option value='용인' >용인</option>'");
+				$('#schQnaType').append("<option value='과천' >과천</option>'");
+				$('#schQnaType').append("<option value='의정부' >의정부</option>'");
 			} else if (type == '서울') { // 주문관련
-				$('#schQnaType').append("<option value='31' >결제문의</option>'");
-				$('#schQnaType').append("<option value='32' >배송문의</option>'");
-				$('#schQnaType').append("<option value='33' >주문취소문의</option>'");
-				$('#schQnaType').append("<option value='34' >반품문의</option>'");
-				$('#schQnaType').append("<option value='35' >기타문의</option>'");
+				$('#schQnaType').append("<option value='종로구' >종로구</option>'");
+				$('#schQnaType').append("<option value='동대문구' >동대문구</option>'");
+				$('#schQnaType').append("<option value='성북구' >성북구</option>'");
+				$('#schQnaType').append("<option value='은평구' >은평구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='송파구' >송파구</option>'");
+				$('#schQnaType').append("<option value='강남구' >강남구</option>'");
 			}
 			document.getElementById("schQnaType").style.display = "";
 
