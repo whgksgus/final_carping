@@ -19,6 +19,7 @@ public interface SuggestionStore {
 	public ArrayList<Suggestion> selectSearList(PageInfo pi, Search search);
 	public int insertAnswer(Answer answer);
 	public Answer selectAnswer(int suggestionKey);
+	public int updateAnswer(Answer answer);
 	public int deleteAnswer(int suggestionKey);
 	public int updateOne(int suggestionKey);
 	public int updateZero(int suggestionKey);

@@ -87,4 +87,9 @@ public class SuggestionServiceImpl implements SuggestionService {
 		return sStore.updateZero(suggestionKey);
 	}
 
+	@Override
+	public int updateAnswer(Answer answer) {
+		return sStore.updateAnswer(answer);
+	}
+
 }

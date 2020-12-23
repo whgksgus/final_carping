@@ -40,7 +40,7 @@
 				<div class="container" style="font-family:'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;"></label><input type="text" value="${answer.answerTitle}" class="col-md-8 form-control align-self-center" readonly style="width : 564px;">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">답변</label><input type="text" value="${answer.answerTitle}" class="col-md-8 form-control align-self-center" readonly style="width : 564px;">
 				</div>
 				<div class="col-md-2"></div>
 				</div>
@@ -92,10 +92,10 @@
 				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return answerInsert();">답변 등록</button></c:if>
 				<div class="col-md-1"></div>
 				
-				<c:url var="insertAnswer" value="insertAnswerView.do">
+				<c:url var="updateAnswer" value="updateAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return answerInsert();">답변 수정</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return answerUpdate();">답변 수정</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="deleteAnswer" value="deleteAnswer.do">
@@ -106,7 +106,7 @@
 				</div>
 				<div class="col-md-2"></div>
                </article>
-	
+	</section>
 	<script>
 	function back(){
 		location.href='${sugList}';
@@ -114,6 +114,10 @@
 	
 	function sugUpdate(){
 		location.href='${sugUpdate}';
+	}
+	
+	function answerUpdate(){
+		location.href='${updateAnswer}';
 	}
 		
 	function sugDelete(){
