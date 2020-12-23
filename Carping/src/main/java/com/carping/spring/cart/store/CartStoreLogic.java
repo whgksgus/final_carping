@@ -39,8 +39,7 @@ public class CartStoreLogic implements CartStore {
 
 	@Override
 	public int orderCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update( "CartMapper.orderCart", cart );
 	}
 
 	@Override
@@ -49,14 +48,13 @@ public class CartStoreLogic implements CartStore {
 	}
 
 	@Override
-	public ArrayList<Cart> selectOrderList(PageInfo pi, String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Map<String, Object>> selectOrderList(String memberId) {
+		return (ArrayList)sqlSession.selectList("CartMapper.selectOrderList", memberId);
 	}
 
 	@Override
-	public int selectCartDetail(int itemKey) {
-		return sqlSession.selectOne( "CartMapper.selectCartDetail", itemKey );
+	public int selectCartDetail(Cart cart) {
+		return sqlSession.selectOne( "CartMapper.selectCartDetail", cart );
 	}
 
 }

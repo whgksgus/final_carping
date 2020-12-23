@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper  namespace="CartMapper">
+
   <resultMap type="Cart" id="cartResultMap">
      <result property="cartKey" column="CART_KEY"/>
      <result property="cartQuantity" column="CART_QUANTITY"/>
@@ -16,12 +17,15 @@
       FROM CART A, ITEM B 
       WHERE A.ITEM_KEY=B.ITEM_KEY 
       AND MEMBER_ID=#{memberId}
+      AND CART_STATUS='N'
    </select>
    
    <select id="selectCartDetail" resultType="int">
 		SELECT CART_QUANTITY 
 		FROM CART
 		WHERE ITEM_KEY = #{itemKey}
+		AND MEMBER_ID=#{memberId}
+		AND CART_STATUS='N'
 	</select>
 	
 	<delete id="deleteCart">
@@ -34,5 +38,23 @@
   	 	SET CART_QUANTITY=#{cartQuantity} 
   	 	WHERE CART_KEY=#{cartKey}
    </update>
+   
+   <update id="orderCart">
+  	 	UPDATE CART 
+  	 	SET CART_STATUS=#{cartStatus}
+  	 	, CART_ORDERDATE = SYSDATE
+  	 	WHERE CART_KEY=#{cartKey}
+  	 	AND MEMBER_ID=#{memberId}
+   </update>
+   
+      <select id="selectOrderList" resultType="MAP">
+      SELECT 
+      	*
+      FROM CART A, ITEM B 
+      WHERE A.ITEM_KEY=B.ITEM_KEY 
+      AND MEMBER_ID=#{memberId}
+      AND CART_STATUS='Y'
+   </select>
+   
    
 </mapper>

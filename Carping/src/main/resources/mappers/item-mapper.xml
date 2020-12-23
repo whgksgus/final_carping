@@ -27,7 +27,8 @@
 		SELECT COUNT(*) 
 		FROM CART 
 		WHERE ITEM_KEY=#{itemKey} 
-		AND MEMBER_ID=#{memberId}
+		AND MEMBER_ID=#{memberId} 
+		AND CART_STATUS='N'
    </select>
       
    	<select id="selectItemDetail" resultMap="itemResultMap">
@@ -41,11 +42,12 @@
       	SEQ_CKEY.NEXTVAL
       	, #{cartQuantity}
       	, 'N'
-      	, SYSDATE
+      	, NULL
       	, #{itemKey}
       	, #{memberId} 
       )
    </insert>
+   
      <update id="updateCart">
   	 	UPDATE CART 
   	 	SET CART_QUANTITY=#{cartQuantity} 
@@ -55,6 +57,112 @@
   <select id="searchTent" resultMap="itemResultMap">
       SELECT * FROM ITEM
       WHERE ITEM_NAME LIKE '%' || #{searchValue} || '%'
-		 AND ITEM_CATEGORY = 'TENT'
+	  AND ITEM_CATEGORY = 'TENT'
    </select>
+   
+   <select id="selectTentNew" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'TENT'
+   	ORDER BY ITEM_REGDATE DESC
+   </select>
+   
+  <select id="selectTentLow" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'TENT'
+   	ORDER BY ITEM_PRICE
+   </select>
+   
+   <select id="selectTentHigh" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'TENT'
+   	ORDER BY ITEM_PRICE DESC
+   </select> 
+   
+   <select id="selectCookList" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+    WHERE ITEM_CATEGORY = 'COOK'
+   </select>
+   
+   <select id="selectSleepList" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+    WHERE ITEM_CATEGORY = 'SLEEP'
+   </select>
+   
+   <select id="selectEtcList" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+    WHERE ITEM_CATEGORY = 'ETC'
+   </select>
+   
+   <select id="searchCook" resultMap="itemResultMap">
+      SELECT * FROM ITEM
+      WHERE ITEM_NAME LIKE '%' || #{searchValue} || '%'
+	  AND ITEM_CATEGORY = 'COOK'
+   </select>
+   
+   <select id="selectCookNew" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'COOK'
+   	ORDER BY ITEM_REGDATE DESC
+   </select>
+   
+  <select id="selectCookLow" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'COOK'
+   	ORDER BY ITEM_PRICE
+   </select>
+   
+   <select id="selectCookHigh" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'COOK'
+   	ORDER BY ITEM_PRICE DESC
+   </select> 
+   
+   
+   <select id="searchSleep" resultMap="itemResultMap">
+      SELECT * FROM ITEM
+      WHERE ITEM_NAME LIKE '%' || #{searchValue} || '%'
+	  AND ITEM_CATEGORY = 'SLEEP'
+   </select>
+   
+   <select id="selectSleepNew" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'SLEEP'
+   	ORDER BY ITEM_REGDATE DESC
+   </select>
+   
+  <select id="selectSleepLow" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'SLEEP'
+   	ORDER BY ITEM_PRICE
+   </select>
+   
+   <select id="selectSleepHigh" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'SLEEP'
+   	ORDER BY ITEM_PRICE DESC
+   </select> 
+   
+   <select id="searchEtc" resultMap="itemResultMap">
+      SELECT * FROM ITEM
+      WHERE ITEM_NAME LIKE '%' || #{searchValue} || '%'
+	  AND ITEM_CATEGORY = 'ETC'
+   </select>
+   
+   <select id="selectEtcNew" resultMap="itemResultMap">
+   	SELECT * FROM ITEM 
+   	WHERE ITEM_CATEGORY = 'ETC'
+   	ORDER BY ITEM_REGDATE DESC
+   </select>
+   
+  <select id="selectEtcLow" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'ETC'
+   	ORDER BY ITEM_PRICE
+   </select>
+   
+   <select id="selectEtcHigh" resultMap="itemResultMap">
+   	SELECT * FROM ITEM
+   	WHERE ITEM_CATEGORY = 'ETC'
+   	ORDER BY ITEM_PRICE DESC
+   </select> 
 </mapper>

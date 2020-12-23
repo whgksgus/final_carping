@@ -9,8 +9,11 @@
 <meta charset="UTF-8">
 <title>상품</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
+<script type="text/javascript">
+			$.ajaxSetup({ async:false });
 	        function fnCart(itemName, itemPrice) {
 	        	console.log( "itemName", itemName );
 	        	console.log( "itemPrice", itemPrice );
