@@ -27,7 +27,8 @@
 		SELECT COUNT(*) 
 		FROM CART 
 		WHERE ITEM_KEY=#{itemKey} 
-		AND MEMBER_ID=#{memberId}
+		AND MEMBER_ID=#{memberId} 
+		AND CART_STATUS='N'
    </select>
       
    	<select id="selectItemDetail" resultMap="itemResultMap">
@@ -41,7 +42,7 @@
       	SEQ_CKEY.NEXTVAL
       	, #{cartQuantity}
       	, 'N'
-      	, SYSDATE
+      	, NULL
       	, #{itemKey}
       	, #{memberId} 
       )

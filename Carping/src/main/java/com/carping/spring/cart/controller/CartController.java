@@ -1,6 +1,7 @@
 package com.carping.spring.cart.controller;
 
-import java.awt.List;
+import java.util.List;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,8 +79,8 @@ public class CartController {
 	}
 	
 	@ResponseBody
-	 @RequestMapping ( value="insertOrder.do", method=RequestMethod.POST ) 
-	 public int orderCart( HttpServletRequest request, @RequestBody String[] data ) {
+	@RequestMapping ( value="insertOrder.do", method=RequestMethod.POST ) 
+	public int orderCart( HttpServletRequest request, @RequestBody String[] data ) {
 		// 로그인 유저 아이디 불러오기
 		HttpSession session = request.getSession();
 		Member mem = (Member) session.getAttribute( "loginUser" );
@@ -100,8 +101,21 @@ public class CartController {
 		 return result;
 	}
 	
-	
-	public ModelAndView orderListView(HttpServletRequest request, ModelAndView mv, Integer page) {
-		return mv;
+	@RequestMapping (value="myOrderView.do", method=RequestMethod.GET)
+	public String orderListView(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		Member mem = (Member) session.getAttribute( "loginUser" );
+		String memberId = mem.getMemberId();
+		
+		ArrayList<Map<String, Object>> rslt = cService.selectOrderList(memberId);
+		
+		for( Map<String, Object> map : rslt ) {
+			String date = new SimpleDateFormat( "yyyy-MM-dd" ).format( map.get( "CART_ORDERDATE" ) );
+			map.put( "CART_ORDERDATE", date );
+		}
+		
+		model.addAttribute( "orderList", rslt );
+		
+		return "item/orderListView";
 	}
 }

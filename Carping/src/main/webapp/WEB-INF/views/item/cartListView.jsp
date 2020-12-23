@@ -74,8 +74,7 @@
      function cartPay( cartAmount ){
   	   var amount = cartAmount + 3000;
   	   console.log( "totalAmount", amount );
-  	 afterPayment();
-		/* var IMP = window.IMP;
+		var IMP = window.IMP;
 		IMP.init('imp42719088');
 		IMP.request_pay({
 		    pg : 'html5_inicis',
@@ -98,8 +97,8 @@
 		        msg += '에러내용 : ' + rsp.error_msg;
 		    }
 		    alert(msg);
-		}); */
-}
+		});
+	} // function cartPay
        
        // after payment ajax
 		function afterPayment() {
@@ -266,11 +265,11 @@ padding-right: 10%;
 				<li class="li">
 					<ul class="ul">
 						<li class="li">번호</li>
-						<li class="li">이미지</li>
+						<li class="li">상품</li>
 						<li class="li">상품정보</li>
 						<li class="li">가격</li>
 						<li class="li">수량</li>
-						<li class="li">상태</li>
+						<li class="li">주문상태</li>
 						<li class="li">삭제</li>
 					</ul>
 				</li>

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.carping.spring.cart.domain.Cart;
 import com.carping.spring.cart.store.CartStore;
-import com.carping.spring.common.PageInfo;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -40,8 +39,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int orderCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cStore.orderCart(cart);
 	}
 
 	@Override
@@ -50,9 +48,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public ArrayList<Cart> selectOrderList(PageInfo pi, String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Map<String, Object>> selectOrderList(String memberId) {
+		return cStore.selectOrderList(memberId);
 	}
 
 	@Override

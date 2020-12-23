@@ -17,6 +17,7 @@
       FROM CART A, ITEM B 
       WHERE A.ITEM_KEY=B.ITEM_KEY 
       AND MEMBER_ID=#{memberId}
+      AND CART_STATUS='N'
    </select>
    
    <select id="selectCartDetail" resultType="int">
@@ -24,6 +25,7 @@
 		FROM CART
 		WHERE ITEM_KEY = #{itemKey}
 		AND MEMBER_ID=#{memberId}
+		AND CART_STATUS='N'
 	</select>
 	
 	<delete id="deleteCart">
@@ -40,8 +42,19 @@
    <update id="orderCart">
   	 	UPDATE CART 
   	 	SET CART_STATUS=#{cartStatus}
+  	 	, CART_ORDERDATE = SYSDATE
   	 	WHERE CART_KEY=#{cartKey}
   	 	AND MEMBER_ID=#{memberId}
    </update>
+   
+      <select id="selectOrderList" resultType="MAP">
+      SELECT 
+      	*
+      FROM CART A, ITEM B 
+      WHERE A.ITEM_KEY=B.ITEM_KEY 
+      AND MEMBER_ID=#{memberId}
+      AND CART_STATUS='Y'
+   </select>
+   
    
 </mapper>

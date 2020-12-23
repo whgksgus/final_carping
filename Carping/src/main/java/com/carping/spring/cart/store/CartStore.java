@@ -12,7 +12,7 @@ public interface CartStore {
 	public int deleteAllCart(String memberId);
 	public int orderCart(Cart cart);
 	public int updateCartList(Cart cart);
-	public ArrayList<Cart> selectOrderList(PageInfo pi, String memberId);
+	public ArrayList<Map<String, Object>> selectOrderList( String memberId);
 	public int checkItemKey(int itemKey);
 	public int selectCartDetail( Cart cart );
 }
