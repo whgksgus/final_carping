@@ -74,7 +74,7 @@
 
 <table align="center" id="firstTb" class="table table-bordered" style="width: 900px; font-family: 'Sunflower', sans-serif; font-size: 1.2em;">
 	<tr>
-		<td rowspan="5"><img src="../../../resources/images/${foodZone.foodZoneImage }" style="width: 300px; height: 300px;"></td>
+		<td rowspan="6"><img src="../../../resources/images/${foodZone.foodZoneImage }" style="width: 300px; height: 300px;"></td>
 		<td>${foodZone.foodZoneName}</td>
 	</tr>
 	<tr>
@@ -88,9 +88,27 @@
 	</tr>
 	<tr>
 		<td><input type="time" id="takeOutTime" value="13:00" min="13:00" max="21:00"></td>
-		
+	</tr>
+	<tr>
+		<td>
+			<select id="menuSelect">
+				<c:forEach items="${tList}" var="menuL">
+					<option>${menuL.takeOutMenu}</option>
+				</c:forEach>
+			</select>
+			<button id="menuChoice" class="btn btn-info" onclick="menuInsert();">+</button>
+		</td>
 	</tr>
 </table>
+<script>
+	
+</script>
+<!-- <td><img src="../../../resources/images/menu/${menuList.takeOutMenuPhoto}"></td>
+		<td>${menuList.takeOutMenu}</td>
+		<td><input type="number" value="1" min="1" class="menuEa" style="width: 50px;"></td>
+		<td><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${menuList.takeOutMenuPrice}" />원</span><input type="hidden" value="${menuList.takeOutMenuPrice}"></td>
+		<td><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${menuList.takeOutMenuPrice}" />원</span><input type="hidden" value="${menuList.takeOutMenuPrice}"></td>
+		<td><button onclick="del(this);" class="btn btn-danger">X</button></td> -->
 <br><br>
 <table id="menu" style="text-align: center; width: 1100px; font-family: 'Sunflower', sans-serif;"  align="center" class="table table-bordered">
 <thead>
@@ -105,18 +123,7 @@
 </thead>
 
 
-<tbody id="menuList">
-	<c:forEach items="${tList}" var="menuList">
-	<tr>
-		<td><img src="../../../resources/images/menu/${menuList.takeOutMenuPhoto}"></td>
-		<td>${menuList.takeOutMenu}</td>
-		<td><input type="number" value="1" min="1" class="menuEa" style="width: 50px;"></td>
-		<td><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${menuList.takeOutMenuPrice}" />원</span><input type="hidden" value="${menuList.takeOutMenuPrice}"></td>
-		<td><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${menuList.takeOutMenuPrice}" />원</span><input type="hidden" value="${menuList.takeOutMenuPrice}"></td>
-		<td><button onclick="del(this);" class="btn btn-danger">X</button></td>
-	</tr>
-	</c:forEach>
-	
+<tbody id="menuList">	
 </tbody>
 </table>
 <div align="center">
@@ -142,9 +149,11 @@
 			
 			$("#total").text('총 금액 : '+numberWithCommas(sum)+"원");
 			
+
 			
 			//number 값이 올라가거나 내려갈 경우 금액을 다시 책정해주는 function
-			$(".menuEa").change(function(){
+			$(".menuEa").click(function(){
+				console.log('test');
 				var td = $(this).parent().parent().children();
 				var menuEa = parseInt($(this).val());
 				var price = td.eq(3).children().eq(1).val();
@@ -155,7 +164,7 @@
 				sumPrice();
 			});
 			// 테이블 생성시에 객체를 만들어보고 넘겨서 받아지는지 할것 12/15;
-			
+
 		});
 	 // ##,###원으로 표현해주는 정규표현식
 	 	
@@ -216,55 +225,105 @@
 	 //결제 메소드
 		function pay(){
 		 var question = confirm('결제하시겠어요?');
+		 var tr = $("#menuList tr").length;
 		 
 		 if(question){
-			 var IMP = window.IMP;
-				IMP.init('imp63220176');
-				IMP.request_pay({
-				    pg : 'html5_inicis',
-				    pay_method : 'card',
-				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    name : '주문명:결제테스트',
-				    amount : 100,
-				    buyer_email : 'iamport@siot.do',
-				    buyer_name : '구매자이름',
-				    buyer_tel : '010-1234-5678',
-				    buyer_addr : '서울특별시 강남구 삼성동',
-				    buyer_postcode : '123-456',
-				    m_redirect_url : 'http://localhost:9999/'
-				}, function(rsp) {
-				    if ( rsp.success ) {
-				    	
-				    	
-				        var msg = '결제가 완료되었습니다.';
-				        go();
-				        
-				        
-				    } else {
-				        var msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				    }
-				    alert(msg);
-				});
-		 }else{
-			alert('취소되었습니다.'); 
+			 if(tr>0){
+				 var IMP = window.IMP;
+					IMP.init('imp63220176');
+					IMP.request_pay({
+					    pg : 'html5_inicis',
+					    pay_method : 'card',
+					    merchant_uid : 'merchant_' + new Date().getTime(),
+					    name : '주문명:결제테스트',
+					    amount : 100,
+					    buyer_email : 'iamport@siot.do',
+					    buyer_name : '구매자이름',
+					    buyer_tel : '010-1234-5678',
+					    buyer_addr : '서울특별시 강남구 삼성동',
+					    buyer_postcode : '123-456',
+					    m_redirect_url : 'http://localhost:9999/'
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					    	
+					    	
+					        var msg = '결제가 완료되었습니다.';
+					        go();
+					        
+					        
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					        msg += '에러내용 : ' + rsp.error_msg;
+					    }
+					    alert(msg);
+					});
+			 }else{
+				alert('물건을 담아주시고 결제해주세요.'); 
+			 }
 		 }
+		 
 			
 		}
 		function del(obj){
 			var tr = $("#menuList tr").length;
-			if(tr==1){
-				alert('메뉴를 전부다 삭제할 수 없어요.');
-			}else{
 				$(obj).parent().parent().remove();
 				sumPrice();
-			}
+
 			
 			
 		}
 		
 		function back(){
 			location.href='foodZoneView.do';
+		}
+		
+		function menuInsert(){
+			var menu = $("#menuSelect option:selected").val();
+			var tr = $("#menuList tr");
+			var chk = 0;
+			console.log('tr 길이 : '+tr.length);
+			for(var y=0; y<tr.length; y++){
+				 if(menu==tr.eq(y).children().eq(1).text()){
+					chk = chk+1;
+				}
+			}
+			console.log(chk);
+			if(chk==0){
+				<c:forEach items="${tList}" var="list">
+				var i = "${list.takeOutMenu}";
+				if(menu==i){
+										
+					$("#menuList").append("<tr><td><img src='../../../resources/images/menu/${list.takeOutMenuPhoto}' style='width:100px; height:100px;'></td><td>${list.takeOutMenu}</td><td><input type='number' value='1' min='1' class='menuEa' style='width: 50px;' onclick='change(this);'></td>"
+								+"<td><span><fmt:formatNumber type='number' maxFractionDigits='3' value='${list.takeOutMenuPrice}' />원</span><input type='hidden' value='${list.takeOutMenuPrice}'></td><td><span><fmt:formatNumber type='number' maxFractionDigits='3' value='${list.takeOutMenuPrice}'/>원</span><input type='hidden' value='${list.takeOutMenuPrice}'></td>"
+								+"<td><button onclick='del(this);' class='btn btn-danger'>X</button></td>");
+								sumPrice();
+					}
+					
+/* 					$("#menuList").append("<td><img src='../../../resources/images/menu/${list.takeOutMenuPhoto}' style='width:100px; height:100px;'></td>"
+					+"");
+					$("#menuList").append("<td>${list.takeOutMenu}</td>");
+					$("#menuList").append("<td><input type='number' value='1' min='1' class='menuEa' style='width: 50px;'></td>");
+					$("#menuList").append("<td><span><fmt:formatNumber type='number' maxFractionDigits='3' value='${list.takeOutMenuPrice}' />원</span><input type='hidden' value='${list.takeOutMenuPrice}'></td>")
+					$("#menuList").append("<td><span><fmt:formatNumber type='number' maxFractionDigits='3' value='${list.takeOutMenuPrice}' />원</span><input type='hidden' value='${list.takeOutMenuPrice}'></td>")
+					$("#menuList").append("<td><button onclick='del(this);' class='btn btn-danger'>X</button></td>"); */
+					
+				
+			</c:forEach>
+			}else{
+				alert('이미 등록된 상품이에요.');
+			}
+			
+		}
+		
+		function change(obj){
+			var td = $(obj).parent().parent().children();
+			var menuEa = parseInt($(obj).val());
+			var price = td.eq(3).children().eq(1).val();
+			var dollar = numberWithCommas(price*menuEa);
+			td.eq(4).children().eq(0).text(dollar+"원");
+			td.eq(4).children().eq(1).val(price*menuEa);
+			
+			sumPrice();
 		}
 	</script>
 </body>
