@@ -10,11 +10,17 @@
 <meta charset="UTF-8">
 <title>쇼핑몰</title>
 </head>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <style>
 a {
 	text-decoration: none;
 	color: black;
-	
+	font-family: 'Sunflower', sans-serif; font-weight:bold;
 }
 
 #shopping {
@@ -27,8 +33,9 @@ a {
 #title {
 	padding-top: 50px;
 	text-align: left;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
+	font-family: 'Sunflower', sans-serif;
 }
 
 #item_category {
@@ -43,10 +50,11 @@ a {
 #item_orderby {
 	float: left;
 	width: 100%;
-	text-align: right;
+	text-align: left;
 	font-size: 15px;
 	color: black;
-	padding-right: 100px;
+	padding-left: 140px;
+	padding-top: 10px;
 }
 
 #orderby {
@@ -58,7 +66,7 @@ a {
 }
 
 #item {
-	margin: 50px 100px;
+	/* margin: 50px 100px; */
 }
 
 #item_img {
@@ -81,12 +89,15 @@ a {
 	font-size: 15px;
 }
 
-ul, li {
+#li_category {
 	line-height: auto;
 	list-style: none;
 	text-align: center;
 	float: left;
 	line-height: center;
+}
+#searchDiv{
+list-style: none;
 }
 
 #li_category:hover {
@@ -102,10 +113,11 @@ ul, li {
 
 <body>
 	<jsp:include page="../common/nav.jsp" />
-	<div id="shopping" style="padding-left: 150px;">
+	<div style="height:100px;"></div>
+	<div id="shopping" style="padding-left: 150px; width:100%">
 		<legend id="title">쇼핑몰
-			<a href="cartListView.do">
-				<img id="cart_icon" src="../../../resources/itemImage/cart.png" style="width: 37px; height:45px; padding-bottom:10px;">
+			<a href="cartListView.do" style="float:right; margin-right:280px;">
+				<img id="cart_icon" src="../../../resources/images/gs25.png" style="width: 40px; height:50px; padding-bottom:10px;">
 			</a>
 		</legend>
 		<div id="item_category">
@@ -130,6 +142,14 @@ ul, li {
 						<a href="etcListView.do">기타용품</a>&nbsp;
 					</span>
 				</li>
+				<li id="searchDiv">
+					<div id="searchArea" style="margin-left:1150px;">
+						<form action="searchTent.do" method="get">	
+							<input class="form-control col-sm-2" style="width:250px;" type="text" name="searchValue" value="${search.searchValue }">
+							<input class="btn btn-default col-sm-1" style="width:80px;" type="submit" value="검색">
+						</form>
+					</div>
+				</li>
 				</ul>
 		</div>
 	</div>
@@ -142,15 +162,15 @@ ul, li {
 		<a href="cookListHigh.do"><span id="orderby">높은가격순</span></a>
 	</div>
 	
-	<div id="searchArea" align="right" style="margin: 65px 120px; ">
+	<%-- <div id="searchArea" align="right" style="margin: 65px 120px; ">
 		<form action="searchCook.do" method="get">	
 			<input type="text" name="searchValue" value="${search.searchValue }">
 			<input type="submit" value="검색">
 		</form>
-	</div>
+	</div> --%>
 	
 	<div id="item"
-		style="width: 100%; height: 800px; float: left; padding-left: 100px; padding-right: 150px;">
+		style="margin-top:70px; width: 100%; height: 900px; float: left; padding-left: 250px; padding-right: 50px;">
 		
 		
 		<c:forEach items="${iList }" var="item">
@@ -166,30 +186,11 @@ ul, li {
 					href="${iDetail }">${item.itemName }</a> <br>
 				<fmt:formatNumber value="${item.itemPrice }" pattern="#,###" />
 				원
-
 			</div>
 		</c:forEach>
-
-
 	</div>
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<br>
-	<table style="width: 100%; text-align: center; padding-top: 300px;">
-		<tr align="center" height="20">
+	<table align="center">
+		<tr>
 			<td colspan="6">
 				<!-- 이전 --> <c:if test="${pi.currentPage <= 1 }">
 					◀&nbsp;
@@ -223,17 +224,8 @@ ul, li {
 
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 
 </html>

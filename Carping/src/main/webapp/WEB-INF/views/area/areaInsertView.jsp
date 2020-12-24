@@ -155,8 +155,8 @@
                <div align="center" style="display:inline-block">
                   <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">편의시설</h3>
                   <br>
-                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox1" type="checkbox" name="areaGS25" value="1"> 화장실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox2" type="checkbox" name="areaToilet" value="1"> 편의점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox1" type="checkbox" name="areaGS25" value="1"> 편의점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox2" type="checkbox" name="areaToilet" value="1"> 화장실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox3" type="checkbox" name="areaSink" value="1"> 개수대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" id="chkBox4" type="checkbox" name="areaPool" value="1"> 물놀이
                </div>

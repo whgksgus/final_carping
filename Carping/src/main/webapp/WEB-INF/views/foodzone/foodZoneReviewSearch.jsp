@@ -15,7 +15,7 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="width:100%; height:800px;">
+	<section style="width:100%; height:1000px;">
 		<article>
 			<div style="height:100px; display:block;"></div>
 			<div align="center">
@@ -25,7 +25,7 @@
 			<br>
 			<form action="foodZoneSearch.do" method="get">
 			<div class="container">
-			    <div class="row">
+			    <div class="row2">
 			        <div class="col-sm-2"></div>
 			        <div class="col-sm-8" style="float: left;">
 			        	<select id="searchCondition" name="searchCondition" class="form-control col-sm-2" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width: 20%; text-align: center;">

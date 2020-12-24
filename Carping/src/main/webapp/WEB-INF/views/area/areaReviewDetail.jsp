@@ -53,7 +53,7 @@
 	<section style="width:100%; height:1000px;">
 		<div style="height:100px;"></div>
 		<div align="center">
-			<h2 class="h2" style="font-weight:bold; font-family: 'Sunflower', sans-serif;">리뷰게시판 - 상세보기</h2>
+			<h2 class="h2" style="font-weight:bold; font-family: 'Sunflower', sans-serif;">리뷰게시판 상세보기</h2>
 			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 		</div>
 		<br><br>
@@ -62,7 +62,7 @@
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" readonly="readonly" value="${areview.arTitle }" class="col-md-8 form-control align-self-center" style="width : 50%;">
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif;font-size: 1.5em;">제목</label><input type="text" readonly="readonly" value="${areview.arTitle }" class="col-md-8 form-control align-self-center" style="font-family: 'Sunflower', sans-serif;width : 50%;">
 						<div id='star'>
 						<div id="stars">
 							<span class='star-rating'>
@@ -97,7 +97,7 @@
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${areview.arContent }</textarea>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif;font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="font-family: 'Sunflower', sans-serif;margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${areview.arContent }</textarea>
 				</div>
 				<div class="col-md-2"></div>
 			</div>

@@ -8,6 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -165,14 +171,17 @@
 }
 
 #title {
+	padding-top: 50px;
 	text-align: left;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
+	font-family: 'Sunflower', sans-serif;
 }
 
 #delAllCart {
 	cursor: pointer;
 	float: right;
+	margin-right: 60px;
 }
 
 #orderCart {
@@ -188,7 +197,7 @@
 }
 
 .ul {
-	margin-top: 10px;
+	margin-top: 40px;
 	width: 95%;
 	display: inline-block;
 }
@@ -253,14 +262,15 @@
 <body>
 
 	<jsp:include page="../common/nav.jsp" />
-	<div id="contents">
+	<div style="height:100px;"></div>
+	<div id="contents" style="width:100%; height:800px;">
 		<form action="#" method="post">
 
 			<legend id="title">장바구니</legend>
 
 			<br>
 			<c:if test="${empty cart}">
-				<p>장바구니가 비어있습니다.</p>
+				<p style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-size: 23px;">장바구니가 비어있습니다.</p>
 				<br>
 				<br>
 				<!-- <div style="text-align: right;">
@@ -280,18 +290,18 @@
 		<div id="cart">
 			<c:if test="${not empty cart}">
 				<form action="#" method="post">
-					<button id="delAllCart" onclick="mkEmptyCart()">전체삭제</button>
+					<button id="delAllCart" class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px;" onclick="mkEmptyCart()">전체삭제</button>
 					<ul id="ul">
 						<li class="li">
 							<ul class="ul">
-								<li class="li">번호</li>
-								<li class="li">상품</li>
-								<li class="li">상품정보</li>
-								<li class="li">가격</li>
-								<li class="li">수량</li>
-								<li class="li">상품금액</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">번호</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-3 test-center">상품</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-5 test-center">상품정보</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">가격</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">수량</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">상품금액</li>
 								<!-- 					<li class="li">주문상태</li> -->
-								<li class="li">삭제</li>
+								<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">삭제</li>
 							</ul>
 						</li>
 						<li class="li"><c:forEach items="${cart}" var="test"
@@ -300,32 +310,32 @@
 									<c:param name="itemKey" value="${test.ITEM_KEY}"></c:param>
 								</c:url>
 								<ul class="ul">
-									<li class="li">${status.count}</li>
-									<li class="li"><a href="${iDetail}"> <img
+									<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="li">${status.count}</li>
+									<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="li"><a href="${iDetail}"> <img
 											src="../../../resources/itemImage/${test.ITEM_IMAGE}"
-											width="170px" height="170px" style="margin: 20px 30px;">
+											width="70px" height="70px" style="margin-top:-20px;" >
 									</a></li>
-									<li class="li" style="text-align: left;"><a
-										href="${iDetail}"> <span style="font-size: 18px;">${test.ITEM_NAME}</span>
+									<li class="li" style="font-family: 'Sunflower', sans-serif; font-weight:bold;text-align: left;"><a
+										href="${iDetail}"> <span style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 18px;">${test.ITEM_NAME}</span>
 									</a></li>
-									<li class="li"><span style="font-size: 18px;"> <fmt:formatNumber
+									<li class="li"><span style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 18px;"> <fmt:formatNumber
 												value="${test.ITEM_PRICE}" pattern="#,###" />원
 									</span></li>
-									<li class="li">
+									<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="li">
 										<!-- onmouseleave --> <input type="number"
 										value="${test.CART_QUANTITY}"
 										onmouseout="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(), ${test.CART_KEY})"
 										min="1" max="99"
-										style="width: 50px; height: 25px; text-align: right;"
+										style="font-family: 'Sunflower', sans-serif; font-weight:bold; width: 50px; height: 25px; text-align: right;"
 										id="cartQuantity${test.CART_QUANTITY}" name="cartQuantity">
 										<%-- <input type="button" value="변경" id="modifyQuantity" 
                 		     	onclick="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(), ${test.CART_KEY} )" style="text-align: right;" />
  --%>
 									</li>
-									<li class="li"><span style="font-size: 18px;"><fmt:formatNumber
+									<li class="li"><span style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-size: 18px;"><fmt:formatNumber
 												value="${test.totalPrice}" pattern="#,###" />원</span></li>
 									<!-- <li class="li" style="font-size: 15px;">대기</li> -->
-									<li class="li"><input type="button" value="삭제"
+									<li class="li"><input class="btn btn-danger col-sm-1" style="margin-left:20px; font-family: 'Sunflower', sans-serif; font-weight:bold; width:50px;" type="button" value="삭제"
 										id="delItem" onclick="deleteItem( '${test.CART_KEY}' )"></li>
 								</ul>
 							</c:forEach></li>
@@ -334,22 +344,23 @@
 
 				</form>
 
-				<div style="text-align: right; width: 100%;">
-					<span> 상품가격 </span> <span> + </span> <span> 배송비 </span> <span>
-						= </span> <span> 총 구매 금액</span>
+				<div style="margin-right:70px; text-align:right;float:right; width: 50%;">
+					<span style="font-family: 'Sunflower', sans-serif; font-weight:bold;"> 상품가격 </span> <span style="font-family: 'Sunflower', sans-serif; font-weight:bold;"> + </span> <span style="font-family: 'Sunflower', sans-serif; font-weight:bold;"> 배송비 </span> <span>
+						= </span> <span style="font-family: 'Sunflower', sans-serif; font-weight:bold;"> 총 구매 금액</span>
 				</div>
-				<div style="text-align: right; font-size: 20px;">
-					<span id="totalPrice"> <fmt:formatNumber
+				<br>
+				<div style="margin-right:70px; float:right; width: 50%; text-align: right; font-size: 20px;">
+					<span id="totalPrice" style="font-family: 'Sunflower', sans-serif; font-weight:bold;"> <fmt:formatNumber
 							value="${grandTotal}" pattern="#,###" />원 +
-					</span> <span id="DeliveryPrice">3,000원 =</span> <span id="TotalPrice"
-						style="text-weight: bold; font-size: 20px;"> <fmt:formatNumber
+					</span> <span id="DeliveryPrice" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">3,000원 =</span> <span id="TotalPrice"
+						style="font-family: 'Sunflower', sans-serif; font-weight:bold;text-weight: bold; font-size: 20px;"> <fmt:formatNumber
 							value="${grandTotal+3000}" pattern="#,###" />원
 					</span> <input type="hidden" id="allCartKeys" value="${cartKeys}" />
 				</div>
 				<br>
 				<br>
 				<br>
-				<input type="button" value="구매하기" id="orderCart"
+				<input  class="btn btn-info col-sm-1" style="margin-right:70px; font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px;" type="button" value="구매하기" id="orderCart"
 					onclick="cartPay(${grandTotal})" />
 			</c:if>
 		</div>
@@ -357,6 +368,6 @@
 	<br>
 	<br>
 	<!--footer-->
-	<%--    <jsp:include page="../../../WEB-INF/views/common/footer.jsp"/> --%>
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

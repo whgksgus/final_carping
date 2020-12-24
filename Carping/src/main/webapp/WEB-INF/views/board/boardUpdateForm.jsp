@@ -14,8 +14,12 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px; ">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰 수정</h3>
+	<section style="width:100%; height:800px;">
+		<div style="height:100px;"></div>
+		<div align="center">
+			<h2 style="font-weight:bold;font-family: 'Sunflower', sans-serif;">자유게시판 수정</h2>
+			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+		</div>
 		<br><br>
 		<form action="boardUpdate.do" method="post" name="buForm">
 			<input type="hidden" name="memberId" value="${loginUser.memberId }">
@@ -26,7 +30,7 @@
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-				<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" name="boardTitle"class="col-md-8 form-control align-self-center" value="${board.boardTitle}" style="width : 50%;">
+				<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-size: 1.5em;">제목</label><input type="text" name="boardTitle"class="col-md-8 form-control align-self-center" value="${board.boardTitle}" style="font-family: 'Sunflower', sans-serif; width : 50%;">
 				
 				<div class="col-md-2" style="margin-top: 10px;">
 				</div>
@@ -37,7 +41,7 @@
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea name="boardContent" class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;">${fReview.frContent }</textarea>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-size: 1.5em;">내용</label><textarea name="boardContent" class="col-md-6 form-control" cols="5" rows="10" style="font-family: 'Sunflower', sans-serif; margin: 0px; width: 564px; height: 325px; resize: none;">${fReview.frContent }</textarea>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -46,9 +50,9 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-4"></div>
-					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button type="button" class="col-md-2 btn btn-default" style="font-family: 'Sunflower', sans-serif; height: 40px;" onclick="back();">목록으로</button>
 					<div class="col-md-2"></div>
-					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;" onclick="return chk();">수정하기</button>
+					<button type="submit" class=" col-md-2 btn btn-info" style="font-family: 'Sunflower', sans-serif; height: 40px;" onclick="return chk();">수정하기</button>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -56,6 +60,10 @@
 		</article>
 		</form>
 	</section>
+	<br>
+	<br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	<script>
 		function back(){
 			location.href='BoardInfo.do';
