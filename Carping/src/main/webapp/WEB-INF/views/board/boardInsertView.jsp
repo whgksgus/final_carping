@@ -16,10 +16,11 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
+		<div style="height: 100px;"></div>
 	<section style="margin-top: 40px; ">
 		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">글 작성</h3>
 		<br><br>
-		<form action="BoardInsert.do" method="post">
+		<form action="BoardInsert.do" method="post" name="boardForm">
 			<input type="hidden" name="memberId" value="${loginUser.memberId }">
 		<article>
 			
@@ -51,7 +52,7 @@
 					<div class="col-md-4"></div>
 					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
 					<div class="col-md-2"></div>
-					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;">글쓰기</button>
+					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;" onclick="return chk();">글쓰기</button>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -62,6 +63,19 @@
 	<script>
 		function back(){
 			location.href="BoardInfo.do";
+		}
+		function chk(){
+			var form = document.boardForm;
+			if(!form.boardTitle.value){
+				alert('제목을 입력해주세요.');
+				return false;
+			}
+			if(!form.boardContent.value){
+				alert('내용을 입력해주세요.');
+				return false;
+			}
+			
+			return true;
 		}
 	</script>
 </body>

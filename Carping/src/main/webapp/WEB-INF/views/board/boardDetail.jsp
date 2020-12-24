@@ -16,6 +16,7 @@
 <body>
 		
 	<jsp:include page="../common/nav.jsp"></jsp:include>
+		<div style="height: 100px;"></div>
 	<section style="margin-top: 40px; ">
 		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">글 상세보기</h3>
 		<br><br>

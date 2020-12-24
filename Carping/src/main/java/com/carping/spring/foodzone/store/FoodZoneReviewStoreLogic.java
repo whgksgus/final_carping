@@ -20,8 +20,10 @@ public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<FoodZone> searchFoodZone(Search search) {
-		return (ArrayList)sqlSession.selectList("FoodZoneMapper.searchList", search);
+	public ArrayList<FoodZone> searchFoodZone(PageInfo pi,Search search) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
+		return (ArrayList)sqlSession.selectList("FoodZoneMapper.searchList", search, rowBounds);
 	}
 
 	@Override
@@ -81,6 +83,11 @@ public class FoodZoneReviewStoreLogic implements FoodZoneReviewStore {
 		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
 		return (ArrayList)sqlSession.selectList("FoodZoneMapper.selectBoardList", boardSearch, rowBounds);
+	}
+
+	@Override
+	public int getReviewListCount(Search search) {
+		return sqlSession.selectOne("FoodZoneMapper.getReviewListCount", search);
 	}
 	
 }

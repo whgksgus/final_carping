@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 상세보기 페이지</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <style>
 	.star-rating { width:205px; } 
 .star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
@@ -36,14 +42,18 @@
 		
 		
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px; ">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰 상세보기</h3>
-		<br><br>
+	<section style="width:100%; height:1100px;">
+	<div style="height:100px; display:block;"></div>
+		<div align="center">
+			<h2 class="h2" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">리뷰 상세보기</h2>
+			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+		</div>
+		<br>
 		<article>
-			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" readonly="readonly" value="${fReview.frTitle}" class="col-md-8 form-control align-self-center" style="width : 50%;">
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">제목</label><input type="text" readonly="readonly" value="${fReview.frTitle}" class="col-md-8 form-control align-self-center" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width : 50%;">
 					<div id='star'>
 					<div id="stars">
 						<span class='star-rating'>
@@ -76,22 +86,22 @@
 					</div>
 				<div class="col-md-2"></div>
 			</div>
-			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${fReview.frContent}</textarea>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">내용</label><textarea class="col-md-6 form-control" cols="5" rows="10" style="font-family: 'Sunflower', sans-serif; font-weight:bold;margin: 0px; width: 564px; height: 325px; resize: none;" readonly="readonly">${fReview.frContent}</textarea>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
 			<br>
-			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">사진</label>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">사진</label>
 					
 					<c:choose>
 						<c:when test="${fReview.frPhoto eq null}">
-							<p style="font-family: 'Sunflower', sans-serif;">첨부파일이 없습니다.</p>
+							<p style="font-family: 'Sunflower', sans-serif; font-weight:bold;">첨부파일이 없습니다.</p>
 							
 						</c:when>
 						<c:otherwise>
@@ -103,11 +113,11 @@
 			</div>
 			<br><br>
 			<!--   -->
-			<div class="container"  style="font-family: 'Sunflower', sans-serif;">
+			<div class="container"  style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">댓글</label>
-					<table id="frctb" class="col-md-6 table table-bordered" style="width: 560px;">
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">댓글</label>
+					<table id="frctb" class="col-md-6 table" style="width: 560px;">
 						<thead>
 							<tr>
 								<td colspan="4"><b id="frcCount"></b></td>
@@ -121,20 +131,20 @@
 				<div class="col-md-2"></div>
 			</div>
 			<br>
-			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 				<div class="col-md-2"></div>
 				<div class="col-md-9" style="margin-left: -20px;">
-					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">
 						
 					</label>
-					<table class="col-md-6 table table-bordered" style="width: 560px;">
+					<table class="col-md-6 table" style="width: 560px;">
 						<thead>
 							<tr>
 								<td>
-									<textarea id="content" rows="5" cols="10" style="width: 543px; height: 67px; resize: none;"></textarea>
+									<textarea id="content" rows="5" cols="10" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width: 543px; height: 67px; resize: none;"></textarea>
 								</td>
 								<td>
-									<button class="btn btn-default" style="width: 70px; height: 70px;" id="submit">등록</button>
+									<button class="btn btn-default" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width: 70px; height: 70px;" id="submit">등록</button>
 								</td>
 							</tr>
 						</thead>
@@ -143,11 +153,11 @@
 				<div class="col-md-1"></div>
 			</div>
 			<br><br>
-			<div class="container" style="font-family: 'Sunflower', sans-serif; ">
+			<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold; ">
 				<div class="col-md-2"></div>
 				<div class="col-md-8" style="margin-left: -30px;">
 					<div class="col-md-3"></div>
-					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+					<button type="button" class="col-md-2 btn btn-default" style="font-family: 'Sunflower', sans-serif; font-weight:bold;height: 40px;" onclick="back();">목록으로</button>
 					<c:if test="${fReview.memberId eq loginUser.memberId}">
 						<c:url var="frUpdate" value="foodZoneReviewUpdate.do">
 							<c:param name="frKey" value="${fReview.frKey}"></c:param>
@@ -158,9 +168,9 @@
 							<c:param name="foodZoneKey" value="${foodZoneKey}"></c:param>
 						</c:url>
 						<div class="col-md-1"></div>
-						<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return upChk();">수정</button>
+						<button class="col-md-2 btn btn-default" style="font-family: 'Sunflower', sans-serif; font-weight:bold;height: 40px;" onclick="return upChk();">수정</button>
 						<div class="col-md-1"></div>
-						<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return chk();">삭제</button>
+						<button class="col-md-2 btn btn-danger" style="font-family: 'Sunflower', sans-serif; font-weight:bold;height: 40px;" onclick= "return chk();">삭제</button>
 					</c:if>
 				</div>
 				<div class="col-md-2"></div>
@@ -169,6 +179,8 @@
 			
 		</article>
 	</section>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	<script>
 		$(function(){
 			getReplyList();

@@ -11,7 +11,7 @@ import com.carping.spring.foodzone.domain.PageInfo;
 
 
 public interface FoodZoneReviewStore {
-	public ArrayList<FoodZone> searchFoodZone(Search search);
+	public ArrayList<FoodZone> searchFoodZone(PageInfo pi,Search search);
 	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey, PageInfo pi);
 	public FoodZoneReview selectFoodZoneReviewDetail(int frKey);
 	public int insertFoodZoneReview(FoodZoneReview foodZoneReview);
@@ -23,4 +23,5 @@ public interface FoodZoneReviewStore {
 	public int getListCount(int foodZoneKey);
 	public int foodZoneReviewHits(int frKey);
 	public ArrayList<FoodZoneReview> searchFoodZoneBoardReview(PageInfo pi, BoardSearch boardSearch);
+	public int getReviewListCount(Search search);
 }

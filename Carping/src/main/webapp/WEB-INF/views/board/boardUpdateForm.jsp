@@ -17,7 +17,7 @@
 	<section style="margin-top: 40px; ">
 		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">리뷰 수정</h3>
 		<br><br>
-		<form action="boardUpdate.do" method="post">
+		<form action="boardUpdate.do" method="post" name="buForm">
 			<input type="hidden" name="memberId" value="${loginUser.memberId }">
 			<input type="hidden" name="boardKey" value="${board.boardKey }">
 			
@@ -48,7 +48,7 @@
 					<div class="col-md-4"></div>
 					<button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
 					<div class="col-md-2"></div>
-					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;">수정하기</button>
+					<button type="submit" class=" col-md-2 btn btn-info" style="height: 40px;" onclick="return chk();">수정하기</button>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -59,6 +59,19 @@
 	<script>
 		function back(){
 			location.href='BoardInfo.do';
+		}
+		function chk(){
+			var form = document.buForm;
+			if(!form.boardTitle.value){
+				alert('제목을 입력해주세요.');
+				return false;
+			}
+			if(!form.boardContent.value){
+				alert('내용을 입력해주세요.');
+				return false;
+			}
+			
+			return true;
 		}
 	</script>
 

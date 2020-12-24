@@ -47,14 +47,17 @@ public class FoodZoneReviewController {
 		return "foodzone/foodZoneReviewSearch";
 	}
 	
-	@RequestMapping(value="foodZoneSearch.do", method = RequestMethod.POST)
+	@RequestMapping(value="foodZoneSearch.do", method = RequestMethod.GET)
 	public ModelAndView foodZoneSearch(Search search, ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
-
-		ArrayList<FoodZone> fList = fzrService.searchFoodZone(search);
+		int currentPage = (page != null) ? page : 1;
+		int listCount = fzrService.getReviewListCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		int pageNum = listCount - (currentPage - 1)*pi.getListLimit();
+		ArrayList<FoodZone> fList = fzrService.searchFoodZone(pi, search);
 		if(!fList.isEmpty()) {
-			mv.addObject("fList", fList).addObject("search", search).setViewName("foodzone/foodZoneReviewSearch");
+			mv.addObject("fList", fList).addObject("search", search).addObject("pi", pi).addObject("pageNum", pageNum).setViewName("foodzone/foodZoneReviewSearch");
 		}else {
-			mv.addObject("msg", "검색 결과가 없습니다..").addObject("url", "foodzone/foodZoneReviewSearch");
+			mv.addObject("msg", "검색 결과가 없습니다..").addObject("url", "javascript:history.back();").setViewName("common/redirect");
 		}
 		return mv;
 	}

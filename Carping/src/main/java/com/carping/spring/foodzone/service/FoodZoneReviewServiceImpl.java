@@ -19,8 +19,8 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 	private FoodZoneReviewStore fzrStore;
 	
 	@Override
-	public ArrayList<FoodZone> searchFoodZone(Search search) {
-		return fzrStore.searchFoodZone(search);
+	public ArrayList<FoodZone> searchFoodZone(PageInfo pi,Search search) {
+		return fzrStore.searchFoodZone(pi, search);
 	}
 
 	@Override
@@ -77,6 +77,11 @@ public class FoodZoneReviewServiceImpl implements FoodZoneReviewService {
 	@Override
 	public ArrayList<FoodZoneReview> searchFoodZoneBoardReview(PageInfo pi, BoardSearch boardSearch) {
 		return fzrStore.searchFoodZoneBoardReview(pi, boardSearch);
+	}
+
+	@Override
+	public int getReviewListCount(Search search) {
+		return fzrStore.getReviewListCount(search);
 	}
 
 }
