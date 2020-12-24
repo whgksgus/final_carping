@@ -194,4 +194,17 @@
 	<insert id="insertMenu">
 		INSERT INTO TAKEOUTMENU VALUES(SEQ_TK.NEXTVAL,#{foodZoneKey}, #{takeOutMenu}, #{takeOutMenuPrice}, #{takeOutMenuPhoto})
 	</insert>
+	
+	<select id="getReviewListCount" resultType="int">
+		SELECT COUNT(*) FROM FOODZONE
+		<where>
+			<if test="searchCondition.toString() == '장소명'">
+				FOODZONE_NAME LIKE '%' || #{searchValue} || '%' 
+			</if>
+			<if test="searchCondition.toString() == '주소'">
+				FOODZONE_ADDRESS LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+		
+	</select>
 </mapper>

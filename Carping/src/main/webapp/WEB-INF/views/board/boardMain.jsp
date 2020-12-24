@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
+	<div style="height: 100px;"></div>
 	<div class="blogs" id="blogs" style="padding: 30px; 30px;">
 		<div class="container">
 		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">자유게시판</h3>
