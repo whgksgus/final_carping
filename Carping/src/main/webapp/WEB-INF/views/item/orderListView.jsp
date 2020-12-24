@@ -8,6 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <title>주문내역</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
@@ -19,9 +25,11 @@ padding-right: 10%;
 }
 
 #title {
-   text-align: left;
-   font-size: 30px;
-   font-weight: bold;
+	padding-top: 50px;
+	text-align: left;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Sunflower', sans-serif;
 }
 
 
@@ -36,7 +44,7 @@ padding-right: 10%;
 }
 
 .ul {
-	margin-top: 10px;
+	margin-top: 40px;
 	width: 90%;
 	display:inline-block;
 }
@@ -106,33 +114,31 @@ padding-right: 10%;
 
 <body>
 
-   <jsp:include page="../common/nav.jsp"/>
-   <div id="contents">
-      <form action="#" method="post">
+   <jsp:include page="../common/nav.jsp" />
+	<div style="height:100px;"></div>
+   <div id="contents" style="width:100%; height:1000px;">
 
          <legend id="title">구매내역</legend>
          
          <br>
          <c:if test="${empty orderList}">
-            <p style="font-size: 23px;">구매내역이 비어있습니다.</p>
+            <p style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-size: 23px;">구매내역이 비어있습니다.</p>
             <br>
             <br>
          </c:if>
-      </form>
 		
 	<div id="order">
       <c:if test="${not empty orderList}">
-         <form action="#" method="post">
          	<ul id="ul">
 				<li class="li">
 					<ul class="ul">
-						<li class="li">번호</li>
-						<li class="li">이미지</li>
-						<li class="li">상품정보</li>
-						<li class="li">상품금액</li>
-						<li class="li">수량</li>
-						<li class="li">주문상태</li>
-						<li class="li">주문날짜</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">번호</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-3 test-center">이미지</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-5 test-center">상품정보</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">상품금액</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">수량</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">주문상태</li>
+						<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-3 test-center">주문날짜</li>
 					</ul>
 				</li>
 				<li class="li">
@@ -142,28 +148,28 @@ padding-right: 10%;
                         	<c:param name="itemKey" value="${order.ITEM_KEY}"></c:param>
                         </c:url> 
 						<ul class="ul">
-							<li class="li"> ${status.count}</li>
-							<li class="li">
+							<li style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="li"> ${status.count}</li>
+							<li class="li" align="center">
 								 <a href="${iDetail}"> 
-									<img src="../../../resources/itemImage/${order.ITEM_IMAGE}" width="170px" height="170px" style="margin: 20px 30px;">
+									<img src="../../../resources/itemImage/${order.ITEM_IMAGE}" width="70px" height="70px" style="margin-top:-20px;">
 								</a>
 							</li>
-							<li class="li" style="text-align: left;">
+							<li class="li" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 								 <a href="${iDetail}"> 
 									<span style="font-size: 18px;">${order.ITEM_NAME}</span>
 								</a> 
 							</li>
-							<li class="li">
+							<li class="li" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 								<span style="font-size: 18px;">
                            			<fmt:formatNumber value="${order.TOTAL_PRICE}" pattern="#,###"/>원
  								</span></li>
-							<li class="li">
+							<li class="li" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 								<span style="font-size: 18px;">${order.CART_QUANTITY}</span>
                 		    </li>
-							<li class="li" style="font-size: 15px;">
+							<li class="li" style="font-size: 15px; font-family: 'Sunflower', sans-serif; font-weight:bold;">
 								<span style="font-size: 18px; color: green;">결제완료</span>
 							</li>
-							<li class="li">
+							<li class="li" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
 								<span style="font-size: 18px;">${order.CART_ORDERDATE}</span>
 							</li>
 						</ul>
@@ -172,7 +178,6 @@ padding-right: 10%;
 			</ul>
             <hr>
 
-               </form>
             </c:if>
      	</div>
         <div style="text-align: right; font-size: 20px;">
@@ -181,6 +186,9 @@ padding-right: 10%;
         <br>
       <br><br><br><br>
    </div>
-<br><br><br><br>
+<br>
+	<br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

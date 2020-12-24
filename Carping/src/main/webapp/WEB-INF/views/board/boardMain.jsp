@@ -6,17 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
+	<div style="width:100%; height:800px;">
 	<div style="height: 100px;"></div>
 	<div class="blogs" id="blogs" style="padding: 30px; 30px;">
 		<div class="container">
 		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">자유게시판</h3>
+		    <br>
 		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s">회원들과 자유롭게 소통을 나눠보세요</p>
 		</div>
+		<br>
+		<br>
 		<div class="container">
 			<div class="col-md-1"></div>
 					<div class="col-md-10">
@@ -101,27 +113,27 @@
 			
 			 <form action="searchBoard.do">
 				  	<div class="container">
-				  	<div class="col-md-2"></div>
-				  	<div class="col-md-8">
-				  		<div class="col-md-1"></div>
-				  		<select class="col-md-2 form-control" id="searchCondition" name="searchCondition" style="width:12%;">
+				  	<div class="row2">
+				  	<div class="col-sm-2"></div>
+				  	<div class="col-sm-8" style="float:left;">
+				  		<select class="col-sm-2 form-control" id="searchCondition" name="searchCondition" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width: 12%; text-align: center;">
 				  			<option value="제목" <c:if test="${search.searchCondition == '제목'}">selected</c:if>>제목</option>
 							<option value="내용" <c:if test="${search.searchCondition == '내용'}">selected</c:if>>내용</option>
 							<option value="작성자" <c:if test="${search.searchCondition == '작성자'}">selected</c:if>>작성자</option>
 				  		</select>
-				  		<div class="col-md-6">
-				  			<input type="text" class="form-control" id="searchValue" name="searchValue" value="${search.searchValue }" required="required">
-				  		</div>
-				  		<div class="col-md-2">
-				  			<button type="submit" class="btn btn-info" id="search">검색</button>
-				  		</div>
+				  		<input type="text" class="form-control col-sm-6" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width : 50%;" id="searchValue" name="searchValue" value="${search.searchValue }" required="required">
+				  		<button type="submit"style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="btn btn-default col-sm-1" id="search">검색</button>
 				  	</div>
 				  	<div class="col-md-2"></div>
+				  	</div>
 				  	
 				  </div>
 			  </form>
 		</div>    
-		   
 	</div>
+	<br>
+	<br>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

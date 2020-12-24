@@ -8,6 +8,12 @@
 <title>리뷰게시판 - 리뷰 수정</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <style>
 	           .star-input>.input,
 

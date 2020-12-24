@@ -293,7 +293,7 @@
 	    				var foodZoneName = result.foodZoneName;
 	    				$("#takeout").html('');
 	    				$("#takeout").append("<p>테이크아웃이 가능한 매장입니다.</p>");
-	    				$("#takeout").append("<button onclick=location.href='takeOut.do?foodZoneName="+foodZoneName+"'>포장예약하기</button>");
+	    				$("#takeout").append("<br><button class='btn btn-info' style='width:120px;font-family: 'Sunflower', sans-serif; font-weight:bold;' onclick=location.href='takeOut.do?foodZoneName="+foodZoneName+"'>포장예약하기</button>");
 	    			}else{
 	    				$("#takeout").html('');
 	    				$("#takeout").append("<p>테이크 아웃이 불가능한 매장입니다.</p>");
