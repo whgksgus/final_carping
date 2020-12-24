@@ -78,18 +78,19 @@
             	<div class="col-md-2"></div>
             	<div class="col-md-5" style="margin-left:100px;">
             	<div class="col-md-4"></div>
+            	
             	<c:url var="sugList" value="selectList.do"></c:url>
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="back();">목록으로</button>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">목록으로</button>
 				<div class="col-md-1"></div>
 				
 				<c:url var="sugUpdate" value="sugUpdateView.do"><c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}">
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="return sugUpdate();">수정</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return sugUpdate();">수정</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="sugDelete" value="sugDelete.do"><c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}">
-				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick= "return sugDelete();">삭제</button></c:if>
+				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick= "return sugDelete();">삭제</button></c:if>
 				</div>
 				<br><br><br>
 				
@@ -99,19 +100,19 @@
 				<c:url var="insertAnswer" value="insertAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="return answerInsert();">답변 등록</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerInsert();">답변 등록</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="updateAnswer" value="updateAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="return answerUpdate();">답변 수정</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerUpdate();">답변 수정</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="deleteAnswer" value="deleteAnswer.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="return answerDelete();">답변 삭제</button></c:if>
+				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerDelete();">답변 삭제</button></c:if>
 				<div class="col-md-1"></div>
 				</div>
 				<div class="col-md-2"></div>

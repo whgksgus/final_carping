@@ -49,9 +49,9 @@
             	<br><br>
             	<c:url var="sugList" value="selectList.do">
     			</c:url>
-               <button type="button" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="back();">뒤로가기</button>
+               <button type="button" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">뒤로가기</button>
                <div class="col-md-2"></div>
-               <input type="submit" class="col-md-2 btn btn-info" style="height:40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="return Add();" value="글쓰기"> &nbsp;
+               <input type="submit" class="col-md-2 btn btn-info" style="height:40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return Add();" value="글쓰기"> &nbsp;
                </div>
                <div class="col-md-2"></div>
                </div>

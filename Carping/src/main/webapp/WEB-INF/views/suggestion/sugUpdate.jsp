@@ -48,9 +48,9 @@
             	<div class="col-md-2"></div>
             	<div class="col-md-8" style="margin-left:400px;">
             	<br><br>
-               <button type="button" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="back();">뒤로가기</button>
+               <button type="button" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">뒤로가기</button>
                <div class="col-md-2"></div>
-               <input type="submit" class="col-md-2 btn btn-info" style="height:40px; font-family: 'Sunflower', sans-serif; font-weight:bold;"" onclick="return Update();" value="수정하기"> &nbsp;
+               <input type="submit" class="col-md-2 btn btn-info" style="height:40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return Update();" value="수정하기"> &nbsp;
                </div>
                <div class="col-md-2"></div>
                </div>
