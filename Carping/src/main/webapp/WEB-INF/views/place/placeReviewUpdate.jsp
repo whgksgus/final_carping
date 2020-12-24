@@ -100,20 +100,19 @@
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 	<section style="width:100%; height:800px;">
-	<div style="height:100px; display:block;"></div>
+	<div style="height:100px;"></div>
 	<div align="center">
 		<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">리뷰 수정</h2>
 		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 	</div>
 	<br>
 	<form action="placeReviewUpdate.do" method="post" enctype="multipart/form-data">
-		<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="memberId" value="${loginUser.memberId }">
-    	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="placeKey" value="${preview.placeKey }">
-    	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="prKey" value="${preview.prKey }">
-    	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="prPhoto" value="${preview.prPhoto }">
-    	
+		<input type="hidden" name="memberId" value="${loginUser.memberId }">
+    	<input type="hidden" name="placeKey" value="${preview.placeKey }">
+    	<input type="hidden" name="prKey" value="${preview.prKey }">
+    	<input type="hidden" name="prPhoto" value="${preview.prPhoto }">
     	<article>
-    	<div class="container" style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
+    	<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
 					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-weight:bold;font-size: 1.5em;">장소</label><input type="text" name="address" readonly="readonly" value="${place.placeName } : ${place.placeAddress}" class="col-md-8 form-control align-self-center" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width : 50%;">
@@ -164,7 +163,7 @@
   		<input type="radio" name="prScore" id="p5" value="5" checked="checked"><label for="p5">5</label>
   	</c:if>
   	</span>
-  <output for="star-input"><input id="result" type="text" value="${preview.prScore}" style="border: none; margin-top: -500px; font-size: 1.4em;" size="1"></output>
+  <output for="star-input"><input id="result" type="hidden" value="${preview.prScore}" style="border: none; margin-top: -500px; font-size: 1.4em;" size="1"></output>
 </span>
 </div>
 
@@ -206,9 +205,10 @@
 		</article>
 		</form>
 	</section>
-	<script>
 	<!--footer-->
-	/* <jsp:include page="../../../WEB-INF/views/common/footer.jsp"/> */
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
+	<script>
+	
 		function back(){
 			location.href="placeReviewListView.do?placeKey="+${preview.placeKey};
 		}

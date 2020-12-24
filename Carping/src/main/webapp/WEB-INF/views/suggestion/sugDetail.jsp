@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>건의사항 상세보기</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -15,9 +21,13 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px;">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 상세보기</h3>
-		<br><br><br>
+	<section style="width:100%; height:900px;">
+		<div style="height:100px;"></div>
+		<div align="center">
+			<h2 class="h2" style="font-weight:bold; font-family: 'Sunflower', sans-serif;">건의사항 상세보기</h2>
+			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+		</div>
+		<br><br>
 		<article>
 			<div class="container" style="font-family:'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
@@ -68,18 +78,19 @@
             	<div class="col-md-2"></div>
             	<div class="col-md-5" style="margin-left:100px;">
             	<div class="col-md-4"></div>
+            	
             	<c:url var="sugList" value="selectList.do"></c:url>
-				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">목록으로</button>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">목록으로</button>
 				<div class="col-md-1"></div>
 				
 				<c:url var="sugUpdate" value="sugUpdateView.do"><c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}">
-				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return sugUpdate();">수정</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return sugUpdate();">수정</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="sugDelete" value="sugDelete.do"><c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}">
-				<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick= "return sugDelete();">삭제</button></c:if>
+				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick= "return sugDelete();">삭제</button></c:if>
 				</div>
 				<br><br><br>
 				
@@ -89,24 +100,26 @@
 				<c:url var="insertAnswer" value="insertAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return answerInsert();">답변 등록</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerInsert();">답변 등록</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="updateAnswer" value="updateAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px;" onclick="return answerUpdate();">답변 수정</button></c:if>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerUpdate();">답변 수정</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="deleteAnswer" value="deleteAnswer.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-danger" style="height: 40px;" onclick="return answerDelete();">답변 삭제</button></c:if>
+				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerDelete();">답변 삭제</button></c:if>
 				<div class="col-md-1"></div>
 				</div>
 				<div class="col-md-2"></div>
                </article>
-	</section>
+	</section><br><br><br>
+    <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	<script>
 	function back(){
 		location.href='${sugList}';
@@ -158,6 +171,5 @@
 	<script>
 		
 	</script>
-	<br><br><br>
 </body>
 </html>

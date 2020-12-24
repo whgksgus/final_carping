@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>건의사항 수정</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -15,9 +21,13 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="margin-top: 40px;">
-		<h3 style="font-family: 'Sunflower', sans-serif; margin-left: 100px;">건의사항 수정</h3>
-		<br><br><br><br>
+	<section style="width:100%; height:800px;">
+	<div style="height:100px;"></div>
+	<div align="center">
+		<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">건의사항 수정</h2>
+		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+	</div>
+	<br>
 	<form action="sugUpdate.do" method="post">
 		<input type="hidden" name="memberId" value="${loginUser.memberId }">
 		<input type="hidden" name="suggestionKey" value="${sList.suggestionKey }">
@@ -38,15 +48,17 @@
             	<div class="col-md-2"></div>
             	<div class="col-md-8" style="margin-left:400px;">
             	<br><br>
-               <button type="button" class="col-md-2 btn btn-default" style="height: 40px;" onclick="back();">뒤로가기</button>
+               <button type="button" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">뒤로가기</button>
                <div class="col-md-2"></div>
-               <input type="submit" class="col-md-2 btn btn-info" style="height:40px;" onclick="return Update();" value="수정하기"> &nbsp;
+               <input type="submit" class="col-md-2 btn btn-info" style="height:40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return Update();" value="수정하기"> &nbsp;
                </div>
                <div class="col-md-2"></div>
                </div>
                </article>
 	</form>
 	</section>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	<script>
 	function Update() {
 		return confirm("건의사항을 수정하시겠습니까?")

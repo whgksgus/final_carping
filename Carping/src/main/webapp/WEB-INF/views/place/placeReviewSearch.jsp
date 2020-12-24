@@ -14,11 +14,11 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<section style="width:100%; height:800px;">
-		<div style="height:100px;"></div>
+	<section style="width:100%; height:1000px;">
 		<article>
+		<div style="height:100px; display:block;"></div>
 		<div align="center">
-			<h2 class="h2" style="font-weight:bold; font-family: 'Sunflower', sans-serif;">명소 검색</h2>
+			<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">명소 검색</h2>
 			<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 		</div>
 		<br>
@@ -30,8 +30,8 @@
 		<select id="searchCondition" name="searchCondition" class="form-control col-sm-2" style="width:20%; text-align:center;font-weight:bold; font-family: 'Sunflower', sans-serif;"> 
 			<option value="명소이름" <c:if test="${search.searchCondition == '명소이름'}">selected</c:if>>명소 이름</option>
 			<option value="주소" <c:if test="${search.searchCondition == '주소'}">selected</c:if>>주소</option>
-		</select>&nbsp;
-		<input type="text" class="form-control col-sm-7" style="font-weight:bold; font-family: 'Sunflower', sans-serif; width:50%;" id="searchValue" name="searchValue" value="${search.searchValue }"/>&nbsp;
+		</select>&nbsp;&nbsp;
+		<input type="text" class="form-control col-sm-7" style="font-weight:bold; font-family: 'Sunflower', sans-serif; width:50%;" id="searchValue" name="searchValue" value="${search.searchValue }" required/>&nbsp;
 		<input type="submit" class="btn btn-default col-sm-1" style="font-weight:bold; font-family: 'Sunflower', sans-serif;" value="검색" id="search"/>
 	</div>
 	<div class="col-sm-2"></div>
@@ -45,11 +45,11 @@
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-7">
-		<table class="table table-striped" style="text-align:center;">
+		<table class="table table-striped">
 			<tr>
 			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-3 text-center">장소명</th>
 			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-7 text-center">주소</th>
-			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2">선택</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 text-center">선택</th>
 		</tr>
 		<c:forEach items="${pList }" var="list" varStatus="status">
 		<tr>
@@ -68,7 +68,51 @@
 	<div class="col-sm-3"></div>
 	</div>
 	</div>
-		<div class="container">
+	<c:if test="${pList ne null || !empty pList }">
+	<div class="container">
+				<div class="col-md-12 text-center">
+					<ul class="pagination pagination-sm">
+					<c:if test="${pi.currentPage <= 1 }">
+						<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">이전</a></li>
+					</c:if>
+					<c:if test="${pi.currentPage>1}">
+						<c:url var="before" value="placeReviewSearch.do">
+							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+							<c:param name="searchValue" value="${search.searchValue }"></c:param>
+							<c:param name="page" value="${pi.currentPage-1}"></c:param>
+						</c:url>
+							<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${before}" class="page-link">이전</a></li>
+					</c:if>
+					<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+						<c:if test="${pi.currentPage == p }">
+							<li class="page-item"><a href="javascript:void(0);" class="page-link">${p}</a></li>
+						</c:if>
+						<c:if test="${pi.currentPage != p }">
+							<c:url var="pagination" value="placeReviewSearch.do">
+								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+								<c:param name="searchValue" value="${search.searchValue }"></c:param>
+								<c:param name="page" value="${p}"></c:param>
+							</c:url>
+							<li class="page-item"><a href="${pagination}" class="page-link">${p}</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pi.currentPage>=pi.maxPage}">
+						<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">다음</a></li>
+					</c:if>
+					<c:if test="${pi.currentPage<pi.maxPage }">
+						<c:url var="after" value="placeReviewSearch.do">
+						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						<c:param name="searchValue" value="${search.searchValue }"></c:param>
+						<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+						</c:url>
+						<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${after}" class="page-link">다음</a></li>
+					</c:if>
+					</ul>
+				</div>
+			</div>
+			</c:if>
+			
+			<div class="container"><br>
 		<div class="col-sm-2"></div>
 			<div class="col-sm-7">
 			<c:if test="${pList ne null || !empty pList }">
@@ -77,84 +121,10 @@
 		</div>
 			<div class="col-sm-3"></div>
 			</div>
-			<br><br>
 			</form>
 			</article>
 			</section>
-	
-	<c:if test="${pList ne null || !empty pList }">
-	<div class="container">
-		<div class="col-md-11 text-center">
-			<ul class="pagination pagionation-sm">
-				<!-- 이전 -->
-				<c:if test="${pi.currentPage <= 1 }">
-					<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">이전</a>
-				</c:if>
-				<c:if test="${pi.currentPage > 1 }">
-					<c:url var="before" value="placeReviewSearch.do">
-						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
-						<c:param name="searchValue" value="${search.searchValue }"></c:param>
-						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
-					</c:url>
-					<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${before}" class="page-link">이전</a></li>
-				</c:if>
-				<!-- 페이지  -->
-				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-					<c:if test="${pi.currentPage == p }">
-             	  	   <li class="page-item"><a href="javascript:void(0);" class="page-link">${p}</a></li>
-            	  	</c:if>
-            	  	<c:if test="${pi.currentPage != p }">
-					<c:url var="pagination" value="placeReviewSearch.do">
-						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
-						<c:param name="searchValue" value="${search.searchValue }"></c:param>
-						<c:param name="page" value="${p}"></c:param>
-					</c:url>
-					<li class="page-item"><a href="${pagination}" class="page-link">${p}</a></li>
-					</c:if>
-				</c:forEach>
-				<!-- 다음 -->
-				<c:if test="${pi.currentPage >= pi.maxPage }">
-					<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">다음</a></li>
-				</c:if>
-				<c:if test="${pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="placeReviewSearch.do">
-						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
-						<c:param name="searchValue" value="${search.searchValue }"></c:param>
-						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
-					</c:url>
-					<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${after}" class="page-link">다음</a></li>
-				</c:if>
-				</ul>
-			</div>
-			</div>
-	</c:if>
-	
 	<!--footer-->
-	<%-- <jsp:include page="../../../WEB-INF/views/common/footer.jsp"/> --%>
-
-	<script>
-	
-	/* var arr = [];
-		$('#search').on("click", function() {
-			var type = $("#searchCondition").val();
-			var search = $("#searchValue").val();
-			
-			$.ajax({
-				url : "placeReviewSearch.do",
-				type : "POST",
-				data : {"searchCondition" : type, "searchValue" : search},
-				success : function(data) {
-				<c:forEach items="${pList}" var="list">
-				var name = ${list.placeName};
-				var addr = "${list.placeAddress}";
-				for (var i in data) {
-					$("tab tbody")
-				}
-				</c:forEach>
-				}
-			});
-		}) */
-	</script>
-
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
