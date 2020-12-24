@@ -82,10 +82,10 @@
          	<br>
             <form action="insertPlace.do" method="post" enctype="multipart/form-data">
                <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">명소이름</h3>
-               <input class="form-control" style="width:400px;" type="text" name="placeName">
+               <input class="form-control" style="width:400px;" type="text" name="placeName" required>
                <div style="width: 600px;">
                <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">주소찾기</h3>
-               <input class="form-control" style="margin-left:100px; width:400px;float:left;" type="text" id="jibunAddress" name="placeAddress">
+               <input class="form-control" style="margin-left:100px; width:400px;float:left;" type="text" id="jibunAddress" name="placeAddress" required>
                <input class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; float:left; width:80px; height:35px;" type="button" onclick="daumPostcode()" value="찾기">
                <br><br>
                <div id="map" style="width:100%;height:250px;"></div>
@@ -103,7 +103,7 @@
                <textarea class="form-control" name="placeEtc" cols="50" rows="5" style="resize: none; color:black; width:400px;"></textarea>
                <br>
                <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">사진 첨부</h3>
-               <input class="loginBtn" type="file" name="uploadFile">
+               <input class="loginBtn" type="file" name="uploadFile" required>
                <br>
                <br>
                <input class="loginBtn" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px; height:35px;" type="submit" value="등록">

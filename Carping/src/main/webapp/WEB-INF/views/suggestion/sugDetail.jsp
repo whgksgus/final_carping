@@ -79,9 +79,18 @@
             	<div class="col-md-5" style="margin-left:100px;">
             	<div class="col-md-4"></div>
             	
+            	<!-- 관리자도 아니고 작성자도 아닐때(목록만) -->
+            	<c:if test="${sList.memberId ne loginUser.memberId }">
+            	<c:url var="sugList" value="selectList.do"></c:url>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:190px;" onclick="back();">목록으로</button>
+				<div class="col-md-1"></div>
+				</c:if>
+				
+				<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId }">
             	<c:url var="sugList" value="selectList.do"></c:url>
 				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">목록으로</button>
 				<div class="col-md-1"></div>
+				</c:if>
 				
 				<c:url var="sugUpdate" value="sugUpdateView.do"><c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${sList.memberId eq loginUser.memberId || 'admin' eq loginUser.memberId}">
@@ -100,19 +109,19 @@
 				<c:url var="insertAnswer" value="insertAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerInsert();">답변 등록</button></c:if>
+				<button id="answerinsertbtn" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;">답변 등록</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="updateAnswer" value="updateAnswerView.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerUpdate();">답변 수정</button></c:if>
+				<button id="answerupdatebtn" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;">답변 수정</button></c:if>
 				<div class="col-md-1"></div>
 				
 				<c:url var="deleteAnswer" value="deleteAnswer.do">
     			<c:param name="suggestionKey" value="${sList.suggestionKey }"></c:param></c:url>
 				<c:if test="${'admin' eq loginUser.memberId }">
-				<button class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerDelete();">답변 삭제</button></c:if>
+				<button id="answerdeletebtn" class="col-md-2 btn btn-danger" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return answerDelete();">답변 삭제</button></c:if>
 				<div class="col-md-1"></div>
 				</div>
 				<div class="col-md-2"></div>
@@ -128,10 +137,6 @@
 	function sugUpdate(){
 		location.href='${sugUpdate}';
 	}
-	
-	function answerUpdate(){
-		location.href='${updateAnswer}';
-	}
 		
 	function sugDelete(){
 		var question = confirm("게시글을 삭제하시겠어요?");
@@ -142,20 +147,6 @@
 			return false;
 		}
 	}
-	
-	/* function answerInsert(){
-			var test = ${answer.answerContent};
-			if (test != "") {
-				alert('답변 삭제 먼저 진행 후 시도해주세요');
-				location.href='${sugList}';
-			}else {
-				location.href='${insertAnswer}';		
-			}
-		} */
-		
-		function answerInsert(){
-			location.href='${insertAnswer}';		
-	} 
 	
 	function answerDelete(){
 		var question = confirm("답변을 삭제하시겠어요?");
@@ -169,7 +160,41 @@
 	</script>
 	
 	<script>
+		$(document).ready(function () {
+		    $('#answerinsertbtn').click(function() {
+		    var check = '<c:out value="${answer.answerTitle}"/>';
+		    if(check != "") {
+				alert('답변 수정이나 답변 삭제 후 이용해주세요');
+				location.href='selectOne.do?suggestionKey=${answer.suggestionKey}';
+		    }else {
+		    	location.href='${insertAnswer}';
+		    }
+		    });
+		});
 		
+		$(document).ready(function () {
+		    $('#answerupdatebtn').click(function() {
+		    var check = '<c:out value="${answer.answerTitle}"/>';
+		    if(check == "") {
+				alert('답변 등록 먼저 진행 후 시도해주세요');
+				location.href='selectOne.do?suggestionKey=${sList.suggestionKey}';
+		    }else {
+		    	location.href='${updateAnswer}';
+		    }
+		    });
+		});
+		
+		$(document).ready(function () {
+		    $('#answerdeletebtn').click(function() {
+		    var check = '<c:out value="${answer.answerTitle}"/>';
+		    if(check == "") {
+				alert('답변 등록 먼저 진행 후 시도해주세요');
+				location.href='selectOne.do?suggestionKey=${sList.suggestionKey}';
+		    }else {
+		    	location.href='${deleteAnswer}';
+		    }
+		    });
+		});
 	</script>
 </body>
 </html>
