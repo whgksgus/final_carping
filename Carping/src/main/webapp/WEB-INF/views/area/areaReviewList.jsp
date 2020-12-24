@@ -30,20 +30,21 @@
 	<br>
 	<br>
 	<form action="areaReviewInsertForm.do" method="post">
+		<div class="container">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
 	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="hidden" name="areaKey" value="${areaKey}"/>
-	<table class="table table-striped" align="center" style="width:900px;">
+	<table class="table table-striped" align="center">
 		<tr>
 			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">글번호</th>
-			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-3 test-center">제목</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-7 test-center">제목</th>
 			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">작성자</th>
-			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">작성일</th>
 			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">조회수</th>
-			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-1 test-center">별점</th>
-			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">첨부파일</th>
+			<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="col-md-2 test-center">작성날짜</th>
 		</tr>
 		<c:if test="${arList eq null || empty arList }">
 			<tr>
-				<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;" colspan="7" class="col-md-11 text-center" align="center">등록된 정보가 없습니다.</td>
+				<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;" colspan="5" class="col-md-11 text-center" align="center">등록된 정보가 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:if test="${arList ne null || !empty arList }">
@@ -58,26 +59,20 @@
 				<a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${arDetail}">${arlist.arTitle }</a>
 			</td>
 			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${arlist.memberId }</td>
-			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${arlist.arRegDate }</td>
 			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${arlist.arHits }</td>
-			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${arlist.arScore }</td>
-			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">
-				<c:if test="${!empty arlist.arPhoto }">
-					O
-				</c:if>
-				<c:if test="${empty arlist.arPhoto }">
-					X
-				</c:if>
-			</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${arlist.arRegDate }</td>
 		</tr>
 		</c:forEach>
 		</c:if>
 	</table>
+	</div>
+	</div>
 	
-	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:1220px;" class="btn btn-info" type="submit" value="글쓰기"/>
+	<input style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:1370px;" class="btn btn-info" type="submit" value="리뷰 작성"/>
 	</form>
 	<div class="container">
 		<div class="col-md-12 text-center">
+		<c:if test="${aList ne null || !empty aList }">
 			<ul class="pagination pagination-sm">
 			<c:if test="${pi.currentPage <= 1 }">
 				<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">이전</a></li>
@@ -110,7 +105,7 @@
 				<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="${after}" class="page-link">다음</a></li>
 			</c:if>
 			</ul>
-			
+			</c:if>
 		</div>
 	</div>
 	

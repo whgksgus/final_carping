@@ -58,7 +58,7 @@ public class AreaReviewController {
 			return "area/areaReviewSearch";
 		}else {
 			model.addAttribute("msg", "검색된 차박장소가 없습니다. 다시 검색 해주세요");
-			model.addAttribute("url", "areaReviewSearchForm.do");
+			model.addAttribute("url", "areaReviewSerachForm.do");
 			return "common/redirect";
 		}
 	}

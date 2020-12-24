@@ -6,50 +6,117 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 추천</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <style>
-.star-rating { width:205px; } 
-.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
+.display-none {
+	display: none;
+}
+.star-rating { 
+	margin-left: 10px;
+	margin-top: -15px;
+	width:205px; 
+	} 
+.star-rating,.star-rating span { display:inline-block; height:37px; overflow:hidden; background:url(../../../resources/images/star.png)no-repeat; } 
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top;}
 #star{
-	width : 100%;
-	display: table-cell;
-	vertical-align: middle;
-}
-#star div{
-	float: left;
+   width : 120px;
+   /* display: table-cell; */
+   float: left;
 }
 
+#stars{
+	float: left;
+}
 </style>
 </head>
 <body>
    <jsp:include page="../common/nav.jsp"></jsp:include>
    <br><br>
-   <div style="margin-left:100px;">
-      <form action="placeSearch.do" method="get">
-            <h2>맛집 추천</h2><br>
-            <select name="sido">
-                <option value="강원">강원</option>
-                <option value="경기">경기</option>
-            </select>&nbsp;&nbsp;&nbsp;&nbsp;
-            <input name="address" type="text" placeholder="시 입력"/>&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="검색"/>
-        </form>
-   </div>
-   <br><br>
    
-   <!-- 지도 표시되는 부분 -->
-      <!-- 지도 표시되는 부분 -->
-   <div id="map" style="width:1300px;height:400px; margin-left:100px;"></div>
+   <script type="text/javascript">
+		$(function() {
+
+			// 질문유형을 선택한다.
+			chnQnaType('1', '11');
+		});
+
+		function chnQnaType(type, select) {
+
+			$('#schQnaType').empty();
+
+			if (type == '강원') { // 상품관련
+				$('#schQnaType').append("<option value='강릉시' >강릉시</option>'");
+				$('#schQnaType').append("<option value='고성군' >고성군</option>'");
+				$('#schQnaType').append("<option value='동해시' >동해시</option>'");
+				$('#schQnaType').append("<option value='삼척시' >삼척시</option>'");
+				$('#schQnaType').append("<option value='속초시' >속초시</option>'");
+				$('#schQnaType').append("<option value='양구군' >양구군</option>'");
+				$('#schQnaType').append("<option value='양양군' >양양군</option>'");
+				$('#schQnaType').append("<option value='연천군' >연천군</option>'");
+				$('#schQnaType').append("<option value='영월군' >영월군</option>'");
+				$('#schQnaType').append("<option value='원주시' >원주시</option>'");
+				$('#schQnaType').append("<option value='인제군' >인제군</option>'");
+				$('#schQnaType').append("<option value='정선군' >정선군</option>'");
+				$('#schQnaType').append("<option value='춘천시' >춘천시</option>'");
+				$('#schQnaType').append("<option value='철원군' >철원군</option>'");
+				$('#schQnaType').append("<option value='태백시' >태백시</option>'");
+				$('#schQnaType').append("<option value='평창군' >평창군</option>'");
+				$('#schQnaType').append("<option value='화천군' >화천군</option>'");
+				$('#schQnaType').append("<option value='홍천군' >홍천군</option>'");
+			} else if (type == '경기') { // 일반관련
+				$('#schQnaType').append("<option value='고양시' >고양시</option>'");
+				$('#schQnaType').append("<option value='일산' >일산</option>'");
+				$('#schQnaType').append("<option value='인천' >인천</option>'");
+				$('#schQnaType').append("<option value='수원' >수원</option>'");
+				$('#schQnaType').append("<option value='용인' >용인</option>'");
+				$('#schQnaType').append("<option value='과천' >과천</option>'");
+				$('#schQnaType').append("<option value='의정부' >의정부</option>'");
+			} else if (type == '서울') { // 주문관련
+				$('#schQnaType').append("<option value='종로구' >종로구</option>'");
+				$('#schQnaType').append("<option value='동대문구' >동대문구</option>'");
+				$('#schQnaType').append("<option value='성북구' >성북구</option>'");
+				$('#schQnaType').append("<option value='은평구' >은평구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='용산구' >용산구</option>'");
+				$('#schQnaType').append("<option value='송파구' >송파구</option>'");
+				$('#schQnaType').append("<option value='강남구' >강남구</option>'");
+			}
+			document.getElementById("schQnaType").style.display = "";
+
+			if ($.trim(select) != "") {
+				$('#select1').val(type);
+				$('#schQnaType').val(select);
+			}
+		}
+	</script>
+	
+   <div style="margin-left: 15.5%; width:1400px; margin-top:100px;">
+		<form style="margin-left: 100px;" id="form" method="post">
+			<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">맛집 추천</h2>
+			<div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
+			<br> <select style="width: 120px; font-family: 'Sunflower', sans-serif;" class="form-control col-sm-2" name="sido" id="select1"
+				onChange="chnQnaType(this.value)">
+				<option value="강원">강원</option>
+				<option value="경기">경기</option>
+				<option value="서울">서울</option>
+			</select> <select class="form-control col-sm-2" id="schQnaType" name="sigun"
+				style="width: 120px; font-family: 'Sunflower', sans-serif; display: none;">
+			</select> <input name="address" style="width:200px; font-family: 'Sunflower', sans-serif;" class="form-control col-sm-1" type="text" placeholder="시 입력" />&nbsp;&nbsp;&nbsp;&nbsp;
+			<input class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif;" type="button" value="검색" id="search" onclick="searchMap()">
+		</form>
+		<br>
+		<!-- 지도 표시되는 부분 -->
+		<div id="map" style="width: 1000px; height: 500px; margin-left: 100px;"></div>
+	</div>
    <br>
-   <div id="Info" style="text-align: center;">
-   
-   </div>
-   <span id="reviewAvg" style="font-size: 1.8em;"></span>
-   <div id="review">
-   </div>
-   <div id="takeout">
-   		
-   </div>
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af"></script>
    <script>
    var fList = new Array();
@@ -83,7 +150,7 @@
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
        mapOption = { 
            center: new kakao.maps.LatLng(37.7224013131875, 127.590475961846), // 지도의 중심좌표
-           level: 11 // 지도의 확대 레벨
+           level: 6 // 지도의 확대 레벨
        };
    
    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -133,21 +200,32 @@
    }
    function makeOverListener(map, marker, infowindow, positions) {
 	    return function() {
+	    	$.ajaxSetup({ async:false });
 	    	$.ajax({
 	    		url : "foodZoneSelect.do",
 	    		data : {"foodZoneName" : positions.title},
 	    		type : "GET",
 	    		success : function(result){
-	    			$('#Info').html('');
-	    			$('#Info').append("<p>"+result.foodZoneKey+"</p><br>");
-	    			$('#Info').append("<p>"+result.foodZoneName+"</p><br>");
-	    			$('#Info').append("<p>"+result.foodZoneAddress+"</p><br>");
-	    			$('#Info').append("<p>"+result.foodZonePhone+"</p><br>");
-	    			$('#Info').append("<img src='../../../resources/images/"+result.foodZoneImage+"'><br>");
-	    			$('#Info').append("<p>"+result.foodZoneEtc+"</p><br>");
-
+	    			$('#fzInfo').html('');
+					$('#image').html('');
+					$('#fzName').html('');
+					$('#fzAddress').html('');
+					$('#scoreAvg').html('');
+					$('#fzEtc').html('');
+					$('#lineDiv1').html('');
+					$('#lineDiv2').html('');
+					$('#lineDiv3').html('');
+					$('#reviewBox').html('');
+					$('#fzInfo').append("<br><br><div id='lineDiv1' style='margin-left:5%;width: 90%;''></div><br><br><div id='image'></div><br><div id='fzName'></div><br><div id='fzAddress' align='center'style='background-color: rgba(99, 82, 63, 0.2); display: inline-block; width: 1200px; height: 150px;font-family: 'Sunflower', sans-serif; font-weight:bold;display: inline-block; width: 100%; height: 150px;'align='center'></div><br><div id='lineDiv2' style='margin-left: 100px; width: 1200px;'></div><br><div id='div_1' style='width: 1200px; height: 500px; margin-left: 100px;'><!-- 맛집&명소 --><div id='fzEtc' style='width: 600px; float: left; display: block;'></div><div id='div_2' style='width: 600px; float: left; display: block;'><div id='scoreAvg'></div><div id='lineDiv3' style='width: 98%; display: inline-block;'></div><div id='reviewBox' style='width: 100%; height: 400px; align: center;'></div></div></div>");
+					$('#image').append("<img align='center' style='width: 1100px; height:600px;' src='../../../resources/foodzoneImage/"+result.foodZoneImage+"'>");
+					$('#fzName').append("<h1 style='font-family: 'Sunflower', sans-serif; font-weight:bold;' class='h1' align='center'>"+result.foodZoneName+"</h1>");
+					$('#fzAddress').append("<h3 class='h3'>"+result.foodZoneAddress+"</h3><br><h4 class='h4'>"+result.foodZonePhone+"</h4><br><br>");
+					$('#fzEtc').append("<h3 class='h3' style='width:200px; margin-left:100px;'>기타사항</h3><div style='width: 98%; display: inline-block; border-bottom: 2px solid lightgray;'></div><br><br><div id='pImage' align='left' style=' width:100%; height:150px;'>"+result.foodZoneEtc+"</div><div id='takeout' align='left' style=' width:100%; height:150px;'></div>");
+					$('#scoreAvg').append("<h3 class='h3' style='width: 250px; float: left;'>리뷰</h3><h3 id='avg' class='h3' style='width:350px; float:left;' align='left'></h3>");
+					$('#lineDiv1').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+					$('#lineDiv2').append("<div style='border-bottom: 2px solid lightgray;'></div>");
+					$('#lineDiv3').append("<div style='border-bottom: 2px solid lightgray;'></div>");	    			
 	    		}
-	    		
 	    	});
 	    	
 	    	$.ajax({
@@ -156,32 +234,32 @@
 	    		type : "GET",
 	    		success : function(result){
 	    			if(result == 0){
-	    				$("#reviewAvg").html('');
-	    				$("#reviewAvg").append("<p>아직 리뷰 평점이 존재하지 않습니다..</p>");
+	    				$("#avg").html('');
+	    				$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars'><span class='star-rating'><span style ='width:0%;'></span></span></div>");
 	    			}else{
-	    				$("#reviewAvg").html('');
+	    				$("#avg").html('');
 	    				if(result > 0 && result < 0.5){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:0%;'></span></span></div></div>");	
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:0%;'></span></span></div>");	
 	    				} else if (result >= 0.5 && result < 1.0){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:10%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:10%;'></span></span></div>");
 	    				} else if (result >= 1.0 && result < 1.5){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:20%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:20%;'></span></span></div>");
 	    				} else if (result >= 1.5 && result < 2.0){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:30%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:30%;'></span></span></div>");
 	    				} else if (result >= 2.0 && result < 2.5){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:40%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:40%;'></span></span></div>");
 	    				} else if (result >= 2.5 && result < 3.0){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:50%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:50%;'></span></span></div>");
 	    				} else if (result >= 3.0 && result < 3.5){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:60%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:60%;'></span></span></div>");
 	    				} else if (result >= 3.5 && result < 4.0){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:70%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:70%;'></span></span></div>");
 	    				} else if (result >= 4.0 && result < 4.5){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:80%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:80%;'></span></span></div>");
 	    				} else if (result >= 4.5 && result < 5.0){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:90%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:90%;'></span></span></div>");
 	    				} else if(result==5.0){
-	    					$("#reviewAvg").append("<div id='star'><div id='starcom'><span>"+positions.title+"의 평균 별점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:100%;'></span></span></div></div>");
+	    					$("#avg").append("<div id='star'><span>평점 : "+result+"</span></div><div id='stars>'<span class='star-rating'><span style ='width:100%;'></span></span></div>");
 	    				}
 	    			}
 	    		}
@@ -191,17 +269,16 @@
 	    		url : "foodZoneReviewList.do",
 	    		data : {"foodZoneName" : positions.title},
 	    		type : "GET",
-	    		success : function(result){
-	    			if(result.frList.length ==0){
-	    				$('#review').html('');
-	    				$('#review').append("<p>아직 작성된 리뷰가 없습니다..</p>")
-	    			}else{
-	    				$('#review').html('');	
-	    				for(var i=0; i<result.frList.length; i++){
-	    					console.log(result.frList[i].frKey+" , "+result.frList[i].foodZoneKey);
-	    					$('#review').append("<p>"+result.frList[i].memberId+" : <a href='foodZoneReviewDetail.do?frKey="+result.frList[i].frKey+"&foodZoneKey="+result.frList[i].foodZoneKey+"'>"+result.frList[i].frContent+"</p><br>");
-		    			}
-	    			}
+	    		success : function(response){
+	    			if(response.frList.length != 0){
+		            	$('#reviewBox').html('');
+		            	for(var i=0; i<response.frList.length; i++){
+	                		$('#reviewBox').append("<div style='margin-left: 5%; margin-top:25px; width:95%; height:100px;' align='left'><img src='../../resources/images/co.png'>&nbsp;&nbsp;&nbsp;&nbsp;<span>["+response.frList[i].memberId+"] : </span><a href='foodZoneReviewDetail.do?foodZoneKey="+response.frList[i].foodZoneKey+"&frKey="+response.frList[i].frKey+"'>"+response.frList[i].frTitle+"</>&nbsp;&nbsp;<span> ("+response.frList[i].frRegDate+")</span><div>");
+	                	 };
+	            	}else{
+	            		 $('#reviewBox').html('');
+	            		 $('#reviewBox').append("<br><span>작성된 리뷰가 없습니다.</span>");
+	            	};
 	    		}
 	    	});
 	    	
@@ -236,129 +313,12 @@
 		/* location.href="takeOut.do?foodZoneName="+foodZoneName; */
 	}
 	
-	/* function getFoodzoneReviews() {
-		$.ajax({
-    		url : "foodZoneReviewList.do",
-    		data : {"foodZoneName" : positions.title},
-    		type : "GET",
-    		success : function(result){
-    			if(result.frList.length ==0){
-    				$('#review').html('');
-    				$('#review').append("<p>아직 작성된 리뷰가 없습니다..</p>")
-    			}else{
-    				$('#review').html('');	
-    				for(var i=0; i<result.frList.length; i++){
-    					
-    					$('#review').append("<p>"+result.frList[i].memberId+" : "+result.frList[i].frContent+"</p><br>");
-	    			}
-    			}
-    			if(result.pi.currentPage<=1){
-    				$('#paging').html('');
-    				$('#paging').append("<p>[이전]</p>")
-    			}
-    			
-    			if(result.pi.currentPage>1){
-    				$('#paging').html('');
-    				$('#paging').append("<a href=foodZoneReviewList.do?page="+(result.pi.currentPage-1)+"&foodZoneName="+(positions.title)+">[이전]</a>")
-    			} 
-    			
-    			for(var i=result.pi.startPage; i<=result.pi.endPage;i++){
-    				console.log(result.pi.startPage);
-    				console.log(result.pi.endPage);
-    				if(i==result.pi.currentPage){
-    					$('#paging').append("<font color=red size=4>"+i+"</font>")
-    				}else{
-    					$('#paging').append("<a href='foodZoneReviewList.do?page="+i+"&foodZoneName="+positions.title+"'>"+i+"</a>");
-    				}
-    			}
-    			if(result.pi.currentPage>=result.pi.maxPage){
-    				$('#paging').append("<p>다음</p>")
-    			}
-    			 */
-	             <%--
-	             <!-- 페이지  -->
-	             <c:forEach var="p" begin=result.pi.startPage end=pi.endPage>
-	                <c:url var="pagination" value="boardList.kh">
-	                   <c:param name="page" value="${p }"></c:param>
-	                </c:url>
-	                <c:if test="${p eq pi.currentPage }">
-	                	<font color="red" size="4">[${p }]</font>
-	                </c:if>
-	                <c:if test="${p ne pi.currentPage }">
-	                	<a href="${pagination }">${p }</a>&nbsp;
-	                </c:if>
-	                
-	             </c:forEach>
-	             <!-- 다음 -->
-	             <c:if test="${pi.currentPage >= pi.maxPage }">
-	                [다음]&nbsp;
-	             </c:if>
-	             <c:if test="${pi.currentPage < pi.maxPage }">
-	                <c:url var="after" value="boardList.kh">
-	                   <c:param name="page" value="${pi.currentPage + 1 }"></c:param>
-	                </c:url>
-	                boardList.kh?page=${pi.currentPage + 1 }
-	                <a href="${after }">[다음]</a>&nbsp;
-	             </c:if>
-	              --%>
-	              /* if(result.pi.currentPage<=1){
-  				$('#paging').html('');
-  				$('#paging').append("<p>[이전]</p>")
-  			}
-  			
-  			if(result.pi.currentPage>1){
-  				$('#paging').html('');
-  				$('#paging').append("<a href=foodZoneReviewList.do?page="+(result.pi.currentPage-1)+"&foodZoneName="+(positions.title)+">[이전]</a>")
-  			} 
-  			
-  			for(var i=result.pi.startPage; i<=result.pi.endPage;i++){
-  				console.log(result.pi.startPage);
-  				console.log(result.pi.endPage);
-  				if(i==result.pi.currentPage){
-  					$('#paging').append("<font color=red size=4>"+i+"</font>")
-  				}else{
-  					$('#paging').append("<a href='foodZoneReviewList.do?page="+i+"&foodZoneName="+positions.title+"'>"+i+"</a>");
-  					//$('#paging').append("<a onclick='getFoodzoneReviews("+i+","+positions.title+"'></a>");
-  				}
-  			}
-  			if(result.pi.currentPage>=result.pi.maxPage){
-  				$('#paging').append("<p>다음</p>")
-  			} */
-  			
-	             <%--
-	             <!-- 페이지  -->
-	             <c:forEach var="p" begin=result.pi.startPage end=pi.endPage>
-	                <c:url var="pagination" value="boardList.kh">
-	                   <c:param name="page" value="${p }"></c:param>
-	                </c:url>
-	                <c:if test="${p eq pi.currentPage }">
-	                	<font color="red" size="4">[${p }]</font>
-	                </c:if>
-	                <c:if test="${p ne pi.currentPage }">
-	                	<a href="${pagination }">${p }</a>&nbsp;
-	                </c:if>
-	                
-	             </c:forEach>
-	             <!-- 다음 -->
-	             <c:if test="${pi.currentPage >= pi.maxPage }">
-	                [다음]&nbsp;
-	             </c:if>
-	             <c:if test="${pi.currentPage < pi.maxPage }">
-	                <c:url var="after" value="boardList.kh">
-	                   <c:param name="page" value="${pi.currentPage + 1 }"></c:param>
-	                </c:url>
-	                boardList.kh?page=${pi.currentPage + 1 }
-	                <a href="${after }">[다음]</a>&nbsp;
-	             </c:if>
-	             
-    			
-    		}
-    	});
-	} --%>
    </script>
 
-   
-   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="fzInfo" style="margin-left: 10%; width:1400px; text-align: center;" >
+	</div>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>   
 
 </body>
 </html>

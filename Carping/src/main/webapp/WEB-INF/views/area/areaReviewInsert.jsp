@@ -124,7 +124,7 @@
 				<label class="col-md-2 text-center vcenter"
 					style="font-size: 1.5em;">제목</label><input type="text"
 					name="arTitle" class="col-md-8 form-control align-self-center"
-					style="width: 50%;">
+					style="width: 50%;" required>
 
 				<div class="col-md-2" style="margin-top: 10px;">
 					<span class="star-input"> <span class="input"> <input
@@ -154,7 +154,7 @@
 					style="font-size: 1.5em;">내용</label>
 				<textarea name="arContent" class="col-md-6 form-control" cols="5"
 					rows="10"
-					style="margin: 0px; width: 564px; height: 325px; resize: none;"></textarea>
+					style="margin: 0px; width: 564px; height: 325px; resize: none;" required></textarea>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

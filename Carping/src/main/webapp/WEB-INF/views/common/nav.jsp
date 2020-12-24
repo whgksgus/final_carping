@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<c:if test="${!empty sessionScope.loginUser }">
 									<c:if test="${loginUser.admin == 'N' }">
 									<li style="float: left;"><a
-										style="display: block; padding: 1px 5px;" href="#">구매내역</a></li>
+										style="display: block; padding: 1px 5px;" href="myOrderView.do">구매내역</a></li>
 									<li style="float: left;"><a
 									style="display: block; padding: 1px 5px;" href="myReserve.do">포장 예약내역</a></li>
 									<li style="float: left;"><a
