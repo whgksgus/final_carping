@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.carping.spring.place.domain.Place;
 import com.carping.spring.place.domain.PlaceReview;
-import com.carping.spring.place.domain.Search;
+import com.carping.spring.place.domain.SearchMap;
 import com.carping.spring.place.service.PlaceService;
 import com.google.gson.Gson;
 
@@ -41,7 +41,7 @@ public class PlaceController {
 	
 	@RequestMapping(value="psearchsido.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String search(Search search) {
+	public String sidoSearch(SearchMap search) {
 		return search.getSido()+" "+search.getSigun()+" "+search.getAddress(); 
 	}
 	
@@ -57,7 +57,7 @@ public class PlaceController {
 		return "";
 	}
 	
-	public String placeSearch(Search search, Model model) {
+	public String placeSearch(SearchMap search, Model model) {
 		return "";
 	}
 	
@@ -65,6 +65,9 @@ public class PlaceController {
 	@ResponseBody
 	public Place placeInfoSelect(String placeName, Model model) {
 		Place place = pService.selectPlaceInfo(placeName);
+		if(place.getPlaceEtc() == null) {
+			place.setPlaceEtc("기타사항 없음");
+		}
 		return place;
 	}
 	

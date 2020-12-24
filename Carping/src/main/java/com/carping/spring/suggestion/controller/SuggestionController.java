@@ -206,7 +206,7 @@ public class SuggestionController {
 			return "suggestion/sugDetail";
 		}else {
 			model.addAttribute("msg", "답변 삭제에 실패하였습니다.");
-			model.addAttribute("url", "javascript:history.back();");
+			model.addAttribute("url", "selectList.do");
 			return "common/redirect";
 		}
 	}

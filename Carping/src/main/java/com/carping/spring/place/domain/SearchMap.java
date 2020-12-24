@@ -1,12 +1,12 @@
 package com.carping.spring.place.domain;
 
-public class Search {
+public class SearchMap {
 	
 	private String sido;
 	private String sigun;
 	private String address;
 	
-	public Search() {}
+	public SearchMap() {}
 
 	public String getSido() {
 		return sido;

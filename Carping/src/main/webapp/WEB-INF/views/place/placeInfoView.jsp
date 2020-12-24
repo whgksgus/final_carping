@@ -264,7 +264,6 @@
 						$('#placeName').html('');
 						$('#placeAddress').html('');
 						$('#scoreAvg').html('');
-						$('#placeEtc').html('');
 						$('#lineDiv1').html('');
 						$('#lineDiv2').html('');
 						$('#lineDiv3').html('');
@@ -363,28 +362,7 @@
 	</script>
 	
 	<div id="placeInfo" style="margin-left: 10%; width:1400px; text-align: center;" >
-	
 	</div>
-	
-	
-	<%-- <div class="placeInfo display-none">
-	<br>
-	<br>
-	<div style="margin-left: 5%; width:1000px; height:600px; align:center;" src="/resources/images/${place.placeImage }"></div>
-	<br>
-	<h1 class="h1" align="center">${place.placeName }</h1>
-	<br>
-	<div align="center" style="display:inline-block; width:70%; height:150px; margin-left:15%;">
-		<h3 class="h3">${place.placeAddress }</h3>
-	</div>
-	
-	<br>
-	<div style="margin-left : 15%; width: 70%; border-bottom: 2px solid lightgray;"></div>
-	<br>
-	</div> --%>
-	
-	
-	
 	
 	<!--footer-->
 	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
