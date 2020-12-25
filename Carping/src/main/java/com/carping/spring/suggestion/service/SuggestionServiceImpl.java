@@ -58,8 +58,8 @@ public class SuggestionServiceImpl implements SuggestionService {
 	}
 
 	@Override
-	public ArrayList<Suggestion> selectSearList(PageInfo pi, Search search) {
-		return sStore.selectSearList(pi, search);
+	public ArrayList<Suggestion> selectSearchList(PageInfo pi, Search search) {
+		return sStore.selectSearchList(pi, search);
 	}
 
 	@Override

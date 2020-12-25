@@ -16,12 +16,6 @@ public class PlaceStoreLogic implements PlaceStore {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	@Override
-	public ArrayList<Place> searchPlace(Search search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Place selectPlaceInfo(String placeName) {
@@ -35,21 +29,10 @@ public class PlaceStoreLogic implements PlaceStore {
 		return (ArrayList)sqlSession.selectList("PlaceMapper.selectPrList", placeKey);
 	}
 
-	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public double selectPlaceReviewScoreAvg(int placeKey) {
 		return sqlSession.selectOne("PlaceMapper.selectPlaceAvg", placeKey);
-	}
-
-	@Override
-	public int updatePlaceScoreAvg(int placeKey, int scoreAvg) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

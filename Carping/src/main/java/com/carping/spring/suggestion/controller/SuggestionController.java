@@ -81,7 +81,7 @@ public class SuggestionController {
 	
 	// 건의사항 등록 메소드
 	@RequestMapping(value="sugInsert.do", method=RequestMethod.POST)
-	public String insertSug(Suggestion suggestion, Model model, HttpServletRequest request) {
+	public String insertSug(Suggestion suggestion, Model model) {
 		String url = null;
 		int result = sService.insertSug(suggestion);
 		if (result > 0 ) {
@@ -112,7 +112,7 @@ public class SuggestionController {
 	
 	// 건의사항 삭제 메소드
 	@RequestMapping(value="sugDelete.do", method=RequestMethod.GET)
-	public ModelAndView deleteSug(ModelAndView mv, int suggestionKey, Model model) {
+	public ModelAndView deleteSug(ModelAndView mv, int suggestionKey) {
 		int result = sService.deleteSug(suggestionKey);
 		if(result > 0) {
 			mv.setViewName("redirect:selectList.do");
@@ -130,7 +130,7 @@ public class SuggestionController {
 		int listCount = sService.getSugSearchList(search);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		int pageNum = listCount - (currentPage -1) * pi.getListLimit();
-		ArrayList<Suggestion> sugsearch = sService.selectSearList(pi, search);
+		ArrayList<Suggestion> sugsearch = sService.selectSearchList(pi, search);
 		if(!sugsearch.isEmpty()) {
 			model.addAttribute("sList", sugsearch);
 			model.addAttribute("search", search);
@@ -151,7 +151,7 @@ public class SuggestionController {
 
 	// 건의사항 답변 등록
 	@RequestMapping(value="insertAnswer.do", method=RequestMethod.POST)
-	public ModelAndView insertAnswer(ModelAndView mv, Answer answer, Model model, int suggestionKey) {
+	public ModelAndView insertAnswer(ModelAndView mv, Answer answer, int suggestionKey) {
 		int result = sService.insertAnswer(answer);
 		sService.updateOne(suggestionKey);
 		Suggestion sug = sService.selectOne(suggestionKey);
@@ -170,7 +170,7 @@ public class SuggestionController {
 	
 	// 건의사항 답변 수정화면
 	@RequestMapping(value="updateAnswerView.do", method=RequestMethod.GET)
-	public String updateAnswerView(Model model, int suggestionKey) {
+	public String sugUpdateAnswerView(Model model, int suggestionKey) {
 		Answer answer = sService.selectAnswer(suggestionKey);
 		model.addAttribute("answer", answer);
 		return "suggestion/answerUpdate";

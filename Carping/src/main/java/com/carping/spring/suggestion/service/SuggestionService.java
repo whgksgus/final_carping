@@ -16,7 +16,7 @@ public interface SuggestionService {
 	public int insertSug(Suggestion suggestion);
 	public int modifySug(Suggestion suggestion);
 	public int deleteSug(int suggestionKey);
-	public ArrayList<Suggestion> selectSearList(PageInfo pi, Search search);
+	public ArrayList<Suggestion> selectSearchList(PageInfo pi, Search search);
 	public int insertAnswer(Answer answer);
 	public Answer selectAnswer(int suggestionKey);
 	public int updateAnswer(Answer answer);

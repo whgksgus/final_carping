@@ -80,9 +80,9 @@
             	<div class="col-md-4"></div>
             	
             	<!-- 관리자도 아니고 작성자도 아닐때(목록만) -->
-            	<c:if test="${sList.memberId ne loginUser.memberId }">
+            	<c:if test="${sList.memberId ne loginUser.memberId && loginUser.memberId ne 'admin'}">
             	<c:url var="sugList" value="selectList.do"></c:url>
-				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:190px;" onclick="back();">목록으로</button>
+				<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:190px;" onclick="back();">목1록으로</button>
 				<div class="col-md-1"></div>
 				</c:if>
 				
