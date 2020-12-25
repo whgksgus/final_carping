@@ -10,15 +10,11 @@ import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.place.domain.Place;
 
 public interface AreaService {
-	 public ArrayList<Area> searchArea(Search search);
 	 public Area selectAreaInfo(String areaName);
-	 public AreaReview selectAreaReview(int arKey);
 	 public Place selectPlaceInfo(int placeKey);
 	 public FoodZone selectFoodZoneInfo(int FoodZoneKey);
-	 public int getListCount();
 	 public ArrayList<AreaReview> selectAreaReviewList(int areaKey);
 	 public double selectAreaReviewScoreAvg(int areaKey);
-	 public int modifyAreaScoreAvg(int areaKey, double scoreAvg);
 	 public int insertArea(Area area);
 	 public ArrayList<Area> selectAreaList();
 	 public ArrayList<FoodZone> selectFoodZoneList(String areaAddress);
