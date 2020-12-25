@@ -13,19 +13,19 @@
 	<h1 align="center">게시글 수정페이지</h1>
 	<br><br>
 	<form action="noticeUpdate.do" method="post">
-		<input type="hidden" name="bId" value="${notice.nKey }">
+		<input type="hidden" name="nKey" value="${notice.nKey }">
 		<table align="center" border="1" cellspace="0">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" size="50" name="bTitle" value="${notice.nTitle }"></td>
+				<td><input type="text" size="50" name="nTitle" value="${notice.nTitle }"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="bWriter" value="${notice.memberId }" readonly></td>
+				<td><input type="text" name="memberId" value="${notice.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="7" cols="50" name="bContent">${notice.nContent }</textarea></td>
+				<td><textarea rows="8" cols="50" name="nContent">${notice.nContent }</textarea></td>
 			</tr>
 			
 			<tr>

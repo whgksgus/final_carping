@@ -120,7 +120,7 @@
 		}
 	
 	function mkEmptyCart() {
-		if( confirm( "장바구니 전체 삭제를 하시겠습니까?" ) ) {
+		if( confirm( "장바구니 전체를 삭제하시겠습니까?" ) ) {
 			$.ajax({
 				url: "deleteAllCart.do",
 				type: "POST",
@@ -255,12 +255,10 @@
 	<jsp:include page="../common/nav.jsp" />
 	<div id="contents">
 		<form action="#" method="post">
-
 			<legend id="title">장바구니</legend>
-
 			<br>
 			<c:if test="${empty cart}">
-				<p>장바구니가 비어있습니다.</p>
+				<p style="font-size: 22px;">장바구니가 비어있습니다.</p>
 				<br>
 				<br>
 				<!-- <div style="text-align: right;">
