@@ -43,14 +43,12 @@ public class NoticeServiceImpl implements NoticeService  {
 
 	@Override
 	public int updateNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nStore.updateNotice(notice);
 	}
 
 	@Override
 	public int deleteNotice(int nKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nStore.deleteNotice(nKey);
 	}
 
 	@Override

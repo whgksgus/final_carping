@@ -25,8 +25,6 @@ a {
 	line-height: auto;
 	list-style: none;
 	text-align: center;
-	padding: 0;
-	margin: 0;
 	line-height: center;
 }
 
