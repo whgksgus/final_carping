@@ -132,10 +132,14 @@
 </div>
 <div align="center">
 	<div id="btn" align="right">
-			<button class="btn btn-info" onclick="back();">목록으로</button>
-			<button class="btn btn-danger" onclick="pay();">결제하기</button>
+			<button class="btn btn-danger" onclick="back();">목록으로</button>
+			<button class="btn btn-info" onclick="pay();">결제하기</button>
 	</div>
 </div>
+<br>
+<br>
+<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 	<script>
 		
 	 //로딩이 된 후 선택자 선택 후 금액 계산(컬럼당 총 금액 , 전체 금액)

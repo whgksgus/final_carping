@@ -111,7 +111,6 @@
          <div style="background-color: rgba(12, 12, 12, 0.4); width:1400px; height:1250px; margin-top:50px;" align="center">
          	<h1 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h1">차박 장소 추가</h1>
          	<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
-         	<br>
             <form action="insertArea.do" method="post" enctype="multipart/form-data">
                <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">장소이름</h3>
                <input class="form-control" style="width:400px;" type="text" name="areaName">
