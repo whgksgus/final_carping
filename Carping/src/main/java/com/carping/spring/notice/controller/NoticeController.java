@@ -94,21 +94,35 @@ public class NoticeController {
 	}
 	
 
-	// 공지글 삭제
-	public String noticeDelete(int nKey, Model model, HttpServletRequest request) {
-		return "";
+	// 공지사항 삭제
+	@RequestMapping(value="noticeDelete.do", method=RequestMethod.GET)
+	public ModelAndView noticeDelete(int nKey, ModelAndView mv, HttpServletRequest request) {
+		int result = nService.deleteNotice(nKey);
+		if(result>0) {
+			mv.setViewName("redirect:noticeList.do");
+		}else {
+			mv.addObject("msg", "공지사항 삭제 실패").setViewName("redirect:noticeDetail.do");
+		}
+		return mv;
 	}
-	
+
 	// 공지글 수정 폼 연결
 	@RequestMapping(value="noticeUpdateView.do", method=RequestMethod.GET)
 	public String noticeUpdateView(int nKey, Model model) {
 		model.addAttribute("notice", nService.selectNotice(nKey));
 		return "notice/noticeUpdateForm";
 	}
-	
+
 	// 공지글 수정
-	public String noticeUpdate(Notice notcie, Model model, HttpServletRequest request) {
-		return "";
+	@RequestMapping(value="noticeUpdate.do", method=RequestMethod.POST)
+	public String noticeUpdate(Notice notice, Model model, HttpServletRequest request) {
+		int result = nService.updateNotice(notice);
+		if(result > 0) {
+			return "redirect:noticeDetail.do?nKey="+notice.getnKey();
+		}else {
+			model.addAttribute("msg", "공지사항 수정 실패");
+			return "redirect:noticeDetail.do";
+		}
 	}
 
 }

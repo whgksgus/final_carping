@@ -54,6 +54,17 @@
    </select>
    
    
+   	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE SET
+		NOTICE_TITLE = #{nTitle}, NOTICE_CONTENT = #{nContent}
+		WHERE NOTICE_KEY = #{nKey}
+	</update>
+
+
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE
+		WHERE NOTICE_KEY = #{nKey}
+	</delete>
    
    
 </mapper>
