@@ -300,6 +300,9 @@
 	    			}
 	    		}
 	    	});
+	    	
+	    	var offset = $("#fzInfo").offset();
+          	$('html, body').animate({scrollTop : offset.top}, 500);
 	        infowindow.open(map, marker);
 	    };
 	}
