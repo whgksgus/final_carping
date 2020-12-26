@@ -136,7 +136,7 @@
       			alert('가게 사진을 업로드 해주세요.');
       			return false;
       		}
-      		if($("input[name=foodZonePhone]").val()==''){
+      		/* if($("input[name=foodZonePhone]").val()==''){
       			alert('가게 번호를 적어주세요.');
       			return false;
       		}
@@ -144,7 +144,7 @@
       			alert('대표 메뉴를 기타사항에 적어주세요.');
       			console.log($("input[name=foodZoneEtc]").val());
       			return false;
-      		}
+      		} */
       		if($("input[name='takeOutStatus']:checked").val()==undefined){
       			alert('테이크 아웃 여부를 체크해주세요.');
       			return false;
