@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.carping.spring.common.Search;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.foodzone.domain.FoodZoneReview;
+import com.carping.spring.foodzone.domain.Search;
 import com.carping.spring.foodzone.domain.TakeOut;
 import com.carping.spring.foodzone.domain.TakeOutReserve;
 import com.carping.spring.foodzone.service.FoodZoneService;
@@ -47,60 +47,60 @@ import com.google.gson.JsonParser;
 public class FoodZoneController {
 	@Autowired
 	private FoodZoneService fzService;
-	
+
 	@RequestMapping(value="foodZoneView.do", method = RequestMethod.GET)
 	public ModelAndView foodZoneInfoView(ModelAndView mv) {
-		
+
 		ArrayList<FoodZone> fList = fzService.selectFoodZoneList();
 		mv.addObject("fList", fList);
 		//맛집리스트 리뷰 리스트
-		
+
 		mv.setViewName("foodzone/foodZoneInfoView");
 		return mv;
 	}
-	
-	public String foodZoneSearch(Search search, Model model) {
-		return "";
-	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="foodZoneSelect.do", method = RequestMethod.GET)
 	public FoodZone foodZoneInfoSelect(String foodZoneName, Model model) {
 		FoodZone foodZone = fzService.selectFoodZoneInfo(foodZoneName);
+		if(foodZone.getFoodZoneEtc() == null || foodZone.getFoodZonePhone() == null) {
+			foodZone.setFoodZoneEtc("기타사항 없음");
+			foodZone.setFoodZonePhone("전화번호 없음");
+		}
 		return foodZone;
 	}
-	
+
 	@RequestMapping("reviewList.do")
 	public ModelAndView foodReviewList(ModelAndView mv) {
 		mv.setViewName("foodzone/reviewList");
 		return mv;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="foodZoneReviewList.do", method = RequestMethod.GET)
 	public Object foodZoneReviewList(ModelAndView mv,
 			@RequestParam(value="page", required=false) Integer page, String foodZoneName) {
-		 FoodZone foodZone = fzService.selectFoodZoneInfo(foodZoneName);
-		 int foodZoneKey = foodZone.getFoodZoneKey();
-	     ArrayList<FoodZoneReview> fzReviewList = fzService.selectFoodZoneReviewList(foodZoneKey);
-	     HashMap<String, Object> paramMap = new HashMap<String, Object>();
-	     paramMap.put("frList", fzReviewList);
-	     for(int i=0; i<fzReviewList.size();i++) { 
-	    	 System.out.println(fzReviewList.get(i).toString());
-	     }
-	     
-	     return paramMap;
+		FoodZone foodZone = fzService.selectFoodZoneInfo(foodZoneName);
+		int foodZoneKey = foodZone.getFoodZoneKey();
+		ArrayList<FoodZoneReview> fzReviewList = fzService.selectFoodZoneReviewList(foodZoneKey);
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("frList", fzReviewList);
+		for(int i=0; i<fzReviewList.size();i++) { 
+			System.out.println(fzReviewList.get(i).toString());
+		}
+
+		return paramMap;
 	}
-	
+
 	@RequestMapping(value="foodZoneInsertView.do", method = RequestMethod.GET)
 	public String insertFoodZoneView() {
 		return "foodzone/insertFoodZone";
 	}
-	
+
 	@RequestMapping(value="insertFoodZone.do", method = RequestMethod.POST)
 	public void insertFoodZone(FoodZone foodZone, ModelAndView mv, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) throws Exception  {
-		
+
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String fileName = saveFile(uploadFile, request);
 			if(fileName!=null) {
@@ -110,20 +110,16 @@ public class FoodZoneController {
 		int result = 0;
 		result = fzService.insertFoodZone(foodZone);
 		response.setContentType("text/html; charset=utf-8");
-		
+
 		PrintWriter out = response.getWriter();
 		if(result>0) {
 			out.println("<script>alert('등록이 완료되었습니다. 메뉴판을 추가해보세요.'); location.href='insertInfo.do';</script>");
 		}else {
 			out.println("<script>alert('등록이 실패하였습니다.'); location.href='home.do';</script>");
-			
+
 		}
 	}
-	
-	public String foodZoneReviewScoreAvg(int foodZoneKey) {
-		return "";
-	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="foodZoneScoreAvgUpdate.do", method = RequestMethod.GET)
 	public double scoreAvgUpdate(String foodZoneName, Model model) {
@@ -137,13 +133,9 @@ public class FoodZoneController {
 			foodZoneAvg = 0;
 			System.out.println(foodZoneAvg);
 		}
-		
-
 		return foodZoneAvg;
-		
-		
 	}
-	
+
 	@RequestMapping(value="takeOut.do", method = RequestMethod.GET)
 	public ModelAndView takeOut(ModelAndView mv, String foodZoneName) {
 		FoodZone foodZone = fzService.selectFoodZoneInfo(foodZoneName);
@@ -152,20 +144,12 @@ public class FoodZoneController {
 		System.out.println(foodZoneKey);
 		ArrayList<TakeOut> tList = fzService.selectTakeOutMenu(foodZoneKey);
 		System.out.println(tList);
-		
+
 		mv.addObject("foodZone", foodZone).addObject("tList", tList);
 		mv.setViewName("foodzone/foodZoneTakeOut");
 		return mv;
 	}
-	
-	public String registerCategoryForm() {
-		return "";
-	}
-	
-	public String foodZoneRegisterForm() {
-		return "";
-	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="takeOutInsert.do", method = RequestMethod.POST)
 	public int takeOutMenuInsert(@RequestParam String data , HttpServletRequest request) {
@@ -189,11 +173,11 @@ public class FoodZoneController {
 			String totalPrice = object.get("totalPrice").getAsString();
 			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 			String foodZoneKey = object.get("foodZoneKey").getAsString();
-			
+
 			TakeOut takeOut = new TakeOut();
 			takeOut.setFoodZoneKey(Integer.parseInt(foodZoneKey));
 			takeOut.setTakeOutMenu(takeOutMenu);
-			
+
 			TakeOut takeOutFind = fzService.selectTakeOut(takeOut);
 			TakeOutReserve tor = new TakeOutReserve();
 			tor.setTakeOutKey(takeOutFind.getTakeOutKey());
@@ -203,19 +187,16 @@ public class FoodZoneController {
 			tor.setTorTotalPrice(Integer.parseInt(totalPrice));
 			tor.setMemberId(memberId);
 			tor.setFoodZoneKey(Integer.parseInt(foodZoneKey));
-				
 			result = fzService.insertTakeout(tor);
-			
-				
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value="takeOutSuccess.do", method = RequestMethod.GET)
 	public String takeOutSuccess() {
 		return "foodzone/takeOutMenuSuccess";
 	}
-	
+
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\images";
@@ -236,16 +217,12 @@ public class FoodZoneController {
 			return originalFileName;
 		}
 	}
-	
-	public void deleteFile(MultipartFile file, HttpServletRequest request) {
-	}
-	
+
 	@RequestMapping(value="foodZoneMenuInsertView.do", method =  RequestMethod.GET)
 	public String foodZoneMenuInsertView() {
 		return "foodzone/menuInsert";
-				
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="searchFoodZone", method = RequestMethod.GET,  produces = "application/text; charset=utf8")
 	public String searchFoodZone(String foodZoneName) {
@@ -255,7 +232,7 @@ public class FoodZoneController {
 		System.out.println(jsonFoodZone);
 		return jsonFoodZone;
 	}
-	
+
 	@RequestMapping(value="insertMenu.do", method = RequestMethod.POST)
 	public void menuInsert(@RequestParam(name="uploadFile", required = false) MultipartFile[] uploadFile, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
@@ -275,12 +252,12 @@ public class FoodZoneController {
 					takeOut.setTakeOutMenuPhoto(uploadFile[i].getOriginalFilename());
 				}
 			}
-			
+
 			int result = fzService.insertMenu(takeOut);
 			if(result>0) {
 				chk++;
 			}
-			
+
 			if(i==foodZoneKey.length-1) {
 				if(chk==foodZoneKey.length) {
 					out.println("<script>alert('정상적으로 등록되었습니다.'); location.href='foodZoneMenuInsertView.do';</script>");
@@ -290,7 +267,7 @@ public class FoodZoneController {
 			}
 		}
 	}
-	
+
 	public String saveFileMenu(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\images\\menu";
@@ -310,5 +287,11 @@ public class FoodZoneController {
 			}
 			return originalFileName;
 		}
+	}
+	
+	@RequestMapping(value = "fsearchsido.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String search(Search search) {
+		return search.getSido() + " " + search.getSigun() + " " + search.getAddress();
 	}
 }

@@ -117,7 +117,7 @@
 		<div id="map" style="width: 1000px; height: 500px; margin-left: 100px;"></div>
 	</div>
    <br>
-   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af"></script>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdad10ac286b199d49c10545308769af&libraries=services"></script>
    <script>
    var fList = new Array();
    <c:forEach items="${fList}" var="list">
@@ -306,6 +306,35 @@
 	        infowindow.open(map, marker);
 	    };
 	}
+   
+   $('#search').on('click',function() {
+		$.ajax({
+			url : "fsearchsido.do",
+			type : "POST",
+			async : false, // 기본값 true -> 비동기식 / false -> 동기식으로 바뀜
+			data : $("#form").serialize(),
+			success : function(data) {
+				mapData = data;
+			}
+		});
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(mapData, function(result, status) {
+
+			// 정상적으로 검색이 완료됐으면 
+			if (status === kakao.maps.services.Status.OK) {
+				var coords = new kakao.maps.LatLng(result[0].y,
+						result[0].x);
+
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				map.setCenter(coords);
+			}
+		});
+
+	})
+   
 	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 	function makeOutListener(infowindow) {
 	    return function() {
