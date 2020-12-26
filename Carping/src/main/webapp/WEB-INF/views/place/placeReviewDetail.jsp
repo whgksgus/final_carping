@@ -137,7 +137,7 @@
 					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">
 						
 					</label>
-					<table class="col-md-6 table table-bordered" style="width: 560px;">
+					<table class="col-md-6 table" style="width: 560px;">
 						<thead>
 							<tr>
 								<td>

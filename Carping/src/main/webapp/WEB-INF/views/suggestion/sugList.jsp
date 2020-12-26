@@ -40,7 +40,7 @@
 		</tr>
 		<c:if test="${sList eq null || empty sList }">
 			<tr>
-				<td colspan="5" class="col-md-12 text-center">등록된 정보가 없습니다.</td>
+				<td colspan="6" class="col-md-12 text-center">등록된 정보가 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:if test="${sList ne null || !empty sList }">

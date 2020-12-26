@@ -160,7 +160,8 @@
     for(var i=0; i<fList.length;i++){
      x = {
            title : fList[i].foodZoneName,
-           latlng : new kakao.maps.LatLng(fList[i].foodZoneGeoCodeX, fList[i].foodZoneGeoCodeY) 
+           latlng : new kakao.maps.LatLng(fList[i].foodZoneGeoCodeX, fList[i].foodZoneGeoCodeY),
+     	   address : fList[i].foodZoneAddress
      }
      //for문으로 fList에 있는 객체배열 순서대로 title, latlng를 빼와서 x라는 배열에 저장
      arr2.push(x);
@@ -188,16 +189,53 @@
        });
        
     	// 마커에 표시할 인포윈도우를 생성합니다 
-       var infowindow = new kakao.maps.InfoWindow({
-           content: positions[i].title // 인포윈도우에 표시할 내용
-       });
+      	var iwContent = '<div style="padding:5px; width:200px; height:100px;">'+positions[i].title + '<br><br>' + positions[i].address+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
+		// 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+			content : iwContent,
+			removable : iwRemoveable
+		});
+			
+			
        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
        // 이벤트 리스너로는 클로저를 만들어 등록합니다 
        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-       kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow, positions[i]));
-       kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+       /* kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow, positions[i]));
+       kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow)); */
+		kakao.maps.event.addListener(marker, 'click', makeOverListener(map,
+				marker, infowindow, positions[i]));
    }
+   
+   $('#search').on('click',function(){
+	   $.ajax({
+			url : "fsearchsido.do",
+			type : "POST",
+			async : false, // 기본값 true -> 비동기식 / false -> 동기식으로 바뀜
+			data : $("#form").serialize(),
+			success : function(data) {
+				mapData = data;
+			}
+		});
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(mapData, function(result, status) {
+
+			// 정상적으로 검색이 완료됐으면 
+			if (status === kakao.maps.services.Status.OK) {
+				var coords = new kakao.maps.LatLng(result[0].y,
+						result[0].x);
+
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				map.setCenter(coords);
+			}
+		});
+   })
+   
+   
    function makeOverListener(map, marker, infowindow, positions) {
 	    return function() {
 	    	$.ajaxSetup({ async:false });

@@ -25,7 +25,7 @@
 			<br>
 			<form action="foodZoneSearch.do" method="get">
 			<div class="container">
-			    <div class="row2">
+			    <div class="row">
 			        <div class="col-sm-2"></div>
 			        <div class="col-sm-8" style="float: left;">
 			        	<select id="searchCondition" name="searchCondition" class="form-control col-sm-2" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width: 20%; text-align: center;">
@@ -70,6 +70,7 @@
 			        <div class="col-sm-3"> </div>
 			    </div>
 			  </div>
+			  <c:if test="${fList ne null || !empty fList }">
 			  <div class="container">
 				<div class="col-md-12 text-center">
 					<ul class="pagination pagination-sm">
@@ -113,8 +114,7 @@
 					
 				</div>
 			</div>
-			  
-			  <c:if test="${fList ne null || !empty fList }">
+			 </c:if> 
 				<div class="container">
 			        <div class="col-sm-2"></div>
 			        	<div class="col-sm-7">
@@ -124,7 +124,6 @@
 			        	</div>
 			   		<div class="col-sm-3"></div>
 			   </div>
-			   </c:if>
 			  </form>
 			 
 			  
