@@ -17,23 +17,12 @@ import com.carping.spring.foodzone.domain.Tor;
 public class FoodZoneStoreLogic implements FoodZoneStore {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	@Override
-	public ArrayList<FoodZone> searchFoodZone(Search search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public FoodZone selectFoodZoneInfo(String foodZoneName) {
 		FoodZone foodZone = sqlSession.selectOne("FoodZoneMapper.selectOneFoodZone", foodZoneName);
 		return foodZone;
-	}
- 
-	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -44,12 +33,6 @@ public class FoodZoneStoreLogic implements FoodZoneStore {
 	@Override
 	public double selectFoodZoneAvg(int foodZoneKey) {
 		return sqlSession.selectOne("FoodZoneMapper.selectFoodZoneAvg", foodZoneKey);
-	}
-
-	@Override
-	public int updateFoodZoneAvg(int foodZoneKey, double scoreAvg) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

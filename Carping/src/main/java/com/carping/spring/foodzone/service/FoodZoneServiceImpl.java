@@ -18,12 +18,6 @@ import com.carping.spring.foodzone.store.FoodZoneStore;
 public class FoodZoneServiceImpl implements FoodZoneService {
 	@Autowired
 	private FoodZoneStore fzStore;
-	
-	@Override
-	public ArrayList<FoodZone> searchFoodZone(Search search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public FoodZone selectFoodZoneInfo(String foodZoneName) {
@@ -31,11 +25,6 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 		return fzStore.selectFoodZoneInfo(foodZoneName);
 	}
 
-	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public ArrayList<FoodZoneReview> selectFoodZoneReviewList(int foodZoneKey) {
@@ -46,12 +35,6 @@ public class FoodZoneServiceImpl implements FoodZoneService {
 	@Override
 	public double selectFoodZoneAvg(int foodZoneKey) {
 		return fzStore.selectFoodZoneAvg(foodZoneKey);
-	}
-
-	@Override
-	public int modifyFoodZoneAvg(int foodZoneKey, double scoreAvg) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
