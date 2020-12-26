@@ -114,7 +114,8 @@
          </div>
       </div>
       </div>
-      
+       <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
       <script>
       	function sbchk(){
       		/* var fzForm = document.fzForm;
