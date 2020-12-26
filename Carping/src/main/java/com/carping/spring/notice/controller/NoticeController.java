@@ -58,8 +58,8 @@ public class NoticeController {
 			mv.addObject("pi", pi);
 			mv.setViewName("notice/noticeListView");
 		}else {
-			mv.addObject("msg", "공지사항 목록조회 실패");
-			mv.setViewName("redirect:noticeList.do");
+			mv.addObject("nList", nList);
+			mv.setViewName("notice/noticeListView");
 		}
 		return mv;
 	}
