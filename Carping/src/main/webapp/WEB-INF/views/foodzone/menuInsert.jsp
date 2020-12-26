@@ -108,42 +108,54 @@
       	} 
       	   	
       </script>
+   <style>
+   .bannerLogin {
+	background: url(../../../resources/images/fallStreet2.jpg) no-repeat 0px 0px;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	min-height: 950px;
+	position: relative;
+}
+   </style>
    <body>
-   <div class="banner2" id="home" style="color: #FFFFFF;">
+   <div class="bannerLogin" id="home" style="color: #FFFFFF;">
    <jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
       <div class="insertBox" align="center">
-         <div style="background-color: rgba(12, 12, 12, 0.36); width:1400px; height:1200px;" align="center">
-         	<h1 class="h1">메뉴 추가</h1>
+         <div style="background-color: rgba(12, 12, 12, 0.4); width:1400px; height:1200px; margin-top:50px;" align="center">
+         	<h1 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h1">메뉴 추가</h1>
+         	<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
          	<br>
-           
-               <h3 class="h3" align="center">장소이름</h3>
-               <input class="form-control" style="width:400px;" type="text" name="foodZoneName" id="foodZoneName">
-               <button type="button" class="btn btn-info" onclick="nameChk();">검색</button>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">장소이름</h3>
+               <input class="form-control" style="font-family: 'Sunflower', sans-serif; font-weight:bold;margin-left:500px; width:400px;float:left;" type="text" name="foodZoneName" id="foodZoneName">
+               <button type="button" style="margin-left:10px;font-family: 'Sunflower', sans-serif; font-weight:bold; float:left; width:80px; height:35px;" class="loginBtn" onclick="nameChk();">검색</button>
                <!-- <input class="form-control" type="text" id="zonecode"> -->
                
                <br>
                <div style="width: 500px; display:inline-block">
-                  <h3 class="h3">근처 맛집 리스트</h3>
+                  <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">근처 맛집 리스트</h3>
                   <table id="fzListTable" style="text-align: center;">
                      <tr>
-                        <th style="width:150px; text-align: center;">이름</th>
-                        <th style="width:250px; text-align: center;">주소</th>
-                        <th style="width:50px; text-align: center;">선택</th>
+                        <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:150px; text-align: center;">이름</th>
+                        <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:250px; text-align: center;">주소</th>
+                        <th style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:50px; text-align: center;">선택</th>
                      </tr>
                   </table>
                </div>
                <br>
                <br>
-               <button type="button" class="btn btn-info" onclick = "menuInsert();">메뉴 추가하기</button>
+               <button style="font-family: 'Sunflower', sans-serif; font-weight:bold; height:35px;" type="button" class="loginBtn" onclick = "menuInsert();">메뉴 추가하기</button>
                <br><br>
              <form action="insertMenu.do" method="post" enctype="multipart/form-data" name="menuInsertForm" onsubmit="return chk();">
                <table id="menuList" style="text-align: center;" border="">
 	               <thead>
 		               <tr>
-		               		<th>메뉴이름</th>	
-		               		<th>가격</th>	
-		               		<th>메뉴 사진</th>	
-		               		<th>삭제</th>
+		               		<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;">메뉴이름</th>	
+		               		<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;">가격</th>	
+		               		<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;">메뉴 사진</th>	
+		               		<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;">삭제</th>
 		               </tr>
 	               </thead>
 	               <tbody>
@@ -151,11 +163,12 @@
                </table>
                <br>
                <br>
-               <button type="submit" class="loginBtn" onsubmit="return chk();">등록</button>
+               <button style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px; height:35px;" type="submit" class="loginBtn" onsubmit="return chk();">등록</button>
             </form>
          </div>
       </div>
       </div>
-      
+      <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
    </body>
 </html>
