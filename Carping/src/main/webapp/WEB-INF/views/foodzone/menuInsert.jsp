@@ -57,8 +57,7 @@
       			alert('가게 선택해주세요.');
       		}else{
       			var i = $("input[name='key']:checked").val();
-      			$("#menuList tbody").append("<tr style='color : black;'><td><input type='hidden' name='foodZoneKey' value='"+i+"'><input type='text' name='takeOutMenu' id='takeOutMenu'></td><td><input type='text' name='takeOutMenuPrice' id='takeOutMenuPrice'>'"
-          				+"'</td><td><input type='file' name='uploadFile'></td><td><button type='button' onclick='deleteTr(this);'>X</button></td></tr>");
+      			$("#menuList tbody").append("<tr style='color : black;'><td><input type='hidden' name='foodZoneKey' value='"+i+"'><input type='text' name='takeOutMenu' id='takeOutMenu'></td><td><input type='text' name='takeOutMenuPrice' id='takeOutMenuPrice'></td><td><input type='file' name='uploadFile'></td><td><button type='button' class='btn-danger' onclick='deleteTr(this);'>X</button></td></tr>");
       		}
       	}
       	/* $("#menuList tbody>tr>td:last>button[id='dbtn']").on("click", function(){
