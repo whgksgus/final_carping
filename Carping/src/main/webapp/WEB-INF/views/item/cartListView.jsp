@@ -270,9 +270,6 @@
 			<c:if test="${empty cart}">
 
 				<p style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-size: 23px;">장바구니가 비어있습니다.</p>
-
-				<p style="font-size: 22px;">장바구니가 비어있습니다.</p>
-
 				<br>
 				<br>
 				<!-- <div style="text-align: right;">
@@ -329,9 +326,6 @@
 										onmouseout="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(), ${test.CART_KEY})"
 										min="1" max="99" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width: 50px; height: 25px; text-align: right;"
 										id="cartQuantity${test.CART_QUANTITY}" name="cartQuantity">
-										<%-- <input type="button" value="변경" id="modifyQuantity" 
-                		     	onclick="modifyCartQuantity($('#cartQuantity${test.CART_QUANTITY}').val(), ${test.CART_KEY} )" style="text-align: right;" />
- --%>
 									</li>
 									<li class="li"><span style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-size: 18px;"><fmt:formatNumber
 												value="${test.totalPrice}" pattern="#,###" />원</span></li>
