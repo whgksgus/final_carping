@@ -96,7 +96,7 @@
 	<select id="selectArList" resultMap="AreaReviewResultMap">
 		SELECT * FROM AREA_REVIEW
 		WHERE AREA_KEY = #{areaKey} AND 3>=ROWNUM
-		ORDER BY AR_REGDATE DESC
+		ORDER BY AR_KEY DESC
 	</select>
 	
 	<select id="selectAreaAvg" resultType="double">

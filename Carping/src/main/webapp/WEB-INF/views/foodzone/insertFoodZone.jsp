@@ -6,6 +6,12 @@
    <head>
       <meta charset="UTF-8">
       <title>맛집 & 메뉴 추가</title>
+      <!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -53,50 +59,63 @@
          }
          
       </script>
-        
+<style>
+.bannerLogin {
+	background: url(../../../resources/images/fallStreet2.jpg) no-repeat 0px 0px;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	min-height: 950px;
+	position: relative;
+}
+</style>        
    </head>
  
    <body>
-   <div class="banner2" id="home" style="color: #FFFFFF;">
+   <div class="bannerLogin" id="home" style="color: #FFFFFF;">
    <jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
       <div class="insertBox" align="center">
-         <div style="background-color: rgba(12, 12, 12, 0.36); width:1400px; height:1200px;" align="center">
-         	<h1 class="h1">차박 장소 추가</h1>
+         <div style="background-color: rgba(12, 12, 12, 0.4); width:1400px; height:1200px; margin-top:50px;" align="center">
+         	<h1 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h1">맛집 추가</h1>
+         	<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
          	<br>
             <form action="insertFoodZone.do" method="post" enctype="multipart/form-data" name="fzForm">
-               <h3 class="h3" align="center">장소이름</h3>
-               <input class="form-control" style="width:400px;" type="text" name="foodZoneName" id="foodZoneName">
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3" align="center">장소이름</h3>
+               <input class="form-control" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:400px;" type="text" name="foodZoneName" id="foodZoneName">
                <!-- <input class="form-control" type="text" id="zonecode"> -->
                <div style="width: 600px;">
-               <h3 class="h3">주소찾기</h3>
-               <input class="form-control" style="width:400px;" type="text" id="jibunAddress" name="foodZoneAddress" readonly="readonly">
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">주소찾기</h3>
+               <input class="form-control" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:400px;" type="text" id="jibunAddress" name="foodZoneAddress" readonly="readonly">
                <input class="loginBtn" type="button" onclick="daumPostcode()" value="찾기">
                <div id="map" style="width:100%;height:250px;"></div>
                </div>
                <input class="form-control" type="hidden" id="aGeoCode" name="foodZoneGeoCode">
                <br>
-               <h3 class="h3">가게 사진</h3>
-               <input class="btn btn-default" type="file" name="uploadFile">
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">가게 사진</h3>
+               <input class="btn btn-default" type="file" style="width:400px;" name="uploadFile">
                <br>
                <br>
-               <h3 class="h3">전화번호</h3>
-               <input type="text" class="form-control" name="foodZonePhone" style="width:200px;">
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">전화번호</h3>
+               <input type="text" class="form-control" name="foodZonePhone" style="font-family: 'Sunflower', sans-serif; font-weight:bold;width:400px;">
                <br><br>
-               <h3 class="h3">기타사항</h3>
-               <textarea name="foodZoneEtc" id="etc" cols="50"  rows="5" style="resize: none; color:black;"></textarea>
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">기타사항</h3>
+               <textarea name="foodZoneEtc" id="etc" cols="50"  rows="5" style="width:400px;font-family: 'Sunflower', sans-serif; font-weight:bold;resize: none; color:black;"></textarea>
                <br>
                
-               <h3 class="h3">테이크 아웃 여부</h3>
-               <input type="radio" name="takeOutStatus" value="Y">Y 
-               <input type="radio" name="takeOutStatus" value="N">N
+               <h3 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h3">테이크 아웃 여부</h3>
+               <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="radio" name="takeOutStatus" value="Y">Y &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <input style="font-family: 'Sunflower', sans-serif; font-weight:bold;" type="radio" name="takeOutStatus" value="N">N
                <br>
                <br>
-               <button class="loginBtn" type="submit" onclick="return sbchk();">등록</button>
+               <button style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px; height:35px;" class="loginBtn" type="submit" onclick="return sbchk();">등록</button>
             </form>
          </div>
       </div>
       </div>
-      
+       <!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
       <script>
       	function sbchk(){
       		/* var fzForm = document.fzForm;

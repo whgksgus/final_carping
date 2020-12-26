@@ -84,16 +84,12 @@ span.error{color:red}
 	<div class="bannerLogin" id="home" style="color: #FFFFFF;">
 		<jsp:include page="../../../WEB-INF/views/common/nav.jsp"/>
 		<div class="loginBox">
-			<div class="loginBox3">
-			<form action="adminRegister.do" method="post">
-				<table class="enrollTable">
-					<tr>
-						<td colspan="3" align="center">
-							<h2 class="h2" style="font-family: 'Sunflower', sans-serif; font-weight:bold;" align="center">Carping 관리자 등록</h2>
+			<div class="loginBox3" align="center">
+			<h2 class="h2" style="font-family: 'Sunflower', sans-serif; font-weight:bold;" align="center">Carping 관리자 등록</h2>
 							<div style="width: 350px; border-bottom: 2px solid #FFFFFF;"></div>
 							<br>
-						</td>
-					</tr>
+			<form action="adminRegister.do" method="post">
+				<table class="enrollTable">
 					<tr>
 						<td style="font-family: 'Sunflower', sans-serif; font-weight:bold; font-weight:bold;">아이디 </td>
 						<td style="width:320px;">

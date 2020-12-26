@@ -6,7 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디/비밀번호 찾기</title>
-
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -41,18 +46,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <style>
 .full{
-width: 100%;
-  height: 100vh;
-	 display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+background: url(../../../resources/images/background.jpg) no-repeat 0px 0px;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	min-height: 950px;
+	position: relative;
 }
+
+.findBox{
+	width: 500px;
+	height: 400px;
+	background-color: rgba(12, 12, 12, 0.4);
+	
+}
+
 </style>
 </head>
 <body>
@@ -70,11 +80,14 @@ width: 100%;
 <p><a id="modalTag" href="#ex1" rel="modal:open"></a></p>
 
 
-	<div class="full">
-		<div class="container" style="width:500px;">
-			<div class="area_inputs wow fadeIn">
-				<div class="sub_title font-weight-bold text-white" align="center">
+	<div class="full" id="home">
+	<div class="loginBox">
+			<div class="findBox">
+		<div class="container" style="width:500px;color: #FFFFFF;">
+			<div class="area_inputs wow fadeIn"> 
+				<div class="sub_title font-weight-bold text-white" style="margin-top: 50px;	margin-left:50px;width: 400px;color: #FFFFFF;" align="center">
 					<h3>아이디/비밀번호 찾기</h3>
+					<br>
 					<br>
 				</div>
 				<div align="center" style="width:50%; float:left;"
@@ -138,6 +151,8 @@ width: 100%;
 				</div>
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 	<script type="text/javascript">
 		//체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
