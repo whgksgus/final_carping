@@ -198,7 +198,7 @@
 	<select id="getReviewListCount" resultType="int">
 		SELECT COUNT(*) FROM FOODZONE
 		<where>
-			<if test="searchCondition.toString() == '장소명'">
+			<if test="searchCondition.toString() == '맛집이름'">
 				FOODZONE_NAME LIKE '%' || #{searchValue} || '%' 
 			</if>
 			<if test="searchCondition.toString() == '주소'">

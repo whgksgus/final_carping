@@ -4,11 +4,11 @@ public class Pagination {
 	
    public static PageInfo getPageInfo(int currentPage, int listCount) {
       PageInfo pi = null;
-      int pageLimit = 5;   // 한 페이지에서 보여줄 네비게이션 수
+      int pageLimit = 10;   // 한 페이지에서 보여줄 네비게이션 수
       int maxPage;      
       int startPage;      
       int endPage;      
-      int listLimit = 7; // 한 페이지에 보여줄 글 개수
+      int listLimit = 10; // 한 페이지에 보여줄 글 개수
       
       maxPage = (int)((double)listCount / listLimit + 0.9);
       
