@@ -11,7 +11,7 @@ public class AreaReview {
 	private Date arRegDate;
 	private int arHits;
 	private String arPhoto;
-	private String memberId;
+	private String memberId; 
 	
 	public AreaReview() {
 		

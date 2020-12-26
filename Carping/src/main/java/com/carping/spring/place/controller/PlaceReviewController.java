@@ -166,7 +166,7 @@ public class PlaceReviewController {
 		@RequestMapping(value="placeReviewUpdateView.do", method=RequestMethod.GET)
 		/*public ModelAndView boardUpdateView(ModelAndView mv, @RequestParam(value="prKey") int prKey,
 				@RequestParam(value="page") Integer page) {*/
-		public ModelAndView boardUpdateView(ModelAndView mv, @RequestParam(value="prKey") int prKey, int placeKey) {
+		public ModelAndView placeReviewUpdateView(ModelAndView mv, @RequestParam(value="prKey") int prKey, int placeKey) {
 			Place place = prService.selectOne(placeKey);
 			PlaceReview preview = prService.selectPlaceReviewDetail(prKey);
 			mv.addObject("preview", preview);
@@ -289,7 +289,7 @@ public class PlaceReviewController {
 	// 댓글 삭제
 	@ResponseBody
 	@RequestMapping(value="prCommentDelete.do", method=RequestMethod.GET)
-	public String placeReviewCommentDelete(int prcKey, Model model, HttpServletRequest request) {
+	public String placeReviewCommentDelete(int prcKey) {
 		int result = prService.deletePlaceReviewComment(prcKey);
 		if (result > 0) {
 			return "success";

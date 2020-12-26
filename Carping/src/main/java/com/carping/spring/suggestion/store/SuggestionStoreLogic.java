@@ -63,7 +63,7 @@ public class SuggestionStoreLogic implements SuggestionStore {
 	}
 
 	@Override
-	public ArrayList<Suggestion> selectSearList(PageInfo pi, Search search) {
+	public ArrayList<Suggestion> selectSearchList(PageInfo pi, Search search) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getListLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getListLimit());
 		return (ArrayList)sqlSession.selectList("Suggestion.searchSugList", search, rowBounds);

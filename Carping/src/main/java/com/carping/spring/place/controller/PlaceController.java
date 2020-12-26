@@ -50,17 +50,6 @@ public class PlaceController {
 		return "place/placeInsertView";
 	}
 	
-	public String registerCategoryForm() {
-		return "";
-	}
-	public String placeRegisterForm() {
-		return "";
-	}
-	
-	public String placeSearch(SearchMap search, Model model) {
-		return "";
-	}
-	
 	@RequestMapping(value="selectPlaceInfo.do", method=RequestMethod.GET)
 	@ResponseBody
 	public Place placeInfoSelect(String placeName, Model model) {
@@ -77,12 +66,7 @@ public class PlaceController {
 		ArrayList<PlaceReview> prList = pService.selectPlaceReviewlist(placeKey);
 		Gson gson = new Gson();
 		String jsonPlaceReview = gson.toJson(prList);
-//		System.out.println(jsonPlaceReview);
 		return jsonPlaceReview;
-	}
-	
-	public String placeReviewScoreAvg(int placeKey, Model model) {
-		return "";
 	}
 	
 	@ResponseBody
@@ -148,7 +132,4 @@ public class PlaceController {
 		return renameFilename;
 	}
 	
-	public void deleteFile(String areaImage, HttpServletRequest request) {
-		
-	}
 }

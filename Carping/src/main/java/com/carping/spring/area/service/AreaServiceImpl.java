@@ -20,20 +20,8 @@ public class AreaServiceImpl implements AreaService {
 	private AreaStore aStore;
 	
 	@Override
-	public ArrayList<Area> searchArea(Search search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Area selectAreaInfo(String areaName) {
 		return aStore.selectAreaInfo(areaName);
-	}
-
-	@Override
-	public AreaReview selectAreaReview(int arKey) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -47,12 +35,6 @@ public class AreaServiceImpl implements AreaService {
 	}
 
 	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public ArrayList<AreaReview> selectAreaReviewList(int areaKey) {
 		return aStore.selectAreaReviewList(areaKey);
 	}
@@ -60,12 +42,6 @@ public class AreaServiceImpl implements AreaService {
 	@Override
 	public double selectAreaReviewScoreAvg(int areaKey) {
 		return aStore.selectAreaReviewScoreAvg(areaKey);
-	}
-
-	@Override
-	public int modifyAreaScoreAvg(int areaKey, double scoreAvg) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

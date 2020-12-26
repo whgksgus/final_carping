@@ -44,28 +44,23 @@ public class AreaController {
 		return "area/areaInsertView";
 	}
 
-	public String areaSearch(Search search, Model model) {
-		return "";
-	}
-
 	@RequestMapping(value = "selectAreaInfo.do", method = RequestMethod.GET)
 	@ResponseBody
 	public Area areaInfoSelect(String areaName, Model model) {
 		Area area = aService.selectAreaInfo(areaName);
+		if(area.getAreaEtc() == null) {
+			area.setAreaEtc("기타사항 없음");
+		}
 		return area;
 	}
 
-	public String areaReviewSelect(int arKey, Model model) {
-		return "";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="selectP.do", method=RequestMethod.POST)
 	public Place placeInfoSelect(int placeKey) {
 		Place pl = aService.selectPlaceInfo(placeKey);
 		return pl;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="selectFz.do", method=RequestMethod.POST)
 	public FoodZone foodZoneInfoSelect(int foodZoneKey) {
@@ -83,9 +78,6 @@ public class AreaController {
 		return jsonAreaReview;
 	}
 
-	public String areaReviewScoreAvg(int areaKey, Model model) {
-		return "";
-	}
 
 	@ResponseBody
 	@RequestMapping(value="areaScoreAvgUpdate.do", method = RequestMethod.GET)
@@ -101,11 +93,6 @@ public class AreaController {
 		}
 		return areaAvg;
 	}
-
-	public String registerCategoryForm() {
-		return "";
-	}
-
 
 	@ResponseBody
 	@RequestMapping(value = "selectFzList.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -136,53 +123,50 @@ public class AreaController {
 			if (renameFilename != null) {
 				area.setAreaImage(renameFilename);
 			}
+		}
+		// 데이터를 디비에 저장하는 작업
+		int result = 0;
+		String path = null;
+		result = aService.insertArea(area);
+		if (result > 0) {
+			path = "area/areaInsertView";
+		} else {
+			model.addAttribute("msg", "장소 등록 실패");
+			path = "common/erroPage";
+		}
+		return path;
 	}
-	// 데이터를 디비에 저장하는 작업
-	int result = 0;
-	String path = null;
-	result = aService.insertArea(area);
-	if (result > 0) {
-		path = "area/areaInsertView";
-	} else {
-		model.addAttribute("msg", "장소 등록 실패");
-		path = "common/erroPage";
-	}
-	return path;
-}
 
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 
-	String root = request.getSession().getServletContext().getRealPath("resources");
-	String savePath = root + "\\areaImage";
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\areaImage";
 
-	File folder = new File(savePath);
-	if (!folder.exists()) {
-		folder.mkdir();
+		File folder = new File(savePath);
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+		// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
+		// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
+		// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMddHmmss");
+		String originalFilename = file.getOriginalFilename();
+		String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
+				+ originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+		String filePath = folder + "\\" + renameFilename;
+
+		try {
+			file.transferTo(new File(filePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return renameFilename;
 	}
-	// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
-	// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
-	// 파일명을 rename하는 과정이 필요함. rename할땐 "년월일시분초.확장자"로 변경 필요
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMddHmmss");
-	String originalFilename = file.getOriginalFilename();
-	String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
-			+ originalFilename.substring(originalFilename.lastIndexOf(".")+1);
-	String filePath = folder + "\\" + renameFilename;
 
-	try {
-		file.transferTo(new File(filePath));
-	} catch (Exception e) {
-		e.printStackTrace();
+
+	@RequestMapping(value = "asearchsido.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String search(SearchMap searchMap) {
+		return searchMap.getSido() + " " + searchMap.getSigun() + " " + searchMap.getAddress();
 	}
-	return renameFilename;
-}
-
-public void deleteFile(String areaImage, HttpServletRequest request) {
-
-}
-
-@RequestMapping(value = "asearchsido.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-@ResponseBody
-public String search(SearchMap searchMap) {
-	return searchMap.getSido() + " " + searchMap.getSigun() + " " + searchMap.getAddress();
-}
 }

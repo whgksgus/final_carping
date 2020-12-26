@@ -20,21 +20,9 @@ public class AreaStoreLogic implements AreaStore {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Area> searchArea(Search search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Area selectAreaInfo(String areaName) {
 		Area area = sqlSession.selectOne("AreaMapper.selectArea", areaName);
 		return area;
-	}
-
-	@Override
-	public AreaReview selectAreaReview(int arKey) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -49,12 +37,6 @@ public class AreaStoreLogic implements AreaStore {
 	}
 
 	@Override
-	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	} 
-
-	@Override
 	public ArrayList<AreaReview> selectAreaReviewList(int areaKey) {
 		return (ArrayList)sqlSession.selectList("AreaMapper.selectArList", areaKey);
 	}
@@ -64,11 +46,6 @@ public class AreaStoreLogic implements AreaStore {
 		return sqlSession.selectOne("AreaMapper.selectAreaAvg", areaKey);
 	}
 
-	@Override
-	public int updateAreaScoreAvg(int areaKey, int scoreAvg) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int insertArea(Area area) {

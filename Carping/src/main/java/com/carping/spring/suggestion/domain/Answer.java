@@ -1,4 +1,4 @@
-package com.carping.spring.suggestion.domain;
+ package com.carping.spring.suggestion.domain;
 
 import java.sql.Date;
 
