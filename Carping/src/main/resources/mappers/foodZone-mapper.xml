@@ -125,7 +125,7 @@
 	</insert>
 	
 	<insert id="insertFoodZone">
-		INSERT INTO FOOD_REVIEW VALUES(TEST_FRKEY.NEXTVAL,#{foodZoneKey}, #{frScore}, #{frTitle}, #{frContent}, SYSDATE, #{frHits}, #{frPhoto,jdbcType=VARCHAR}, #{memberId})
+		INSERT INTO FOOD_REVIEW VALUES(SEQ_FRKEY.NEXTVAL,#{foodZoneKey}, #{frScore}, #{frTitle}, #{frContent}, SYSDATE, #{frHits}, #{frPhoto,jdbcType=VARCHAR}, #{memberId})
 	</insert>
 	
 	<delete id="deleteFoodZoneReview">
