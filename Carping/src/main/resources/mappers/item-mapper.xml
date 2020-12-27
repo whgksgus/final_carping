@@ -23,6 +23,11 @@
       WHERE ITEM_CATEGORY = 'TENT'
    </select>
    
+   <select id="getSearchCount" resultType="int">
+   	 SELECT COUNT(*) FROM ITEM WHERE ITEM_NAME LIKE '%' || #{searchValue} || '%' 
+   </select>
+
+   
    <select id="checkItemKey" resultType="int">
 		SELECT COUNT(*) 
 		FROM CART 

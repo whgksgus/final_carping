@@ -108,7 +108,7 @@ public class ItemController {
    @RequestMapping( value="searchTent.do", method=RequestMethod.GET )
    public String searchTent(Search search, Model model, Integer page) {
 	   int currentPage = (page != null) ? page : 1;
-	   int listCount = iService.getListCount();
+	   int listCount = iService.getSearchCount(search);
 	   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 	   ArrayList<Item> searchList = iService.searchTentList(search, pi);
 		if(!searchList.isEmpty()) {
@@ -196,7 +196,7 @@ public class ItemController {
    @RequestMapping( value="searchCook.do", method=RequestMethod.GET )
    public String searchCook(Search search, Model model, Integer page){
 	   int currentPage = (page != null) ? page : 1;
-	   int listCount = iService.getListCount();
+	   int listCount = iService.getSearchCount(search);
 	   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 	   ArrayList<Item> searchList = iService.searchCookList(search, pi);
 		if(!searchList.isEmpty()) {
@@ -283,7 +283,7 @@ public class ItemController {
    @RequestMapping( value="searchSleep.do", method=RequestMethod.GET )
    public String searchSleep(Search search, Model model, Integer page) {
 	   int currentPage = (page != null) ? page : 1;
-	   int listCount = iService.getListCount();
+	   int listCount = iService.getSearchCount(search);
 	   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 	   ArrayList<Item> searchList = iService.searchSleepList(search, pi);
 		if(!searchList.isEmpty()) {
@@ -369,7 +369,7 @@ public class ItemController {
    @RequestMapping( value="searchEtc.do", method=RequestMethod.GET )
    public String searchEtc(Search search, Model model, Integer page) {
 	   int currentPage = (page != null) ? page : 1;
-	   int listCount = iService.getListCount();
+	   int listCount = iService.getSearchCount(search);
 	   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 	   ArrayList<Item> searchList = iService.searchEtcList(search, pi);
 		if(!searchList.isEmpty()) {
