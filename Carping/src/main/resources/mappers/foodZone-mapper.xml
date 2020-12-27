@@ -188,7 +188,7 @@
 	</insert>
 	
 	<select id="searchMenuFoodZoneList" resultMap="FoodZoneResultMap">
-		SELECT * FROM FOODZONE WHERE FOODZONE_NAME=#{foodZoneName} AND TAKEOUT_STATUS = 'Y'
+		SELECT * FROM FOODZONE WHERE FOODZONE_NAME LIKE '%' || #{foodZoneName} || '%' AND TAKEOUT_STATUS = 'Y'
 	</select>
 	
 	<insert id="insertMenu">

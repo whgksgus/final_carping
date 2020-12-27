@@ -217,7 +217,7 @@
 	    		type : "post",
 	    		success: function(result){
 	    			if(result==1){
-	    				location.href="takeOutSuccess.do";
+	    				location.href="home.do";
 	    			}else{
 	    				location.href="error.do";
 	    			}
