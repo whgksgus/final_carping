@@ -22,6 +22,11 @@ public class ItemServiceImpl implements ItemService {
 	public int getListCount() {
 		return iStore.getListCount();
 	}
+	
+	@Override
+	public int getSearchCount(Search search) {
+		return iStore.getSearchCount(search);
+	}
 
 	@Override
 	public ArrayList<Item> selectTentList(PageInfo pi) {

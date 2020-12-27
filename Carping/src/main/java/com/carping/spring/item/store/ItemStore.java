@@ -10,6 +10,7 @@ import com.carping.spring.item.domain.Search;
 
 public interface ItemStore {
 	public int getListCount();
+	public int getSearchCount(Search search);
 	public ArrayList<Item> selectTentList(PageInfo pi);
 	public ArrayList<Item> selectTentNew(PageInfo pi);
 	public ArrayList<Item> selectTentLow(PageInfo pi);
