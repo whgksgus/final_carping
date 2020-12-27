@@ -32,7 +32,7 @@
       					 	$("#fzListTable").html('');
       						$("#fzListTable").append("<tr><th style='width:20%; text-align: center;'>이름</th><th style='width:600px; text-align: center;'>주소</th><th style='width:50px; text-align: center;'>선택</th></tr>");
       						for(var i=0; i<result.length; i++){
-      							 $('#fzListTable').append("<tr><td>"+result[i]['foodZoneName']+"</td><td>"+result[i]['foodZoneAddress']+"</td><td><input type='radio' name='key' value='"+result[i]['foodZoneKey']+"'></td></tr>");
+      							 $('#fzListTable').append("<tr><td>"+result[i]['foodZoneName']+"</td><td>"+result[i]['foodZoneAddress']+"</td><td><input type='radio' name='key' onclick='change();' value='"+result[i]['foodZoneKey']+"'></td></tr>");
       						} 
 
       					}else{
@@ -104,7 +104,11 @@
 	      			return false;
 	      		}
       		return true; 
-      	} 
+      	}
+      	
+      	function change(){
+      		$("#mListBody tr").remove()
+      	}
       	   	
       </script>
    <style>
@@ -148,7 +152,7 @@
                <button style="font-family: 'Sunflower', sans-serif; font-weight:bold; height:35px;" type="button" class="loginBtn" onclick = "menuInsert();">메뉴 추가하기</button>
                <br><br>
              <form action="insertMenu.do" method="post" enctype="multipart/form-data" name="menuInsertForm" onsubmit="return chk();">
-               <table id="menuList" style="text-align: center;" border="">
+               <table id="menuList" style="text-align: center;" border="" id="ml">
 	               <thead>
 		               <tr>
 		               		<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;">메뉴이름</th>	
@@ -157,7 +161,9 @@
 		               		<th style="font-family: 'Sunflower', sans-serif; font-weight:bold;">삭제</th>
 		               </tr>
 	               </thead>
-	               <tbody>
+	               <tbody id="mListBody">
+	               <%-- --%>
+	               
 	               </tbody>
                </table>
                <br>

@@ -199,7 +199,7 @@ public class FoodZoneController {
 
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\images";
+		String savePath = root + "\\foodZoneImage";
 		File folder = new File(savePath);
 		if(!folder.exists()) {
 			folder.mkdir();
