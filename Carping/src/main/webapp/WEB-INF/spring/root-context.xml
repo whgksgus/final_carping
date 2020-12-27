@@ -39,7 +39,7 @@
 	      <property name="port" value="587" />
 	      <property name="defaultEncoding" value="utf-8"/>
 	      <property name="username" value="shc3912@gmail.com" />
-	      <property name="password" value="shin@7198@" />
+	      <property name="password" value="shin/7198/" />
 	      <!-- email 요청시는 SMTP -->
 	      <property name="javaMailProperties">
 	         <props>

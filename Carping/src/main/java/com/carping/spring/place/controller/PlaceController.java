@@ -1,6 +1,7 @@
 package com.carping.spring.place.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,8 +85,8 @@ public class PlaceController {
 	}
 	
 	@RequestMapping(value = "insertPlace.do", method = RequestMethod.POST)
-	public String insertPlace(Place place, Model model, HttpServletRequest request, 
-			@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) {
+	public String insertPlace(Place place, Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name="uploadFile", required = false) MultipartFile uploadFile) throws Exception {
 		System.out.println(place.toString());
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFilename = saveFile(uploadFile, request);
@@ -97,8 +97,11 @@ public class PlaceController {
 		int result = 0;
 		String path = null;
 		result = pService.insertPlace(place);
+		response.setContentType("text/html; charset=utf-8");
+		
+		PrintWriter out = response.getWriter();
 		if (result > 0) {
-			path = "place/placeInsertView";
+			out.println("<script>alert('등록이 완료되었습니다.'); location.href='placeInsertView.do';</script>");
 		}else {
 			model.addAttribute("msg", "장소 등록 실패");
 			model.addAttribute("url", "placecView.do");

@@ -180,12 +180,12 @@ document.addEventListener('DOMContentLoaded', function(){
 						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='areaInfoView.do'">
-									<img style="height:400px;" src="resources/images/my1.jpg" alt=" " />
+									<img style="height:400px;" src="resources/areaImage/SeaSideCarping5.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='areaInfoView.do'">
 											<h4>차박 장소 추천</h4>
 											<span class="separator"></span>
-											<p>차박차박~</p>
+											<p>차박 어디로 가고싶으세요~!</p>
 											<span class="separator"></span>
 										</div>
 									</div>
@@ -195,12 +195,12 @@ document.addEventListener('DOMContentLoaded', function(){
 						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div style="height:400px;" class="gal-spin-effect vertical ">
-									<img style="height:400px;" src="resources/images/my2.jpg" alt=" " />
+									<img style="height:400px;" src="resources/images/foodImage.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con">
-											<h4>맛집,명소 추천</h4>
+											<h4>맛집 추천</h4>
 											<span class="separator"></span>
-											<p>맛있엉ㅎ</p>
+											<p>여행과 맛집을 한번에~!</p>
 											<span class="separator"></span>
 										</div>
 									</div>
@@ -210,12 +210,12 @@ document.addEventListener('DOMContentLoaded', function(){
 						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='tentListView.do'">
-									<img style="height:400px;" src="resources/images/my3.jpg" alt=" " />
+									<img style="height:400px;" src="resources/images/campingItem.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='tentListView.do'">
-											<h4>차박물품쇼핑</h4>
+											<h4>차박 쇼핑몰</h4>
 											<span class="separator"></span>
-											<p>질러 질러~</p>
+											<p>차박 준비하고 가세요~!</p>
 											<span class="separator"></span>
 										</div>
 									</div>
@@ -228,11 +228,10 @@ document.addEventListener('DOMContentLoaded', function(){
 									<img style="height:400px;" src="resources/images/my4.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='reviewInfo.do'">
-											<h4>후기게시판</h4>
+											<h4>리뷰게시판</h4>
 											<span class="separator"></span>
-											<p>후기쓰자!</p>
-											<span class="sepa
-											rator"></span>
+											<p>리뷰 평가를 남겨주세요~!</p>
+											<span class="separator"></span>
 										</div>
 									</div>
 								</div>
