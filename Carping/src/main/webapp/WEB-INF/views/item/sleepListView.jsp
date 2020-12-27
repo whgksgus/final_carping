@@ -118,7 +118,7 @@ list-style: none;
 		<legend id="title">쇼핑몰
 			<a href="cartListView.do" style="float:right; margin-right:280px;font-size: 28px;">
 				<img id="cart_icon" src="../../../resources/images/gs25.png" style="width: 40px; height:50px; padding-bottom:10px;">
-			</a>
+			장바구니</a>
 		</legend>
 		<div id="item_category">
 			<ul>
