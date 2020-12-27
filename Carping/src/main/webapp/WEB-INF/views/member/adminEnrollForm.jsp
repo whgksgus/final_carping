@@ -141,7 +141,7 @@ span.error{color:red}
 					</tr>
 					<tr>
 						<td colspan="3" align="center">
-							<button style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="btnLogin" onclick="return validate();">가입하기</button>
+							<button style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="btnLogin" onclick="return validate();">등록하기</button>
 							<!-- <input type="submit" value="가입하기"> -->
 							<button style="font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:10px;" class="btnLogin" type="button" onclick="location.href='home.do';">메인으로</button>
 						</td>

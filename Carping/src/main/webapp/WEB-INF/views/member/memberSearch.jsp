@@ -172,7 +172,7 @@ background: url(../../../resources/images/background.jpg) no-repeat 0px 0px;
 			var phone = $('#phone').val();
 			if(memberName != ''){
 				$.post("/findId.do", {"memberName" : memberName,"phone" : phone}, function(response) {
-					if (response == null) {
+					if (response.memberId == null) {
 						$('#titleH1').text(memberName+"님의  아이디는");
 						$('#id_value1').text("존재하지 않습니다.");
 						$('#id_value2').text("입력 정보를 다시 확인해주세요.");

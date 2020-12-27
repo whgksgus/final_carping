@@ -9,6 +9,10 @@
 <!-- 상단 아이콘 -->
 <link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
@@ -19,13 +23,13 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-	<div style="width:100%; height:800px;">
+	<div style="width:100%; height:1000px;">
 	<div style="height: 100px;"></div>
 	<div class="blogs" id="blogs" style="padding: 30px; 30px;">
 		<div class="container">
 		    <h3 class="tittle" style="font-family: 'Poor story', cursive;">자유게시판</h3>
 		    <br>
-		    <p class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s">회원들과 자유롭게 소통을 나눠보세요</p>
+		    <p style="font-family: 'Sunflower', sans-serif; font-weight: bold;" class="wel-text wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".4s">회원들과 자유롭게 소통을 나눠보세요</p>
 		</div>
 		<br>
 		<br>
@@ -34,30 +38,30 @@
 					<div class="col-md-10">
 						<table class="table table-striped">
 							<tr>
-								<th class="col-md-1 text-center">글 번호</th>
-								<th class="col-md-7 text-center">제목</th>
-								<th class="col-md-1 text-center">작성자</th>
-								<th class="col-md-1 text-center">조회수</th>
-								<th class="col-md-2 text-center">작성날짜</th>
+								<th style="font-family: 'Sunflower', sans-serif; font-weight: bold;" class="col-md-1 text-center">글 번호</th>
+								<th style="font-family: 'Sunflower', sans-serif; font-weight: bold;" class="col-md-7 text-center">제목</th>
+								<th style="font-family: 'Sunflower', sans-serif; font-weight: bold;" class="col-md-1 text-center">작성자</th>
+								<th style="font-family: 'Sunflower', sans-serif; font-weight: bold;" class="col-md-1 text-center">조회수</th>
+								<th style="font-family: 'Sunflower', sans-serif; font-weight: bold;" class="col-md-2 text-center">작성날짜</th>
 							</tr>
 							<c:if test="${bList eq null || empty bList}">
 								<tr>
-									<td colspan="5" class="col-md-12 text-center">등록된 글이 없어요~</td>
+									<td style="font-family: 'Sunflower', sans-serif; font-weight: bold;" colspan="5" class="col-md-12 text-center">등록된 글이 없어요~</td>
 								</tr>
 							</c:if>
 							<c:if test="${bList ne null && !empty bList }">
 								<c:forEach items="${bList}" var="bList" varStatus="status">
 									<tr>
-										<td>${pageNum - status.index }</td>
+										<td style="font-family: 'Sunflower', sans-serif; font-weight: bold;">${pageNum - status.index }</td>
 										<td>
 											<c:url var="boardDetail" value="boardDetail.do">
 												<c:param name="boardKey" value="${bList.boardKey}"></c:param>
 											</c:url>
-											<a href="${boardDetail }">${bList.boardTitle}</a>
+											<a style="font-family: 'Sunflower', sans-serif; font-weight: bold;" href="${boardDetail }">${bList.boardTitle}</a>
 										</td>
-										<td>${bList.memberId }</td>
-										<td>${bList.boardCount }</td>
-										<td>${bList.boardEnrollDate}</td>
+										<td style="font-family: 'Sunflower', sans-serif; font-weight: bold;">${bList.memberId }</td>
+										<td style="font-family: 'Sunflower', sans-serif; font-weight: bold;">${bList.boardCount }</td>
+										<td style="font-family: 'Sunflower', sans-serif; font-weight: bold;">${bList.boardEnrollDate}</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -68,7 +72,7 @@
 			<form action="BoardInsertForm.do" method="get">
 				<div class="container" style="margin-left: 210px;">
 					<div class="col-md-10"></div>
-					<div class="col-md-1"><input type="submit" class="btn btn-info" value="글 작성"></div>
+					<div class="col-md-1"><input style="font-family: 'Sunflower', sans-serif; font-weight: bold;" type="submit" class="btn btn-info" value="글 작성"></div>
 					<div class="col-md-1"><%-- <input type="hidden" name="foodZoneKey" value="${foodZoneKey}"> --%></div>
 				</div>
 			</form>

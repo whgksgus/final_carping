@@ -1,10 +1,12 @@
 package com.carping.spring.area.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.carping.spring.area.domain.Area;
 import com.carping.spring.area.domain.AreaReview;
 import com.carping.spring.area.service.AreaService;
-import com.carping.spring.common.Search;
 import com.carping.spring.common.SearchMap;
 import com.carping.spring.foodzone.domain.FoodZone;
 import com.carping.spring.place.domain.Place;
@@ -58,6 +59,9 @@ public class AreaController {
 	@RequestMapping(value="selectP.do", method=RequestMethod.POST)
 	public Place placeInfoSelect(int placeKey) {
 		Place pl = aService.selectPlaceInfo(placeKey);
+		if(pl.getPlaceEtc() == null) {
+			pl.setPlaceEtc("기타사항 없음");
+		}
 		return pl;
 	}
 
@@ -65,6 +69,10 @@ public class AreaController {
 	@RequestMapping(value="selectFz.do", method=RequestMethod.POST)
 	public FoodZone foodZoneInfoSelect(int foodZoneKey) {
 		FoodZone fz = aService.selectFoodZoneInfo(foodZoneKey);
+		if(fz.getFoodZoneEtc() == null || fz.getFoodZonePhone() == null) {
+			fz.setFoodZoneEtc("기타사항 없음");
+			fz.setFoodZonePhone("전화번호 없음");
+		}
 		return fz;
 	}
 
@@ -115,8 +123,8 @@ public class AreaController {
 	}
 
 	@RequestMapping(value = "insertArea.do", method = RequestMethod.POST)
-	public String insertArea(Area area, Model model, HttpServletRequest request,
-			@RequestParam(name = "uploadFile", required = false) MultipartFile uploadFile) {
+	public String insertArea(Area area, Model model, HttpServletRequest request,  HttpServletResponse response,
+			@RequestParam(name = "uploadFile", required = false) MultipartFile uploadFile) throws Exception   {
 		// 파일을 서버에 저장하는 작업
 		if (!uploadFile.getOriginalFilename().equals("")) {
 			String renameFilename = saveFile(uploadFile, request);
@@ -128,8 +136,11 @@ public class AreaController {
 		int result = 0;
 		String path = null;
 		result = aService.insertArea(area);
+		response.setContentType("text/html; charset=utf-8");
+		
+		PrintWriter out = response.getWriter();
 		if (result > 0) {
-			path = "area/areaInsertView";
+			out.println("<script>alert('등록이 완료되었습니다.'); location.href='areaInsertView.do';</script>");
 		} else {
 			model.addAttribute("msg", "장소 등록 실패");
 			path = "common/erroPage";
