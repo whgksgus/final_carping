@@ -123,7 +123,7 @@ list-style: none;
 		<div id="item_category">
 			<ul>
 				<li id="li_category">
-					<span id="category" style="color: #5bcdc5;">
+					<span id="category">
 						<a href="tentListView.do">텐트</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</span>
 				</li>
@@ -139,12 +139,12 @@ list-style: none;
 				</li>
 				<li id="li_category">
 					<span id="category">
-						<a href="etcListView.do">기타용품</a>&nbsp;
+						<a href="etcListView.do" style="color: green; font-weight: bold;">기타용품</a>&nbsp;
 					</span>
 				</li>
 				<li id="searchDiv">
 					<div id="searchArea" style="margin-left:1150px;">
-						<form action="searchTent.do" method="get">	
+						<form action="searchEtc.do" method="get">	
 							<input class="form-control col-sm-2" style="width:250px;" type="text" name="searchValue" value="${search.searchValue }">
 							<input class="btn btn-default col-sm-1" style="width:80px;" type="submit" value="검색">
 						</form>

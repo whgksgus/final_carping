@@ -107,14 +107,14 @@ public class NoticeController {
 		return mv;
 	}
 
-	// 공지글 수정 폼 연결
+	// 공지사항 수정 폼 연결
 	@RequestMapping(value="noticeUpdateView.do", method=RequestMethod.GET)
 	public String noticeUpdateView(int nKey, Model model) {
 		model.addAttribute("notice", nService.selectNotice(nKey));
 		return "notice/noticeUpdateForm";
 	}
 
-	// 공지글 수정
+	// 공지사항 수정
 	@RequestMapping(value="noticeUpdate.do", method=RequestMethod.POST)
 	public String noticeUpdate(Notice notice, Model model, HttpServletRequest request) {
 		int result = nService.updateNotice(notice);

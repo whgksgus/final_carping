@@ -123,8 +123,8 @@ list-style: none;
 		<div id="item_category">
 			<ul>
 				<li id="li_category">
-					<span id="category" style="color: #5bcdc5;">
-						<a href="tentListView.do">텐트</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="category">
+						<a href="tentListView.do" style="color: green; font-weight: bold;">텐트</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</span>
 				</li>
 				<li id="li_category">
@@ -220,8 +220,8 @@ list-style: none;
 			</td>
 		</tr>
 	</table>
-	<br>
-	<br>
+	<br><br><br><br>
+
 	<!--footer-->
 	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
 </body>

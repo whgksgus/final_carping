@@ -6,42 +6,67 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 수정</title>
+<!-- 상단 아이콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/carpingLogo.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
-	<br style="clear:both">
-	<h1 align="center">게시글 수정페이지</h1>
-	<br><br>
+	<section style="width:100%; height:800px;">
+	<div style="height:100px;"></div>
+	<div align="center">
+		<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">공지사항 수정</h2>
+		<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
+	</div>
+	<br>
 	<form action="noticeUpdate.do" method="post">
-		<input type="hidden" name="nKey" value="${notice.nKey }">
-		<table align="center" border="1" cellspace="0">
-			<tr>
-				<td>제목</td>
-				<td><input type="text" size="50" name="nTitle" value="${notice.nTitle }"></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="memberId" value="${notice.memberId }" readonly></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="8" cols="50" name="nContent">${notice.nContent }</textarea></td>
-			</tr>
-			
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="수정">
-				</td>
-			</tr>
-		</table>
+		<input type="hidden" name="memberId" value="${loginUser.memberId }">
+		<input type="hidden" name="nKey" value="${notice.nKey}">
+		<article>
+			<div class="container" style="font-family:'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 vcenter">
+					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">제목</label><input type="text" name="nTitle" placeholder="제목을 입력해주세요" required class="col-md-8 form-control align-self-center" style="width : 564px;" value="${notice.nTitle}">
+				</div><br><br>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="container" style="font-family: 'Sunflower', sans-serif;">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 vcenter">
+				<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label><textarea name="nContent" placeholder="내용을 입력해주세요" class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 325px; resize: none;" required>${notice.nContent }</textarea>
+				</div>
+            <div class="container" style="font-family: 'Sunflower', sans-serif;"></div>
+            	<div class="col-md-2"></div>
+            	<div class="col-md-8" style="margin-left:400px;">
+            	<br><br>
+               <button type="button" class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">뒤로가기</button>
+               <div class="col-md-2"></div>
+               <input type="submit" class="col-md-2 btn btn-info" style="height:40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="return Update();" value="수정하기"> &nbsp;
+               </div>
+               <div class="col-md-2"></div>
+               </div>
+               </article>
 	</form>
+	</section>
+	<!--footer-->
+	<jsp:include page="../../../WEB-INF/views/common/footer.jsp"/>
+	<script>
+	function Update() {
+		return confirm("공지사항을 수정하시겠습니까?")
+	}
 	
-	<p align="center">
-		<c:url var="home" value="home.do"></c:url>
-		<c:url var="nList" value="noticeList.do"></c:url>
-		<c:url var="back" value="${header.referer }"></c:url>
-		<a href="${home }">Home</a>
-		<a href="${nList }">목록</a>
-		<a href="${back }">이전</a>	
+	function back() {
+		location.href="javascript:history.go(-1);"
+	}
+	</script>
 </body>
 </html>
