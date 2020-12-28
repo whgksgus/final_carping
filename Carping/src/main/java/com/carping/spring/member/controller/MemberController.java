@@ -196,7 +196,7 @@ public class MemberController {
 		if(result > 0) {
 			session.invalidate();
 			model.addAttribute("msg", "회원정보 탈퇴에 성공했습니다."); 
-			model.addAttribute("url", "home.do"); 
+			model.addAttribute("url", "login.do"); 
 			return "common/redirect";
 		}else {
 			model.addAttribute("msg", "회원정보 탈퇴에 실패했습니다.");

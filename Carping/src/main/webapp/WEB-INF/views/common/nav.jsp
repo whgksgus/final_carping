@@ -85,12 +85,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a style="font-weight:bold; font-family: 'Sunflower', sans-serif;" data-hover="추천장소" href="#" class="scroll">추천장소</a>
 								<ul class="subNav">
 									<li style="float: left;"><a
-										style="font-weight:bold; font-family: 'Sunflower', sans-serif;display: block; padding: 1px 5px;" href="areaInfoView.do">차박 장소
-											정보</a></li>
+										style="font-weight:bold; font-family: 'Sunflower', sans-serif;display: block; padding: 1px 5px;" href="areaInfoView.do">차박 장소 추천</a></li>
 									<li style="float: left;"><a
-										style="font-weight:bold; font-family: 'Sunflower', sans-serif;display: block; padding: 1px 5px;" href="foodZoneView.do">맛집 정보</a></li>
+										style="font-weight:bold; font-family: 'Sunflower', sans-serif;display: block; padding: 1px 5px;" href="foodZoneView.do">맛집 추천</a></li>
 									<li style="float: left;"><a
-										style="font-weight:bold; font-family: 'Sunflower', sans-serif;display: block; padding: 1px 5px;" href="placeView.do">명소 정보</a></li>
+										style="font-weight:bold; font-family: 'Sunflower', sans-serif;display: block; padding: 1px 5px;" href="placeView.do">명소 추천</a></li>
 								</ul></li>
 							<li><a style="font-weight:bold; font-family: 'Sunflower', sans-serif;" data-hover="쇼핑몰" href="tentListView.do" >쇼핑몰</a></li>
 							<li><a style="font-weight:bold; font-family: 'Sunflower', sans-serif;" data-hover="커뮤니티" href="#" class="scroll">커뮤니티</a>

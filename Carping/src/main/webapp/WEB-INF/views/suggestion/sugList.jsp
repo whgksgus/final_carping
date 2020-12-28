@@ -54,7 +54,7 @@
 			<a href="${sugDetail }">${sList.suggestionTitle }</a>
 			</td>
 			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${sList.memberId }</td>
-			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${sList.suggestionCount }</td>
+			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;${sList.suggestionCount }</td>
 			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">${sList.suggestionEnrollDate }</td>
 			<c:if test="${sList.answerCheck eq 0 }">
 			<td style="font-family: 'Sunflower', sans-serif; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X</td>

@@ -72,4 +72,9 @@ public class BoardServiceImpl implements BoardService {
 		return bStore.getBoardSearchListCount(search);
 	}
 
+	@Override
+	public int updateCount(int boardKey) {
+		return bStore.updateCount(boardKey);
+	}
+
 }

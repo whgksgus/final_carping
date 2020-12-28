@@ -41,7 +41,7 @@
 			<div class="container" style="font-family: 'Sunflower', sans-serif;">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-size: 1.5em;">내용</label><textarea name="boardContent" class="col-md-6 form-control" cols="5" rows="10" style="font-family: 'Sunflower', sans-serif; margin: 0px; width: 564px; height: 325px; resize: none;">${fReview.frContent }</textarea>
+					<label class="col-md-2 text-center vcenter" style="font-family: 'Sunflower', sans-serif; font-size: 1.5em;">내용</label><textarea name="boardContent" class="col-md-6 form-control" cols="5" rows="10" style="font-family: 'Sunflower', sans-serif; margin: 0px; width: 564px; height: 325px; resize: none;">${board.boardContent }</textarea>
 				</div>
 				<div class="col-md-2"></div>
 			</div>

@@ -78,4 +78,9 @@ public class BoardStoreLogic implements BoardStore {
 		return sqlSession.selectOne("BoardMapper.searchListCount", search);
 	}
 
+	@Override
+	public int updateCount(int boardKey) {
+		return sqlSession.update("BoardMapper.updateCount", boardKey);
+	}
+
 }

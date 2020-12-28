@@ -48,9 +48,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8 vcenter">
 					<label class="col-md-2 text-center vcenter" style="font-size: 1.5em;">내용</label>
-					<textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 300px;resize: none;" readonly>
-						${notice.nContent }
-					</textarea>
+					<textarea class="col-md-6 form-control" cols="5" rows="10" style="margin: 0px; width: 564px; height: 300px;resize: none;" readonly>${notice.nContent }</textarea>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -67,13 +65,13 @@
 	            	
 	            	<!-- 관리자 아닐때(목록만) -->
 	            	<c:if test="${loginUser.memberId ne 'admin'}">
-	            	<c:url var="nList" value="selectList.do"></c:url>
+	            	<c:url var="nList" value="noticeList.do"></c:url>
 					<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold; margin-left:190px;" onclick="back();">목록으로</button>
 					<div class="col-md-1"></div>
 					</c:if>
 					
 					<c:if test="${loginUser.memberId eq 'admin' }">
-		            	<c:url var="nList" value="selectList.do"></c:url>
+		            	<c:url var="nList" value="noticeList.do"></c:url>
 						<button class="col-md-2 btn btn-default" style="height: 40px; font-family: 'Sunflower', sans-serif; font-weight:bold;" onclick="back();">목록으로</button>
 						<div class="col-md-1"></div>
 					</c:if>
@@ -110,7 +108,7 @@
 	
 	<script>
 	function back(){
-		location.href="javascript:history.go(-1);"
+		location.href="${nList}";
 	}
 	
 	function nUpdate(){

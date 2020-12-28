@@ -9,6 +9,7 @@ import com.carping.spring.common.Search;
 
 public interface BoardService {
 	public ArrayList<Board> selectList(PageInfo pi);
+	public int updateCount(int boardKey);
 	public Board selectOne(int boardKey);
 	public int registerBoard(Board board);
 	public int modifyBoard(Board board);

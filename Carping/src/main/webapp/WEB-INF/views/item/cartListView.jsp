@@ -118,8 +118,16 @@
 				contentType: "application/json; charset=utf-8",
 			}).done( function( data ) {
 				if( data > 0 ) {
-					window.location.reload();
-				}
+						if( confirm( "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?" ) ) {
+						// 페이지 이동
+							window.location.href = "myOrderView.do";
+					} else {
+						// 현재 페이지 위치
+						return false;
+					}
+					} else {
+						alert( "구매에 실패하였습니다" );
+					}
 			}).fail( function( error ) {
 				console.log( error );
 			});
@@ -135,6 +143,9 @@
 			}).done( function( data ) {
 				if( data > 0 ) {
 					window.location.reload();
+				}else {
+					alert("전체 상품의 삭제에 실패하였습니다.");
+					return false;
 				}
 			}).fail( function( error ) {
 				console.log( error );
@@ -263,7 +274,7 @@
 
 	<jsp:include page="../common/nav.jsp" />
 	<div style="height:100px;"></div>
-	<div id="contents" style="width:100%; height:800px;">
+	<div id="contents" style="width:100%; height:1000px;">
 		<form action="#" method="post">
 			<legend id="title">장바구니</legend>
 			<br>
@@ -289,7 +300,7 @@
 		<div id="cart">
 			<c:if test="${not empty cart}">
 				<form action="#" method="post">
-					<button id="delAllCart" class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px;" onclick="mkEmptyCart()">전체삭제</button>
+					<button type="button" id="delAllCart" class="btn btn-default col-sm-1" style="font-family: 'Sunflower', sans-serif; font-weight:bold; width:80px;" onclick="mkEmptyCart()">전체삭제</button>
 					<ul id="ul">
 						<li class="li">
 							<ul class="ul">

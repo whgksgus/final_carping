@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='areaInfoView.do'">
-									<img style="height:400px;" src="resources/areaImage/SeaSideCarping5.jpg" alt=" " />
+									<img style="height:400px;" src="resources/images/SeaSideCarping5main.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='areaInfoView.do'">
 											<h4>차박 장소 추천</h4>
@@ -194,10 +194,10 @@ document.addEventListener('DOMContentLoaded', function(){
 						</div>
 						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
-								<div style="height:400px;" class="gal-spin-effect vertical ">
+								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='foodZoneView.do'">
 									<img style="height:400px;" src="resources/images/foodImage.jpg" alt=" " />
 									<div class="gal-text-box">
-										<div class="info-gal-con">
+										<div class="info-gal-con" onclick="location.href='foodZoneView.do'">
 											<h4>맛집 추천</h4>
 											<span class="separator"></span>
 											<p>여행과 맛집을 한번에~!</p>
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						<div class="col-md-4 col-sm-4 ggd baner-top small wow fadeInLeft animated" data-wow-delay=".5s" style="width:400px;">
 							<a href="resources/images/my2.jpg" class="b-link-stripe b-animate-go  swipebox">
 								<div style="height:400px;" class="gal-spin-effect vertical " onclick="location.href='tentListView.do'">
-									<img style="height:400px;" src="resources/images/campingItem.jpg" alt=" " />
+									<img style="height:400px;" src="resources/images/campingItemmain.jpg" alt=" " />
 									<div class="gal-text-box">
 										<div class="info-gal-con" onclick="location.href='tentListView.do'">
 											<h4>차박 쇼핑몰</h4>

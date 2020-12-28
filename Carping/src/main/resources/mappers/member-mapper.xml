@@ -31,7 +31,7 @@
 	
 	<update id="updateMember">
 		UPDATE MEMBER SET
-		MEMBER_NAME = #{memberName}, PHONE = #{phone}, EMAIL = #{email}, MEMBER_ADDRESS = #{memberAddress}
+		MEMBER_NAME = #{memberName}, MEMBER_PWD = #{memberPwd}, PHONE = #{phone}, EMAIL = #{email}, MEMBER_ADDRESS = #{memberAddress}
 		WHERE MEMBER_ID = #{memberId}
 	</update>
 	

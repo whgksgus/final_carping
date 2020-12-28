@@ -26,7 +26,7 @@
 <body>
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 
-	<section style="width:100%; height:800px;">
+	<section style="width:100%; height:1000px;">
 		<article>
 		<div style="height:100px; display:block;"></div>
 			<div align="center">

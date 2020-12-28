@@ -88,7 +88,7 @@
 	
 	<update id="updatePlaceReview">
 		UPDATE PLACE_REVIEW SET
-		PR_SCORE = #{prScore}, PR_TITLE = #{prTitle}, PR_CONTENT = #{prContent}, PR_REGDATE = SYSDATE, PR_HITS = #{prHits}, PR_PHOTO = #{prPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
+		PR_SCORE = #{prScore}, PR_TITLE = #{prTitle}, PR_CONTENT = #{prContent}, PR_REGDATE = SYSDATE, PR_PHOTO = #{prPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
 		WHERE PR_KEY = #{prKey}
 	</update>
 	

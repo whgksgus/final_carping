@@ -11,6 +11,7 @@ public interface BoardStore {
 
 	public ArrayList<Board> selectList(PageInfo pi);
 	public Board selectOne(int boardKey);
+	public int updateCount(int boardKey);
 	public int registerBoard(Board board);
 	public int modifyBoard(Board board);
 	public int deleteBoard(int boardKey);

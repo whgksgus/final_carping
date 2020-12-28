@@ -71,8 +71,7 @@
 						<td
 							style="font-family: 'Sunflower', sans-serif; font-weight: bold;">${notice.memberId }</td>
 						<td
-							style="font-family: 'Sunflower', sans-serif; font-weight: bold;">
-							${notice.nCount }</td>
+							style="font-family: 'Sunflower', sans-serif; font-weight: bold;">${notice.nCount }</td>
 						<td
 							style="font-family: 'Sunflower', sans-serif; font-weight: bold;">
 							${notice.nWriteDate }</td>

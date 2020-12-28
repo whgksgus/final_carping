@@ -82,5 +82,9 @@
    </where>
 	</select>
 	
-	
+	<update id="updateCount">
+		UPDATE BOARD SET
+		BOARD_COUNT = BOARD_COUNT + 1
+		WHERE BOARD_KEY = #{boardKey}
+	</update>
 </mapper>

@@ -29,7 +29,7 @@
 				<div style="width: 350px; border-bottom: 2px solid lightgray;"></div>
 			</div>
 			<br>
-			<form id="form" action="areaReviewSearch.do" method="post">
+			<form id="form" action="areaReviewSearch.do" method="get">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-2"></div>
@@ -93,7 +93,7 @@
 						<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">이전</a></li>
 					</c:if>
 					<c:if test="${pi.currentPage>1}">
-						<c:url var="before" value="placeReviewSearch.do">
+						<c:url var="before" value="areaReviewSearch.do">
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							<c:param name="searchValue" value="${search.searchValue }"></c:param>
 							<c:param name="page" value="${pi.currentPage-1}"></c:param>
@@ -105,7 +105,7 @@
 							<li class="page-item"><a href="javascript:void(0);" class="page-link">${p}</a></li>
 						</c:if>
 						<c:if test="${pi.currentPage != p }">
-							<c:url var="pagination" value="placeReviewSearch.do">
+							<c:url var="pagination" value="areaReviewSearch.do">
 								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 								<c:param name="searchValue" value="${search.searchValue }"></c:param>
 								<c:param name="page" value="${p}"></c:param>
@@ -117,7 +117,7 @@
 						<li class="page-item"><a style="font-family: 'Sunflower', sans-serif; font-weight:bold;" href="javascript:void(0);" class="page-link">다음</a></li>
 					</c:if>
 					<c:if test="${pi.currentPage<pi.maxPage }">
-						<c:url var="after" value="placeReviewSearch.do">
+						<c:url var="after" value="areaReviewSearch.do">
 						<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 						<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						<c:param name="page" value="${pi.currentPage + 1}"></c:param>

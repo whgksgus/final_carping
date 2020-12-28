@@ -133,7 +133,7 @@
 	</delete>
 	
 	<update id="updateFoodZoneReview">
-		UPDATE FOOD_REVIEW SET FR_SCORE = #{frScore}, FR_TITLE = #{frTitle}, FR_CONTENT = #{frContent}, FR_REGDATE = SYSDATE, FR_HITS =#{frHits}, FR_PHOTO = #{frPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId} WHERE FR_KEY = #{frKey} 
+		UPDATE FOOD_REVIEW SET FR_SCORE = #{frScore}, FR_TITLE = #{frTitle}, FR_CONTENT = #{frContent}, FR_REGDATE = SYSDATE, FR_PHOTO = #{frPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId} WHERE FR_KEY = #{frKey} 
 	</update>
 	<select id="selectReviewComment" resultMap="foodZoneReviewCommentResultMap">
 		SELECT * FROM FOOD_REVIEW_COMMENT WHERE FR_KEY = #{frKey} ORDER BY FRC_KEY DESC

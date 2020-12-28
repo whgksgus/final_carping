@@ -60,6 +60,7 @@ public class BoardController {
 	}
 	@RequestMapping(value="boardDetail.do", method = RequestMethod.GET)
 	public ModelAndView selectOne(ModelAndView mv, int boardKey) {
+		bService.updateCount(boardKey);
 		Board board = bService.selectOne(boardKey);
 		if(board!=null) {
 			mv.addObject("board", board).setViewName("board/boardDetail");

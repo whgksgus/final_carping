@@ -192,7 +192,7 @@
 	
 	<update id="updateAreaReview">
 		UPDATE AREA_REVIEW SET
-		AR_SCORE = #{arScore}, AR_TITLE = #{arTitle}, AR_CONTENT = #{arContent}, AR_REGDATE = SYSDATE, AR_HITS = #{arHits}, AR_PHOTO = #{arPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
+		AR_SCORE = #{arScore}, AR_TITLE = #{arTitle}, AR_CONTENT = #{arContent}, AR_REGDATE = SYSDATE, AR_PHOTO = #{arPhoto,jdbcType=VARCHAR}, MEMBER_ID = #{memberId}
 		WHERE AR_KEY = #{arKey}
 	</update>
 	

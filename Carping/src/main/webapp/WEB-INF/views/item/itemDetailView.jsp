@@ -145,7 +145,7 @@
 								return false;
 							}
 	 					} else {
-	 						alert( "구매에 실패하였습니다 ㅗㅗ" );
+	 						alert( "구매에 실패하였습니다" );
 	 					}
 	 				}).fail( function( error ) {
 	 					console.log( error );

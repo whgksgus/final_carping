@@ -46,7 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--footer-->
 		<div class="footer text-center">
 						<div class="container">
-									<p class="copy-right wow fadeInUp"  data-wow-duration="1s" data-wow-delay=".3s">&copy; 2020 Outdoors . All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+									<p class="copy-right wow fadeInUp"  data-wow-duration="1s" data-wow-delay=".3s">&copy; 2020 Carping . All rights reserved</p>
 									<ul class="social wow slideInDown" data-wow-duration="1s" data-wow-delay=".3s">
 										<li><a href="#" class="tw"></a></li>
 										<li><a href="#" class="fb"> </a></li>

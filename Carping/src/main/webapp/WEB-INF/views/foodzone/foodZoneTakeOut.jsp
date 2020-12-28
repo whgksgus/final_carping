@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>테이크아웃 예약</title>
+<title>포장 예약</title>
 <style>
 	#menuList tr td img{
 		width: 100px;
@@ -67,7 +67,7 @@
 <div style="height: 100px;"></div>
 
 <div style="margin-left: 15.5%;">
-	<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">테이크아웃 예약하기</h2>
+	<h2 style="font-family: 'Sunflower', sans-serif; font-weight:bold;" class="h2">포장 예약하기</h2>
 	<div style="width: 300px; border-bottom: 2px solid lightgray;"></div>
 </div>
 <br><br>
@@ -217,7 +217,7 @@
 	    		type : "post",
 	    		success: function(result){
 	    			if(result==1){
-	    				location.href="home.do";
+	    				location.href="myReserve.do";
 	    			}else{
 	    				location.href="error.do";
 	    			}

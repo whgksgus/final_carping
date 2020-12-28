@@ -43,7 +43,7 @@ public class AreaReviewController {
 		return "area/areaReviewSearch";
 	}
 	
-	@RequestMapping(value="areaReviewSearch.do", method=RequestMethod.POST)
+	@RequestMapping(value="areaReviewSearch.do", method=RequestMethod.GET)
 	public String areaReviewSearch(Search search, Model model, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page: 1;
 		int listCount = arService.getReviewListCount(search);
